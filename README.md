@@ -1,33 +1,23 @@
-# WP Plugin Vue Tailwind Boilerplate
-This is a Customizable sample WordPress Plugin which is developed as a single page app on backend with Vue js and Tailwind custom build css.
-# Plugin name : WP Plugin Vue Tailwind Boilerplate
+## How to Use the Plugin
 
+To use this plugin, follow these steps:
 
-<img src="./src/github-images/dashboard.png" />
+1. Download the plugin files from the [WordPress Plugin Directory](https://wordpress.org/plugins/wp-review-manager/).
 
-Caption: <i>Dummy dashboard with custom build vue + tailwind setup</i><br/>
+2. Upload the plugin files to the `/wp-content/plugins/wp-review-manager/` directory on your WordPress installation.
 
-# How to use ?
+3. Activate the plugin through the 'Plugins' menu in WordPress.
 
-- Just clone/fork this repository
-- Check the package.json file
-- command: `npm i`
-- command: `npm run watch` for development and for production: `npm run production`
+4. Go to the 'WP Review Manager' settings page in the WordPress admin dashboard.
 
+5. Configure the plugin settings according to your requirements.
 
+6. Use the shortcode `[wp_review_manager]` in your posts or pages to display the review form.
 
+7. Customize the appearance and functionality of the review form using the available options.
 
-If you face any issue feel free to let me know. :)
+8. Save your changes and preview your website to see the review form in action.
 
-<br/>
+For more detailed instructions and documentation, please refer to the [official plugin documentation](https://example.com/wp-review-manager/docs).
 
-## Vue + Element UI auto command boilerplate
-<hr/>
-You can check another boilerplate plugin with vue js and element UI, You can create your own project using simple command line on that project within 2 mint.
-
-Check it here: https://github.com/hasanuzzamanbe/wp-boilerplate-plugin-with-vuejs
-
-
-### Other Setups you may Use
-* WordPress Plugin with Vue 3, tailwind (Vite Build) [https://github.com/hasanuzzamanbe/wp-boilerplate-vue-with-vite]
-* WordPress Plugin with Vue 2, Element UI (Laravel Mix Build) [https://github.com/hasanuzzamanbe/wp-boilerplate-plugin-with-vuejs]
+If you encounter any issues or have any questions, please feel free to reach out to our support team at support@example.com.
