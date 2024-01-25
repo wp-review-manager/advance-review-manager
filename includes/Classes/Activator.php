@@ -1,6 +1,7 @@
 <?php
 
-namespace WPPluginWithVueTailwind\Classes;
+namespace WPReviewManager\Classes;
+use WPReviewManager\Database\SampleTableMigration;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -41,32 +42,6 @@ class Activator
         * and write your own query at createUserFavorite function
         */
 
-        $this->sampleTable();
-    }
-
-    public function sampleTable()
-    {
-        global $wpdb;
-        $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'WPRM_user_favorites';
-        $sql = "CREATE TABLE $table_name (
-            id int(10) NOT NULL AUTO_INCREMENT,
-            user_id int(10) NOT NULL,
-            post_id int(10) NOT NULL,
-            created_at timestamp NULL DEFAULT NULL,
-            updated_at timestamp NULL DEFAULT NULL,
-            PRIMARY KEY (id)
-            ) $charset_collate;";
-
-        $this->runSQL($sql, $table_name);
-    }
-
-    private function runSQL($sql, $tableName)
-    {
-        global $wpdb;
-        if ($wpdb->get_var("SHOW TABLES LIKE '$tableName'") != $tableName) {
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            dbDelta($sql);
-        }
+        (new SampleTableMigration())->createTable();
     }
 }

@@ -1,7 +1,7 @@
-const request = function(method, route, data = {}) {
-    const url = `${window.wpPluginWithVueTailwind.rest.url}/${route}`;
+const request = function (method, route, data = {}) {
+    const url = `${window.WPReviewManager.rest.url}/${route}`;
 
-    const headers = {'X-WP-Nonce': window.wpPluginWithVueTailwind.rest.nonce};
+    const headers = { 'X-WP-Nonce': window.WPReviewManager.rest.nonce };
 
     if (['PUT', 'PATCH', 'DELETE'].indexOf(method.toUpperCase()) !== -1) {
         headers['X-HTTP-Method-Override'] = method;
@@ -37,6 +37,6 @@ export default {
 jQuery(document).ajaxSuccess((event, xhr, settings) => {
     const nonce = xhr.getResponseHeader('X-WP-Nonce');
     if (nonce) {
-        window.wpPluginWithVueTailwind.rest.nonce = nonce;
+        window.WPReviewManager.rest.nonce = nonce;
     }
 });
