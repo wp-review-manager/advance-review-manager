@@ -1,0 +1,26 @@
+.WPRM-admin-page {
+    margin-left: -20px;
+
+    .main-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $accent-color;
+        color: $text-color;
+        padding: 4px;
+
+        router-link {
+            color: $text-color;
+            text-decoration: none;
+            margin-right: 10px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

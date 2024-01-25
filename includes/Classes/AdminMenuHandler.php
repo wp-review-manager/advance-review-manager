@@ -19,15 +19,25 @@ class AdminMenuHandler{
                 'dashicons-editor-code',
                 25
             );
-            $submenu['wp-review-manager.php']['dashboard'] = array(
-                'Dashboard',
+            $submenu['wp-review-manager.php']['review-forms'] = array(
+                'Review Forms',
                 'manage_options',
                 'admin.php?page=wp-review-manager.php#/',
             );
-            $submenu['wp-review-manager.php']['contact'] = array(
-                'Contact',
+            $submenu['wp-review-manager.php']['settings'] = array(
+                'Settings',
                 'manage_options',
-                'admin.php?page=wp-review-manager.php#/contact',
+                'admin.php?page=wp-review-manager.php#/settings',
+            );
+            $submenu['wp-review-manager.php']['usage-guide'] = array(
+                'Usage Guide',
+                'manage_options',
+                'admin.php?page=wp-review-manager.php#/usage-guide',
+            );
+            $submenu['wp-review-manager.php']['support-&-debug'] = array(
+                'Support & Debug',
+                'manage_options',
+                'admin.php?page=wp-review-manager.php#/support-&-debug',
             );
         });
     }
@@ -38,6 +48,7 @@ class AdminMenuHandler{
         wp_enqueue_style('WPRM-global-styling', WPM_URL . 'assets/css/element.css', array(), WPM_VERSION);
 
         $WPRM = apply_filters('WPRM/admin_app_vars', array(
+            //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => WPM_URL . 'assets/',
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
@@ -47,10 +58,16 @@ class AdminMenuHandler{
         echo '<div class="WPRM-admin-page" id="WPRM_app">
             <div class="main-menu text-white-200 bg-wheat-600 p-4">
                 <router-link to="/">
-                    Home
+                    Review Forms
                 </router-link> |
-                <router-link to="/contact" >
-                    Contact
+                <router-link to="/settings" >
+                    Settings | 
+                </router-link>
+                <router-link to="/usage-guide" >
+                    Usage Guide | 
+                </router-link>
+                <router-link to="/support-&-debug" >
+                    Support And Debug
                 </router-link>
             </div>
             <hr/>

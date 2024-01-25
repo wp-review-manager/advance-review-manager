@@ -10,8 +10,18 @@ export default [{
     },
 },
 {
-    path: '/contact',
+    path: '/settings',
     name: 'contact',
+    component: Contact
+},
+{
+    path: '/usage-guide',
+    name: 'usage-guide',
+    component: Contact
+},
+{
+    path: '/support-&-debug',
+    name: 'support-&-debug',
     component: Contact
 }
 ];
