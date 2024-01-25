@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="relative bg-blueGray-100">
+    <!-- <div class="relative bg-blueGray-100">
       <dashboard-navbar />
       <header-stats />
       <div class="px-4 md:px-10 mx-auto w-full -m-24">
@@ -8,7 +8,8 @@
         <router-view />
         <footer-admin />
       </div>
-    </div>
+    </div> -->
+    Home
   </div>
 </template>
 <script>
