@@ -4,7 +4,7 @@ namespace WPReviewManager\Classes;
 
 class DeactivationHandler
 {
-    public function handle()
+    public static function handle()
     {
 
     }

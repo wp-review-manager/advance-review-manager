@@ -14,7 +14,7 @@ if (!defined('ABSPATH')) {
  */
 class ActivationHandler
 {
-    public function handle($network_wide = false)
+    public static function handle($network_wide = false)
     {
         DBMigrator::run($network_wide);
 
