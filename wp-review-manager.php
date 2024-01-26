@@ -8,9 +8,16 @@
  * Author URI: #
  * Version: 1.0.5
  */
+
+use WPReviewManager\Classes\ActivationHandler;
+use WPReviewManager\Classes\DeactivationHandler;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 define('WPRM_URL', plugin_dir_url(__FILE__));
 define('WPRM_DIR', plugin_dir_path(__FILE__));
-
+define('WPRM_FILE', __FILE__);
 define('WPRM_VERSION', '1.0.5');
 define('WPRM_DB_VERSION', 1);
 
@@ -39,16 +46,16 @@ class WPReviewManager {
     }
 }
 
-register_activation_hook($file, function () {
-    require_once(WPRM_DIR . 'includes/Classes/ActivationHandler.php');
-    $activationHandler = new \WPReviewManager\Classes\ActivationHandler();
-    $activationHandler->handle();
+
+register_activation_hook(__FILE__, function () {
+ 
+     ActivationHandler::handle();
+    // (new WPReviewManager\Classes\ActivationHandler)->handle();
 });
 
-register_deactivation_hook($file, function () {
-    require_once(WPRM_DIR . 'includes/Classes/DeactivationHandler.php');
-    $deactivationHandler = new \WPReviewManager\Classes\DeactivationHandler();
-    $deactivationHandler->handle();
+register_deactivation_hook(__FILE__, function () {
+    DeactivationHandler::handle();
+    // (new WPReviewManager\Classes\DeactivationHandler)->handle();
 });
 
 
