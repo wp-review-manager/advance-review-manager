@@ -10,7 +10,8 @@
         <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
           <button
             class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-            type="button">
+            type="button"
+          >
             Show all
           </button>
         </div>
@@ -22,16 +23,18 @@
         <thead class="thead-light">
           <tr>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            >
               Referral
             </th>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left"
+            >
               Visitors
             </th>
             <th
-              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px">
-            </th>
+              class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left min-w-140-px"
+            />
           </tr>
         </thead>
         <tbody>
@@ -47,9 +50,10 @@
                 <span class="mr-2">60%</span>
                 <div class="relative w-full">
                   <div class="overflow-hidden h-2 text-xs flex rounded bg-red-200">
-                    <div style="width: 60%;"
-                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
-                    </div>
+                    <div
+                      style="width: 60%;"
+                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
+                    />
                   </div>
                 </div>
               </div>
@@ -67,9 +71,10 @@
                 <span class="mr-2">70%</span>
                 <div class="relative w-full">
                   <div class="overflow-hidden h-2 text-xs flex rounded bg-emerald-200">
-                    <div style="width: 70%;"
-                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
-                    </div>
+                    <div
+                      style="width: 70%;"
+                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
+                    />
                   </div>
                 </div>
               </div>
@@ -87,9 +92,10 @@
                 <span class="mr-2">80%</span>
                 <div class="relative w-full">
                   <div class="overflow-hidden h-2 text-xs flex rounded bg-purple-200">
-                    <div style="width: 80%;"
-                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500">
-                    </div>
+                    <div
+                      style="width: 80%;"
+                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500"
+                    />
                   </div>
                 </div>
               </div>
@@ -107,9 +113,10 @@
                 <span class="mr-2">75%</span>
                 <div class="relative w-full">
                   <div class="overflow-hidden h-2 text-xs flex rounded bg-lightBlue-200">
-                    <div style="width: 75%;"
-                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500">
-                    </div>
+                    <div
+                      style="width: 75%;"
+                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500"
+                    />
                   </div>
                 </div>
               </div>
@@ -127,9 +134,10 @@
                 <span class="mr-2">30%</span>
                 <div class="relative w-full">
                   <div class="overflow-hidden h-2 text-xs flex rounded bg-blue-600">
-                    <div style="width: 30%;"
-                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
-                    </div>
+                    <div
+                      style="width: 30%;"
+                      class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
+                    />
                   </div>
                 </div>
               </div>

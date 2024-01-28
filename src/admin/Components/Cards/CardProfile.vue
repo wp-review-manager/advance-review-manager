@@ -4,8 +4,11 @@
       <div class="flex flex-wrap justify-center">
         <div class="w-full px-4 flex justify-center">
           <div class="relative">
-            <img alt="..." :src="team2"
-              class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+            <img
+              alt="..."
+              :src="team2"
+              class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
+            >
           </div>
         </div>
         <div class="w-full px-4 text-center mt-20">
@@ -36,15 +39,15 @@
           Jenna Stones
         </h3>
         <div class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-          <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+          <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400" />
           Los Angeles, California
         </div>
         <div class="mb-2 text-blueGray-600 mt-10">
-          <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+          <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400" />
           Solution Manager - Creative Tim Officer
         </div>
         <div class="mb-2 text-blueGray-600">
-          <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+          <i class="fas fa-university mr-2 text-lg text-blueGray-400" />
           University of Computer Science
         </div>
       </div>
@@ -57,7 +60,10 @@
               records all of his own music, giving it a warm, intimate feel with
               a solid groove structure. An artist of considerable range.
             </p>
-            <a href="javascript:void(0);" class="font-normal text-emerald-500">
+            <a
+              href="javascript:void(0);"
+              class="font-normal text-emerald-500"
+            >
               Show more
             </a>
           </div>

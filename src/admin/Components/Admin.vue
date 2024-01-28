@@ -13,18 +13,18 @@
   </div>
 </template>
 <script>
-import DashboardNavbar from "./Navbars/DashboardNavbar.vue";
-import HeaderStats from "./Headers/HeaderStats.vue";
-import FooterAdmin from "./Footers/FooterAdmin.vue";
+// import DashboardNavbar from "./Navbars/DashboardNavbar.vue";
+// import HeaderStats from "./Headers/HeaderStats.vue";
+// import FooterAdmin from "./Footers/FooterAdmin.vue";
 
-import Dashboard from './Dashboard.vue';
+// import Dashboard from './Dashboard.vue';
 export default {
-  name: "admin-layout",
+  name: "AdminLayout",
   components: {
-    DashboardNavbar,
-    HeaderStats,
-    FooterAdmin,
-    Dashboard
+    // DashboardNavbar,
+    // HeaderStats,
+    // FooterAdmin,
+    // Dashboard
   },
 };
 </script>
