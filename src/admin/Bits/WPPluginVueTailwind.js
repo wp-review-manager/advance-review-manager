@@ -70,7 +70,7 @@ export default class WPPluginVueTailwind {
             'ticket-header': {
                 template: `<h1>OK</h1>`
             }
-        }
+        };
     }
 
     registerBlock(blockLocation, blockName, block) {
@@ -179,7 +179,7 @@ export default class WPPluginVueTailwind {
     ucWords(text) {
         return (text + '').replace(/^(.)|\s+(.)/g, function ($1) {
             return $1.toUpperCase();
-        })
+        });
     }
 
     slugify(text) {
@@ -228,10 +228,10 @@ export default class WPPluginVueTailwind {
         } else if (typeof (obj) === 'function') {
 
         } else if (typeof (obj) === 'string') {
-            string.push(obj)
+            string.push(obj);
         }
 
-        return string.join('<br />')
+        return string.join('<br />');
     }
 
     humanDiffTime(date) {

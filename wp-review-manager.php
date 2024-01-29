@@ -3,14 +3,22 @@
 /**
  * Plugin Name: WP review manager
  * Plugin URI: http://wp-review-manager.com/
+ * text-domain: wp-review-manager
  * Description: WP review manager is a plugin for wordpress that allows you to manage reviews for your website.
  * Author: #
  * Author URI: #
  * Version: 1.0.5
  */
+
+use WPReviewManager\Classes\ActivationHandler;
+use WPReviewManager\Classes\DeactivationHandler;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 define('WPRM_URL', plugin_dir_url(__FILE__));
 define('WPRM_DIR', plugin_dir_path(__FILE__));
-
+define('WPRM_FILE', __FILE__);
 define('WPRM_VERSION', '1.0.5');
 define('WPRM_DB_VERSION', 1);
 
@@ -19,8 +27,8 @@ class WPReviewManager {
     {
         $this->loadClasses();
         (new WPReviewManager\Classes\Shortcode)->registerShortCodes();
-        $this->ActivatePlugin();
         (new WPReviewManager\Classes\AdminMenuHandler)->renderMenu();
+        $this->loadTextDomain();
     }
 
     public function loadClasses()
@@ -28,27 +36,22 @@ class WPReviewManager {
         require WPRM_DIR . 'includes/autoload.php';
     }
 
-
-    public function ActivatePlugin()
+    public function loadTextDomain()
     {
-        //activation deactivation hook
-        // register_activation_hook(__FILE__, function ($newWorkWide) {
-        //     $activator = new \WPReviewManager\Classes\ActivationHandler();
-        //     $activator->handle($newWorkWide);
-        // });
+        load_plugin_textdomain('wp-review-manager', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 }
 
-register_activation_hook($file, function () {
-    require_once(WPRM_DIR . 'includes/Classes/ActivationHandler.php');
-    $activationHandler = new \WPReviewManager\Classes\ActivationHandler();
-    $activationHandler->handle();
+
+register_activation_hook(__FILE__, function () {
+ 
+     ActivationHandler::handle();
+    // (new WPReviewManager\Classes\ActivationHandler)->handle();
 });
 
-register_deactivation_hook($file, function () {
-    require_once(WPRM_DIR . 'includes/Classes/DeactivationHandler.php');
-    $deactivationHandler = new \WPReviewManager\Classes\DeactivationHandler();
-    $deactivationHandler->handle();
+register_deactivation_hook(__FILE__, function () {
+    DeactivationHandler::handle();
+    // (new WPReviewManager\Classes\DeactivationHandler)->handle();
 });
 
 

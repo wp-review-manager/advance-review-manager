@@ -16,7 +16,7 @@
     </div>
     <div class="p-4 flex-auto">
       <div class="relative h-350-px">
-        <canvas id="bar-chart"></canvas>
+        <canvas id="bar-chart" />
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@ import Chart from "chart.js";
 export default {
   mounted: function () {
     this.$nextTick(function () {
-      let config = {
+      const config = {
         type: "bar",
         data: {
           labels: [
@@ -118,7 +118,7 @@ export default {
           },
         },
       };
-      let ctx = document.getElementById("bar-chart").getContext("2d");
+      const ctx = document.getElementById("bar-chart").getContext("2d");
       window.myBar = new Chart(ctx, config);
     });
   },

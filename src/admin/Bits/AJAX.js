@@ -14,7 +14,7 @@ const request = function (method, route, data = {}) {
         data: data,
         headers: headers
     });
-}
+};
 
 export default {
     get(route, data = {}) {

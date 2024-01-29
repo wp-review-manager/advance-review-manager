@@ -1,4 +1,6 @@
 import routes from './routes';
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import { createWebHashHistory, createRouter } from 'vue-router'
 import WPPluginVueTailwind from './Bits/WPPluginVueTailwind';
 
@@ -12,7 +14,9 @@ const framework = new WPPluginVueTailwind();
 
 framework.app.config.globalProperties.appVars = window.WPPluginVueTailwindAdmin;
 
-window.WPPluginVueTailwindApp = framework.app.use(router).mount('#WPRM_app');
+framework.app.use(router);
+framework.app.use(ElementPlus);
+window.WPPluginVueTailwindApp = framework.app.mount('#WPRM_app');
 
 router.afterEach((to, from) => {
     jQuery('.WPRM_menu_item').removeClass('active');

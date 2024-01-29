@@ -1,5 +1,4 @@
 <?php
-
 namespace WPReviewManager\Database\Migrations;
 
 class MigrateHelper

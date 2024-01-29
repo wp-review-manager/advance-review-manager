@@ -15,7 +15,7 @@ class ReviewComment {
             comment text,
             created_at timestamp NULL,
             updated_at timestamp NULL,
-            PRIMARY  KEY  (id),
+            PRIMARY  KEY  (id)
             -- FOREIGN KEY (review_id) REFERENCES reviews(id) ON DELETE CASCADE
         ) $charset_collate;";
 

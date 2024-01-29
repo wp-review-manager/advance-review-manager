@@ -1,6 +1,7 @@
 <?php
 
 namespace WPReviewManager\Classes;
+use WPReviewManager\Classes\Helper;
 
 class AdminMenuHandler{
 
@@ -40,6 +41,23 @@ class AdminMenuHandler{
                 'admin.php?page=wp-review-manager.php#/support-&-debug',
             );
         });
+        add_action('admin_init', function () {
+
+            $disablePages = [
+                'wp-review-manager.php',
+            ];
+        
+            if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
+                remove_all_actions('admin_notices');
+        
+                wp_enqueue_style(
+                    'wprm_admin_app',
+                    WPRM_URL . 'assets/css/wp-review-manager-admin.css',
+                    array(),
+                    WPRM_VERSION
+                );
+            }
+        }, 20);
     }
 
     public function renderAdminPage()
@@ -54,25 +72,34 @@ class AdminMenuHandler{
         ));
 
         wp_localize_script('WPRM-script-boot', 'WPRMAdmin', $WPRM);
-
-        echo '<div class="WPRM-admin-page" id="WPRM_app">
+        ob_start();
+        ?>
+        <div class="WPRM-admin-page" id="WPRM_app">
             <div class="main-menu text-white-200 bg-wheat-600 p-4">
-                <router-link to="/">
-                    Review Forms
-                </router-link> |
-                <router-link to="/settings" >
-                    Settings | 
-                </router-link>
-                <router-link to="/usage-guide" >
-                    Usage Guide | 
-                </router-link>
-                <router-link to="/support-&-debug" >
-                    Support And Debug
-                </router-link>
+                <div class="WPRM-logo">
+                    <?php echo Helper::LogoSvg() ?>
+                </div>
+                <div class="WPRM-menu-item">
+                    <router-link to="/">
+                        Review Forms
+                    </router-link> 
+                    <router-link to="/settings" >
+                        Settings 
+                    </router-link>
+                    <router-link to="/usage-guide" >
+                        Usage Guide 
+                    </router-link>
+                    <router-link to="/support-&-debug" >
+                        Support And Debug
+                    </router-link>
+                </div>
             </div>
             <hr/>
             <router-view></router-view>
-        </div>';
+        </div>;
+        <?php
+        $form_body = ob_get_clean();
+        echo $form_body;
     }
 
 }
