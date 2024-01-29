@@ -6,7 +6,7 @@
 <script>
 import Table from './Common/Table.vue';
 export default {
-  name: "admin-layout",
+  name: "AdminLayout",
   components: {
     Table
   },

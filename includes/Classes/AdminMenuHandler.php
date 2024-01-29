@@ -41,6 +41,23 @@ class AdminMenuHandler{
                 'admin.php?page=wp-review-manager.php#/support-&-debug',
             );
         });
+        add_action('admin_init', function () {
+
+            $disablePages = [
+                'wp-review-manager.php',
+            ];
+        
+            if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
+                remove_all_actions('admin_notices');
+        
+                wp_enqueue_style(
+                    'wprm_admin_app',
+                    WPRM_URL . 'assets/css/wp-review-manager-admin.css',
+                    array(),
+                    WPRM_VERSION
+                );
+            }
+        }, 20);
     }
 
     public function renderAdminPage()

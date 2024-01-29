@@ -3,6 +3,7 @@
 /**
  * Plugin Name: WP review manager
  * Plugin URI: http://wp-review-manager.com/
+ * text-domain: wp-review-manager
  * Description: WP review manager is a plugin for wordpress that allows you to manage reviews for your website.
  * Author: #
  * Author URI: #
@@ -26,8 +27,8 @@ class WPReviewManager {
     {
         $this->loadClasses();
         (new WPReviewManager\Classes\Shortcode)->registerShortCodes();
-        $this->ActivatePlugin();
         (new WPReviewManager\Classes\AdminMenuHandler)->renderMenu();
+        $this->loadTextDomain();
     }
 
     public function loadClasses()
@@ -35,14 +36,9 @@ class WPReviewManager {
         require WPRM_DIR . 'includes/autoload.php';
     }
 
-
-    public function ActivatePlugin()
+    public function loadTextDomain()
     {
-        //activation deactivation hook
-        // register_activation_hook(__FILE__, function ($newWorkWide) {
-        //     $activator = new \WPReviewManager\Classes\ActivationHandler();
-        //     $activator->handle($newWorkWide);
-        // });
+        load_plugin_textdomain('wp-review-manager', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 }
 
