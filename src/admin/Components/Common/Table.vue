@@ -25,6 +25,9 @@
                                 class="text-white mx-1 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                 <span class="dashicons dashicons-trash"></span>
                             </button>
+                            <button>
+                                <Icons icon="Star" />
+                            </button>
                         </div>
                     </td>
                 </tr>
@@ -33,8 +36,12 @@
     </div>
 </template>
 <script>
+import Icons from '../../Icons/Index.vue';
 export default {
     name: "table-component",
+    components: {
+        Icons
+    },
     props: {
         columns: {
             type: Array,
