@@ -1,17 +1,46 @@
 <template>
   <div class="wpf-dashboard">
-    <Table @edit-item="editHandler" @delete-item="deleteHandler" :columns="columns" :items="data"></Table>
+    <div class="p-2 flex flex-row justify-between items-center bg-white border border-gray-200 rounded-lg mb-3 ">
+      <div class="object-cover w-2/4 gap-x-8 rounded-t-lg h-96 md:h-auto md:rounded-none md:rounded-s-lg">
+        <div class="relative">
+          <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+          </div>
+          <input id="default-search" type="search"
+            class="block WPRM-search-input w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-yellow-700 focus:border-yellow-700  dark:text-white"
+            placeholder="Search Mockups, Logos..." required>
+          <button type="submit" class="text-white absolute end-1.5 bottom-1.5 h-8 el-button--success rounded-lg px-4 py-2"
+            style="line-height: 1.04rem;">
+            Search
+          </button>
+        </div>
+      </div>
+      <div class="w-2/4 float-right leading-normal">
+        <el-button @click="dialogVisibleProp = true" class="float-right" type="success">Create Your Form</el-button>
+      </div>
+    </div>
+    <AppModal width="70%" :dialogVisibleProp="dialogVisibleProp" @update:handleDialogClose="handleDialogClose">
+      <h1>App Modal</h1>
+    </AppModal>
+    <AppTable :columns="columns" :items="data" @edit-item="editHandler" @delete-item="deleteHandler" />
   </div>
 </template>
 <script>
-import Table from './Common/Table.vue';
+import AppTable from './Common/AppTable.vue';
+import AppModal from './Common/AppModal.vue';
 export default {
   name: "AdminLayout",
   components: {
-    Table
+    AppTable,
+    AppModal
   },
   data() {
     return {
+      dialogVisibleProp: false,
       columns: [
         {
           label: "Name",
@@ -34,6 +63,11 @@ export default {
           sortable: true
         },
         {
+          label: "Shortcode",
+          field: "shortcode",
+          sortable: true
+        },
+        {
           label: "Actions",
           field: "actions"
         }
@@ -44,6 +78,7 @@ export default {
           category: "Silver",
           price: "$2999",
           brand: "Apple",
+          shortcode: "[wp-review-manager id=1]",
           actions: {
             edit: true,
             delete: true
@@ -54,8 +89,9 @@ export default {
           category: "White",
           price: "$1999",
           brand: "Microsoft",
+          shortcode: "[wp-review-manager id=2]",
           actions: {
-            edit: false,
+            edit: true,
             delete: true
           }
         },
@@ -64,17 +100,29 @@ export default {
           category: "Black",
           price: "$99",
           brand: "Apple",
+          shortcode: "[wp-review-manager id=3]",
           actions: {
-            edit: false,
+            edit: true,
             delete: true
           }
         }
       ]
-    }
+    };
   },
   methods: {
     editHandler(item) {
       console.log(item);
+    },
+    handleDialogClose(successOrCancel) {
+      // check if the user clicked on the confirm button or not
+      if (successOrCancel) {
+        // user clicked on the confirm button
+        console.log("User clicked on the confirm button");
+      } else {
+        // user clicked on the cancel button
+        console.log("User clicked on the cancel button");
+      }
+      this.dialogVisibleProp = false;
     },
     deleteHandler(item) {
       console.log(item);

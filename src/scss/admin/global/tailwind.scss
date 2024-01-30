@@ -1,7 +1,32 @@
-.bg-blue-700 {
+.bg-yellow-700 {
     background-color: $active-color !important;
 }
 
+// .border-yellow-700 {
+//     box-shadow: 0 0 0 1px $active-color !important;
+// }
+
+// .ring-yellow-700 {
+//     --tw-ring-color: $active-color !important;
+// }
+
 .bg-red-700 {
     background-color: #E74C3C !important;
+}
+
+.WPRM-search-input {
+    padding-left: 34px !important;
+    height: 44px;
+}
+
+.border-gray-300 {
+    border-color: $border-color !important;
+}
+
+.w-32 {
+    width: 19px !important;
+}
+
+.h-32 {
+    height: 19px !important;
 }

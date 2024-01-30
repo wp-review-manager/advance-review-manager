@@ -1,0 +1,49 @@
+.WPRM-app-modal-wrapper {
+    .el-dialog {
+        border-radius: 8px;
+
+        .el-dialog__title {
+            color: $text-dark;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 32px;
+            letter-spacing: -0.48px;
+        }
+    }
+}
+
+.el-button--primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $white;
+
+    &:hover {
+        background-color: $accent-color;
+        border-color: $accent-color;
+        color: $white;
+    }
+}
+
+.el-button--success {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $white;
+
+    &:hover {
+        background-color: $accent-color;
+        border-color: $accent-color;
+        color: $white;
+    }
+}
+
+.el-button--default {
+    background-color: $white;
+    border-color: $border-color;
+    color: $text-dark;
+
+    &:hover {
+        background-color: $background-color;
+        border-color: $border-color;
+        color: $text-dark;
+    }
+}
