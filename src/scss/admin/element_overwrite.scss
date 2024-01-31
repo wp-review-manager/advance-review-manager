@@ -47,3 +47,25 @@
         color: $text-dark;
     }
 }
+
+.el-textarea__inner,
+.WPRM-search-input,
+.el-input__inner {
+    border-radius: 8px !important;
+
+    &:focus {
+        border-color: $active-color-50 !important;
+        box-shadow: 0 0 0 1px $active-color-50 !important;
+    }
+}
+
+.el-radio__input.is-checked+.el-radio__label,
+.el-checkbox__input.is-checked+.el-checkbox__label {
+    color: $active-color !important;
+}
+
+.el-radio__input.is-checked .el-radio__inner,
+.el-checkbox__input.is-checked .el-checkbox__inner {
+    border-color: $active-color !important;
+    background-color: $active-color !important;
+}
