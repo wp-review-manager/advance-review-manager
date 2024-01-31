@@ -1,11 +1,19 @@
 <template>
-  <el-dialog modal-class="WPRM-app-modal-wrapper" v-model="dialogVisible" :title="title" :width="width"
-    :before-close="handleClose">
-    <slot></slot>
+  <el-dialog
+    v-model="dialogVisible"
+    modal-class="WPRM-app-modal-wrapper"
+    :title="title"
+    :width="width"
+    :before-close="handleClose"
+  >
+    <slot />
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="handleClose">{{ cancelBtnLabel }}</el-button>
-        <el-button type="primary" @click="handleSuccess">
+        <el-button
+          type="primary"
+          @click="handleSuccess"
+        >
           {{ confirmBtnLabel }}
         </el-button>
       </span>
@@ -15,11 +23,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      dialogVisible: false
-    }
-  },
   props: {
     dialogVisibleProp: {
       type: Boolean,
@@ -42,6 +45,11 @@ export default {
       default: '30%'
     }
   },
+  data() {
+    return {
+      dialogVisible: false
+    };
+  },
   watch: {
     dialogVisibleProp: {
       immediate: true,
@@ -61,7 +69,7 @@ export default {
       this.$emit('update:handleDialogClose', true);
     }
   }
-}
+};
 </script>
 <style scoped>
 .dialog-footer button:first-child {

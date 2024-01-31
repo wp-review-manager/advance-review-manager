@@ -3,6 +3,7 @@ $white: #ffffff;
 $primary-color: #096A2E;
 $primary-50: #E8F3EE;
 $active-color: #FF9A00;
+$active-color-50: #ff9a0073;
 $active-50: #FFF5E5;
 $accent-color: #0d7042;
 
@@ -13,3 +14,10 @@ $text-dark: #26272e;
 
 $border-color: #D6DAE1;
 $border-color-light: #e8e8e85c;
+
+@mixin wprm-paragraph {
+    color: $text-dark;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+}

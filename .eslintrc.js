@@ -29,5 +29,6 @@ module.exports = {
         'vue/multi-word-component-names': 'off',
         'vue/no-deprecated-slot-attribute': 'off',
         "no-console": "off",
+        "vue/no-mutating-props": "off",
     },
 };  
