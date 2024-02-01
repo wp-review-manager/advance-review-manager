@@ -1,99 +1,51 @@
 <template>
-  <el-form
-    ref="form"
-    class="WPRM-dynamicForm"
-    :model="formData"
-    label-width="120px"
-  >
-    <el-row
-      v-for="field in formFields"
-      :key="field.name"
-    >
+  <el-form ref="form" class="WPRM-dynamicForm" :model="formData" label-width="120px">
+    <el-row v-for="field in formFields" :key="field.name">
       <el-col :span="12">
         <el-form-item label-position="top">
           <label for="inputField">{{ field.label }}</label>
           <template v-if="field.type === 'text' || field.type === 'email' || field.type === 'phone'">
-            <el-input
-              v-model="formData[field.name]"
-              :type="field.type"
-              :placeholder="field.placeholder"
-            />
+            <el-input v-model="formData[field.name]" :type="field.type" :placeholder="field.placeholder" />
           </template>
 
           <template v-else-if="field.type === 'textarea'">
-            <el-input
-              v-model="formData[field.name]"
-              type="textarea"
-              :placeholder="field.placeholder"
-            />
+            <el-input v-model="formData[field.name]" type="textarea" :placeholder="field.placeholder" />
           </template>
 
           <template v-else-if="field.type === 'rating'">
-            <el-rate
-              v-model="formData[field.name]"
-              :allow-half="true"
-              size="large"
-              class="ml-4"
-            />
+            <el-rate v-model="formData[field.name]" :allow-half="true" size="large" class="ml-4" />
           </template>
 
           <template v-else-if="field.type === 'file'">
-            <el-upload
-              action="/upload"
-              :on-success="handleUploadSuccess"
-              :on-error="handleUploadError"
-              :file-list="formData[field.name]"
-              :limit="1"
-              :show-file-list="false"
-            >
-              <el-button
-                slot="trigger"
-                size="small"
-                type="primary"
-              >
+            <!-- <el-upload action="/upload" :on-success="handleUploadSuccess" :on-error="handleUploadError"
+              :file-list="formData[field.name]" :limit="1" :show-file-list="false">
+              <el-button slot="trigger" size="small" type="primary">
                 Upload
               </el-button>
-            </el-upload>
+            </el-upload> -->
+            <AppFileUpload :product="formData[field.name]" />
           </template>
 
           <template v-else-if="field.type === 'radio'">
             <!-- <div class="ml-2 flex items-center text-sm"> -->
-            <el-radio-group
-              v-model="formData[field.name]"
-              class="ml-4"
-            >
-              <el-radio
-                v-for="option in field.options"
-                :key="option.value"
-                :label="option.value"
-              >
+            <el-radio-group v-model="formData[field.name]" class="ml-4">
+              <el-radio v-for="option in field.options" :key="option.value" :label="option.value">
                 {{ option.label }}
               </el-radio>
             </el-radio-group>
             <!-- </div> -->
           </template>
           <template v-else-if="field.type === 'checkbox'">
-            <el-checkbox-group
-              v-model="formData[field.name]"
-              class="ml-4 mt-3.5"
-            >
-              <el-checkbox
-                v-for="option in field.options"
-                :key="option.value"
-                :label="option.value"
-              >
+            <el-checkbox-group v-model="formData[field.name]" class="ml-4 mt-3.5">
+              <el-checkbox v-for="option in field.options" :key="option.value" :label="option.value">
                 {{ option.label }}
               </el-checkbox>
             </el-checkbox-group>
           </template>
           <template v-else-if="field.type === 'select'">
             <el-select v-model="formData[field.name]">
-              <el-option
-                v-for="option in field.options"
-                :key="option.value"
-                :label="option.label"
-                :value="option.value"
-              />
+              <el-option v-for="option in field.options" :key="option.value" :label="option.label"
+                :value="option.value" />
             </el-select>
           </template>
         </el-form-item>
@@ -103,7 +55,11 @@
 </template>
 
 <script>
+import AppFileUpload from "./AppFileUpload.vue";
 export default {
+  components: {
+    AppFileUpload,
+  },
   props: {
     formData: {
       type: Object,
