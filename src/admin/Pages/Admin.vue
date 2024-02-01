@@ -191,16 +191,16 @@ export default {
           type: 'textarea',
           placeholder: 'Your message',
         },
-        // {
-        //   label: 'Rating',
-        //   name: 'rating',
-        //   type: 'rating',
-        // },
-        // {
-        //   label: 'File',
-        //   name: 'file',
-        //   type: 'file',
-        // },
+        {
+          label: 'Rating',
+          name: 'rating',
+          type: 'rating',
+        },
+        {
+          label: 'File',
+          name: 'file',
+          type: 'file',
+        },
         {
           label: 'Radio',
           name: 'radio',

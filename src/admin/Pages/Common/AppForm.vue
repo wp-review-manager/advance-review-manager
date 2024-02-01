@@ -19,6 +19,7 @@
               :placeholder="field.placeholder"
             />
           </template>
+
           <template v-else-if="field.type === 'textarea'">
             <el-input
               v-model="formData[field.name]"
@@ -26,9 +27,16 @@
               :placeholder="field.placeholder"
             />
           </template>
+
           <template v-else-if="field.type === 'rating'">
-            <el-rate v-model="formData[field.name]" />
+            <el-rate
+              v-model="formData[field.name]"
+              :allow-half="true"
+              size="large"
+              class="ml-4"
+            />
           </template>
+
           <template v-else-if="field.type === 'file'">
             <el-upload
               action="/upload"
@@ -47,27 +55,34 @@
               </el-button>
             </el-upload>
           </template>
+
           <template v-else-if="field.type === 'radio'">
-            <el-radio-group v-model="formData[field.name]">
+            <!-- <div class="ml-2 flex items-center text-sm"> -->
+            <el-radio-group
+              v-model="formData[field.name]"
+              class="ml-4"
+            >
               <el-radio
                 v-for="option in field.options"
                 :key="option.value"
                 :label="option.value"
               >
-                {{
-                  option.label }}
+                {{ option.label }}
               </el-radio>
             </el-radio-group>
+            <!-- </div> -->
           </template>
           <template v-else-if="field.type === 'checkbox'">
-            <el-checkbox-group v-model="formData[field.name]">
+            <el-checkbox-group
+              v-model="formData[field.name]"
+              class="ml-4 mt-3.5"
+            >
               <el-checkbox
                 v-for="option in field.options"
                 :key="option.value"
                 :label="option.value"
               >
-                {{
-                  option.label }}
+                {{ option.label }}
               </el-checkbox>
             </el-checkbox-group>
           </template>

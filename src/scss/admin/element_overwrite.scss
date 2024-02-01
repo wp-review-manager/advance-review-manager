@@ -48,16 +48,44 @@
     }
 }
 
+.el-input__inner {
+    border: none !important;
+    min-height: 38px !important;
+}
+
+input[type=checkbox]:focus,
+input[type=color]:focus,
+input[type=date]:focus,
+input[type=datetime-local]:focus,
+input[type=datetime]:focus,
+input[type=email]:focus,
+input[type=month]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=radio]:focus,
+input[type=search]:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=time]:focus,
+input[type=url]:focus,
+input[type=week]:focus {
+    border: none !important;
+    box-shadow: none !important;
+}
+
 .el-textarea__inner,
 .WPRM-search-input,
-.el-input__inner {
+.el-input__wrapper {
     border-radius: 8px !important;
 
+    &.is-focus,
     &:focus {
         border-color: $active-color-50 !important;
         box-shadow: 0 0 0 1px $active-color-50 !important;
+
     }
 }
+
 
 .el-radio__input.is-checked+.el-radio__label,
 .el-checkbox__input.is-checked+.el-checkbox__label {
