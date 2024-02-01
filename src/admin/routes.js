@@ -1,4 +1,4 @@
-import Admin from './Pages/Admin.vue';
+import Admin from './Pages/HomePage/Admin.vue';
 import Contact from './Pages/Contact.vue';
 
 export default [{
