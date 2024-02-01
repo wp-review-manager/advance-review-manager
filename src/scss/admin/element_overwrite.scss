@@ -1,0 +1,71 @@
+.WPRM-app-modal-wrapper {
+    .el-dialog {
+        border-radius: 8px;
+
+        .el-dialog__title {
+            color: $text-dark;
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 32px;
+            letter-spacing: -0.48px;
+        }
+    }
+}
+
+.el-button--primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $white;
+
+    &:hover {
+        background-color: $accent-color;
+        border-color: $accent-color;
+        color: $white;
+    }
+}
+
+.el-button--success {
+    background-color: $primary-color;
+    border-color: $primary-color;
+    color: $white;
+
+    &:hover {
+        background-color: $accent-color;
+        border-color: $accent-color;
+        color: $white;
+    }
+}
+
+.el-button--default {
+    background-color: $white;
+    border-color: $border-color;
+    color: $text-dark;
+
+    &:hover {
+        background-color: $background-color;
+        border-color: $border-color;
+        color: $text-dark;
+    }
+}
+
+.el-textarea__inner,
+.WPRM-search-input,
+.el-input__inner {
+    border-radius: 8px !important;
+
+    &:focus {
+        border-color: $active-color-50 !important;
+        box-shadow: 0 0 0 1px $active-color-50 !important;
+    }
+}
+
+.el-radio__input.is-checked+.el-radio__label,
+.el-checkbox__input.is-checked+.el-checkbox__label {
+    color: $active-color !important;
+}
+
+.el-radio__input.is-checked .el-radio__inner,
+.el-checkbox__input.is-checked .el-checkbox__inner {
+    border-color: $active-color !important;
+    background-color: $active-color !important;
+}

@@ -75,7 +75,7 @@ class AdminMenuHandler{
         ob_start();
         ?>
         <div class="WPRM-admin-page" id="WPRM_app">
-            <div class="main-menu text-white-200 bg-wheat-600 p-4">
+            <div class="main-menu text-white-200 bg-wheat-600">
                 <div class="WPRM-logo">
                     <?php echo Helper::LogoSvg() ?>
                 </div>

@@ -1,0 +1,16 @@
+.WPRM-dynamicForm {
+    .el-row {
+        .el-col-12 {
+            max-width: 100% !important;
+            flex: 0 0 100% !important;
+        }
+    }
+
+    .el-form-item__content {
+        margin-left: 0 !important;
+
+        label {
+            @include wprm-paragraph;
+        }
+    }
+}

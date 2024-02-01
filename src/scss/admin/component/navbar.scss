@@ -8,12 +8,12 @@
         align-items: center;
         justify-content: center;
         background-color: $white;
-        padding: 16px;
         justify-content: space-between;
 
         .WPRM-menu-item {
             display: flex;
             gap: 20px;
+            padding: 16px;
 
             a {
                 color: $text-dark;
