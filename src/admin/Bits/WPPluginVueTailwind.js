@@ -9,7 +9,7 @@ import {
 } from '@wordpress/hooks';
 
 const moment = require('moment');
-require('moment/locale/en-gb');
+// require('moment/locale/en-gb');
 moment.locale('en-gb');
 
 const appStartTime = new Date();
@@ -44,7 +44,7 @@ export default class WPPluginVueTailwind {
                 ucFirst: self.ucFirst,
                 ucWords: self.ucWords,
                 slugify: self.slugify,
-                moment: moment,
+                // moment: moment,
                 $get: self.$get,
                 $post: self.$post,
                 $del: self.$del,

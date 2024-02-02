@@ -49,21 +49,14 @@ class AdminMenuHandler{
         
             if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
                 remove_all_actions('admin_notices');
-        
-                wp_enqueue_style(
-                    'wprm_admin_app',
-                    WPRM_URL . 'assets/css/wp-review-manager-admin.css',
-                    array(),
-                    WPRM_VERSION
-                );
             }
         }, 20);
     }
 
     public function renderAdminPage()
     {
-        wp_enqueue_script('WPRM-script-boot', WPRM_URL . 'assets/admin/js/start.js', array('jquery'), WPRM_VERSION, false);
-        wp_enqueue_style('WPRM-global-styling', WPRM_URL . 'assets/css/element.css', array(), WPRM_VERSION);
+        Vite::enqueueScript('WPRM-script-boot',  'admin/start.js', array('jquery'), WPRM_VERSION, true);
+        Vite::enqueueStyle('WPRM-global-styling', 'scss/admin/app.scss', array(), WPRM_VERSION);
 
         $WPRM = apply_filters('WPRM/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),

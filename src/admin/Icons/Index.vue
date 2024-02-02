@@ -18,15 +18,15 @@ export default {
             dynamicComponent: null
         };
     },
-    watch: {
-        icon: {
-            immediate: true,
-            handler(newComponent) {
-                this.dynamicComponent = defineAsyncComponent(() =>
-                    import(`./${newComponent}.vue`)
-                );
-            }
-        }
-    }
+    // watch: {
+    //     icon: {
+    //         immediate: true,
+    //         handler(newComponent) {
+    //             this.dynamicComponent = defineAsyncComponent(() =>
+    //                 import(`./${newComponent}.vue`)
+    //             );
+    //         }
+    //     }
+    // }
 };
 </script>

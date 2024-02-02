@@ -22,6 +22,7 @@ define('WPRM_FILE', __FILE__);
 define('WPRM_VERSION', '1.0.5');
 define('WPRM_DB_VERSION', 1);
 
+define('WP_REVIEW_MANAGER_PRODUCTION', 'yes');
 class WPReviewManager {
     public function boot()
     {
