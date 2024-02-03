@@ -71,6 +71,8 @@ class AdminMenuHandler{
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
 
+        $this->renderGlobalSettings();
+
         wp_localize_script('WPRM-script-boot', 'WPRMAdmin', $WPRM);
         ob_start();
         ?>
@@ -100,6 +102,15 @@ class AdminMenuHandler{
         <?php
         $form_body = ob_get_clean();
         echo $form_body;
+    }
+
+    public function renderGlobalSettings()
+    {
+        if (function_exists('wp_enqueue_editor')) {
+            add_filter('user_can_richedit', '__return_true');
+            wp_enqueue_editor();
+            wp_enqueue_media();
+        }
     }
 
 }

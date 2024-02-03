@@ -2,6 +2,11 @@
     .el-dialog {
         border-radius: 8px;
 
+        .el-dialog__header {
+            margin-right: 0px !important;
+            border-bottom: 1px solid $border-color;
+        }
+
         .el-dialog__title {
             color: $text-dark;
             font-size: 24px;
@@ -20,7 +25,17 @@
     &:hover {
         background-color: $accent-color;
         border-color: $accent-color;
-        color: $white;
+    }
+}
+
+.el-button--warning {
+    background-color: $active-color !important;
+    border-color: $active-color !important;
+    color: $white;
+
+    &:hover {
+        background-color: $active-color-50 !important;
+        border-color: $active-color-50 !important;
     }
 }
 
@@ -48,16 +63,43 @@
     }
 }
 
+.el-input__inner {
+    border: none !important;
+    min-height: 38px !important;
+}
+
+input[type=checkbox]:focus,
+input[type=color]:focus,
+input[type=date]:focus,
+input[type=datetime-local]:focus,
+input[type=datetime]:focus,
+input[type=email]:focus,
+input[type=month]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=radio]:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=time]:focus,
+input[type=url]:focus,
+input[type=week]:focus {
+    border: none !important;
+    box-shadow: none !important;
+}
+
 .el-textarea__inner,
 .WPRM-search-input,
-.el-input__inner {
+.el-input__wrapper {
     border-radius: 8px !important;
 
+    &.is-focus,
     &:focus {
         border-color: $active-color-50 !important;
         box-shadow: 0 0 0 1px $active-color-50 !important;
+
     }
 }
+
 
 .el-radio__input.is-checked+.el-radio__label,
 .el-checkbox__input.is-checked+.el-checkbox__label {
@@ -68,4 +110,19 @@
 .el-checkbox__input.is-checked .el-checkbox__inner {
     border-color: $active-color !important;
     background-color: $active-color !important;
+}
+
+.el-dialog__close {
+    border: 1px solid $border-color;
+    padding: 6px;
+    border-radius: 8px;
+    box-sizing: content-box;
+}
+
+.el-dialog__headerbtn {
+    &:hover {
+        .el-dialog__close {
+            color: $active-color;
+        }
+    }
 }

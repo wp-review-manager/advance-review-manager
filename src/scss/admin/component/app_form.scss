@@ -11,6 +11,7 @@
 
         label {
             @include wprm-paragraph;
+            min-width: 100px;
         }
     }
 }

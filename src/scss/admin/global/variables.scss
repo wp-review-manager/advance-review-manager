@@ -21,3 +21,23 @@ $border-color-light: #e8e8e85c;
     font-weight: 500;
     display: inline-block;
 }
+
+@mixin wprm-box-wrapper {
+    margin-bottom: 20px;
+    background: $white;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+@mixin h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h2 {
+    @include h2;
+}
