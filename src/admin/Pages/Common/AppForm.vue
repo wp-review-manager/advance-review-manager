@@ -1,13 +1,17 @@
 <template>
   <el-col :span="12">
     <el-form-item label-position="top">
-      <label for="inputField">{{ field.label }}</label>
+      <input @blur="labelEditAble = false" class="label-editor-input" type="text" @keyup.enter="labelEditAble = false"
+        v-if="labelEditAble" v-model="field.label" placeholder="" />
+      <label class="form-label" @click="labelEditAble = true" v-else for="inputField">{{ field.label }}
+        <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
+      </label>
       <template v-if="field.type === 'text' || field.type === 'email' || field.type === 'phone'">
-        <el-input v-model="field.value" :type="field.type" :placeholder="field.placeholder" />
+        <el-input v-model="field.placeholder" :type="field.type" :placeholder="field.placeholder" />
       </template>
 
       <template v-else-if="field.type === 'textarea'">
-        <el-input v-model="field.value" type="textarea" :placeholder="field.placeholder" />
+        <el-input v-model="field.placeholder" type="textarea" :placeholder="field.placeholder" />
       </template>
 
       <template v-else-if="field.type === 'rating'">
@@ -47,7 +51,7 @@
 import AppFileUpload from "./AppFileUpload.vue";
 export default {
   components: {
-    AppFileUpload,
+    AppFileUpload
   },
   props: {
     field: {
@@ -58,6 +62,7 @@ export default {
   data() {
     return {
       // JSON data for form fields
+      labelEditAble: false,
     };
   },
   methods: {

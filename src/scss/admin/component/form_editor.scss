@@ -17,6 +17,12 @@
         .WPRM-form-body__left {
             @include wprm-box-wrapper;
             width: 70%;
+
+            .form-label {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
         }
 
         .WPRM-form-body__right {
