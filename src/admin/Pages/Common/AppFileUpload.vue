@@ -1,14 +1,20 @@
 <template>
-    <div class="wpf_photo_card ml-4">
-        <div class="wpf_photo_holder mb-2" v-if="checkHasImage(product)">
-            <img :src="getSingleImageLink(product)" />
-        </div>
-        <div class="wpf_photo_media_btn">
-            <el-button type="warning" @click="initUploader">
-                {{ buttonText }}
-            </el-button>
-        </div>
+  <div class="wpf_photo_card ml-4">
+    <div
+      v-if="checkHasImage(product)"
+      class="wpf_photo_holder mb-2"
+    >
+      <img :src="getSingleImageLink(product)">
     </div>
+    <div class="wpf_photo_media_btn">
+      <el-button
+        type="warning"
+        @click="initUploader"
+      >
+        {{ buttonText }}
+      </el-button>
+    </div>
+  </div>
 </template>
   
 <script type="text/babel">
@@ -16,7 +22,7 @@ import each from "lodash/each";
 // import Button from "../Button/Button.vue";
 
 export default {
-    name: "photo_widget",
+    name: "PhotoWidget",
     props: ["product", "custom_width", "is_multiple", "layout"],
     // components: {
     //     Button,
@@ -26,6 +32,25 @@ export default {
             app_ready: false,
             buttonText: "+ Photo",
         };
+    },
+    mounted() {
+        // if (!this.product.photo || typeof this.product.photo != "object") {
+        //     this.$set(this.product, "photo", {
+        //         alt_text: "",
+        //         image_full: "",
+        //         image_thumb: "",
+        //     });
+        // }
+
+        if (this.product[0].image_thumb) {
+            this.buttonText = "Change Image";
+        }
+
+        if (!window.wpActiveEditor) {
+            window.wpActiveEditor = null;
+        }
+
+        this.app_ready = true;
     },
     methods: {
         checkHasImage(product) {
@@ -52,7 +77,7 @@ export default {
         },
         initUploader(event) {
             event.preventDefault();
-            let that = this;
+            const that = this;
             const upload = wp
                 .media({
                     title: "Choose Image", //Title for Media Box
@@ -89,25 +114,6 @@ export default {
             });
             return finalUrl || maybeUrl;
         },
-    },
-    mounted() {
-        // if (!this.product.photo || typeof this.product.photo != "object") {
-        //     this.$set(this.product, "photo", {
-        //         alt_text: "",
-        //         image_full: "",
-        //         image_thumb: "",
-        //     });
-        // }
-
-        if (this.product[0].image_thumb) {
-            this.buttonText = "Change Image";
-        }
-
-        if (!window.wpActiveEditor) {
-            window.wpActiveEditor = null;
-        }
-
-        this.app_ready = true;
     },
 };
 </script>

@@ -1,29 +1,44 @@
 <template>
-    <div class="WPRM_card" v-for="(template, index) in formTemplate" :key="index">
-        <el-card :body-style="{ padding: '0px' }">
-            <img :src="template.thumbnail" style="width: 100%; height: 200px" alt="image" class="image" />
-            <div style="padding: 14px">
-                <span>{{ template.title }}</span>
-                <div class="bottom">
-                    <el-button @click="saveForm()" style="width: 100%;" type="primary">Choose Template</el-button>
-                </div>
-            </div>
-        </el-card>
-    </div>
+  <div
+    v-for="(template, index) in formTemplate"
+    :key="index"
+    class="WPRM_card"
+  >
+    <el-card :body-style="{ padding: '0px' }">
+      <img
+        :src="template.thumbnail"
+        style="width: 100%; height: 200px"
+        alt="image"
+        class="image"
+      >
+      <div style="padding: 14px">
+        <span>{{ template.title }}</span>
+        <div class="bottom">
+          <el-button
+            style="width: 100%;"
+            type="primary"
+            @click="saveForm()"
+          >
+            Choose Template
+          </el-button>
+        </div>
+      </div>
+    </el-card>
+  </div>
 </template>
   
 <script>
 export default {
-    data() {
-        return {
-            currentDate: new Date().toLocaleDateString()
-        };
-    },
     props: {
         formTemplate: {
             type: Array,
             default: []
         }
+    },
+    data() {
+        return {
+            currentDate: new Date().toLocaleDateString()
+        };
     },
     methods: {
         saveForm() {

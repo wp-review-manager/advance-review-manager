@@ -1,36 +1,55 @@
 <template>
-    <div class="WPRM-form-editor WPRM-box-wrapper">
-        <div class="WPRM-form-editor__header">
-            <div class="WPRM-form-editor__header__title">
-                <Back style="width: 1em; height: 1em; margin-right: 8px" />
-                <h2>Form Editor</h2>
-                <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
-            </div>
-            <el-button type="success">Save Settings</el-button>
-        </div>
-        <div class="WPRM-form-body">
-            <div class="WPRM-form-body__left">
-                <draggable class="dragArea list-group w-full WPRM-dynamicForm" :list="list2" group="people" @change="log"
-                    :move="checkMove">
-                    <!-- <div class="WPRM-dynamicForm" label-width="120px"> -->
-                    <el-row v-for="field in list2" :key="field.name">
-                        <AppForm :field="field" />
-                    </el-row>
-                    <!-- </div> -->
-                </draggable>
-            </div>
-            <div class="WPRM-form-body__right">
-                <h2>Form components</h2>
-                <draggable class="dragArea list-group w-full" :list="list1"
-                    :group="{ name: 'people', pull: 'clone', put: false }" :sort="true" @change="log" :move="checkMove">
-                    <div class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center" v-for="element in list1"
-                        :key="element.name">
-                        {{ element.name }}
-                    </div>
-                </draggable>
-            </div>
-        </div>
+  <div class="WPRM-form-editor WPRM-box-wrapper">
+    <div class="WPRM-form-editor__header">
+      <div class="WPRM-form-editor__header__title">
+        <Back style="width: 1em; height: 1em; margin-right: 8px" />
+        <h2>Form Editor</h2>
+        <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
+      </div>
+      <el-button type="success">
+        Save Settings
+      </el-button>
     </div>
+    <div class="WPRM-form-body">
+      <div class="WPRM-form-body__left">
+        <draggable
+          class="dragArea list-group w-full WPRM-dynamicForm"
+          :list="list2"
+          group="people"
+          :move="checkMove"
+          @change="log"
+        >
+          <!-- <div class="WPRM-dynamicForm" label-width="120px"> -->
+          <el-row
+            v-for="field in list2"
+            :key="field.name"
+          >
+            <AppForm :field="field" />
+          </el-row>
+          <!-- </div> -->
+        </draggable>
+      </div>
+      <div class="WPRM-form-body__right">
+        <h2>Form components</h2>
+        <draggable
+          class="dragArea list-group w-full"
+          :list="list1"
+          :group="{ name: 'people', pull: 'clone', put: false }"
+          :sort="true"
+          :move="checkMove"
+          @change="log"
+        >
+          <div
+            v-for="element in list1"
+            :key="element.name"
+            class="list-group-item bg-gray-300 m-1 p-3 rounded-md text-center"
+          >
+            {{ element.name }}
+          </div>
+        </draggable>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import AppForm from '../Common/AppForm.vue';
@@ -126,20 +145,20 @@ export default {
     },
     methods: {
         add() {
-            console.log('add')
+            console.log('add');
         },
         replace() {
-            console.log('replace')
+            console.log('replace');
         },
         checkMove(event) {
-            console.log('checkMove', event.draggedContext)
-            console.log('Future index: ' + event.draggedContext.futureIndex)
+            console.log('checkMove', event.draggedContext);
+            console.log('Future index: ' + event.draggedContext.futureIndex);
         },
         log(event) {
-            const { moved, added } = event
+            const { moved, added } = event;
 
-            if (moved) console.log('moved', moved)
-            if (added) console.log('added', added, added.element)
+            if (moved) console.log('moved', moved);
+            if (added) console.log('added', added, added.element);
         },
     },
 };
