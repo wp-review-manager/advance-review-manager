@@ -1,15 +1,12 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from "path";
-import tailwindcss from "tailwindcss";
-import {defineConfig} from 'vite'
-import vue from '@vitejs/plugin-vue'
 import liveReload from 'vite-plugin-live-reload';
 import { viteStaticCopy } from "vite-plugin-static-copy";
-
-const {ElementPlusResolver} = require("unplugin-vue-components/resolvers");
-const Components = require("unplugin-vue-components/vite");
 import tailwindcss from "tailwindcss";
+
+import {ElementPlusResolver} from "unplugin-vue-components/resolvers"; 
+import Components from "unplugin-vue-components/vite";
 import AutoImport from 'unplugin-auto-import/vite'
 
 const inputs = [
@@ -66,10 +63,10 @@ export default defineConfig({
     },
 
     server: {
-        port: 2222,
+        port: 8080,
         strictPort: true,
         hmr: {
-            port: 2222,
+            port: 8080,
             host: 'localhost',
             protocol: 'ws',
         }

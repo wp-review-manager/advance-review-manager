@@ -31,7 +31,7 @@ class AdminMenuHandler{
                 'admin.php?page=wp-review-manager.php#/settings',
             );
             $submenu['wp-review-manager.php']['usage-guide'] = array(
-                'Usage Guide',
+                'User Guide',
                 'manage_options',
                 'admin.php?page=wp-review-manager.php#/usage-guide',
             );
@@ -62,8 +62,9 @@ class AdminMenuHandler{
 
     public function renderAdminPage()
     {
-        wp_enqueue_script('WPRM-script-boot', WPRM_URL . 'assets/admin/js/start.js', array('jquery'), WPRM_VERSION, false);
-        wp_enqueue_style('WPRM-global-styling', WPRM_URL . 'assets/css/element.css', array(), WPRM_VERSION);
+
+        Vite::enqueueScript('WPRM-script-boot', 'admin/js/start.js', array('jquery'), WPRM_VERSION, true);
+        Vite::enqueueStyle('WPRM-global-styling', 'scss/element.css', array(), WPRM_VERSION);
 
         $WPRM = apply_filters('WPRM/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),

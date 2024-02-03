@@ -19,14 +19,14 @@ export default {
         };
     },
     watch: {
-        icon: {
-            immediate: true,
-            handler(newComponent) {
-                this.dynamicComponent = defineAsyncComponent(() =>
-                    import(`./${newComponent}.vue`)
-                );
-            }
-        }
+        // icon: {
+        //     immediate: true,
+        //     handler(newComponent) {
+        //         this.dynamicComponent = defineAsyncComponent(() =>
+        //             import(`./${newComponent}.vue`)
+        //         );
+        //     }
+        // }
     }
 };
 </script>
