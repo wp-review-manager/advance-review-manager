@@ -27,12 +27,11 @@
       </div>
     </div>
     <!-- End Start Page -->
-
     <!-- Start Create Feedback Form Modal-->
-    <AppModal width="70%" :dialog-visible-prop="dialogVisibleProp" @update:handle-dialog-close="handleDialogClose">
-      <!-- {{ formData }} -->
+    <AppModal width="70%" :dialog-visible-prop="dialogVisibleProp" @update:handle-dialog-close="handleDialogClose"
+      :confirmBtnLabel="'Create a blank form'">
       <div class="WPRM-choose-template-form">
-        <AppForm :form-data="formData" :form-fields="formFields" />
+        <HomeChooseTemplate :formTemplate="formTemplate" />
       </div>
     </AppModal>
     <!-- End Create Feedback Form Modal-->
@@ -43,24 +42,25 @@
   </div>
 </template>
 <script>
-import { tableColumns, tableData, formData, formFields } from './home_helper.js';
+import { tableColumns, tableData, formTemplate } from './home_helper.js';
 import AppTable from '../Common/AppTable.vue';
 import AppModal from '../Common/AppModal.vue';
-import AppForm from '../Common/AppForm.vue';
+import HomeChooseTemplate from './HomeChooseTemplate.vue';
+// import AppForm from '../Common/AppForm.vue';
 export default {
   name: "AdminLayout",
   components: {
     AppTable,
     AppModal,
-    AppForm
+    // AppForm,
+    HomeChooseTemplate
   },
   data() {
     return {
       dialogVisibleProp: false,
       columns: tableColumns,
       data: tableData,
-      formData,
-      formFields
+      formTemplate: formTemplate
     };
   },
   methods: {

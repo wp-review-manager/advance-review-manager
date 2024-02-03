@@ -3,7 +3,22 @@
 }
 
 .WPRM-choose-template-form {
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid $border-color;
+    .WPRM-search-container {
+        display: flex;
+        gap: 30px;
+
+        .el-input__wrapper {
+            min-width: 440px !important
+        }
+    }
+}
+
+.el-radio-button__original-radio:checked+.el-radio-button__inner {
+    border-color: $active-color !important;
+    background-color: $active-color !important;
+    color: #fff !important;
+}
+
+.el-radio-button__inner:hover {
+    color: $active-color !important;
 }

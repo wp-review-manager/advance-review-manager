@@ -157,9 +157,77 @@ const formFields = [
 
 ]
 
+const commonFormFields = [
+    {
+        label: 'Name',
+        name: 'name',
+        type: 'text',
+        placeholder: 'Apple MacBook Pro 17',
+    },
+    {
+        label: 'Email',
+        name: 'email',
+        type: 'email',
+        placeholder: 'Enter user email',
+    },
+    {
+        label: 'Message',
+        name: 'message',
+        type: 'textarea',
+        placeholder: 'Your message',
+    },
+    {
+        label: 'Rating',
+        name: 'rating',
+        type: 'rating',
+    },
+    {
+        label: 'File',
+        name: 'file',
+        type: 'file',
+        value: [
+            {
+                image_full: '',
+                image_thumb: '',
+                alt_text: '',
+            }
+        ],
+    },
+];
+
+const commonFormData = {
+    name: '',
+    email: '',
+    message: '',
+    rating: 0,
+    file: [
+        {
+            image_full: '',
+            image_thumb: '',
+            alt_text: '',
+        }
+    ],
+    radio: '',
+    checkbox: [],
+}
+
+const formTemplate = [
+    {
+        title: 'Hotel Review Form',
+        thumbnail: 'https://via.placeholder.com/150',
+        FormData: commonFormData,
+        formFields: commonFormFields,
+    },
+    {
+        title: 'Product Review Form',
+        thumbnail: 'https://via.placeholder.com/150',
+        FormData: commonFormData,
+        formFields: commonFormFields,
+    }
+]
+
 export {
     tableColumns,
     tableData,
-    formData,
-    formFields
+    formTemplate
 }

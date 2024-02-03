@@ -1,0 +1,38 @@
+.WPRM-form-editor {
+    .WPRM-form-editor__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @include wprm-box-wrapper;
+
+        .WPRM-form-editor__header__title {
+            @include h2;
+        }
+    }
+
+    .WPRM-form-body {
+        display: flex;
+        gap: 20px;
+
+        .WPRM-form-body__left {
+            @include wprm-box-wrapper;
+            width: 70%;
+        }
+
+        .WPRM-form-body__right {
+            width: 30%;
+            @include wprm-box-wrapper;
+            margin-left: 20px;
+
+            h2 {
+                padding-bottom: 10px;
+                border-bottom: 1px solid $border-color;
+            }
+
+            .dragArea {
+                margin-top: 20px;
+            }
+        }
+
+    }
+}
