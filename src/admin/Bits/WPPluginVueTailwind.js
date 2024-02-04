@@ -1,4 +1,5 @@
 import app from './elements.js';
+import ajax from './AJAX.js'
 
 import {
     applyFilters,
@@ -8,9 +9,15 @@ import {
     removeAllActions
 } from '@wordpress/hooks';
 
-const moment = require('moment');
-require('moment/locale/en-gb');
+import moment from 'moment';
+import 'moment/locale/en-gb';
 moment.locale('en-gb');
+
+import {
+    ElIcon,
+} from "element-plus";
+
+app.use(ElIcon);
 
 const appStartTime = new Date();
 
@@ -23,7 +30,7 @@ export default class WPPluginVueTailwind {
         this.applyFilters = applyFilters;
         this.removeAllActions = removeAllActions;
         //
-        this.AJAX = require('./AJAX.js');
+        this.AJAX = ajax;
         this.appVars = window.WPPluginVueTailwindAdmin;
         this.app = this.extendVueConstructor();
     }

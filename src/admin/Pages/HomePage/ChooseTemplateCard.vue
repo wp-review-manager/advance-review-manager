@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(template, index) in formTemplate"
+    v-for="(template, index) in formTemplates"
     :key="index"
     class="WPRM_card"
   >
@@ -30,7 +30,7 @@
 <script>
 export default {
     props: {
-        formTemplate: {
+        formTemplates: {
             type: Array,
             default: []
         }

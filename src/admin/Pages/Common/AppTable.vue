@@ -47,7 +47,7 @@
               <button
                 class="text-white mx-1 bg-gray-700 hover:bg-gray-800 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center me-2"
               >
-                <Icons icon="Duplicate" />
+                <Icons icon='Duplicate' />
               </button>
             </div>
           </td>

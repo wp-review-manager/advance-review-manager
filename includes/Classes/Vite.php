@@ -7,7 +7,7 @@ class Vite
     private static $instance = null;
     private string $viteHostProtocol = 'http://';
     private string $viteHost = 'localhost';
-    private string $vitePort = '8080';
+    private string $vitePort = '8880';
     private string $resourceDirectory = 'src/';
     private array $moduleScripts = [];
     private bool $isScriptFilterAdded = false;
@@ -39,7 +39,6 @@ class Vite
      */
     private function enqueueScript($handle, $src, $dependency = [], $version = null, $inFooter = false)
     {
-        // dd("hittt");
         if (in_array($handle, (static::$instance)->moduleScripts)) {
             if (static::isDevMode()) {
                 throw new \Exception('This handel Has been used');
@@ -97,7 +96,7 @@ class Vite
             return;
         }
 
-        $manifestPath = realpath(__DIR__) . '/../assets/manifest.json';
+        $manifestPath = realpath(__DIR__) . '/../../assets/manifest.json';
         if (!file_exists($manifestPath)) {
             throw new \Exception('Vite Manifest Not Found. Run : npm run dev or npm run prod');
         }

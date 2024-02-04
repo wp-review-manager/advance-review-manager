@@ -16,8 +16,8 @@ export default [{
     component: Contact
 },
 {
-    path: '/usage-guide',
-    name: 'usage-guide',
+    path: '/user-guide',
+    name: 'user-guide',
     component: Contact
 },
 {

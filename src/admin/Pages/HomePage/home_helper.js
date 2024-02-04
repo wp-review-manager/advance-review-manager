@@ -211,7 +211,7 @@ const commonFormData = {
     checkbox: [],
 }
 
-const formTemplate = [
+const formTemplates = [
     {
         title: 'Hotel Review Form',
         thumbnail: 'https://via.placeholder.com/150',
@@ -229,5 +229,5 @@ const formTemplate = [
 export {
     tableColumns,
     tableData,
-    formTemplate
+    formTemplates
 }

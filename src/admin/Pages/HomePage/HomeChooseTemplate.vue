@@ -21,7 +21,7 @@
   </div>
 
   <div class="WPRM_card_wrapper">
-    <ChooseTemplateCard :form-template="formTemplate" />
+    <ChooseTemplateCard :formTemplates="formTemplates" />
   </div>
 </template>
 
@@ -32,14 +32,15 @@ export default {
         ChooseTemplateCard
     },
     props: {
-        formTemplate: {
+        formTemplates: {
             type: Array,
             default: []
         }
     },
     data() {
         return {
-            radio1: 'New York'
+            radio1: 'New York',
+            input2: ''
         };
     }
 };

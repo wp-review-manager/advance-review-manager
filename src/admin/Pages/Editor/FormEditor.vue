@@ -54,7 +54,7 @@
 <script>
 import AppForm from '../Common/AppForm.vue';
 import { VueDraggableNext } from 'vue-draggable-next';
-import { formTemplate } from '../HomePage/home_helper.js';
+import { formTemplates } from '../HomePage/home_helper.js';
 
 export default {
     components: {
@@ -63,7 +63,7 @@ export default {
     },
     data() {
         return {
-            formTemplate: formTemplate,
+            formTemplates: formTemplates,
             enabled: true,
             list1: [
                 {
@@ -139,7 +139,7 @@ export default {
                 },
 
             ],
-            list2: formTemplate[0].formFields,
+            list2: formTemplates[0].formFields,
             dragging: false,
         };
     },
