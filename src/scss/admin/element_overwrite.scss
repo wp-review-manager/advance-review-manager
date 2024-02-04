@@ -2,6 +2,11 @@
     .el-dialog {
         border-radius: 8px;
 
+        .el-dialog__header {
+            margin-right: 0px !important;
+            border-bottom: 1px solid $border-color;
+        }
+
         .el-dialog__title {
             color: $text-dark;
             font-size: 24px;

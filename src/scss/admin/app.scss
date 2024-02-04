@@ -6,3 +6,10 @@
 @import './component/app_table.scss';
 @import './component/app_form.scss';
 @import './element_overwrite.scss';
+@import './component/card.scss';
+@import './component/form_editor.scss';
+
+.label-editor-input {
+    width: 100%;
+    margin-bottom: 10px;
+}

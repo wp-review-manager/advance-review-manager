@@ -1,5 +1,6 @@
 import Admin from './Pages/HomePage/Admin.vue';
 import Contact from './Pages/Contact.vue';
+import FormEditor from './Pages/Editor/FormEditor.vue';
 
 export default [{
     path: '/',
@@ -23,5 +24,10 @@ export default [{
     path: '/support-&-debug',
     name: 'support-&-debug',
     component: Contact
+},
+{
+    path: '/form/edit/:id',
+    name: 'edit-form',
+    component: FormEditor
 }
 ];
