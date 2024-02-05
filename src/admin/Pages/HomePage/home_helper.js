@@ -65,23 +65,6 @@ const tableData = [
     }
 ]
 
-const formData = {
-    name: 'gjgjgjhgjh',
-    email: '',
-    phone: '',
-    message: '',
-    rating: 0,
-    file: [
-        {
-            image_full: '',
-            image_thumb: '',
-            alt_text: '',
-        }
-    ],
-    radio: '',
-    checkbox: [],
-    select: '',
-}
 const formFields = [
     {
         label: 'Name',
@@ -154,7 +137,42 @@ const formFields = [
             },
         ],
     },
-
+    {
+        label: 'Select',
+        name: 'select',
+        type: 'select',
+        options: [
+            {
+                label: 'Option 1',
+                value: 'option1',
+            },
+            {
+                label: 'Option 2',
+                value: 'option2',
+            },
+        ],
+    },
+    {
+        label: 'Date',
+        name: 'date',
+        type: 'date',
+    },
+    {
+        label: 'Number',
+        name: 'number',
+        type: 'number',
+    },
+    {
+        label: 'Hidden',
+        name: 'hidden',
+        type: 'hidden',
+    },
+    {
+        label: 'Submit',
+        name: 'submit',
+        type: 'submit',
+        single_component: true,
+    }
 ]
 
 const commonFormFields = [
@@ -195,33 +213,29 @@ const commonFormFields = [
     },
 ];
 
-const commonFormData = {
-    name: '',
-    email: '',
-    message: '',
-    rating: 0,
-    file: [
-        {
-            image_full: '',
-            image_thumb: '',
-            alt_text: '',
-        }
-    ],
-    radio: '',
-    checkbox: [],
-}
-
 const formTemplate = [
     {
-        title: 'Hotel Review Form',
-        thumbnail: 'https://via.placeholder.com/150',
-        FormData: commonFormData,
-        formFields: commonFormFields,
+        id: 0,
+        title: 'Blank Form',
+        thumbnail: 'images/template_1.jpeg',
+        formFields: [],
+
     },
     {
+        id: 1,
+        title: 'Hotel Review Form',
+        thumbnail: 'images/template_1.jpeg',
+        formFields: [...commonFormFields, {
+            label: 'Hotel Name',
+            name: 'hotel_name',
+            type: 'text',
+            placeholder: 'Hotel Name',
+        }],
+    },
+    {
+        id: 2,
         title: 'Product Review Form',
-        thumbnail: 'https://via.placeholder.com/150',
-        FormData: commonFormData,
+        thumbnail: 'images/template_1.jpeg',
         formFields: commonFormFields,
     }
 ]
@@ -229,5 +243,6 @@ const formTemplate = [
 export {
     tableColumns,
     tableData,
-    formTemplate
+    formTemplate,
+    formFields
 }
