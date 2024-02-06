@@ -32,9 +32,9 @@ export default {
         icon: {
             immediate: true,
             handler(newComponent) {
-                // this.dynamicComponent = defineAsyncComponent(() =>
-                //     import(`./wprm-${newComponent}.vue`)
-                // );
+                this.dynamicComponent = defineAsyncComponent(() =>
+                    import(`./wprm-${newComponent}.vue`)
+                );
             }
         }
     }
