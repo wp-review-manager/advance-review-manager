@@ -54,7 +54,7 @@ export default {
     dialogVisibleProp: {
       immediate: true,
       handler(val) {
-        console.log(val);
+        console.log(val, 'xcx');
         this.dialogVisible = val;
       }
     }

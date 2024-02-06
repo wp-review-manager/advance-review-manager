@@ -3,7 +3,7 @@
         <div class="WPRM-form-editor__header">
             <div class="WPRM-form-editor__header__title">
                 <Back style="width: 1em; height: 1em; margin-right: 8px" />
-                <h2>Form Editor</h2>
+                <h2>Form Editor test vite</h2>
                 <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
             </div>
             <el-button type="success">

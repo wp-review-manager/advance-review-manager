@@ -56,7 +56,7 @@
       @update:handle-dialog-close="handleDialogClose"
     >
       <div class="WPRM-choose-template-form">
-        <HomeChooseTemplate :form-template="formTemplate" />
+        <HomeChooseTemplate :formTemplates="formTemplates" />
       </div>
     </AppModal>
     <!-- End Create Feedback Form Modal-->
@@ -72,17 +72,17 @@
   </div>
 </template>
 <script>
-import { tableColumns, tableData, formTemplate } from './home_helper.js';
+import { tableColumns, tableData, formTemplates } from './home_helper.js';
 import AppTable from '../Common/AppTable.vue';
 import AppModal from '../Common/AppModal.vue';
 import HomeChooseTemplate from './HomeChooseTemplate.vue';
-// import AppForm from '../Common/AppForm.vue';
+import AppForm from '../Common/AppForm.vue';
 export default {
   name: "AdminLayout",
   components: {
     AppTable,
     AppModal,
-    // AppForm,
+    AppForm,
     HomeChooseTemplate
   },
   data() {
@@ -90,12 +90,12 @@ export default {
       dialogVisibleProp: false,
       columns: tableColumns,
       data: tableData,
-      formTemplate: formTemplate
+      formTemplates: formTemplates
     };
   },
   methods: {
     editHandler(item) {
-      console.log(item);
+      console.log(item, 'edit');
     },
     handleDialogClose(successOrCancel) {
       // check if the user clicked on the confirm button or not

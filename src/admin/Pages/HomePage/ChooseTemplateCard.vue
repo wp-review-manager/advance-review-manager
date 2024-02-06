@@ -1,5 +1,5 @@
 <template>
-  <div v-for="(template, index) in formTemplate" :key="index" class="WPRM_card">
+  <div v-for="(template, index) in formTemplates" :key="index" class="WPRM_card">
     <el-card :body-style="{ padding: '0px' }">
       <img :src="getTemplateImage(template.thumbnail)" style="width: 100%; height: 200px" alt="image" class="image">
       <div style="padding: 14px">
@@ -17,7 +17,7 @@
 <script>
 export default {
   props: {
-    formTemplate: {
+    formTemplates: {
       type: Array,
       default: []
     }
