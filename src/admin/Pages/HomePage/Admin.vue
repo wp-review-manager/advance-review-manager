@@ -56,7 +56,7 @@
       @update:handle-dialog-close="handleDialogClose"
     >
       <div class="WPRM-choose-template-form">
-        <HomeChooseTemplate :formTemplates="formTemplates" />
+        <HomeChooseTemplate :form-templates="formTemplates" />
       </div>
     </AppModal>
     <!-- End Create Feedback Form Modal-->

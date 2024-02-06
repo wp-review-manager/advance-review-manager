@@ -23,7 +23,32 @@ import each from "lodash/each";
 
 export default {
     name: "PhotoWidget",
-    props: ["product", "custom_width", "is_multiple", "layout"],
+    props: {
+        product: {
+            type: Object,
+            default: () => {
+                return {
+                    photo: {
+                        alt_text: "",
+                        image_full: "",
+                        image_thumb: "",
+                    },
+                };
+            },
+        },
+        // custom_width: {
+        //     type: String,
+        //     default: "100%",
+        // },
+        // is_multiple: {
+        //     type: Boolean,
+        //     default: false,
+        // },
+        // layout: {
+        //     type: String,
+        //     default: "grid",
+        // },
+    },
     // components: {
     //     Button,
     // },

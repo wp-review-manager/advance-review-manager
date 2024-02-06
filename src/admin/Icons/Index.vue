@@ -1,7 +1,10 @@
 <template>
-    <div>
-        <component v-if="dynamicComponent" :is="dynamicComponent" />
-    </div>
+  <div>
+    <component
+      :is="dynamicComponent"
+      v-if="dynamicComponent"
+    />
+  </div>
 </template>
 
 <script>
@@ -13,7 +16,11 @@ import Star from './wprm-Star.vue';
 
 export default {
     props: {
-        icon: String
+        icon: {
+            type: String,
+            required: true,
+            default: 'Star'
+        }
     },
     data() {
         const dynamicComponent = shallowRef(null);

@@ -114,7 +114,7 @@ export default {
       // Handle file upload success
       this.formData[file.name] = fileList;
     },
-    handleUploadError(error, file, fileList) {
+    handleUploadError(error) {
       // Handle file upload error
       console.error(error);
     },

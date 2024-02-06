@@ -21,7 +21,7 @@
   </div>
 
   <div class="WPRM_card_wrapper">
-    <ChooseTemplateCard :formTemplates="formTemplates" />
+    <ChooseTemplateCard :form-templates="formTemplates" />
   </div>
 </template>
 
