@@ -1,5 +1,5 @@
 <template>
-  <el-col :span="12">
+  <el-col :span="12" style="margin: 10px 0px">
     <el-form-item label-position="top">
       <input v-if="labelEditAble" v-model="field.label" class="label-editor-input" type="text" placeholder=""
         @blur="labelEditAble = false" @keyup.enter="labelEditAble = false">
@@ -16,11 +16,11 @@
       </template>
 
       <template v-else-if="field.type === 'rating'">
-        <el-rate v-model="field.value" :allow-half="true" size="large" class="ml-4" />
+        <el-rate v-model="field.value" :allow-half="true" size="large" class="mt-4" />
       </template>
 
       <template v-else-if="field.type === 'file'">
-        <AppFileUpload :product="field.value" />
+        <AppFileUpload class="mt-4" :product="field.value" />
       </template>
 
       <template v-else-if="field.type === 'radio'">
