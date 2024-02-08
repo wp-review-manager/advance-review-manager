@@ -32,6 +32,8 @@ class WPReviewManager {
         (new WPReviewManager\Classes\Shortcode)->registerShortCodes();
         (new WPReviewManager\Classes\AdminMenuHandler)->renderMenu();
         $this->loadTextDomain();
+        // register hooks
+        new WPReviewManager\Hooks\Actions();
     }
 
     public function loadClasses()

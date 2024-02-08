@@ -1,18 +1,21 @@
 <?php
 namespace WPReviewManager\Database\Migrations;
 
-class RatingTable {
+class CustomFeedback {
 
     public static function migrate($forced = false)
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wprm_rating';
+        $table_name = $wpdb->prefix . 'wprm_custom_feedbacks';
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,
-            review_id int(20) NOT NULL,
-            rating int(20) NOT NULL,
+            review_title varchar(255),
+            name varchar(255),
+            reviewer_title varchar(255) not null,
+            review_text text not null,
+            meta longtext,
             created_at timestamp NULL,
             updated_at timestamp NULL,
             PRIMARY  KEY  (id)
