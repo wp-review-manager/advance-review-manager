@@ -2,6 +2,7 @@
 
 namespace WPReviewManager\Classes;
 use WPReviewManager\Classes\Helper;
+use WPReviewManager\Hooks\Actions;
 
 class AdminMenuHandler{
 
