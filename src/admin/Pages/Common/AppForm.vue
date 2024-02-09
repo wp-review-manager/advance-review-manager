@@ -1,6 +1,6 @@
 <template>
-  <el-col :span="12">
-    <el-form-item label-position="top" style="margin: 10px 0px;">
+  <el-col :span="12" style="margin: 10px 0px">
+    <el-form-item label-position="top">
       <input v-if="labelEditAble" v-model="field.label" class="label-editor-input" type="text" placeholder=""
         @blur="labelEditAble = false" @keyup.enter="labelEditAble = false">
       <label v-else class="form-label mb-1" for="inputField" @click="labelEditAble = true">{{ field.label }}
@@ -20,7 +20,7 @@
       </template>
 
       <template v-else-if="field.type === 'file'">
-        <AppFileUpload :product="field.value" />
+        <AppFileUpload class="mt-4" :product="field.value" />
       </template>
 
       <template v-else-if="field.type === 'radio'">
