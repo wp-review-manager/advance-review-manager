@@ -1,18 +1,18 @@
 <?php
 namespace WPReviewManager\Database\Migrations;
 
-class ReviewComment {
+class Rating {
 
     public static function migrate($forced = false)
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wprm_review_comments';
+        $table_name = $wpdb->prefix . 'wprm_ratings';
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,
             review_id int(20) NOT NULL,
-            comment text,
+            rating int(20) NOT NULL,
             created_at timestamp NULL,
             updated_at timestamp NULL,
             PRIMARY  KEY  (id)

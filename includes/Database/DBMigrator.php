@@ -35,9 +35,10 @@ class DBMigrator
     public static function migrate()
     {
         \WPReviewManager\Database\Migrations\ReviewTable::migrate();
-        \WPReviewManager\Database\Migrations\RatingTable::migrate();
+        \WPReviewManager\Database\Migrations\Rating::migrate();
         \WPReviewManager\Database\Migrations\ReviewComment::migrate();
         \WPReviewManager\Database\Migrations\ReviewMedia::migrate();
+        \WPReviewManager\Database\Migrations\CustomFeedback::migrate();
         // we are good. It's a new installation
         if (get_option('WPRM_DB_VERSION') < self::WPRMDBV) {
             self::maybeUpgradeDB();

@@ -2,6 +2,7 @@
 
 namespace WPReviewManager\Classes;
 use WPReviewManager\Classes\Helper;
+use WPReviewManager\Hooks\Actions;
 
 class AdminMenuHandler{
 
@@ -69,7 +70,8 @@ class AdminMenuHandler{
         $WPRM = apply_filters('WPRM/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => WPRM_URL . 'assets/',
-            'ajaxurl' => admin_url('admin-ajax.php')
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'wprm_nonce' => wp_create_nonce('wp-review-manager-nonce'),
         ));
 
         $this->renderGlobalSettings();
