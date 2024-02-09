@@ -1,9 +1,9 @@
 <template>
   <el-col :span="12">
-    <el-form-item label-position="top">
+    <el-form-item label-position="top" style="margin: 10px 0px;">
       <input v-if="labelEditAble" v-model="field.label" class="label-editor-input" type="text" placeholder=""
         @blur="labelEditAble = false" @keyup.enter="labelEditAble = false">
-      <label v-else class="form-label" for="inputField" @click="labelEditAble = true">{{ field.label }}
+      <label v-else class="form-label mb-1" for="inputField" @click="labelEditAble = true">{{ field.label }}
         <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
       </label>
       <template
@@ -16,7 +16,7 @@
       </template>
 
       <template v-else-if="field.type === 'rating'">
-        <el-rate v-model="field.value" :allow-half="true" size="large" class="ml-4" />
+        <el-rate v-model="field.value" :allow-half="true" size="large" />
       </template>
 
       <template v-else-if="field.type === 'file'">
@@ -25,7 +25,7 @@
 
       <template v-else-if="field.type === 'radio'">
         <!-- <div class="ml-2 flex items-center text-sm"> -->
-        <el-radio-group v-model="field.value" class="ml-4">
+        <el-radio-group v-model="field.value">
           <el-radio v-for="option in field.options" :key="option.value" :label="option.value">
             {{ option.label }}
           </el-radio>
@@ -33,7 +33,7 @@
         <!-- </div> -->
       </template>
       <template v-else-if="field.type === 'checkbox'">
-        <el-checkbox-group v-model="field.value" class="ml-4 mt-3.5">
+        <el-checkbox-group v-model="field.value">
           <el-checkbox v-for="option in field.options" :key="option.value" :label="option.value">
             {{ option.label }}
           </el-checkbox>
@@ -45,7 +45,7 @@
         </el-select>
       </template>
       <template v-else-if="field.type === 'submit'">
-        <el-button type="primary" class="ml-4">{{ field.label }}</el-button>
+        <el-button type="primary">{{ field.label }}</el-button>
       </template>
     </el-form-item>
   </el-col>

@@ -82,7 +82,9 @@ export default {
             const { moved, added } = event;
             console.log('log', event);
             if (moved) console.log('moved', moved);
-            if (added) console.log('added', added, added.element);
+            if (added) {
+                this.templateFormComponents[added.newIndex] = JSON.parse(JSON.stringify(added.element));
+            }
         },
         countOccurrences(array, itemToFind) {
             let count = 0;
