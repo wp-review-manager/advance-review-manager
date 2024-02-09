@@ -32,27 +32,25 @@ export default {
     saveForm(id) {
       console.log('Form saved', this.$AJAX);
       let _that = this;
-      this.$router.push({ name: 'edit-form', params: { id: id } });
-
-      // jQuery.ajax({
-      //   method: 'POST',
-      //   url: window.WPRMAdmin.ajax_url,
-      //   dataType: "json",
-      //   data: {
-      //       action: "wp_review_manager_ajax",
-      //       route: "create_review_form",
-      //       nonce: window.WPRMAdmin.wprm_nonce,
-      //       post_title: this.formTemplates[id].title,
-      //       template: this.formTemplates[id].id
-      //   },
-      //   success(res) {
-      //       console.log('Form saved');
-      //       _that.$router.push({ name: 'edit-form', params: { id: id } });
-      //     },
-      //     error(err) {
-      //         console.log(err);
-      //     }
-      //   });
+      jQuery.ajax({
+        method: 'POST',
+        url: window.WPRMAdmin.ajax_url,
+        dataType: "json",
+        data: {
+          action: "wp_review_manager_ajax",
+          route: "create_review_form",
+          nonce: window.WPRMAdmin.wprm_nonce,
+          post_title: this.formTemplates[id].title,
+          template: this.formTemplates[id].id
+        },
+        success(res) {
+          console.log('Form saved');
+          _that.$router.push({ name: 'edit-form', params: { id: id } });
+        },
+        error(err) {
+          console.log(err);
+        }
+      });
     },
     getTemplateImage(image) {
       return window.WPRMAdmin.assets_url + image;

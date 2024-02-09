@@ -18,7 +18,7 @@ class Actions{
             // add_action('admin_menu', array($this, 'registerMenu'));
             add_action('wprm/review_form_created', function ($reviewFormId, $data, $template) {
                 ReviewFormController::insertTemplate($reviewFormId, $data, $template);
-            });
+            }, 10, 3);
             
         }
 
