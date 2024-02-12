@@ -1,7 +1,6 @@
 <?php
 
 namespace WPReviewManager\Models;
-use WPReviewManager\Classes\DemoTemplates;
 use WPReviewManager\Services\ArrayHelper as Arr;
 
 class ReviewForm
@@ -11,14 +10,59 @@ class ReviewForm
         return 'getReviewForms';
     }
 
-    public function getReviewForm($id)
+    public function getReviewForm()
     {
-        return 'getReviewForm';
+        $reviewFormId = $_REQUEST['form_id'];
+
+        $reviewForm = get_post($reviewFormId, 'OBJECT');
+        if (!$reviewForm || $reviewForm->post_type != 'wp_review_form') {
+            wp_send_json_error(
+                [
+                    'message' => "Form not found."
+                ],423);
+        }
+
+        $data = maybe_unserialize(get_post_meta($reviewFormId, 'wprm_form_fields', true));
+
+        $reviewForm->form_fields = $data ? $data : [];
+        $reviewForm->preview_url = site_url('?wp_paymentform_preview=' . $reviewForm->ID);
+
+        wp_send_json_success(
+            [
+                'form' => $reviewForm,
+                'message' => "Form info retrived."
+            ],
+        200);
+    }
+
+    public function saveReviewForm()
+    {
+        $reviewFormId = $_REQUEST['form_id'];
+        $formFields = maybe_serialize($_REQUEST['formFields']);
+
+        wp_update_post([
+            'ID' => $reviewFormId,
+            'post_title' => sanitize_text_field( $_REQUEST['post_title'] )
+        ]);
+
+        if (is_wp_error($reviewFormId)) {
+            wp_send_json_error(
+                [
+                    'message' => $reviewFormId->get_error_message()
+                ],
+            423);
+        }
+
+        update_post_meta($reviewFormId, 'wprm_form_fields', $formFields);
+
+        wp_send_json_success( array(
+            'form_id' => $reviewFormId,
+            'message' => 'Form saved!'
+        ),200 );
     }
 
     public static function storeData()
-    {
-        $nonce = $_REQUEST['nonce'];
+    {   
         $postTitle = $_REQUEST['post_title'];
         $template = $_REQUEST['template'];
 
@@ -32,24 +76,25 @@ class ReviewForm
         );
 
         do_action('wprm/before_review_form_create', $data, $template);
-        $formId = static::store($data);
+        $reviewFormId = static::store($data);
 
         wp_update_post([
-            'ID' => $formId,
-            'post_title' => sanitize_text_field($data['post_title']) . ' (#' . $formId . ')'
+            'ID' => $reviewFormId,
+            'post_title' => sanitize_text_field($data['post_title']) . ' (#' . $reviewFormId . ')'
         ]);
 
-        if (is_wp_error($formId)) {
-            throw new Exception(esc_html($formId->get_error_message()));
+        if (is_wp_error($reviewFormId)) {
+            wp_send_json_error(
+                [
+                    'message' => $reviewFormId->get_error_message()
+                ],
+            423);
         }
 
-        // do_action('wprm/review_form_created', $formId, $data, $template);
-        self::insertTemplate($formId, $data, $template);
-
-        return $formId;
+        self::insertTemplate($reviewFormId, $template);
     }
 
-    public static function insertTemplate($reviewFormId, $data, $template)
+    public static function insertTemplate($reviewFormId, $template)
     {
         
         $template_data = Arr::get($template, 'formFields', null);
@@ -77,18 +122,9 @@ class ReviewForm
         return $id;
     }
 
-    public function updateReviewForm($request)
-    {
-        return 'updateReviewForm';
-    }
-
     public function deleteReviewForm($id)
     {
         return 'deleteReviewForm';
     }
 
-    public static function insertTemplateForm($reviewFormId, $data, $template)
-    {
-        return DemoTemplates::insertTemplate($reviewFormId, $data, $template);
-    }
 }

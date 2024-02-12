@@ -11,39 +11,47 @@ class ReviewFormController
         return (new ReviewForm())->getReviewForms();
     }
 
-    public function getReviewForm($id)
+    public static function getReviewForm()
     {
-        return (new ReviewForm())->getReviewForm($id);
+        try{
+            return (new ReviewForm)->getReviewForm();
+        } catch(\Exception $e) {
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
+        }
     }
 
     public static function createReviewForm()
     {
         try {
-            $reviewFormId = ReviewForm::storeData();
+            ReviewForm::storeData();
         } catch (\Exception $e) {
-            return array(
-                'message' => $e->getMessage(),
-            );
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
         }
-
-        return array(
-            'message' => __('Review Form successfully created.', 'wp-review-manager'),
-            'reveiw_form_id' => $reviewFormId
-        );
     }
 
-    public function updateReviewForm($request)
+    public static function saveReviewForm()
     {
-        return (new ReviewForm())->updateReviewForm($request);
+        try{
+            return (new ReviewForm)->saveReviewForm();
+        } catch(\Exception $e) {
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
+        }
     }
 
     public function deleteReviewForm($id)
     {
         return (new ReviewForm())->deleteReviewForm($id);
-    }
-
-    public static function insertTemplate($reviewFormId, $data, $template)
-    {
-        return ReviewForm::insertTemplateForm($reviewFormId, $data, $template);
     }
 }

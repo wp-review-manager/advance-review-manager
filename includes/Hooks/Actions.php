@@ -15,10 +15,7 @@ class Actions{
 
         public function registerHooks()
         {
-            // add_action('admin_menu', array($this, 'registerMenu'));
-            add_action('wprm/review_form_created', function ($reviewFormId, $data, $template) {
-                ReviewFormController::insertTemplate($reviewFormId, $data, $template);
-            }, 10, 3);
+            // register necessary hooks here
             
         }
 
@@ -43,7 +40,7 @@ class Actions{
     
             $validRoutes = array(
                 'create_review_form' => 'createReviewForm',
-                'save_review_form' => 'saveReviewFrom',
+                'save_review_form' => 'saveReviewForm',
                 'get_review_forms' => 'getReviewForms',
                 'get_review_form' => 'getReviewForm',
             );
@@ -68,14 +65,17 @@ class Actions{
 
         public function saveReviewForm()
         {
-            // $formController = new \WPReviewManager\Classes\FormController();
-            // wp_send_json_success($formController->saveForm());
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                wp_send_json_success(ReviewFormController::saveReviewForm());
+            }
         }
 
         public function getReviewForm()
         {
-            // $formController = new \WPReviewManager\Classes\FormController();
-            // wp_send_json_success($formController->getForm());
+            
+            // if (AccessControl::hasTopLevelMenuPermission()) {
+               ReviewFormController::getReviewForm();
+            // }
         }
 
 }
