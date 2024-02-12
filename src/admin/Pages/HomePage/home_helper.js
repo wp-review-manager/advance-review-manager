@@ -213,15 +213,15 @@ const commonFormFields = [
     },
 ];
 
-const formTemplate = [
-    {
+const formTemplate = {
+    'blank_form': {
         id: 0,
         title: 'Blank Form',
         thumbnail: 'images/template_1.jpeg',
         formFields: [],
 
     },
-    {
+    'hotel_review_form':{
         id: 1,
         title: 'Hotel Review Form',
         thumbnail: 'images/template_1.jpeg',
@@ -232,13 +232,13 @@ const formTemplate = [
             placeholder: 'Hotel Name',
         }],
     },
-    {
+    'product_review_form': {
         id: 2,
         title: 'Product Review Form',
         thumbnail: 'images/template_1.jpeg',
         formFields: commonFormFields,
     }
-]
+}
 
 export {
     tableColumns,

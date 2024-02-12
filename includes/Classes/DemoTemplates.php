@@ -13,6 +13,9 @@ class DemoTemplates
     public static function insertTemplate($reviewFormId, $data, $template)
     {
         $demoForms = self::demoTemplates();
+        // dd($template);
+        $template['formFields'] = maybe_serialize( $template['formFields'] );
+        dd($demoForms, $template);
         if (!isset($demoForms[$template])) {
             return;
         }
@@ -46,5 +49,7 @@ class DemoTemplates
                 'is_pro' => false
             ),
         );
+
+        return $demoTemplates;
     }
 }

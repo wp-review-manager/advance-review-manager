@@ -2,6 +2,7 @@
 
 namespace WPReviewManager\Models;
 use WPReviewManager\Classes\DemoTemplates;
+use WPReviewManager\Services\ArrayHelper as Arr;
 
 class ReviewForm
 {
@@ -42,9 +43,30 @@ class ReviewForm
             throw new Exception(esc_html($formId->get_error_message()));
         }
 
-        do_action('wprm/review_form_created', $formId, $data, $template);
+        // do_action('wprm/review_form_created', $formId, $data, $template);
+        self::insertTemplate($formId, $data, $template);
 
         return $formId;
+    }
+
+    public static function insertTemplate($reviewFormId, $data, $template)
+    {
+        
+        $template_data = Arr::get($template, 'formFields', null);
+        if ($template_data == null) {
+            wp_send_json_success( array(
+                'form_id' => $reviewFormId,
+                'message' => 'Blank Form created!'
+            ),200 );
+        }
+        $template['formFields'] = maybe_serialize( $template_data );
+        $metaValue = $template['formFields'];
+        update_post_meta($reviewFormId, 'wprm_form_fields', $metaValue);
+
+        wp_send_json_success( array(
+            'form_id' => $reviewFormId,
+            'message' => 'Form created!'
+        ),200 );
     }
 
     public static function store($data)

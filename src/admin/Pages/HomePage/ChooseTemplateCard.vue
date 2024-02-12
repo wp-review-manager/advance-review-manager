@@ -41,11 +41,10 @@ export default {
           route: "create_review_form",
           nonce: window.WPRMAdmin.wprm_nonce,
           post_title: this.formTemplates[id].title,
-          template: this.formTemplates[id].id
+          template: this.formTemplates[id]
         },
         success(res) {
-          console.log('Form saved');
-          _that.$router.push({ name: 'edit-form', params: { id: id } });
+          _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
         },
         error(err) {
           console.log(err);
