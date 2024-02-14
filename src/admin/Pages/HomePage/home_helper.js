@@ -1,22 +1,22 @@
 const tableColumns = [
     {
-        label: "Name",
-        field: "name",
+        label: "ID",
+        field: "ID",
         sortable: true
     },
     {
-        label: "Category",
-        field: "category",
+        label: "Title",
+        field: "post_title",
         sortable: true
     },
     {
-        label: "Price",
-        field: "price",
+        label: "Reviews",
+        field: "reviews",
         sortable: true
     },
     {
-        label: "Brand",
-        field: "brand",
+        label: "Created At",
+        field: "post_date",
         sortable: true
     },
     {
@@ -29,6 +29,7 @@ const tableColumns = [
         field: "actions"
     }
 ]
+
 const tableData = [
     {
         name: "Apple MacBook Pro 17",

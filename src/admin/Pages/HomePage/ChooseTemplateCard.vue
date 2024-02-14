@@ -1,11 +1,24 @@
 <template>
-  <div v-for="(template, index) in formTemplates" :key="index" class="WPRM_card">
+  <div
+    v-for="(template, index) in formTemplates"
+    :key="index"
+    class="WPRM_card"
+  >
     <el-card :body-style="{ padding: '0px' }">
-      <img :src="getTemplateImage(template.thumbnail)" style="width: 100%; height: 200px" alt="image" class="image">
+      <img
+        :src="getTemplateImage(template.thumbnail)"
+        style="width: 100%; height: 200px"
+        alt="image"
+        class="image"
+      >
       <div style="padding: 14px">
         <span>{{ template.title }}</span>
         <div class="bottom">
-          <el-button style="width: 100%;" type="primary" @click="saveForm(index)">
+          <el-button
+            style="width: 100%;"
+            type="primary"
+            @click="saveForm(index)"
+          >
             Choose Template
           </el-button>
         </div>
@@ -30,8 +43,7 @@ export default {
   },
   methods: {
     saveForm(id) {
-      console.log('Form saved', this.$AJAX);
-      let _that = this;
+      const _that = this;
       jQuery.ajax({
         method: 'POST',
         url: window.WPRMAdmin.ajax_url,

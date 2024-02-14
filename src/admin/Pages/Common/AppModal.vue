@@ -23,7 +23,6 @@
 
 <script>
 export default {
-  emits: ['update:handleDialogClose'],
   props: {
     dialogVisibleProp: {
       type: Boolean,
@@ -46,6 +45,7 @@ export default {
       default: '30%'
     }
   },
+  emits: ['update:handleDialogClose'],
   data() {
     return {
       dialogVisible: false

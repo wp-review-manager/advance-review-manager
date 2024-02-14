@@ -1,5 +1,5 @@
 <template>
-  <div class="wpf_photo_card ml-4">
+  <div class="wpf_photo_card">
     <div
       v-if="checkHasImage(product)"
       class="wpf_photo_holder mb-2"
