@@ -5,9 +5,9 @@
   >
     <div class="WPRM-form-editor__header">
       <div class="WPRM-form-editor__header__title">
-        <Back style="width: 1em; height: 1em; margin-right: 8px" />
-        <h2>Form Editor</h2>
-        <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
+        <span style="width: 1em; height: 1em; margin-right: 8px" class="dashicons dashicons-arrow-left-alt"></span>
+        <el-input @blur="title_editable = false" style="min-width: 764px;" v-if="title_editable" v-model="title" />
+        <h2 @click="title_editable = true" v-else style="cursor: pointer;">{{  title }} <span class="dashicons dashicons-edit"></span></h2>
       </div>
       <el-button
         type="success"
@@ -59,6 +59,7 @@
 </template>
 <script>
 import AppForm from '../Common/AppForm.vue';
+import { ElNotification } from 'element-plus'
 import debounce from 'lodash/debounce';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { formTemplate, formFields } from '../HomePage/home_helper.js';
@@ -77,7 +78,8 @@ export default {
             dragging: false,
             debouncedCheckMove: null,
             loading: false,
-            title: 'Form Editor'
+            title: 'Form Editor',
+            title_editable: false,
         };
     },
     mounted() {
@@ -169,10 +171,11 @@ export default {
                 },
                 success(res) {
                     console.log(res);
-                    this.$notify({
+                    ElNotification({
                         title: 'Success',
-                        message: 'Form saved successfully',
-                    });
+                        message: 'This is a success message',
+                        type: 'success',
+                    })
                     // _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
                 },
                 error(err) {
