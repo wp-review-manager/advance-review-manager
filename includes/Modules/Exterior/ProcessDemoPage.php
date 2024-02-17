@@ -28,7 +28,8 @@ class ProcessDemoPage {
         $form = (new ReviewForm)->getReviewForm($formId);
         if (!empty($form)) {
            View::render('preview_review', [
-            'form' => $form
+            'form' => $form,
+            'preview_page' => 'yes'
            ] );
            exit();
         }
