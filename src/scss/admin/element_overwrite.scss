@@ -17,6 +17,10 @@
     }
 }
 
+.el-skeleton__item {
+    background-color: #e3e7ec !important;
+}
+
 .el-button--primary {
     background-color: $primary-color;
     border-color: $primary-color;

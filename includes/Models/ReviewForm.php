@@ -8,7 +8,45 @@ class ReviewForm extends Model
 {
     public function getReviewForms()
     {
-        return 'getReviewForms';
+        $search_string = Arr::get($_REQUEST, 'search_string', "");
+        $post_query_array = [
+            'post_type' => 'wp_review_form',
+            'post_status' => 'publish',
+            'numberposts' => -1
+        ];
+        
+        if($search_string) {
+            $post_query_array['s'] = $search_string;
+        }
+
+       $all_forms = get_posts($post_query_array);
+
+        if (empty($all_forms)) {
+            wp_send_json_error(
+                [
+                    'message' => "No forms found."
+                ],423);
+        }
+
+        $forms = [];
+        foreach ($all_forms as $form) {
+            $form->shortcode = '[wp-review-manager id="' . $form->ID . '"]';
+            $form->actions = array(
+                'edit' => true,
+                'delete' => true,
+            );
+            $form->reviews = '100';
+            $form->form_fields = maybe_unserialize(get_post_meta($form->ID, 'wprm_form_fields', true));
+            $form->preview_url = site_url('?wp_paymentform_preview=' . $form->ID);
+            $forms[] = $form;
+        }
+
+        wp_send_json_success(
+            [
+                'forms' => $forms,
+                'message' => "Forms retried."
+            ],
+        200);
     }
 
     public function getReviewForm()

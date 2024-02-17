@@ -7,7 +7,7 @@ use WPReviewManager\Models\ReviewForm;
 
 class ReviewFormController
 {
-    public function getReviewForms()
+    public static function getReviewForms()
     {
         return (new ReviewForm())->getReviewForms();
     }

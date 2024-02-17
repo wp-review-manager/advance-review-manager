@@ -27,7 +27,8 @@ class Actions{
         }
         public function handleEndPoint()
         {
-            if(!wp_verify_nonce($_POST['nonce'], 'wp-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
+            $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
+            if(!wp_verify_nonce($nonce, 'wp-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
                 wp_send_json([
                     "status" => 403,
                     "nonce" => $_POST['nonce'],
@@ -60,8 +61,9 @@ class Actions{
 
         public function getReviewForms()
         {
-            // $formController = new \WPReviewManager\Classes\FormController();
-            // wp_send_json_success($formController->getForms());
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                ReviewFormController::getReviewForms();
+             }
         }
 
         public function saveReviewForm()
@@ -73,10 +75,9 @@ class Actions{
 
         public function getReviewForm()
         {
-            
-            // if (AccessControl::hasTopLevelMenuPermission()) {
+            if (AccessControl::hasTopLevelMenuPermission()) {
                ReviewFormController::getReviewForm();
-            // }
+            }
         }
 
 }

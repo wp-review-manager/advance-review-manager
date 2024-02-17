@@ -1,6 +1,9 @@
 <template>
   <div class="relative overflow-x-auto WPRM-table-wrapper">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table
+      v-if="items?.length"
+      class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+    >
       <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
           <th
@@ -29,7 +32,7 @@
             <!-- Actions column is a special case -->
             <div v-else>
               <button
-                v-if="item[column.field].edit"
+                v-if="item[column.field]?.edit"
                 type="button"
                 class="text-white mx-1 bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center me-2"
                 @click="editItem(item)"
@@ -37,7 +40,7 @@
                 <span class="dashicons dashicons-edit" />
               </button>
               <button
-                v-if="item[column.field].delete"
+                v-if="item[column.field]?.delete"
                 type="button"
                 class="text-white mx-1 bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center me-2"
                 @click="deleteItem(item)"
@@ -54,6 +57,12 @@
         </tr>
       </tbody>
     </table>
+    <div
+      v-else
+      class="flex items-center justify-center h-96"
+    >
+      <el-empty :image-size="200" />
+    </div>
   </div>
 </template>
 <script>
