@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace WPReviewManager\Controllers;
 
@@ -27,7 +28,7 @@ class ReviewFormController
     public static function createReviewForm()
     {
         try {
-            ReviewForm::storeData();
+            (new ReviewForm)->create();
         } catch (\Exception $e) {
             wp_send_json_error(
                 [

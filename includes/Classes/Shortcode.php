@@ -1,6 +1,7 @@
 <?php
-namespace WPReviewManager\Classes;
+declare(strict_types=1);
 
+namespace WPReviewManager\Classes;
 class Shortcode {
     
     public function registerShortCodes() {

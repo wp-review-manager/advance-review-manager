@@ -1,7 +1,6 @@
-<?php 
-declare(strict_types=1);
-
-namespace WPReviewManager\Classes;
+<?php
+ 
+namespace WPReviewManager\Models;
 
 class Model
 {

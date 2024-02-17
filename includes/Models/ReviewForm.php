@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace WPReviewManager\Models;
 use WPReviewManager\Services\ArrayHelper as Arr;
 
-class ReviewForm
+class ReviewForm extends Model
 {
     public function getReviewForms()
     {
@@ -61,7 +62,7 @@ class ReviewForm
         ),200 );
     }
 
-    public static function storeData()
+    public function create()
     {   
         $postTitle = $_REQUEST['post_title'];
         $template = $_REQUEST['template'];
@@ -76,7 +77,7 @@ class ReviewForm
         );
 
         do_action('wprm/before_review_form_create', $data, $template);
-        $reviewFormId = static::store($data);
+        $reviewFormId = $this->store($data);
 
         wp_update_post([
             'ID' => $reviewFormId,
@@ -91,7 +92,7 @@ class ReviewForm
             423);
         }
 
-        self::insertTemplate($reviewFormId, $template);
+        static::insertTemplate($reviewFormId, $template);
     }
 
     public static function insertTemplate($reviewFormId, $template)
@@ -114,7 +115,7 @@ class ReviewForm
         ),200 );
     }
 
-    public static function store($data)
+    private function store($data)
     {
         $data['post_type'] = 'wp_review_form';
         $data['post_status'] = 'publish';
