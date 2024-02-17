@@ -3,7 +3,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        @include wprm-box-wrapper;
+        // @include wprm-box-wrapper;
+        margin-bottom: 20px;
 
         .WPRM-form-editor__header__title {
             @include h2;

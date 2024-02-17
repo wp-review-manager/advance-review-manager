@@ -5,6 +5,7 @@
     :title="title"
     :width="width"
     :before-close="handleClose"
+    style="min-width: 500px;"
   >
     <slot />
     <template #footer>

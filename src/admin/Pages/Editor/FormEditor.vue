@@ -5,17 +5,39 @@
   >
     <div class="WPRM-form-editor__header">
       <div class="WPRM-form-editor__header__title">
-        <span style="width: 1em; height: 1em; margin-right: 8px" class="dashicons dashicons-arrow-left-alt"></span>
-        <el-input @blur="title_editable = false" style="min-width: 764px;" v-if="title_editable" v-model="title" />
-        <h2 @click="title_editable = true" v-else style="cursor: pointer;">{{  title }} <span class="dashicons dashicons-edit"></span></h2>
+        <span
+          style="width: 1em; height: 1em; margin-right: 8px"
+          class="dashicons dashicons-arrow-left-alt"
+        />
+        <el-input
+          v-if="title_editable"
+          v-model="title"
+          style="min-width: 764px;"
+          @blur="title_editable = false"
+        />
+        <h2
+          v-else
+          style="cursor: pointer;"
+          @click="title_editable = true"
+        >
+          {{ title }} <span class="dashicons dashicons-edit" />
+        </h2>
       </div>
-      <el-button
-        type="success"
-        @click="saveForm()"
-      >
-        Save Settings
-      </el-button>
+      <div class="WPRM-form-editor__header__action">
+        <el-button @click="redirectToPreview()" type="default">
+          <span style="margin-right: 8px;" class="dashicons dashicons-visibility" />
+          Preview
+        </el-button>
+        <el-button
+          type="success"
+          @click="saveForm()"
+        >
+          Save Settings
+        </el-button>
+      </div>
     </div>
+    <!-- <div class="WPRM-form-editor__action">
+    </div> -->
     <div class="WPRM-form-body">
       <div class="WPRM-form-body__left">
         <draggable
@@ -59,7 +81,7 @@
 </template>
 <script>
 import AppForm from '../Common/AppForm.vue';
-import { ElNotification } from 'element-plus'
+import { ElNotification } from 'element-plus';
 import debounce from 'lodash/debounce';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { formTemplate, formFields } from '../HomePage/home_helper.js';
@@ -80,6 +102,7 @@ export default {
             loading: false,
             title: 'Form Editor',
             title_editable: false,
+            preview_url: '',
         };
     },
     mounted() {
@@ -90,6 +113,9 @@ export default {
     methods: {
         add() {
             console.log('add');
+        },
+        redirectToPreview() {
+            window.open(this.preview_url, '_blank');
         },
         replace() {
             console.log('replace');
@@ -148,6 +174,7 @@ export default {
                     _that.templateFormComponents = res?.data?.form?.form_fields;
                     _that.title = res?.data?.form?.post_title;
                     _that.loading = false;
+                    _that.preview_url = res?.data?.form?.preview_url;
                 },
                 error(err) {
                     _that.loading = false;
@@ -175,7 +202,7 @@ export default {
                         title: 'Success',
                         message: 'This is a success message',
                         type: 'success',
-                    })
+                    });
                     // _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
                 },
                 error(err) {
@@ -189,7 +216,7 @@ export default {
 
 <style scoped lang="scss">
 .WPRM-form-editor {
-    padding: 60px;
+    padding: 20px;
 
     .WPRM-box-wrapper {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

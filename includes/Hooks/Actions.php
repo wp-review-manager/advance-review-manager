@@ -16,7 +16,10 @@ class Actions{
         public function registerHooks()
         {
             // register necessary hooks here
-            
+            add_action( 'init', function () {
+                $demoPage = new \WPReviewManager\Modules\Exterior\ProcessDemoPage();
+                $demoPage->handleExteriorPages();
+            }); 
         }
 
         public function registerEndpoints()
@@ -44,6 +47,7 @@ class Actions{
                 'save_review_form' => 'saveReviewForm',
                 'get_review_forms' => 'getReviewForms',
                 'get_review_form' => 'getReviewForm',
+                'delete_review_form' => 'deleteReviewForm',
             );
 
             if (isset($validRoutes[$route])) {
@@ -55,6 +59,13 @@ class Actions{
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
                 wp_send_json_success(ReviewFormController::createReviewForm());
+            }
+        }
+
+        public function deleteReviewForm()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                wp_send_json_success(ReviewFormController::deleteReviewForm());
             }
         }
 
