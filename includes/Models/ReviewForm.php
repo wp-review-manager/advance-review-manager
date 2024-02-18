@@ -37,7 +37,7 @@ class ReviewForm extends Model
             );
             $form->reviews = '100';
             $form->form_fields = maybe_unserialize(get_post_meta($form->ID, 'wprm_form_fields', true));
-            $form->preview_url = site_url('?wp_paymentform_preview=' . $form->ID);
+            $form->preview_url = site_url('?wprm_review_preview=' . $form->ID);
             $forms[] = $form;
         }
 
@@ -49,29 +49,22 @@ class ReviewForm extends Model
         200);
     }
 
-    public function getReviewForm()
+    public function getReviewForm($form_id)
     {
-        $reviewFormId = $_REQUEST['form_id'];
+        $reviewFormId = sanitize_text_field( $form_id );
 
         $reviewForm = get_post($reviewFormId, 'OBJECT');
         if (!$reviewForm || $reviewForm->post_type != 'wp_review_form') {
-            wp_send_json_error(
-                [
-                    'message' => "Form not found."
-                ],423);
+            return [];
         }
 
         $data = maybe_unserialize(get_post_meta($reviewFormId, 'wprm_form_fields', true));
 
         $reviewForm->form_fields = $data ? $data : [];
-        $reviewForm->preview_url = site_url('?wp_paymentform_preview=' . $reviewForm->ID);
+        $reviewForm->preview_url = site_url('?wprm_review_preview=' . $reviewForm->ID);
+        $reviewForm->shortcode = '[wp-review-manager id="' . $reviewFormId . '"]';
 
-        wp_send_json_success(
-            [
-                'form' => $reviewForm,
-                'message' => "Form info retrived."
-            ],
-        200);
+        return $reviewForm;
     }
 
     public function saveReviewForm()
@@ -163,6 +156,8 @@ class ReviewForm extends Model
 
     public function deleteReviewForm($id)
     {
+        $result = wp_delete_post($id, true);
+
         return 'deleteReviewForm';
     }
 

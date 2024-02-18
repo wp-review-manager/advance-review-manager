@@ -62,6 +62,17 @@
         <HomeChooseTemplate :form-templates="formTemplate" />
       </div>
     </AppModal>
+    <AppModal
+      width="40%"
+      :dialog-visible-prop="dialogVisibleDeleteProp"
+      :confirm-btn-label="'Delete'"
+      :title="'Confirmation Delete Form !'"
+      @update:handle-dialog-close="handleDelDialogClose"
+    >
+      <div class="WPRM-delete-confirmation">
+        <p>Are you sure you want to delete this form?</p>
+      </div>
+    </AppModal>
     <!-- End Create Feedback Form Modal-->
 
     <!-- Start Table -->
@@ -98,7 +109,9 @@ export default {
       formTemplate: formTemplate,
       forms_search_string: '',
       loading: false,
-      timeout: null
+      timeout: null,
+      dialogVisibleDeleteProp: false,
+      deleteProductId: null
     };
   },
   mounted() {
@@ -137,23 +150,40 @@ export default {
           });
       },
     handleDialogClose(successOrCancel) {
-      // check if the user clicked on the confirm button or not
-      if (successOrCancel) {
-        // user clicked on the confirm button
-        console.log({ formData: this.formData });
-        console.log("User clicked on the confirm button");
-      } else {
-        // user clicked on the cancel button
-        console.log("User clicked on the cancel button");
-      }
       this.dialogVisibleProp = false;
     },
     // table actions
     editHandler(item) {
       this.$router.push({ name: 'edit-form', params: { id: item.ID } });
     },
+    handleDelDialogClose(successOrCancel) {
+      if (successOrCancel) {
+        this.loading = true;
+        const _that = this;
+        jQuery.ajax({
+          method: 'POST',
+          url: window.WPRMAdmin.ajax_url,
+          dataType: "json",
+          data: {
+            action: "wp_review_manager_ajax",
+            route: "delete_review_form",
+            nonce: window.WPRMAdmin.wprm_nonce,
+            form_id: this.deleteProductId
+          },
+          success(res) {
+            _that.loading = false;
+            _that.getForms();
+          },
+          error(err) {
+            _that.loading = false;
+          }
+        });
+      }
+      this.dialogVisibleDeleteProp = false;
+    },
     deleteHandler(item) {
-      console.log(item);
+      this.deleteProductId = item?.ID;
+      this.dialogVisibleDeleteProp = true;
     }
   }
 };
