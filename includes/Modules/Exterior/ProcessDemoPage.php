@@ -3,9 +3,11 @@ namespace WPReviewManager\Modules\Exterior;
 use WPReviewManager\Services\AccessControl;
 use WPReviewManager\Models\ReviewForm;
 use WPReviewManager\Classes\View;
+use WPReviewManager\Classes\Vite;
 
 class ProcessDemoPage {
     public function handleExteriorPages() {
+        // dd("hitt");
         if (isset($_GET['wprm_review_preview']) && $_GET['wprm_review_preview']) {
             $hasDemoAccess = AccessControl::hasTopLevelMenuPermission();
             $hasDemoAccess = apply_filters('wprm/can_see_demo_form', $hasDemoAccess);
@@ -16,8 +18,12 @@ class ProcessDemoPage {
             // }
             if ($hasDemoAccess) {
                 $formId = intval($_GET['wprm_review_preview']);
-                wp_enqueue_style('dashicons');
+                Vite::enqueueStyle('dashicons');
+                // Vite::enqueueScript('review_manager_public', 'public/js/form_preview.js', array('jquery'), WPRM_VERSION, true);
+                // Vite::enqueueStyle('review_manager_public', 'public/css/form_preview.css', array(), WPRM_VERSION);
+                // Vite::enqueueStyle('WPRM-global-styling', 'scss/admin/app.scss', array(), WPRM_VERSION);
                 // $this->loadDefaultPageTemplate();
+                
                 $this->renderPreview($formId);
             }
         }

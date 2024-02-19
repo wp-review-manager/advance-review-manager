@@ -7,12 +7,12 @@ use WPReviewManager\Models\ReviewForm;
 
 class ReviewFormController
 {
-    public static function getReviewForms()
+    public function getReviewForms()
     {
         return (new ReviewForm())->getReviewForms();
     }
 
-    public static function deleteReviewForm()
+    public function deleteReviewForm()
     {
         $form_id = Arr::get($_REQUEST, 'form_id', "");
         $form_id = sanitize_text_field($form_id);
@@ -65,7 +65,7 @@ class ReviewFormController
         }
     }
 
-    public static function saveReviewForm()
+    public function saveReviewForm()
     {
         try{
             return (new ReviewForm)->saveReviewForm();

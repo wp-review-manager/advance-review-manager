@@ -12,6 +12,7 @@ import dynamicImport from 'vite-plugin-dynamic-import'
 
 const inputs = [
     'src/admin/start.js',
+    'src/public/js/form_preview.js',
     'src/scss/admin/app.scss',
 ];
 

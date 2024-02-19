@@ -17,10 +17,10 @@ class Actions{
         public function registerHooks()
         {
             // register necessary hooks here
-            add_action( 'init', function () {
+            // add_action( 'init', function () {
                 $demoPage = new \WPReviewManager\Modules\Exterior\ProcessDemoPage();
                 $demoPage->handleExteriorPages();
-            }); 
+            // }); 
         }
 
         public function registerEndpoints()
@@ -66,21 +66,21 @@ class Actions{
         public function deleteReviewForm()
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
-                wp_send_json_success(ReviewFormController::deleteReviewForm());
+                wp_send_json_success((new ReviewFormController)->deleteReviewForm());
             }
         }
 
         public function getReviewForms()
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
-                ReviewFormController::getReviewForms();
+                (new ReviewFormController)->getReviewForms();
              }
         }
 
         public function saveReviewForm()
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
-                wp_send_json_success(ReviewFormController::saveReviewForm());
+                wp_send_json_success((new ReviewFormController)->saveReviewForm());
             }
         }
 

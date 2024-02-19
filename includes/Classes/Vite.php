@@ -22,6 +22,7 @@ class Vite
                 (static::$instance)->viteManifest();
             }
         }
+        // dd($method, $params);
         return call_user_func_array(array(static::$instance, $method), $params);
     }
 
@@ -38,8 +39,9 @@ class Vite
      * @throws \Exception If dev mode is on and file not found in manifest
      * 
      */
-    private function enqueueScript($handle, $src, $dependency = [], $version = null, $inFooter = false)
+    private function enqueueScript($handle, $src = '', $dependency = [], $version = null, $inFooter = false)
     {
+
         if (in_array($handle, (static::$instance)->moduleScripts)) {
             if (static::isDevMode()) {
                 throw new \Exception('This handel Has been used');
@@ -63,6 +65,7 @@ class Vite
             $srcPath = static::getDevPath() . $src;
         }
 
+        // dd($srcPath, $handle, $src, $dependency, $version, $inFooter);
         wp_enqueue_script(
             $handle,
             $srcPath,
@@ -73,7 +76,7 @@ class Vite
         return $this;
     }
 
-    private function enqueueStyle($handle, $src, $dependency = [], $version = null)
+    private function enqueueStyle($handle, $src = '', $dependency = [], $version = null)
     {
         if (!static::isDevMode()) {
             $assetFile = (static::$instance)->getFileFromManifest($src);

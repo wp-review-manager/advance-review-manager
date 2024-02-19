@@ -1,16 +1,16 @@
 <?php
 use WPReviewManager\Services\ArrayHelper as Arr;
+use WPReviewManager\Classes\Vite;
+Vite::enqueueScript('review_manager_public_js', 'public/js/form_preview.js', array('jquery'), WPRM_VERSION, true);
+Vite::enqueueStyle('review_manager_public_css', 'public/css/form_preview.css', array(), WPRM_VERSION);
+wp_localize_script('review_manager_public_js', 'review_manager_public', array(
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'nonce' => wp_create_nonce('wprm_nonce'),
+));
+wp_enqueue_script('review_manager_public_js',);
+wp_enqueue_script('bootstrap_cdn', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js', [], '1.0.0');
+
 ?>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WP Review Preview</title>
-        <?php
-            wp_meta();
-        ?>
-    </head>
     <style>
         body {
             background-color: #f2f2f2;
@@ -109,5 +109,3 @@ use WPReviewManager\Services\ArrayHelper as Arr;
                 </form>
             </div>
         </div>
-    </body>
-</html>
