@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WPReviewManager\Hooks;
 
 use WPReviewManager\Controllers\ReviewFormController;
+use WPReviewManager\Controllers\ReviewController;
 use WPReviewManager\Services\AccessControl;
 
 class Actions{
@@ -49,6 +50,7 @@ class Actions{
                 'get_review_forms' => 'getReviewForms',
                 'get_review_form' => 'getReviewForm',
                 'delete_review_form' => 'deleteReviewForm',
+                'create_review' => 'createReview',
             );
 
             if (isset($validRoutes[$route])) {
@@ -89,6 +91,11 @@ class Actions{
             if (AccessControl::hasTopLevelMenuPermission()) {
                ReviewFormController::getReviewForm();
             }
+        }
+// start of review  endpoint
+        public function createReview()
+        {
+            ReviewController::createReview();
         }
 
 }

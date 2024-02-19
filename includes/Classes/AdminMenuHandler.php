@@ -67,7 +67,6 @@ class AdminMenuHandler{
 
         Vite::enqueueScript('WPRM-script-boot', 'admin/start.js', array('jquery'), WPRM_VERSION, true);
         Vite::enqueueStyle('WPRM-global-styling', 'scss/admin/app.scss', array(), WPRM_VERSION);
-
         $WPRM = apply_filters('WPRM/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => WPRM_URL . 'assets/',
