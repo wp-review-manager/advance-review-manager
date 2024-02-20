@@ -11,10 +11,8 @@ class ReviewTable {
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,
-            email varchar(255),
-            name varchar(255),
-            review_title varchar(255),
-            review_text text,
+            form_id int(20) NOT NULL,
+            unique_id varchar(255),
             meta text,
             created_at timestamp NULL,
             updated_at timestamp NULL,

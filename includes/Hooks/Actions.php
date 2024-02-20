@@ -18,10 +18,10 @@ class Actions{
         public function registerHooks()
         {
             // register necessary hooks here
-            // add_action( 'init', function () {
+            add_action( 'init', function () {
                 $demoPage = new \WPReviewManager\Modules\Exterior\ProcessDemoPage();
                 $demoPage->handleExteriorPages();
-            // }); 
+            }); 
         }
 
         public function registerEndpoints()

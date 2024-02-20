@@ -133,7 +133,7 @@ wp_enqueue_script('bootstrap_cdn', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2
                 formID: formID,
                 formData: formData,
                 action: 'wp_review_manager_ajax',
-                nonce: "8836541849",
+                nonce: "7393195656",
                 route: 'create_review'
             }
             makeAjaxRequest(data, formID);

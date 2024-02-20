@@ -7,7 +7,7 @@ class Rating {
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wprm_ratings';
+        $table_name = $wpdb->prefix . 'wprm_reviews';
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,

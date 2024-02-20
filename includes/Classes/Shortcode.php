@@ -13,6 +13,7 @@ class Shortcode {
     public function WPReviewManagerShortcode() {
         add_shortcode('wp-review-manager', function ($args) {
             // dd($args);
+            Vite::enqueueScript('WPRM-form-preview-js', 'public/js/form_preview.js', array('jquery'), WPRM_VERSION, true);
             return "<h1>hello</h1>";
             // $args = shortcode_atts(
             //     array(
