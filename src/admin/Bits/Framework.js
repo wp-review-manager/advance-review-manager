@@ -22,7 +22,7 @@ app.use(ElIcon);
 const appStartTime = new Date();
 
 
-export default class WPPluginVueTailwind {
+export default class Framework {
     constructor() {
         this.doAction = doAction;
         this.addFilter = addFilter;
@@ -31,7 +31,7 @@ export default class WPPluginVueTailwind {
         this.removeAllActions = removeAllActions;
         //
         this.AJAX = ajax;
-        this.appVars = window.WPPluginVueTailwindAdmin;
+        this.appVars = window.WPRMAdmin;
         this.app = this.extendVueConstructor();
     }
 
@@ -249,7 +249,7 @@ export default class WPPluginVueTailwind {
         const endTime = new Date();
         const timeDiff = endTime - appStartTime; // in ms
         const dateObj = moment(dateString);
-        return dateObj.from(moment(window.WPPluginVueTailwindAdmin.server_time).add(timeDiff, 'milliseconds'));
+        return dateObj.from(moment(window.WPRMAdmin.server_time).add(timeDiff, 'milliseconds'));
     }
 
     waitingTime(time1, time2) {

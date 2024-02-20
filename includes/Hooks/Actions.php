@@ -61,14 +61,14 @@ class Actions{
         public function createReviewForm()
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
-                wp_send_json_success(ReviewFormController::createReviewForm());
+                ReviewFormController::createReviewForm();
             }
         }
 
         public function deleteReviewForm()
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
-                wp_send_json_success((new ReviewFormController)->deleteReviewForm());
+                (new ReviewFormController)->deleteReviewForm();
             }
         }
 
@@ -82,7 +82,7 @@ class Actions{
         public function saveReviewForm()
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
-                wp_send_json_success((new ReviewFormController)->saveReviewForm());
+                (new ReviewFormController)->saveReviewForm();
             }
         }
 

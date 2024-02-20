@@ -3,14 +3,14 @@
 /**
  * Autoloader
  *
- * @package WPPluginVueTailwind
+ * @package WPReviewManager
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 include 'global_functions.php';
-if (!function_exists('WPPluginVueTailwindAutoload')) {
+if (!function_exists('WPReviewManagerAutoload')) {
     /**
      * Plugin autoloader.
      *
@@ -22,7 +22,7 @@ if (!function_exists('WPPluginVueTailwindAutoload')) {
      *
      * @param $class
      */
-    function WPPluginVueTailwindAutoload($class)
+    function WPReviewManagerAutoload($class)
     {
         // Do not load unless in plugin domain.
         $namespace = 'WPReviewManager';
@@ -45,5 +45,5 @@ if (!function_exists('WPPluginVueTailwindAutoload')) {
         }
     }
     // Register the autoloader.
-    spl_autoload_register('WPPluginVueTailwindAutoload');
+    spl_autoload_register('WPReviewManagerAutoload');
 }

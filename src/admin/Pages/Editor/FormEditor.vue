@@ -81,7 +81,7 @@
 </template>
 <script>
 import AppForm from '../Common/AppForm.vue';
-import { ElNotification } from 'element-plus';
+import { ElNotification } from 'element-plus'
 import debounce from 'lodash/debounce';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { formTemplate, formFields } from '../HomePage/home_helper.js';
@@ -171,10 +171,10 @@ export default {
                     form_id: this.$route.params.id,
                 },
                 success(res) {
-                    _that.templateFormComponents = res?.data?.form?.form_fields;
-                    _that.title = res?.data?.form?.post_title;
+                    _that.templateFormComponents = res?.data?.form_fields;
+                    _that.title = res?.data?.post_title;
                     _that.loading = false;
-                    _that.preview_url = res?.data?.form?.preview_url;
+                    _that.preview_url = res?.data?.preview_url;
                 },
                 error(err) {
                     _that.loading = false;
@@ -200,8 +200,9 @@ export default {
                     console.log(res);
                     ElNotification({
                         title: 'Success',
-                        message: 'This is a success message',
+                        message: res.data.message,
                         type: 'success',
+                        position: 'bottom-right'
                     });
                     // _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
                 },

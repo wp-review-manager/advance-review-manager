@@ -1,9 +1,8 @@
 import routes from './routes';
-// import ElementPlus from 'element-plus'
-// import * as ElementPlusIconsVue from '@element-plus/icons-vue';
-// import 'element-plus/dist/index.css'
+import 'element-plus/dist/index.css'
+// import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createWebHashHistory, createRouter } from 'vue-router'
-import WPPluginVueTailwind from './Bits/WPPluginVueTailwind';
+import Plugin from './Bits/Framework';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -11,9 +10,9 @@ const router = createRouter({
 });
 
 
-const framework = new WPPluginVueTailwind();
+const framework = new Plugin();
 
-framework.app.config.globalProperties.appVars = window.WPPluginVueTailwindAdmin;
+framework.app.config.globalProperties.appVars = window.WPRMAdmin;
 
 // Object.keys(ElementPlusIconsVue).forEach(key => {
 //     framework.app.component(key, ElementPlusIconsVue[key])
