@@ -160,27 +160,43 @@ export default {
         getForm() {
             this.loading = true;
             const _that = this;
-            jQuery.ajax({
-                method: 'GET',
-                url: window.WPRMAdmin.ajax_url,
-                dataType: "json",
-                data: {
-                    action: "wp_review_manager_ajax",
-                    route: "get_review_form",
+            // jQuery.$get({
+            //     method: 'GET',
+            //     url: window.WPRMAdmin.ajax_url,
+            //     dataType: "json",
+            //     data: {
+            //         action: "wp_review_manager_ajax",
+            //         route: "get_review_form",
+            //         nonce: window.WPRMAdmin.wprm_nonce,
+            //         form_id: this.$route.params.id,
+            //     },
+                
+            //     success(res) {
+            //         _that.templateFormComponents = res?.data?.form_fields;
+            //         _that.title = res?.data?.post_title;
+            //         _that.loading = false;
+            //         _that.preview_url = res?.data?.preview_url;
+            //     },
+            //     error(err) {
+            //         _that.loading = false;
+            //         console.log(err);
+            //     }
+            // });
+            this.$get('',
+                {
+                    action: 'wp_review_manager_ajax',
+                    route: 'get_review_form',
                     nonce: window.WPRMAdmin.wprm_nonce,
                     form_id: this.$route.params.id,
-                },
-                success(res) {
-                    _that.templateFormComponents = res?.data?.form_fields;
-                    _that.title = res?.data?.post_title;
+                }).then(function (response) {
+                    _that.templateFormComponents = response.data.form_fields;
+                    _that.title = response.data.post_title;
                     _that.loading = false;
-                    _that.preview_url = res?.data?.preview_url;
-                },
-                error(err) {
+                    _that.preview_url = response.data.preview_url;
+                }).catch(function (error) {
                     _that.loading = false;
-                    console.log(err);
-                }
-            });
+                    console.log(error);
+                });
         },
         saveForm() {
             const _that = this;

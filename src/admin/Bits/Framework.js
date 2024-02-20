@@ -109,23 +109,23 @@ export default class Framework {
     }
 
     $get(url, options = {}) {
-        return AJAX.get(url, options);
+        return ajax.get(url, options);
     }
 
     $post(url, options = {}) {
-        return AJAX.post(url, options);
+        return ajax.post(url, options);
     }
 
     $del(url, options = {}) {
-        return AJAX.delete(url, options);
+        return ajax.delete(url, options);
     }
 
     $put(url, options = {}) {
-        return AJAX.put(url, options);
+        return ajax.put(url, options);
     }
 
     $patch(url, options = {}) {
-        return AJAX.patch(url, options);
+        return ajax.patch(url, options);
     }
 
     dateTimeFormat(date, format) {

@@ -2,7 +2,7 @@ import routes from './routes';
 import 'element-plus/dist/index.css'
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createWebHashHistory, createRouter } from 'vue-router'
-import Plugin from './Bits/Framework';
+import Framework from './Bits/Framework';
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -10,7 +10,7 @@ const router = createRouter({
 });
 
 
-const framework = new Plugin();
+const framework = new Framework();
 
 framework.app.config.globalProperties.appVars = window.WPRMAdmin;
 

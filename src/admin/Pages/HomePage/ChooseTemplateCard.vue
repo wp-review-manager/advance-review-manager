@@ -44,24 +44,36 @@ export default {
   methods: {
     saveForm(id) {
       const _that = this;
-      jQuery.ajax({
-        method: 'POST',
-        url: window.WPRMAdmin.ajax_url,
-        dataType: "json",
-        data: {
-          action: "wp_review_manager_ajax",
-          route: "create_review_form",
-          nonce: window.WPRMAdmin.wprm_nonce,
-          post_title: this.formTemplates[id].title,
-          template: this.formTemplates[id]
-        },
-        success(res) {
-          _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
-        },
-        error(err) {
-          console.log(err);
-        }
-      });
+      // jQuery.ajax({
+      //   method: 'POST',
+      //   url: window.WPRMAdmin.ajax_url,
+      //   dataType: "json",
+      //   data: {
+      //     action: "wp_review_manager_ajax",
+      //     route: "create_review_form",
+      //     nonce: window.WPRMAdmin.wprm_nonce,
+      //     post_title: this.formTemplates[id].title,
+      //     template: this.formTemplates[id]
+      //   },
+      //   success(res) {
+      //     _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
+      //   },
+      //   error(err) {
+      //     console.log(err);
+      //   }
+      // });
+      this.$post('',
+          {
+            action: 'wp_review_manager_ajax',
+            route: 'create_review_form',
+            nonce: window.WPRMAdmin.wprm_nonce,
+            post_title: this.formTemplates[id].title,
+            template: this.formTemplates[id]
+          }).then(function (res) {
+            _that.$router.push({ name: 'edit-form', params: { id: res?.data?.form_id } });
+          }).catch(function (error) {
+              console.log(error);
+          });
     },
     getTemplateImage(image) {
       return window.WPRMAdmin.assets_url + image;
