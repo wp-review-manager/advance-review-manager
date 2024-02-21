@@ -63,7 +63,7 @@ class ReviewForm extends Model
         $reviewForm->form_fields = $data ? $data : [];
         $reviewForm->preview_url = site_url('?wprm_review_preview=' . $reviewForm->ID);
         $reviewForm->shortcode = '[wp-review-manager id="' . $reviewFormId . '"]';
-        wp_send_json_success($reviewForm,200);
+
         return $reviewForm;
     }
 

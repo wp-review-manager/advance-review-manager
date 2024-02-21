@@ -11,6 +11,24 @@
         }
     }
 
+    .WPRM-form-editor__action {
+        @include wprm-box-wrapper;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .WPRM-form-editor__action_left {
+            margin-right: 20px;
+            .WPRM-radio-group-wrapper {
+                padding: 8px;
+                border-radius: 4px;
+                border: 1px solid $border-color;
+            }
+        }
+        &.WPRM-form-editor__action__right {
+            margin-left: 20px;
+        }
+    }
+
     .WPRM-form-body {
         display: flex;
         gap: 20px;

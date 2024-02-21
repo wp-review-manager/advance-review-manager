@@ -36,9 +36,23 @@
         </el-button>
       </div>
     </div>
-    <!-- <div class="WPRM-form-editor__action">
-    </div> -->
-    <div class="WPRM-form-body">
+    <div class="WPRM-form-editor__action">
+      <div class="WPRM-form-editor__action_left">
+        <div class="WPRM-radio-group-wrapper">
+          <el-radio-group v-model="editor_mode">
+            <el-radio-button label="Review Form">Review Form</el-radio-button>
+            <el-radio-button label="Review Template">Review Template</el-radio-button>
+          </el-radio-group>
+        </div>
+      </div>
+      <div class="WPRM-form-editor__action_right">
+          <button class="WPRM-shortcode" v-clipboard:success="clipboardSuccessHandler" v-clipboard="'swdugsuyg'">
+              {{ shortcode }}
+          </button>
+      </div>
+    </div>
+    {{  }}
+    <div v-if="editor_mode == 'Review Form'" class="WPRM-form-body">
       <div class="WPRM-form-body__left">
         <draggable
           class="dragArea list-group w-full WPRM-dynamicForm"
@@ -77,11 +91,15 @@
         </draggable>
       </div>
     </div>
+    <div v-else class="WPRM-form-body">
+      <ReviewTemplate />
+    </div>
   </div>
 </template>
 <script>
 import AppForm from '../Common/AppForm.vue';
 import { ElNotification } from 'element-plus'
+import ReviewTemplate from './ReviewTemplate.vue';
 import debounce from 'lodash/debounce';
 import { VueDraggableNext } from 'vue-draggable-next';
 import { formTemplate, formFields } from '../HomePage/home_helper.js';
@@ -89,10 +107,13 @@ import { formTemplate, formFields } from '../HomePage/home_helper.js';
 export default {
     components: {
         AppForm,
-        draggable: VueDraggableNext
+        draggable: VueDraggableNext,
+        ReviewTemplate
     },
     data() {
         return {
+            editor_mode: 'Review Form',
+            shortcode: '[wprm_review_form id="1"]',
             formTemplate: formTemplate,
             enabled: true,
             allFormComponents: formFields,
@@ -119,6 +140,14 @@ export default {
         },
         replace() {
             console.log('replace');
+        },
+        clipboardSuccessHandler() {
+            ElNotification({
+                title: 'Success',
+                message: 'Copied to clipboard',
+                type: 'success',
+                position: 'bottom-right'
+            });
         },
         checkMove(event) {
             // let hasDuplicate = this.countOccurrences(this.templateFormComponents, this.allFormComponents[event.draggedContext.index]);
@@ -160,28 +189,6 @@ export default {
         getForm() {
             this.loading = true;
             const _that = this;
-            // jQuery.$get({
-            //     method: 'GET',
-            //     url: window.WPRMAdmin.ajax_url,
-            //     dataType: "json",
-            //     data: {
-            //         action: "wp_review_manager_ajax",
-            //         route: "get_review_form",
-            //         nonce: window.WPRMAdmin.wprm_nonce,
-            //         form_id: this.$route.params.id,
-            //     },
-                
-            //     success(res) {
-            //         _that.templateFormComponents = res?.data?.form_fields;
-            //         _that.title = res?.data?.post_title;
-            //         _that.loading = false;
-            //         _that.preview_url = res?.data?.preview_url;
-            //     },
-            //     error(err) {
-            //         _that.loading = false;
-            //         console.log(err);
-            //     }
-            // });
             this.$get('',
                 {
                     action: 'wp_review_manager_ajax',
@@ -189,10 +196,11 @@ export default {
                     nonce: window.WPRMAdmin.wprm_nonce,
                     form_id: this.$route.params.id,
                 }).then(function (response) {
-                    _that.templateFormComponents = response.data.form_fields;
-                    _that.title = response.data.post_title;
+                    _that.templateFormComponents = response.data.form.form_fields;
+                    _that.title = response.data.form.post_title;
                     _that.loading = false;
-                    _that.preview_url = response.data.preview_url;
+                    _that.preview_url = response.data.form.preview_url;
+                    _that.shortcode = response.data.form.shortcode;
                 }).catch(function (error) {
                     _that.loading = false;
                     console.log(error);

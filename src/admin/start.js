@@ -1,5 +1,6 @@
 import routes from './routes';
 import 'element-plus/dist/index.css'
+import Clipboard from 'v-clipboard'
 // import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createWebHashHistory, createRouter } from 'vue-router'
 import Framework from './Bits/Framework';
@@ -18,6 +19,7 @@ framework.app.config.globalProperties.appVars = window.WPRMAdmin;
 //     framework.app.component(key, ElementPlusIconsVue[key])
 // });
 framework.app.use(router);
+framework.app.use(Clipboard);
 // framework.app.use(ElementPlus);
 window.WPPluginVueTailwindApp = framework.app.mount('#WPRM_app');
 

@@ -30,8 +30,8 @@ class ReviewFormController
     {
         try{
             $form_id = $_REQUEST['form_id'];
-            (new ReviewForm)->getReviewForm($form_id);
-
+            $form = (new ReviewForm)->getReviewForm($form_id);
+            // dd($form);
             if(empty($form)) {
                 wp_send_json_error(
                     [

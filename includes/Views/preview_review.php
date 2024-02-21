@@ -1,15 +1,6 @@
 <?php
 use WPReviewManager\Services\ArrayHelper as Arr;
 use WPReviewManager\Classes\Vite;
-Vite::enqueueScript('review_manager_public_js', 'public/js/form_preview.js', array('jquery'), WPRM_VERSION, true);
-Vite::enqueueStyle('review_manager_public_css', 'public/css/form_preview.css', array(), WPRM_VERSION);
-wp_localize_script('review_manager_public_js', 'review_manager_public', array(
-    'ajax_url' => admin_url('admin-ajax.php'),
-    'nonce' => wp_create_nonce('wprm_nonce'),
-));
-wp_enqueue_script('review_manager_public_js',);
-wp_enqueue_script('bootstrap_cdn', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js', [], '1.0.0');
-
 ?>
     <style>
         body {
@@ -112,43 +103,3 @@ wp_enqueue_script('bootstrap_cdn', 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2
         </div>
     </body>
 </html>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        // Your code here
-        $('.wprm-review-form-submit').click(function(e){
-            e.preventDefault();
-            let form = $(this).closest('form');
-            let formID = +form.attr('data-wprm-form-id');
-            let formData = form.serializeArray();
-
-            let inputIndex = 0;
-            form.find('[data-id]').each(function() {
-                formData[inputIndex]['label'] = $(this).attr('data-id');
-                // data[inputIndex]['placeholder'] = $(this).attr('placeholder') || '';
-                inputIndex++;
-            });
-            let data = {
-                formID: formID,
-                formData: formData,
-                action: 'wp_review_manager_ajax',
-                nonce: "7393195656",
-                route: 'create_review'
-            }
-            makeAjaxRequest(data, formID);
-        })
-
-        function makeAjaxRequest(data, formID) {
-            $.ajax({
-                url: 'https://wordpress.test/wp-admin/admin-ajax.php', // This is a global JavaScript variable defined by WordPress itself.
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    // Handle the response here
-                    console.log(response);
-                }
-            });
-        }
-    });
-</script>
