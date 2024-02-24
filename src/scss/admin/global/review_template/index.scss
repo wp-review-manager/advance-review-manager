@@ -1,0 +1,14 @@
+@import './template_one.scss';
+.review-template_settings_wrapper {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    .review-template {
+        width: 70%;
+        @include wprm-box-wrapper;
+    }
+    .review-template-settings {
+        @include wprm-box-wrapper;
+        width: 30%;
+    }
+}

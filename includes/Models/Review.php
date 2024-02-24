@@ -30,6 +30,19 @@ class Review extends Model
         }
     }
 
+    public function getReviews($formID) {
+        global $wpdb;
+        $formID = sanitize_text_field($formID);
+        $sql = "SELECT * FROM {$wpdb->prefix}wprm_reviews WHERE form_id = {$formID}";
+        $reviews = $wpdb->get_results($sql, ARRAY_A);
+        
+        foreach ($reviews as $key => $review) {
+            $reviews[$key]['meta'] = maybe_unserialize($review['meta']);
+        }
+
+        return $reviews;
+    }
+
     public static function sanitizeData($data) {
         $data['formID'] = sanitize_text_field( $data['formID'] );
         foreach ($data['formData'] as $key => $value) {

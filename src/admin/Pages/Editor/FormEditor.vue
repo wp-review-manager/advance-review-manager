@@ -17,7 +17,7 @@
         />
         <h2
           v-else
-          style="cursor: pointer;"
+          style="cursor: pointer"
           @click="title_editable = true"
         >
           {{ title }} <span class="dashicons dashicons-edit" />
@@ -25,7 +25,7 @@
       </div>
       <div class="WPRM-form-editor__header__action">
         <el-button @click="redirectToPreview()" type="default">
-          <span style="margin-right: 8px;" class="dashicons dashicons-visibility" />
+          <span style="margin-right: 8px" class="dashicons dashicons-visibility" />
           Preview
         </el-button>
         <el-button
@@ -51,7 +51,6 @@
           </button>
       </div>
     </div>
-    {{  }}
     <div v-if="editor_mode == 'Review Form'" class="WPRM-form-body">
       <div class="WPRM-form-body__left">
         <draggable
@@ -92,7 +91,7 @@
       </div>
     </div>
     <div v-else class="WPRM-form-body">
-      <ReviewTemplate />
+      <ReviewTemplate :reviews="reviews" />
     </div>
   </div>
 </template>
@@ -118,6 +117,7 @@ export default {
             enabled: true,
             allFormComponents: formFields,
             templateFormComponents: [],
+            reviews: [],
             dragging: false,
             debouncedCheckMove: null,
             loading: false,
@@ -197,6 +197,7 @@ export default {
                     form_id: this.$route.params.id,
                 }).then(function (response) {
                     _that.templateFormComponents = response.data.form.form_fields;
+                    _that.reviews = response.data.reviews;
                     _that.title = response.data.form.post_title;
                     _that.loading = false;
                     _that.preview_url = response.data.form.preview_url;
@@ -221,7 +222,6 @@ export default {
                     form_id: this.$route.params.id,
                 },
                 success(res) {
-                    console.log(res);
                     ElNotification({
                         title: 'Success',
                         message: res.data.message,

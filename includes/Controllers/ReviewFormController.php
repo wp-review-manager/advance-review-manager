@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace WPReviewManager\Controllers;
 use WPReviewManager\Services\ArrayHelper as Arr;
 use WPReviewManager\Models\ReviewForm;
+use WPReviewManager\Models\Review;
 
 class ReviewFormController
 {
@@ -31,7 +32,7 @@ class ReviewFormController
         try{
             $form_id = $_REQUEST['form_id'];
             $form = (new ReviewForm)->getReviewForm($form_id);
-            // dd($form);
+            $reviews = (new Review)->getReviews($form_id);
             if(empty($form)) {
                 wp_send_json_error(
                     [
@@ -40,6 +41,7 @@ class ReviewFormController
             } else {
                 wp_send_json_success( array(
                     'form' => $form,
+                    'reviews' => $reviews,
                     'message' => 'Form retried!'
                 ),200 );
             }
