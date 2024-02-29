@@ -3,12 +3,12 @@
 namespace ADReviewManager\Database;
 
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-require_once(WPRM_DIR.'includes/Database/Migrations/ReviewTable.php');
+require_once(ADRM_DIR.'includes/Database/Migrations/ReviewTable.php');
 
 
 class DBMigrator
 {
-    const WPRMDBV = WPRM_DB_VERSION;
+    const ADRMDBV = ADRM_DB_VERSION;
 
     public static function run($network_wide = false)
     {
@@ -40,17 +40,17 @@ class DBMigrator
         \ADReviewManager\Database\Migrations\ReviewMedia::migrate();
         \ADReviewManager\Database\Migrations\CustomFeedback::migrate();
         // we are good. It's a new installation
-        if (get_option('WPRM_DB_VERSION') < self::WPRMDBV) {
+        if (get_option('WPRM_DB_VERSION') < self::ADRMDBV) {
             self::maybeUpgradeDB();
         } else {
             // we are good. It's a new installation
-            update_option('WPRM_DB_VERSION', self::WPRMDBV, false);
+            update_option('WPRM_DB_VERSION', self::ADRMDBV, false);
         }
     }
 
     public static function maybeUpgradeDB()
     {
-        if (get_option('WPRM_DB_VERSION') < self::WPRMDBV) {
+        if (get_option('ADRM_DB_VERSION') < self::ADRMDBV) {
             // We need to upgrade the database
             self::forceUpgradeDB();
         }
@@ -61,6 +61,6 @@ class DBMigrator
     {
         // We are upgrading the DB forcedly
         // upgrade and migrate new tables
-        update_option('WPRM_DB_VERSION', self::WPRMDBV, false);
+        update_option('ADRM_DB_VERSION', self::ADRMDBV, false);
     }
 }
