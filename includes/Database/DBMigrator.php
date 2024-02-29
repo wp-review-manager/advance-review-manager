@@ -40,11 +40,11 @@ class DBMigrator
         \ADReviewManager\Database\Migrations\ReviewMedia::migrate();
         \ADReviewManager\Database\Migrations\CustomFeedback::migrate();
         // we are good. It's a new installation
-        if (get_option('WPRM_DB_VERSION') < self::ADRMDBV) {
+        if (get_option('ADRM_DB_VERSION') < self::ADRMDBV) {
             self::maybeUpgradeDB();
         } else {
             // we are good. It's a new installation
-            update_option('WPRM_DB_VERSION', self::ADRMDBV, false);
+            update_option('ADRM_DB_VERSION', self::ADRMDBV, false);
         }
     }
 
