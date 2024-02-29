@@ -1,4 +1,4 @@
-.WPRM-dynamicForm {
+.adrm-dynamicForm {
     height: 100%;
 
     .el-row {
@@ -12,7 +12,7 @@
         margin-left: 0 !important;
 
         label {
-            @include wprm-paragraph;
+            @include adrm-paragraph;
             min-width: 100px;
         }
     }

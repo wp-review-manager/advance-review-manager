@@ -1,6 +1,6 @@
 <?php
 
-namespace WPReviewManager\Services;
+namespace ADReviewManager\Services;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -65,9 +65,9 @@ class AccessControl
     {
 
         if ($grandAccess = self::hasGrandAccess()) {
-            return apply_filters('wprm/has_endpoint_access', $grandAccess, $endpoint, $group);
+            return apply_filters('adrm/has_endpoint_access', $grandAccess, $endpoint, $group);
         } elseif ($roleAccess = self::giveCustomAccess()['has_access']) {
-            return apply_filters('wprm/has_endpoint_access', $roleAccess, $endpoint, $group);
+            return apply_filters('adrm/has_endpoint_access', $roleAccess, $endpoint, $group);
         }
 
         $permissions = self::getEndpointPermissionMaps($group);
@@ -80,7 +80,7 @@ class AccessControl
                 }
             }
         }
-        return apply_filters('wprm/has_endpoint_access', false, $endpoint, $group);
+        return apply_filters('adrm/has_endpoint_access', false, $endpoint, $group);
     }
 
     public static function getEndpointPermissionMaps($group = false)
@@ -137,7 +137,7 @@ class AccessControl
             }
         }
 
-        $capability = get_option('_wprm_permission');
+        $capability = get_option('_adrm_permission');
 
         if (is_string($capability)) {
             $capability = [];

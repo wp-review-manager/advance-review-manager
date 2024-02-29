@@ -1,10 +1,10 @@
 <template>
   <div
     v-loading="loading"
-    class="WPRM-form-editor WPRM-box-wrapper"
+    class="adrm-form-editor adrm-box-editor"
   >
-    <div class="WPRM-form-editor__header">
-      <div class="WPRM-form-editor__header__title">
+    <div class="adrm-form-editor__header">
+      <div class="adrm-form-editor__header__title">
         <span
           style="width: 1em; height: 1em; margin-right: 8px"
           class="dashicons dashicons-arrow-left-alt"
@@ -23,7 +23,7 @@
           {{ title }} <span class="dashicons dashicons-edit" />
         </h2>
       </div>
-      <div class="WPRM-form-editor__header__action">
+      <div class="adrm-form-editor__header__action">
         <el-button @click="redirectToPreview()" type="default">
           <span style="margin-right: 8px" class="dashicons dashicons-visibility" />
           Preview
@@ -36,31 +36,31 @@
         </el-button>
       </div>
     </div>
-    <div class="WPRM-form-editor__action">
-      <div class="WPRM-form-editor__action_left">
-        <div class="WPRM-radio-group-wrapper">
+    <div class="adrm-form-editor__action">
+      <div class="adrm-form-editor__action_left">
+        <div class="adrm-radio-group-wrapper">
           <el-radio-group v-model="editor_mode">
             <el-radio-button label="Review Form">Review Form</el-radio-button>
             <el-radio-button label="Review Template">Review Template</el-radio-button>
           </el-radio-group>
         </div>
       </div>
-      <div class="WPRM-form-editor__action_right">
-          <button class="WPRM-shortcode" v-clipboard:success="clipboardSuccessHandler" v-clipboard="'swdugsuyg'">
+      <div class="adrm-form-editor__action_right">
+          <button class="adrm-shortcode" v-clipboard:success="clipboardSuccessHandler" v-clipboard="'swdugsuyg'">
               {{ shortcode }}
           </button>
       </div>
     </div>
-    <div v-if="editor_mode == 'Review Form'" class="WPRM-form-body">
-      <div class="WPRM-form-body__left">
+    <div v-if="editor_mode == 'Review Form'" class="adrm-form-body">
+      <div class="adrm-form-body__left">
         <draggable
-          class="dragArea list-group w-full WPRM-dynamicForm"
+          class="dragArea list-group w-full adrm-dynamicForm"
           :list="templateFormComponents"
           group="people"
           :move="checkMove"
           @change="log"
         >
-          <!-- <div class="WPRM-dynamicForm" label-width="120px"> -->
+          <!-- <div class="adrm-dynamicForm" label-width="120px"> -->
           <el-row
             v-for="field in templateFormComponents"
             :key="field.name"
@@ -70,7 +70,7 @@
           <!-- </div> -->
         </draggable>
       </div>
-      <div class="WPRM-form-body__right">
+      <div class="adrm-form-body__right">
         <h2>Form components</h2>
         <draggable
           class="dragArea list-group w-full"
@@ -90,7 +90,7 @@
         </draggable>
       </div>
     </div>
-    <div v-else class="WPRM-form-body">
+    <div v-else class="adrm-form-body">
       <ReviewTemplate :reviews="reviews" />
     </div>
   </div>
@@ -112,7 +112,7 @@ export default {
     data() {
         return {
             editor_mode: 'Review Form',
-            shortcode: '[wprm_review_form id="1"]',
+            shortcode: '[adrm_review_form id="1"]',
             formTemplate: formTemplate,
             enabled: true,
             allFormComponents: formFields,
@@ -191,9 +191,9 @@ export default {
             const _that = this;
             this.$get('',
                 {
-                    action: 'wp_review_manager_ajax',
+                    action: 'ad_review_manager_ajax',
                     route: 'get_review_form',
-                    nonce: window.WPRMAdmin.wprm_nonce,
+                    nonce: window.ADRMAdmin.adrm_nonce,
                     form_id: this.$route.params.id,
                 }).then(function (response) {
                     _that.templateFormComponents = response.data.form.form_fields;
@@ -211,12 +211,12 @@ export default {
             const _that = this;
             jQuery.ajax({
                 method: 'POST',
-                url: window.WPRMAdmin.ajax_url,
+                url: window.ADRMAdmin.ajax_url,
                 dataType: "json",
                 data: {
-                    action: "wp_review_manager_ajax",
+                    action: "ad_review_manager_ajax",
                     route: "save_review_form",
-                    nonce: window.WPRMAdmin.wprm_nonce,
+                    nonce: window.ADRMAdmin.adrm_nonce,
                     post_title: this.title,
                     formFields: this.templateFormComponents,
                     form_id: this.$route.params.id,
@@ -240,10 +240,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.WPRM-form-editor {
+.adrm-form-editor {
     padding: 20px;
 
-    .WPRM-box-wrapper {
+    .adrm-box-editor {
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         background-color: #fff;

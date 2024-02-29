@@ -2,9 +2,9 @@
 
 To use this plugin, follow these steps:
 
-1. Download the plugin files from the [WordPress Plugin Directory](https://wordpress.org/plugins/wp-review-manager/).
+1. Download the plugin files from the [WordPress Plugin Directory](https://wordpress.org/plugins/advance-review-manager/).
 
-2. Upload the plugin files to the `/wp-content/plugins/wp-review-manager/` directory on your WordPress installation.
+2. Upload the plugin files to the `/wp-content/plugins/advance-review-manager/` directory on your WordPress installation.
 
 3. Activate the plugin through the 'Plugins' menu in WordPress.
 
@@ -18,6 +18,6 @@ To use this plugin, follow these steps:
 
 8. Save your changes and preview your website to see the review form in action.
 
-For more detailed instructions and documentation, please refer to the [official plugin documentation](https://example.com/wp-review-manager/docs).
+For more detailed instructions and documentation, please refer to the [official plugin documentation](https://example.com/advance-review-manager/docs).
 
 If you encounter any issues or have any questions, please feel free to reach out to our support team at support@example.com.

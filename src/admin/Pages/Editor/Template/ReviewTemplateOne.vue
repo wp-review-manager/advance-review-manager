@@ -1,22 +1,24 @@
 <template>
-    <div v-for="(review, index) in reviews" class="wprm_review_temp_one" :key="index">
-        {{ review }}
-        <div class="wprm_review_temp_one_avatar">
-            <img src="https://via.placeholder.com/150" alt="Avatar" />
-        </div>
-        <div class="wprm_review_temp_one_content">
-            <div class="wprm_review_temp_one_content_header">
-                <div class="left">
-                    <p class="date">{{ convertMysqlDateFormat(review.created_at) }}</p>
-                    <h3 class="wprm_review_temp_one_content_header_name">John Doe</h3>
-                </div>
-                <div class="wprm_rating">
-                    <RatingLabel :rating="review.rating" />
-                </div>
+    <div>
+        <div v-for="(review, index) in reviews" class="adrm_review_temp_one" :key="index">
+            {{ review }}
+            <div class="adrm_review_temp_one_avatar">
+                <img src="https://via.placeholder.com/150" alt="Avatar" />
             </div>
-            <div class="wprm_review_temp_one_content_body">
-                <p class="review">This is a review of the product. It is a very good product. I would recommend it to
-                    anyone.</p>
+            <div class="adrm_review_temp_one_content">
+                <div class="adrm_review_temp_one_content_header">
+                    <div class="left">
+                        <p class="date">{{ convertMysqlDateFormat(review.created_at) }}</p>
+                        <h3 class="adrm_review_temp_one_content_header_name">John Doe</h3>
+                    </div>
+                    <div class="adrm_rating">
+                        <RatingLabel :rating="review.rating" />
+                    </div>
+                </div>
+                <div class="adrm_review_temp_one_content_body">
+                    <p class="review">This is a review of the product. It is a very good product. I would recommend it to
+                        anyone.</p>
+                </div>
             </div>
         </div>
     </div>

@@ -1,14 +1,14 @@
 const {glob} = require('glob');
 const fs = require('fs');
 
-const newFiles = glob(['wp-review-manager.php'])
+const newFiles = glob(['advance-review-manager.php'])
 newFiles.then(function (files) {
     files.forEach(function(item, index, array) {
         const data = fs.readFileSync(item, 'utf8');
         const mapObj = {
-            WP_REVIEW_MANAGER_DEVELOPMENT: "WP_REVIEW_MANAGER_PRODUCTION"
+            ADVANCE_REVIEW_MANAGER_DEVELOPMENT: "ADVANCE_REVIEW_MANAGER_PRODUCTION"
         };
-        const result = data.replace(/WP_REVIEW_MANAGER_DEVELOPMENT/gi, function (matched) {
+        const result = data.replace(/ADVANCE_REVIEW_MANAGER_DEVELOPMENT/gi, function (matched) {
             return mapObj[matched];
         });
         fs.writeFile(item, result, 'utf8', function (err) {

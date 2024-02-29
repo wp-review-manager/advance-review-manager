@@ -11,8 +11,8 @@
 import { shallowRef } from 'vue';
 import { defineAsyncComponent } from 'vue';
 // eslint-disable-next-line no-use-before-define
-import Duplicate from './wprm-Duplicate.vue';
-import Star from './wprm-Star.vue';
+import Duplicate from './adrm-Duplicate.vue';
+import Star from './adrm-Star.vue';
 
 export default {
     props: {
@@ -33,7 +33,7 @@ export default {
             immediate: true,
             handler(newComponent) {
                 this.dynamicComponent = defineAsyncComponent(() =>
-                    import(`./wprm-${newComponent}.vue`)
+                    import(`./adrm-${newComponent}.vue`)
                 );
             }
         }

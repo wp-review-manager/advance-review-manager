@@ -9,14 +9,14 @@
         margin: 0 auto;
         width: 70%;
         max-width: 1000px;
-        @include wprm-box-wrapper;
+        @include adrm-box-wrapper;
         @media screen and (max-width: 768px){
             width: 100%;
             padding: 8px;
         }
     }
     .review-template-settings {
-        @include wprm-box-wrapper;
+        @include adrm-box-wrapper;
         width: 30%;
     }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="wpf-dashboard">
+  <div class="adrm-dashboard">
     <!-- Start Top Search bar Page -->
     <div class="p-2 flex flex-row justify-between items-center bg-white border border-gray-200 rounded-lg mb-3 ">
       <div class="object-cover w-2/4 gap-x-8 rounded-t-lg h-96 md:h-auto md:rounded-none md:rounded-s-lg">
@@ -25,7 +25,7 @@
             id="default-search"
             v-model="forms_search_string"
             type="search"
-            class="block WPRM-search-input w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-yellow-700 focus:border-yellow-700  dark:text-white"
+            class="block adrm-search-input w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-yellow-700 focus:border-yellow-700  dark:text-white"
             placeholder="Search Mockups, Logos..."
             required
             @keyup="getFormsDebounce()"
@@ -58,7 +58,7 @@
       :confirm-btn-label="'Create a blank form'"
       @update:handle-dialog-close="handleDialogClose"
     >
-      <div class="WPRM-choose-template-form">
+      <div class="adrm-choose-template-form">
         <HomeChooseTemplate :form-templates="formTemplate" />
       </div>
     </AppModal>
@@ -69,7 +69,7 @@
       :title="'Confirmation Delete Form !'"
       @update:handle-dialog-close="handleDelDialogClose"
     >
-      <div class="WPRM-delete-confirmation">
+      <div class="adrm-delete-confirmation">
         <p>Are you sure you want to delete this form?</p>
       </div>
     </AppModal>
@@ -131,12 +131,12 @@ export default {
           const _that = this;
           jQuery.ajax({
               method: 'GET',
-              url: window.WPRMAdmin.ajax_url,
+              url: window.ADRMAdmin.ajax_url,
               dataType: "json",
               data: {
-                  action: "wp_review_manager_ajax",
+                  action: "ad_review_manager_ajax",
                   route: "get_review_forms",
-                  nonce: window.WPRMAdmin.wprm_nonce,
+                  nonce: window.ADRMAdmin.adrm_nonce,
                   search_string: this.forms_search_string
               },
               success(res) {
@@ -162,12 +162,12 @@ export default {
         const _that = this;
         jQuery.ajax({
           method: 'POST',
-          url: window.WPRMAdmin.ajax_url,
+          url: window.ADRMAdmin.ajax_url,
           dataType: "json",
           data: {
-            action: "wp_review_manager_ajax",
+            action: "ad_review_manager_ajax",
             route: "delete_review_form",
-            nonce: window.WPRMAdmin.wprm_nonce,
+            nonce: window.ADRMAdmin.adrm_nonce,
             form_id: this.deleteProductId
           },
           success(res) {

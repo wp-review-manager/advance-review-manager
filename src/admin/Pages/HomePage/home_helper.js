@@ -36,7 +36,7 @@ const tableData = [
         category: "Silver",
         price: "$2999",
         brand: "Apple",
-        shortcode: "[wp-review-manager id=1]",
+        shortcode: "[advance-review-manager id=1]",
         actions: {
             edit: true,
             delete: true
@@ -47,7 +47,7 @@ const tableData = [
         category: "White",
         price: "$1999",
         brand: "Microsoft",
-        shortcode: "[wp-review-manager id=2]",
+        shortcode: "[advance-review-manager id=2]",
         actions: {
             edit: true,
             delete: true
@@ -58,7 +58,7 @@ const tableData = [
         category: "Black",
         price: "$99",
         brand: "Apple",
-        shortcode: "[wp-review-manager id=3]",
+        shortcode: "[advance-review-manager id=3]",
         actions: {
             edit: true,
             delete: true

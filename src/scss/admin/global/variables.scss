@@ -30,14 +30,14 @@ $text-dark-50: #26272e73;
 $border-color: #D6DAE1;
 $border-color-light: #e8e8e85c;
 
-@mixin wprm-paragraph {
+@mixin adrm-paragraph {
     color: $text-dark;
     font-size: 14px;
     font-weight: 500;
     display: inline-block;
 }
 
-@mixin wprm-box-wrapper {
+@mixin adrm-box-wrapper {
     margin-bottom: 20px;
     background: $white;
     padding: 20px;

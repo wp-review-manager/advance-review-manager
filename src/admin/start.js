@@ -13,7 +13,7 @@ const router = createRouter({
 
 const framework = new Framework();
 
-framework.app.config.globalProperties.appVars = window.WPRMAdmin;
+framework.app.config.globalProperties.appVars = window.ADRMAdmin;
 
 // Object.keys(ElementPlusIconsVue).forEach(key => {
 //     framework.app.component(key, ElementPlusIconsVue[key])
@@ -21,12 +21,12 @@ framework.app.config.globalProperties.appVars = window.WPRMAdmin;
 framework.app.use(router);
 framework.app.use(Clipboard);
 // framework.app.use(ElementPlus);
-window.WPPluginVueTailwindApp = framework.app.mount('#WPRM_app');
+window.WPPluginVueTailwindApp = framework.app.mount('#ADRM_app');
 
 router.afterEach((to, from) => {
-    jQuery('.WPRM_menu_item').removeClass('active');
+    jQuery('.adrm_menu_item').removeClass('active');
     let active = to.meta.active;
     if (active) {
-        jQuery('.WPRM_main-menu-items').find('li[data-key=' + active + ']').addClass('active');
+        jQuery('.adrm_main-menu-items').find('li[data-key=' + active + ']').addClass('active');
     }
 });

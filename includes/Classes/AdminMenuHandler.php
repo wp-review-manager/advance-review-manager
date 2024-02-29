@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Classes;
-use WPReviewManager\Classes\Helper;
-use WPReviewManager\Hooks\Actions;
+namespace ADReviewManager\Classes;
+use ADReviewManager\Classes\Helper;
+use ADReviewManager\Hooks\Actions;
 
 class AdminMenuHandler{
 
@@ -14,49 +14,49 @@ class AdminMenuHandler{
             }
             global $submenu;
             add_menu_page(
-                'WP-review-manager',
-                'WP Review Manager',
+                'Advance-review-manager',
+                'Advance Review Manager',
                 'manage_options',
-                'wp-review-manager.php',
+                'advance-review-manager.php',
                 array($this, 'renderAdminPage'),
                 'dashicons-editor-code',
                 25
             );
-            $submenu['wp-review-manager.php']['review-forms'] = array(
+            $submenu['advance-review-manager.php']['review-forms'] = array(
                 'Review Forms',
                 'manage_options',
-                'admin.php?page=wp-review-manager.php#/',
+                'admin.php?page=advance-review-manager.php#/',
             );
-            $submenu['wp-review-manager.php']['settings'] = array(
+            $submenu['advance-review-manager.php']['settings'] = array(
                 'Settings',
                 'manage_options',
-                'admin.php?page=wp-review-manager.php#/settings',
+                'admin.php?page=advance-review-manager.php#/settings',
             );
-            $submenu['wp-review-manager.php']['user-guide'] = array(
+            $submenu['advance-review-manager.php']['user-guide'] = array(
                 'User Guide',
                 'manage_options',
-                'admin.php?page=wp-review-manager.php#/user-guide',
+                'admin.php?page=advance-review-manager.php#/user-guide',
             );
-            $submenu['wp-review-manager.php']['support-&-debug'] = array(
+            $submenu['advance-review-manager.php']['support-&-debug'] = array(
                 'Support & Debug',
                 'manage_options',
-                'admin.php?page=wp-review-manager.php#/support-&-debug',
+                'admin.php?page=advance-review-manager.php#/support-&-debug',
             );
         });
         add_action('admin_init', function () {
 
             $disablePages = [
-                'wp-review-manager.php',
+                'advance-review-manager.php',
             ];
         
             if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
                 remove_all_actions('admin_notices');
         
                 // wp_enqueue_style(
-                //     'wprm_admin_app',
-                //     WPRM_URL . 'assets/css/wp-review-manager-admin.css',
+                //     'adrm_admin_app',
+                //     ADRM_URL . 'assets/css/advance-review-manager-admin.css',
                 //     array(),
-                //     WPRM_VERSION
+                //     ADRM_VERSION
                 // );
             }
         }, 20);
@@ -65,26 +65,26 @@ class AdminMenuHandler{
     public function renderAdminPage()
     {
 
-        Vite::enqueueScript('WPRM-script-boot', 'admin/start.js', array('jquery'), WPRM_VERSION, true);
-        Vite::enqueueStyle('WPRM-global-styling', 'scss/admin/app.scss', array(), WPRM_VERSION);
-        $WPRM = apply_filters('WPRM/admin_app_vars', array(
+        Vite::enqueueScript('ADRM-script-boot', 'admin/start.js', array('jquery'), ADRM_VERSION, true);
+        Vite::enqueueStyle('ADRM-global-styling', 'scss/admin/app.scss', array(), ADRM_VERSION);
+        $ADRM = apply_filters('ADRM/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
-            'assets_url' => WPRM_URL . 'assets/',
+            'assets_url' => ADRM_URL . 'assets/',
             'ajax_url' => admin_url('admin-ajax.php'),
-            'wprm_nonce' => wp_create_nonce('wp-review-manager-nonce'),
+            'adrm_nonce' => wp_create_nonce('advance-review-manager-nonce'),
         ));
 
         $this->renderGlobalSettings();
 
-        wp_localize_script('WPRM-script-boot', 'WPRMAdmin', $WPRM);
+        wp_localize_script('ADRM-script-boot', 'ADRMAdmin', $ADRM);
         ob_start();
         ?>
-        <div class="WPRM-admin-page" id="WPRM_app">
+        <div class="adrm-admin-page" id="ADRM_app">
             <div class="main-menu text-white-200 bg-wheat-600">
-                <div class="WPRM-logo">
+                <div class="adrm-logo">
                     <?php echo Helper::LogoSvg() ?>
                 </div>
-                <div class="WPRM-menu-item">
+                <div class="adrm-menu-item">
                     <router-link to="/">
                         Review Forms
                     </router-link> 

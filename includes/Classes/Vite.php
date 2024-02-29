@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Classes;
+namespace ADReviewManager\Classes;
 
 class Vite
 {
@@ -128,7 +128,7 @@ class Vite
 
     public static function isDevMode()
     {
-        return defined('WP_REVIEW_MANAGER_DEVELOPMENT') && WP_REVIEW_MANAGER_DEVELOPMENT === 'yes';
+        return defined('ADVANCE_REVIEW_MANAGER_DEVELOPMENT') && ADVANCE_REVIEW_MANAGER_DEVELOPMENT === 'yes';
     }
 
     private static function getDevPath()
@@ -138,7 +138,7 @@ class Vite
 
     private static function getAssetPath()
     {
-        return WPRM_URL . 'assets/';
+        return ADRM_URL . 'assets/';
     }
 
     private static function getProductionFilePath($file)

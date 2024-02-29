@@ -1,6 +1,6 @@
 const request = function (method, route, data = {}) {
-    const url = window.WPRMAdmin.ajax_url;
-    const headers = { 'X-WP-Nonce': window.WPRMAdmin.wprm_nonce };
+    const url = window.ADRMAdmin.ajax_url;
+    const headers = { 'X-WP-Nonce': window.ADRMAdmin.adrm_nonce };
 
     if (['PUT', 'PATCH', 'DELETE'].indexOf(method.toUpperCase()) !== -1) {
         headers['X-HTTP-Method-Override'] = method;
@@ -36,6 +36,6 @@ export default {
 jQuery(document).ajaxSuccess((event, xhr, settings) => {
     const nonce = xhr.getResponseHeader('X-WP-Nonce');
     if (nonce) {
-        window.WPRMAdmin.wprm_nonce = nonce;
+        window.ADRMAdmin.adrm_nonce = nonce;
     }
 });

@@ -1,5 +1,5 @@
 <?php
-namespace WPReviewManager\Database\Migrations;
+namespace ADReviewManager\Database\Migrations;
 
 class ReviewComment {
 
@@ -7,7 +7,7 @@ class ReviewComment {
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wprm_review_comments';
+        $table_name = $wpdb->prefix . 'adrm_review_comments';
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,

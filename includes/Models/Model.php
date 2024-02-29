@@ -1,6 +1,6 @@
 <?php
  
-namespace WPReviewManager\Models;
+namespace ADReviewManager\Models;
 
 class Model
 {

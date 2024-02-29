@@ -1,6 +1,6 @@
 <?php
 
-namespace WPReviewManager\Database;
+namespace ADReviewManager\Database;
 
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 require_once(WPRM_DIR.'includes/Database/Migrations/ReviewTable.php');
@@ -34,11 +34,11 @@ class DBMigrator
 
     public static function migrate()
     {
-        \WPReviewManager\Database\Migrations\ReviewTable::migrate();
-        \WPReviewManager\Database\Migrations\Rating::migrate();
-        \WPReviewManager\Database\Migrations\ReviewComment::migrate();
-        \WPReviewManager\Database\Migrations\ReviewMedia::migrate();
-        \WPReviewManager\Database\Migrations\CustomFeedback::migrate();
+        \ADReviewManager\Database\Migrations\ReviewTable::migrate();
+        \ADReviewManager\Database\Migrations\Rating::migrate();
+        \ADReviewManager\Database\Migrations\ReviewComment::migrate();
+        \ADReviewManager\Database\Migrations\ReviewMedia::migrate();
+        \ADReviewManager\Database\Migrations\CustomFeedback::migrate();
         // we are good. It's a new installation
         if (get_option('WPRM_DB_VERSION') < self::WPRMDBV) {
             self::maybeUpgradeDB();

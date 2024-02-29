@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Controllers;
-use WPReviewManager\Services\ArrayHelper as Arr;
-use WPReviewManager\Models\Review;
+namespace ADReviewManager\Controllers;
+use ADReviewManager\Services\ArrayHelper as Arr;
+use ADReviewManager\Models\Review;
 
 class ReviewController
 {

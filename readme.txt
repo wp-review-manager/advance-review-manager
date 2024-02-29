@@ -1,5 +1,5 @@
-=== PHP snippets for WPRM ===
-Contributors: hasanuzzamanshamim
+=== PHP snippets for ADRM ===
+Contributors: dashnitesh780 , akmelias
 Tags: php, snippets, rawcode
 Requires at least: 4.5
 Tested up to: 6.0

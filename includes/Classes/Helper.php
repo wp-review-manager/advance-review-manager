@@ -1,5 +1,5 @@
 <?php
-namespace WPReviewManager\Classes;
+namespace ADReviewManager\Classes;
 
 class Helper {
     public static function LogoSvg() {

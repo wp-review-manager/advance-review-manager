@@ -1,9 +1,9 @@
 jQuery(document).ready(function ($) {
     // Your code here
-    $('.wprm-review-form-submit').click(function(e){
+    $('.adrm-success-notification').click(function(e){
         e.preventDefault();
         let form = $(this).closest('form');
-        let formID = +form.attr('data-wprm-form-id');
+        let formID = +form.attr('data-adrm-form-id');
         let formFieldData = form.serializeArray();
         let formComponent = form.serializeArray();
         let inputIndex = 0;
@@ -16,25 +16,25 @@ jQuery(document).ready(function ($) {
             formID: formID,
             formComponent: formComponent,
             formFieldData: formFieldData,
-            action: 'wp_review_manager_ajax',
-            nonce: window.WPRMPublic.wprm_nonce,
+            action: 'ad_review_manager_ajax',
+            nonce: window.ADRMPublic.adrm_nonce,
             route: 'create_review'
         }
         makeAjaxRequest(data, formID);
     })
 
     function makeAjaxRequest(data, formID) {
-        const form = $(`[data-wprm-form-id="${formID}"]`);
+        const form = $(`[data-adrm-form-id="${formID}"]`);
 
         $.ajax({
-            url: window.WPRMPublic.ajax_url, // This is a global JavaScript variable defined by WordPress itself.
+            url: window.ADRMPublic.ajax_url, // This is a global JavaScript variable defined by WordPress itself.
             type: 'POST',
             data: data,
             success: function(response) {
                 // Handle the response here
 
                 $(form).find('input:not([type=submit])').val('');
-                var notification = $('<div class="wprm-success-notification">Form submitted successfully</div>');
+                var notification = $('<div class="adrm-success-notification">Form submitted successfully</div>');
 
                 // Append the notification to the body
                 $(form).append(notification);

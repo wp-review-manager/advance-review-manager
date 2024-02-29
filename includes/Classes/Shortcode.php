@@ -1,31 +1,31 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Classes;
-use WPReviewManager\Classes\View;
-use WPReviewManager\Models\ReviewForm;
-use WPReviewManager\Models\Review;
+namespace ADReviewManager\Classes;
+use ADReviewManager\Classes\View;
+use ADReviewManager\Models\ReviewForm;
+use ADReviewManager\Models\Review;
 class Shortcode {
     
     public function registerShortCodes() {
         add_action('plugin_loaded', function() {
-            $this->WPReviewManagerShortcode();
+            $this->ADReviewManagerShortCode();
         });
     }
 
-    public function WPReviewManagerShortcode() {
-        add_shortcode('wp-review-manager', function ($args) {
+    public function ADReviewManagerShortCode() {
+        add_shortcode('advance-review-manager', function ($args) {
             // dd($args);
             $formId = $args['id'];
-            Vite::enqueueScript('WPRM-form-preview-js', 'public/js/form_preview.js', array('jquery'), WPRM_VERSION, true);
-            Vite::enqueueStyle('WPRM-global-styling', 'scss/admin/app.scss', array(), WPRM_VERSION);
+            Vite::enqueueScript('adrm-form-preview-js', 'public/js/form_preview.js', array('jquery'), ADRM_VERSION, true);
+            Vite::enqueueStyle('adrm-global-styling', 'scss/admin/app.scss', array(), ADRM_VERSION);
             $preview_localized =  array(
                 //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
-                'assets_url' => WPRM_URL . 'assets/',
+                'assets_url' => ADRM_URL . 'assets/',
                 'ajax_url' => admin_url('admin-ajax.php'),
-                'wprm_nonce' => wp_create_nonce('wp-review-manager-nonce'),
+                'adrm_nonce' => wp_create_nonce('advance-review-manager-nonce'),
             );
-            wp_localize_script('WPRM-form-preview-js', 'WPRMPublic', $preview_localized);
+            wp_localize_script('ADRM-form-preview-js', 'ADRMPublic', $preview_localized);
             $form = (new ReviewForm)->getReviewForm($formId);
             $reviews = (new Review)->getReviews($formId);
             // dd($form);

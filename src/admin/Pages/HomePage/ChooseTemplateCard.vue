@@ -1,29 +1,31 @@
 <template>
-  <div
-    v-for="(template, index) in formTemplates"
-    :key="index"
-    class="WPRM_card"
-  >
-    <el-card :body-style="{ padding: '0px' }">
-      <img
-        :src="getTemplateImage(template.thumbnail)"
-        style="width: 100%; height: 200px"
-        alt="image"
-        class="image"
-      >
-      <div style="padding: 14px">
-        <span>{{ template.title }}</span>
-        <div class="bottom">
-          <el-button
-            style="width: 100%;"
-            type="primary"
-            @click="saveForm(index)"
-          >
-            Choose Template
-          </el-button>
+  <div>
+    <div
+      v-for="(template, index) in formTemplates"
+      :key="index"
+      class="adrm_card"
+    >
+      <el-card :body-style="{ padding: '0px' }">
+        <img
+          :src="getTemplateImage(template.thumbnail)"
+          style="width: 100%; height: 200px"
+          alt="image"
+          class="image"
+        >
+        <div style="padding: 14px">
+          <span>{{ template.title }}</span>
+          <div class="bottom">
+            <el-button
+              style="width: 100%;"
+              type="primary"
+              @click="saveForm(index)"
+            >
+              Choose Template
+            </el-button>
+          </div>
         </div>
-      </div>
-    </el-card>
+      </el-card>
+    </div>
   </div>
 </template>
   
@@ -49,7 +51,7 @@ export default {
       //   url: window.WPRMAdmin.ajax_url,
       //   dataType: "json",
       //   data: {
-      //     action: "wp_review_manager_ajax",
+      //     action: "ad_review_manager_ajax",
       //     route: "create_review_form",
       //     nonce: window.WPRMAdmin.wprm_nonce,
       //     post_title: this.formTemplates[id].title,
@@ -64,7 +66,7 @@ export default {
       // });
       this.$post('',
           {
-            action: 'wp_review_manager_ajax',
+            action: 'ad_review_manager_ajax',
             route: 'create_review_form',
             nonce: window.WPRMAdmin.wprm_nonce,
             post_title: this.formTemplates[id].title,

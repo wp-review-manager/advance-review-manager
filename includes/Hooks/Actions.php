@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Hooks;
+namespace ADReviewManager\Hooks;
 
-use WPReviewManager\Controllers\ReviewFormController;
-use WPReviewManager\Controllers\ReviewController;
-use WPReviewManager\Services\AccessControl;
+use ADReviewManager\Controllers\ReviewFormController;
+use ADReviewManager\Controllers\ReviewController;
+use ADReviewManager\Services\AccessControl;
 
 class Actions{
     
@@ -19,20 +19,20 @@ class Actions{
         {
             // register necessary hooks here
             add_action( 'init', function () {
-                $demoPage = new \WPReviewManager\Modules\Exterior\ProcessDemoPage();
+                $demoPage = new \ADReviewManager\Modules\Exterior\ProcessDemoPage();
                 $demoPage->handleExteriorPages();
             }); 
         }
 
         public function registerEndpoints()
         {
-            add_action('wp_ajax_wp_review_manager_ajax', array($this, 'handleEndPoint'));
-            add_action('wp_ajax_nopriv_wp_review_manager_ajax', array($this, 'handleEndPoint'));
+            add_action('wp_ajax_ad_review_manager_ajax', array($this, 'handleEndPoint'));
+            add_action('wp_ajax_nopriv_ad_review_manager_ajax', array($this, 'handleEndPoint'));
         }
         public function handleEndPoint()
         {
             $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
-            if(!wp_verify_nonce($nonce, 'wp-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
+            if(!wp_verify_nonce($nonce, 'advance-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
                 wp_send_json([
                     "status" => 403,
                     "nonce" => $_POST['nonce'],

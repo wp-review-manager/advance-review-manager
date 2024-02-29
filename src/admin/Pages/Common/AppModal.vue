@@ -1,7 +1,7 @@
 <template>
   <el-dialog
     v-model="dialogVisible"
-    modal-class="WPRM-app-modal-wrapper"
+    modal-class="ADRM-app-modal-wrapper"
     :title="title"
     :width="width"
     :before-close="handleClose"

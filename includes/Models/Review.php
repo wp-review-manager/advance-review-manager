@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Models;
-use WPReviewManager\Services\ArrayHelper as Arr;
+namespace ADReviewManager\Models;
+use ADReviewManager\Services\ArrayHelper as Arr;
 
 class Review extends Model
 {
@@ -19,7 +19,7 @@ class Review extends Model
 
         try {
             $wpdb->insert(
-                $wpdb->prefix . 'wprm_reviews',
+                $wpdb->prefix . 'adrm_reviews',
                 array(
                     'form_id' => $formID,
                     'meta' => $formData,
@@ -39,7 +39,7 @@ class Review extends Model
     public function getReviews($formID) {
         global $wpdb;
         $formID = sanitize_text_field($formID);
-        $sql = "SELECT * FROM {$wpdb->prefix}wprm_reviews WHERE form_id = {$formID}";
+        $sql = "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID}";
         $reviews = $wpdb->get_results($sql, ARRAY_A);
         
         foreach ($reviews as $key => $review) {

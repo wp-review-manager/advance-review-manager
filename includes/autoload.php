@@ -3,7 +3,7 @@
 /**
  * Autoloader
  *
- * @package WPReviewManager
+ * @package ADReviewManager
  */
 
 if (!defined('ABSPATH')) {
@@ -22,10 +22,10 @@ if (!function_exists('WPReviewManagerAutoload')) {
      *
      * @param $class
      */
-    function WPReviewManagerAutoload($class)
+    function ADReviewManagerAutoload($class)
     {
         // Do not load unless in plugin domain.
-        $namespace = 'WPReviewManager';
+        $namespace = 'ADReviewManager';
         if (strpos($class, $namespace) !== 0) {
             return;
         }
@@ -45,5 +45,5 @@ if (!function_exists('WPReviewManagerAutoload')) {
         }
     }
     // Register the autoloader.
-    spl_autoload_register('WPReviewManagerAutoload');
+    spl_autoload_register('ADReviewManagerAutoload');
 }

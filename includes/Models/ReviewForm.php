@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-namespace WPReviewManager\Models;
-use WPReviewManager\Services\ArrayHelper as Arr;
+namespace ADReviewManager\Models;
+use ADReviewManager\Services\ArrayHelper as Arr;
 
 class ReviewForm extends Model
 {
@@ -30,14 +30,14 @@ class ReviewForm extends Model
 
         $forms = [];
         foreach ($all_forms as $form) {
-            $form->shortcode = '[wp-review-manager id="' . $form->ID . '"]';
+            $form->shortcode = '[advance-review-manager id="' . $form->ID . '"]';
             $form->actions = array(
                 'edit' => true,
                 'delete' => true,
             );
             $form->reviews = '100';
-            $form->form_fields = maybe_unserialize(get_post_meta($form->ID, 'wprm_form_fields', true));
-            $form->preview_url = site_url('?wprm_review_preview=' . $form->ID);
+            $form->form_fields = maybe_unserialize(get_post_meta($form->ID, 'adrm_form_fields', true));
+            $form->preview_url = site_url('?adrm_review_preview=' . $form->ID);
             $forms[] = $form;
         }
 
@@ -58,11 +58,11 @@ class ReviewForm extends Model
             return [];
         }
 
-        $data = maybe_unserialize(get_post_meta($reviewFormId, 'wprm_form_fields', true));
+        $data = maybe_unserialize(get_post_meta($reviewFormId, 'adrm_form_fields', true));
 
         $reviewForm->form_fields = $data ? $data : [];
-        $reviewForm->preview_url = site_url('?wprm_review_preview=' . $reviewForm->ID);
-        $reviewForm->shortcode = '[wp-review-manager id="' . $reviewFormId . '"]';
+        $reviewForm->preview_url = site_url('?adrm_review_preview=' . $reviewForm->ID);
+        $reviewForm->shortcode = '[advance-review-manager id="' . $reviewFormId . '"]';
 
         return $reviewForm;
     }
@@ -85,7 +85,7 @@ class ReviewForm extends Model
             423);
         }
 
-        update_post_meta($reviewFormId, 'wprm_form_fields', $formFields);
+        update_post_meta($reviewFormId, 'adrm_form_fields', $formFields);
 
         wp_send_json_success( array(
             'form_id' => $reviewFormId,
@@ -107,7 +107,7 @@ class ReviewForm extends Model
             'post_status' => 'publish'
         );
 
-        do_action('wprm/before_review_form_create', $data, $template);
+        do_action('adrm/before_review_form_create', $data, $template);
         $reviewFormId = $this->store($data);
 
         wp_update_post([
@@ -138,7 +138,7 @@ class ReviewForm extends Model
         }
         $template['formFields'] = maybe_serialize( $template_data );
         $metaValue = $template['formFields'];
-        update_post_meta($reviewFormId, 'wprm_form_fields', $metaValue);
+        update_post_meta($reviewFormId, 'adrm_form_fields', $metaValue);
 
         wp_send_json_success( array(
             'form_id' => $reviewFormId,

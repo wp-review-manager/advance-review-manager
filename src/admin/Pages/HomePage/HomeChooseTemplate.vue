@@ -1,27 +1,29 @@
 <template>
-  <div class="WPRM-search-container">
-    <div class="filter-btn">
-      <el-radio-group
-        v-model="radio1"
-        size="large"
-      >
-        <el-radio-button label="New York" />
-        <el-radio-button label="Washington" />
-        <el-radio-button label="Los Angeles" />
-        <el-radio-button label="Chicago" />
-      </el-radio-group>
+  <div>
+    <div class="adrm-search-container">
+      <div class="filter-btn">
+        <el-radio-group
+          v-model="radio1"
+          size="large"
+        >
+          <el-radio-button label="New York" />
+          <el-radio-button label="Washington" />
+          <el-radio-button label="Los Angeles" />
+          <el-radio-button label="Chicago" />
+        </el-radio-group>
+      </div>
+      <div class="search-btn">
+        <el-input
+          v-model="input2"
+          placeholder="Type something"
+          prefix-icon="el-icon-search"
+        />
+      </div>
     </div>
-    <div class="search-btn">
-      <el-input
-        v-model="input2"
-        placeholder="Type something"
-        prefix-icon="el-icon-search"
-      />
-    </div>
-  </div>
 
-  <div class="WPRM_card_wrapper">
-    <ChooseTemplateCard :form-templates="formTemplates" />
+    <div class="adrm_card_wrapper">
+      <ChooseTemplateCard :form-templates="formTemplates" />
+    </div>
   </div>
 </template>
 

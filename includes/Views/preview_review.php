@@ -1,14 +1,14 @@
 <?php
-use WPReviewManager\Services\ArrayHelper as Arr;
-use WPReviewManager\Classes\Vite;
-use WPReviewManager\Views\ReviewsTemplate;
+use ADReviewManager\Services\ArrayHelper as Arr;
+use ADReviewManager\Classes\Vite;
+use ADReviewManager\Views\ReviewsTemplate;
 
 ?>
     <style>
         body {
             background-color: #f2f2f2;
         }
-        .wprm-review-manager-wrapper {
+        .adrm-review-manager-wrapper {
             margin: 0 auto;
             margin-top: 70px;
             width: 70%;
@@ -64,10 +64,10 @@ use WPReviewManager\Views\ReviewsTemplate;
             $formID = $form->ID;
         }
     ?>
-        <div class="wprm-review-manager-wrapper <?php echo $preview_page == 'yes' ? 'wprm-preview-page' : '' ?>">
+        <div class="adrm-review-manager-wrapper <?php echo $preview_page == 'yes' ? 'adrm-preview-page' : '' ?>">
             <h3><?php echo $title ?></h3>
             <div>
-                <form data-wprm-form-id="<?php echo $formID ?>">
+                <form data-adrm-form-id="<?php echo $formID ?>">
                     <?php
                         foreach ($formFields as $formField) {
                         $type = Arr::get($formField, 'type', '');
@@ -96,7 +96,7 @@ use WPReviewManager\Views\ReviewsTemplate;
                     <?php
                     } else if (Arr::get($formField, 'type') == 'submit') {
                     ?>
-                    <input class="wprm-review-form-submit" type="submit" value="Submit">
+                    <input class="adrm-success-notification" type="submit" value="Submit">
                     <?php
                     }}
                     ?>
@@ -105,7 +105,7 @@ use WPReviewManager\Views\ReviewsTemplate;
         </div>
         <?php 
         (new ReviewsTemplate)->render($reviews);
-            // require_once WPRM_DIR . 'includes/Views/reviews.php';
+            // require_once ADRM_DIR . 'includes/Views/reviews.php';
         ?>
     </body>
 </html>

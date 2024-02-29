@@ -1,5 +1,5 @@
 <?php
-namespace WPReviewManager\Database\Migrations;
+namespace ADReviewManager\Database\Migrations;
 
 class CustomFeedback {
 
@@ -7,7 +7,7 @@ class CustomFeedback {
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'wprm_custom_feedbacks';
+        $table_name = $wpdb->prefix . 'adrm_custom_feedbacks';
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,

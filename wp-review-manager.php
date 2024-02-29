@@ -1,49 +1,49 @@
 <?php
 
 /**
- * Plugin Name: WP review manager
- * Plugin URI: http://wp-review-manager.com/
- * text-domain: wp-review-manager
- * Description: WP review manager is a plugin for wordpress that allows you to manage reviews for your website.
- * Author: #
+ * Plugin Name:  Advance Review Manager
+ * Plugin URI: http://advance-review-manager.com/
+ * text-domain: advance-review-manager
+ * Description: Advance Review Manager is a plugin for wordpress that allows you to manage reviews for your website.
+ * Author: Nitesh Dash, AKM Elias
  * Author URI: #
  * Version: 1.0.0
  */
 
-use WPReviewManager\Classes\ActivationHandler;
-use WPReviewManager\Classes\DeactivationHandler;
+use ADReviewManager\Classes\ActivationHandler;
+use ADReviewManager\Classes\DeactivationHandler;
 
 if (!defined('ABSPATH')) {
     exit;
 }
-define('WPRM_URL', plugin_dir_url(__FILE__));
-define('WPRM_DIR', plugin_dir_path(__FILE__));
-define('WPRM_FILE', __FILE__);
-define('WPRM_VERSION', '1.0.0');
-define('WPRM_DB_VERSION', 1);
+define('ADRM_URL', plugin_dir_url(__FILE__));
+define('ADRM_DIR', plugin_dir_path(__FILE__));
+define('ADRM_FILE', __FILE__);
+define('ADRM_VERSION', '1.0.0');
+define('ADRM_DB_VERSION', 1);
 
-// define('WP_REVIEW_MANAGER_DEVELOPMENT', 'yes');
-define('WP_REVIEW_MANAGER_DEVELOPMENT', 'yes');
+// define('ADVANCE_REVIEW_MANAGER_DEVELOPMENT', 'yes');
+define('ADVANCE_REVIEW_MANAGER_DEVELOPMENT', 'yes');
 
-class WPReviewManager {
+class AdvanceReviewManager {
     public function boot()
     {
         $this->loadClasses();
-        (new WPReviewManager\Classes\AdminMenuHandler)->renderMenu();
+        (new ADReviewManager\Classes\AdminMenuHandler)->renderMenu();
         $this->loadTextDomain();
         // register hooks
-        new WPReviewManager\Hooks\Actions();
-        (new WPReviewManager\Classes\Shortcode)->registerShortCodes();
+        new ADReviewManager\Hooks\Actions();
+        (new ADReviewManager\Classes\Shortcode)->registerShortCodes();
     }
 
     public function loadClasses()
     {
-        require WPRM_DIR . 'includes/autoload.php';
+        require ADRM_DIR . 'includes/autoload.php';
     }
 
     public function loadTextDomain()
     {
-        load_plugin_textdomain('wp-review-manager', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('advance-review-manager', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 }
 
@@ -51,16 +51,16 @@ class WPReviewManager {
 register_activation_hook(__FILE__, function () {
  
      ActivationHandler::handle();
-    // (new WPReviewManager\Classes\ActivationHandler)->handle();
+    // (new ADReviewManager\Classes\ActivationHandler)->handle();
 });
 
 register_deactivation_hook(__FILE__, function () {
     DeactivationHandler::handle();
-    // (new WPReviewManager\Classes\DeactivationHandler)->handle();
+    // (new ADReviewManager\Classes\DeactivationHandler)->handle();
 });
 
 
-(new WPReviewManager())->boot();
+(new AdvanceReviewManager())->boot();
 
 
 

@@ -1,12 +1,12 @@
 <?php
-namespace WPReviewManager\Classes;
+namespace ADReviewManager\Classes;
 
 class View
 {
     public static function make($path, $data = [])
     {
         $path = str_replace('.', DIRECTORY_SEPARATOR, $path);
-        $file = WPRM_DIR.'includes/Views/'.$path.'.php';
+        $file = ADRM_DIR.'includes/Views/'.$path.'.php';
         // dd($file);
         ob_start();
         extract($data);

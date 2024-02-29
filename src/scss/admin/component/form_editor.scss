@@ -1,40 +1,40 @@
-.WPRM-form-editor {
-    .WPRM-form-editor__header {
+.adrm-form-editor {
+    .adrm-form-editor__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // @include wprm-box-wrapper;
+        // @include adrm-box-wrapper;
         margin-bottom: 20px;
 
-        .WPRM-form-editor__header__title {
+        .adrm-form-editor__header__title {
             @include h2;
         }
     }
 
-    .WPRM-form-editor__action {
-        @include wprm-box-wrapper;
+    .adrm-form-editor__action {
+        @include adrm-box-wrapper;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        .WPRM-form-editor__action_left {
+        .adrm-form-editor__action_left {
             margin-right: 20px;
-            .WPRM-radio-group-wrapper {
+            .adrm-radio-group-wrapper {
                 padding: 8px;
                 border-radius: 4px;
                 border: 1px solid $border-color;
             }
         }
-        &.WPRM-form-editor__action__right {
+        &.adrm-form-editor__action__right {
             margin-left: 20px;
         }
     }
 
-    .WPRM-form-body {
+    .adrm-form-body {
         display: flex;
         gap: 20px;
 
-        .WPRM-form-body__left {
-            @include wprm-box-wrapper;
+        .adrm-form-body__left {
+            @include adrm-box-wrapper;
             width: 70%;
 
             .form-label {
@@ -44,9 +44,9 @@
             }
         }
 
-        .WPRM-form-body__right {
+        .adrm-form-body__right {
             width: 30%;
-            @include wprm-box-wrapper;
+            @include adrm-box-wrapper;
             margin-left: 20px;
 
             h2 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace WPReviewManager\Classes;
+namespace ADReviewManager\Classes;
 
 class DeactivationHandler
 {

@@ -1,5 +1,5 @@
 <template>
-    <div class="wprm-star-rating">
+    <div class="adrm-star-rating">
         <label name="rating" class="active" value="1">★</label>
         <label name="rating" class="active" value="2">★</label>
         <label name="rating" class="active" value="3">★</label>

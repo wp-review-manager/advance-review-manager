@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WPReviewManager\Services;
+namespace ADReviewManager\Services;
 
 class ArrayHelper
 {

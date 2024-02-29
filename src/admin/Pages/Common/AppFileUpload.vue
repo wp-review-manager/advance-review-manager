@@ -1,12 +1,12 @@
 <template>
-  <div class="wpf_photo_card">
+  <div class="adrm_photo_card">
     <div
       v-if="checkHasImage(product)"
-      class="wpf_photo_holder mb-2"
+      class="adrm_photo_holder mb-2"
     >
       <img :src="getSingleImageLink(product)">
     </div>
-    <div class="wpf_photo_media_btn">
+    <div class="adrm_photo_media_btn">
       <el-button
         type="warning"
         @click="initUploader"

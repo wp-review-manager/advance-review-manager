@@ -31,7 +31,7 @@ export default class Framework {
         this.removeAllActions = removeAllActions;
         //
         this.AJAX = ajax;
-        this.appVars = window.WPRMAdmin;
+        this.appVars = window.ADRMAdmin;
         this.app = this.extendVueConstructor();
     }
 
@@ -92,7 +92,7 @@ export default class Framework {
             return;
         }
 
-        this.addFilter('WPRM_top_menus', this.appVars.slug, function (menus) {
+        this.addFilter('ADRM_top_menus', this.appVars.slug, function (menus) {
             menus = menus.filter(m => m.route !== route.name);
             menus.push({
                 route: route.name,
@@ -101,7 +101,7 @@ export default class Framework {
             return menus;
         });
 
-        this.addFilter('WPRM_global_routes', this.appVars.slug, function (routes) {
+        this.addFilter('ADRM_global_routes', this.appVars.slug, function (routes) {
             routes = routes.filter(r => r.name !== route.name);
             routes.push(route);
             return routes;
@@ -145,7 +145,7 @@ export default class Framework {
     }
 
     saveData(key, data) {
-        let existingData = window.localStorage.getItem('__WPRM_data');
+        let existingData = window.localStorage.getItem('__ADRM_data');
 
         if (!existingData) {
             existingData = {};
@@ -155,11 +155,11 @@ export default class Framework {
 
         existingData[key] = data;
 
-        window.localStorage.setItem('__WPRM_data', JSON.stringify(existingData));
+        window.localStorage.setItem('__ADRM_data', JSON.stringify(existingData));
     }
 
     getData(key, defaultValue = false) {
-        let existingData = window.localStorage.getItem('__WPRM_data');
+        let existingData = window.localStorage.getItem('__ADRM_data');
         existingData = JSON.parse(existingData);
         if (!existingData) {
             return defaultValue;
@@ -249,7 +249,7 @@ export default class Framework {
         const endTime = new Date();
         const timeDiff = endTime - appStartTime; // in ms
         const dateObj = moment(dateString);
-        return dateObj.from(moment(window.WPRMAdmin.server_time).add(timeDiff, 'milliseconds'));
+        return dateObj.from(moment(window.ADRMAdmin.server_time).add(timeDiff, 'milliseconds'));
     }
 
     waitingTime(time1, time2) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-x-auto WPRM-table-wrapper">
+  <div class="relative overflow-x-auto adrm-table-wrapper">
     <table
       v-if="items?.length"
       class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
