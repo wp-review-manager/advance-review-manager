@@ -5,6 +5,10 @@
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid $border-color;
+    @media screen and (max-width: 768px){
+      padding: 4px;
+      gap: 10px;
+    }
     .wprm_review_temp_one_avatar {
         width: 100px;
         height: 100px;
@@ -40,12 +44,26 @@
             color: #f1c40f;
           }
         }
+        @media screen and (max-width: 768px){
+          display: block;
+          .date {
+            margin: 0;
+          }
+          .wprm_review_temp_one_content_header_name {
+            margin: 0;
+          }
+        }
       }
       .wprm_review_temp_one_content_body {
         .review {
             @include wprm-paragraph;
             color: $text-dark-50;
             margin-bottom: 10px;
+        }
+        @media screen and (max-width: 768px){
+          .review {
+            margin-top: 0px;
+          }
         }
       }
     }

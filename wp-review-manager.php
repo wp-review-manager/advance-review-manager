@@ -29,11 +29,11 @@ class WPReviewManager {
     public function boot()
     {
         $this->loadClasses();
-        (new WPReviewManager\Classes\Shortcode)->registerShortCodes();
         (new WPReviewManager\Classes\AdminMenuHandler)->renderMenu();
         $this->loadTextDomain();
         // register hooks
         new WPReviewManager\Hooks\Actions();
+        (new WPReviewManager\Classes\Shortcode)->registerShortCodes();
     }
 
     public function loadClasses()

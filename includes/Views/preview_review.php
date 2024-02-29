@@ -1,6 +1,8 @@
 <?php
 use WPReviewManager\Services\ArrayHelper as Arr;
 use WPReviewManager\Classes\Vite;
+use WPReviewManager\Views\ReviewsTemplate;
+
 ?>
     <style>
         body {
@@ -101,5 +103,9 @@ use WPReviewManager\Classes\Vite;
                 </form>
             </div>
         </div>
+        <?php 
+        (new ReviewsTemplate)->render($reviews);
+            // require_once WPRM_DIR . 'includes/Views/reviews.php';
+        ?>
     </body>
 </html>

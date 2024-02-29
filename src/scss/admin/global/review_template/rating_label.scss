@@ -1,0 +1,12 @@
+.wprm-star-rating {
+    display: inline-block;
+
+    label {
+        color: #ccc;
+        font-size: 2em;
+        cursor: pointer;
+        &.active {
+            color: #f90;
+        }
+    }
+}

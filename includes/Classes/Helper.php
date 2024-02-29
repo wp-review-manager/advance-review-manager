@@ -123,4 +123,13 @@ class Helper {
         <path transform="translate(614,317)" d="m0 0c0.99 0.66 1.98 1.32 3 2 0.188 3.62 0.188 3.62 0 7-1.65-0.33-3.3-0.66-5-1 0.66-0.33 1.32-0.66 2-1v-4c-0.66-0.33-1.32-0.66-2-1h2v-2z" fill="#056836"/>
         </svg>';
     }
+    public function formatDate($dateString) {
+        // Create a DateTime object from the input string
+        $dateTime = new \DateTime($dateString);
+        
+        // Format the date as required
+        $formattedDate = $dateTime->format('F, j, Y');
+        
+        return $formattedDate;
+    }
 }
