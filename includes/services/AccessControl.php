@@ -66,9 +66,12 @@ class AccessControl
 
         if ($grandAccess = self::hasGrandAccess()) {
             return apply_filters('adrm/has_endpoint_access', $grandAccess, $endpoint, $group);
-        } elseif ($roleAccess = self::giveCustomAccess()['has_access']) {
-            return apply_filters('adrm/has_endpoint_access', $roleAccess, $endpoint, $group);
         }
+
+        //will give custom access in future
+        // elseif ($roleAccess = self::giveCustomAccess()['has_access']) {
+        //     return apply_filters('adrm/has_endpoint_access', $roleAccess, $endpoint, $group);
+        // }
 
         $permissions = self::getEndpointPermissionMaps($group);
 
