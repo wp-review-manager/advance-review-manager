@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adrm-template-modal">
     <div class="adrm-search-container">
       <div class="filter-btn">
         <el-radio-group
@@ -21,7 +21,7 @@
       </div>
     </div>
 
-    <div class="adrm_card_wrapper">
+    <div class="adrm-card-wrapper">
       <ChooseTemplateCard :form-templates="formTemplates" />
     </div>
   </div>

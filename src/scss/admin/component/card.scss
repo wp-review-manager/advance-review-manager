@@ -1,11 +1,11 @@
-.adrm_card_wrapper {
+.adrm-card-wrapper .adrm-card-container {
     display: flex;
     flex-wrap: wrap;
     padding: 30px 0;
     justify-content: space-between;
     gap: 20px;
 
-    .adrm_card {
+    .adrm-card {
         max-width: 31.533%;
     }
 }

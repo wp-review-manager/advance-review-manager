@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "node src/env/development_mode.js && vite",
         "watch": "npm run dev",
+        "prod": "npm run build",
         "build": "node src/env/production_mode.js && vite build",
         "lint": "eslint --ext .vue src/",
         "lint:fix": "eslint --fix --ext .vue src/"

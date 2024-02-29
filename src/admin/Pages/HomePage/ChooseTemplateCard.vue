@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="adrm-card-container">
     <div
       v-for="(template, index) in formTemplates"
       :key="index"
-      class="adrm_card"
+      class="adrm-card"
     >
       <el-card :body-style="{ padding: '0px' }">
         <img
@@ -48,12 +48,12 @@ export default {
       const _that = this;
       // jQuery.ajax({
       //   method: 'POST',
-      //   url: window.WPRMAdmin.ajax_url,
+      //   url: window.ADRMAdmin.ajax_url,
       //   dataType: "json",
       //   data: {
       //     action: "ad_review_manager_ajax",
       //     route: "create_review_form",
-      //     nonce: window.WPRMAdmin.wprm_nonce,
+      //     nonce: window.ADRMAdmin.ADrm_nonce,
       //     post_title: this.formTemplates[id].title,
       //     template: this.formTemplates[id]
       //   },
@@ -68,7 +68,7 @@ export default {
           {
             action: 'ad_review_manager_ajax',
             route: 'create_review_form',
-            nonce: window.WPRMAdmin.wprm_nonce,
+            nonce: window.ADRMAdmin.adrm_nonce,
             post_title: this.formTemplates[id].title,
             template: this.formTemplates[id]
           }).then(function (res) {
@@ -78,7 +78,7 @@ export default {
           });
     },
     getTemplateImage(image) {
-      return window.WPRMAdmin.assets_url + image;
+      return window.ADRMAdmin.assets_url + image;
     }
   }
 };
