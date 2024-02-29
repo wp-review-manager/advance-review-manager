@@ -10,7 +10,13 @@ class Review extends Model
         global $wpdb;
         $data = self::sanitizeData($_POST);
         $formID = $data['formID'];
-        $formData = maybe_serialize( $data['formData'] );
+        $formData = array(
+            'formComponent' => $data['formComponent'],
+            'formFieldData' => $data['formFieldData'],
+        );
+
+        $formData = maybe_serialize($formData);
+
         try {
             $wpdb->insert(
                 $wpdb->prefix . 'wprm_reviews',

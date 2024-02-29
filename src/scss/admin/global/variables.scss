@@ -1,7 +1,20 @@
 $white: #ffffff;
 
 $primary-color: #096A2E;
+
 $primary-50: #E8F3EE;
+$primary-100: lighten($primary-color, 40%);
+$primary-200: lighten($primary-color, 30%);
+$primary-300: lighten($primary-color, 20%);
+$primary-400: lighten($primary-color, 10%);
+$primary-500: $primary-color;
+$primary-600: darken($primary-color, 10%);
+$primary-700: darken($primary-color, 20%);
+$primary-800: darken($primary-color, 30%);
+$primary-900: darken($primary-color, 40%);
+$primary-1000: darken($primary-color, 50%);
+
+
 $active-color: #FF9A00;
 $active-color-50: #ff9a0073;
 $active-50: #FFF5E5;
