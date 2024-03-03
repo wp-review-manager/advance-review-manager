@@ -40,8 +40,8 @@
       <div class="adrm-form-editor__action_left">
         <div class="adrm-radio-group-wrapper">
           <el-radio-group v-model="editor_mode">
-            <el-radio-button label="Review Form">Review Form</el-radio-button>
             <el-radio-button label="Review Template">Review Template</el-radio-button>
+            <el-radio-button label="Review Form">Review Form</el-radio-button>
           </el-radio-group>
         </div>
       </div>
@@ -51,6 +51,7 @@
           </button>
       </div>
     </div>
+    {{ editor_mode }}
     <div v-if="editor_mode == 'Review Form'" class="adrm-form-body">
       <div class="adrm-form-body__left">
         <draggable
@@ -62,10 +63,14 @@
         >
           <!-- <div class="adrm-dynamicForm" label-width="120px"> -->
           <el-row
-            v-for="field in templateFormComponents"
+            v-for="(field, fieldIndex) in templateFormComponents"
             :key="field.name"
+            class="adrm-dynamicForm__item"
           >
             <AppForm :field="field" />
+            <el-button @click="deleteFormItem(fieldIndex)" class="form-item-delete-btn" type="" circle >
+              <span class="dashicons dashicons-trash"></span>
+            </el-button>
           </el-row>
           <!-- </div> -->
         </draggable>
@@ -111,7 +116,7 @@ export default {
     },
     data() {
         return {
-            editor_mode: 'Review Form',
+            editor_mode: 'Review Template',
             shortcode: '[adrm_review_form id="1"]',
             formTemplate: formTemplate,
             enabled: true,
@@ -140,6 +145,20 @@ export default {
         },
         replace() {
             console.log('replace');
+        },
+        deleteFormItem(index) {
+          console.log('deleteFormItem', this.templateFormComponents[index].template_required);
+          if (this.templateFormComponents[index].template_required == 'true') {
+            ElNotification({
+                title: 'Error',
+                message: 'Cannot delete a required field.',
+                type: 'error',
+                position: 'bottom-right'
+            });
+            return;
+          } else {
+            this.templateFormComponents.splice(index, 1);
+          }
         },
         clipboardSuccessHandler() {
             ElNotification({

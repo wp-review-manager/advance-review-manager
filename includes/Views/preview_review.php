@@ -104,8 +104,7 @@ use ADReviewManager\Views\ReviewsTemplate;
             </div>
         </div>
         <?php 
-        (new ReviewsTemplate)->render($reviews);
-            // require_once ADRM_DIR . 'includes/Views/reviews.php';
+        // (new ReviewsTemplate)->render($reviews);
         ?>
     </body>
 </html>

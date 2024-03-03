@@ -72,29 +72,34 @@ const formFields = [
         name: 'name',
         type: 'text',
         placeholder: 'Apple MacBook Pro 17',
+        required: true,
     },
     {
         label: 'Email',
         name: 'email',
         type: 'email',
         placeholder: 'dasnites@gmail.com',
+        required: false,
     },
     {
         label: 'Phone',
         name: 'phone',
         type: 'phone',
         placeholder: '01747102896',
+        required: false,
     },
     {
         label: 'Message',
         name: 'message',
         type: 'textarea',
         placeholder: 'Your message',
+        required: true,
     },
     {
         label: 'Rating',
         name: 'rating',
         type: 'rating',
+        required: true,
     },
     {
         label: 'File',
@@ -107,6 +112,7 @@ const formFields = [
                 alt_text: '',
             }
         ],
+        required: false,
     },
     {
         label: 'Radio',
@@ -122,11 +128,13 @@ const formFields = [
                 value: 'option2',
             },
         ],
+        required: false,
     },
     {
         label: 'Checkbox',
         name: 'checkbox',
         type: 'checkbox',
+        required: false,
         options: [
             {
                 label: 'Option 1',
@@ -142,6 +150,7 @@ const formFields = [
         label: 'Select',
         name: 'select',
         type: 'select',
+        required: false,
         options: [
             {
                 label: 'Option 1',
@@ -157,16 +166,19 @@ const formFields = [
         label: 'Date',
         name: 'date',
         type: 'date',
+        required: false,
     },
     {
         label: 'Number',
         name: 'number',
         type: 'number',
+        required: false,
     },
     {
         label: 'Hidden',
         name: 'hidden',
         type: 'hidden',
+        required: false,
     },
     {
         label: 'Submit',
@@ -182,28 +194,33 @@ const commonFormFields = [
         name: 'name',
         type: 'text',
         placeholder: 'Apple MacBook Pro 17',
+        template_required: true,
     },
     {
         label: 'Email',
         name: 'email',
         type: 'email',
         placeholder: 'Enter user email',
+        template_required: false,
     },
     {
         label: 'Message',
         name: 'message',
         type: 'textarea',
         placeholder: 'Your message',
+        template_required: true,
     },
     {
         label: 'Rating',
         name: 'rating',
         type: 'rating',
+        template_required: true,
     },
     {
         label: 'File',
         name: 'file',
         type: 'file',
+        template_required: false,
         value: [
             {
                 image_full: '',
@@ -231,6 +248,7 @@ const formTemplate = {
             name: 'hotel_name',
             type: 'text',
             placeholder: 'Hotel Name',
+            template_required: false,
         }],
     },
     'product_review_form': {

@@ -34,6 +34,34 @@
         gap: 20px;
 
         .adrm-form-body__left {
+            .adrm-dynamicForm__item {
+                .form-editor-label {
+                    display: none;
+                }
+                position: relative;
+                .label-editor-input {
+                    max-width: calc(100% - 40px);
+                }
+                .form-item-delete-btn {
+                    display: none;
+                }
+                &:hover {
+                    .form-editor-label {
+                        display: flex;
+                        align-items: center;
+                    }
+                    .form-item-delete-btn {
+                        display: block;
+                        position: absolute;
+                        top: 10px;
+                        right: 0;
+                        color: $text-dark;
+                        padding: 4px;
+                        border-radius: 4px;
+                        cursor: pointer;
+                    }
+                }
+            }
             @include adrm-box-wrapper;
             width: 70%;
 

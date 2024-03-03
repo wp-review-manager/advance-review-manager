@@ -25,7 +25,7 @@ class Shortcode {
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'adrm_nonce' => wp_create_nonce('advance-review-manager-nonce'),
             );
-            wp_localize_script('ADRM-form-preview-js', 'ADRMPublic', $preview_localized);
+            wp_localize_script('adrm-form-preview-js', 'ADRMPublic', $preview_localized);
             $form = (new ReviewForm)->getReviewForm($formId);
             $reviews = (new Review)->getReviews($formId);
             // dd($form);

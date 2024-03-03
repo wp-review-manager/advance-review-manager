@@ -4,6 +4,7 @@
     style="margin: 10px 0px"
   >
     <el-form-item label-position="top">
+
       <input
         v-if="labelEditAble"
         v-model="field.label"
@@ -19,8 +20,9 @@
         for="inputField"
         @click="labelEditAble = true"
       >{{ field.label }}
-        <EditPen style="width: 1em; height: 1em; margin-right: 8px" />
+        <p class="form-editor-label" style="color: rgb(64, 126, 234);">Click to edit <span class="dashicons dashicons-edit"></span></p>
       </label>
+
       <template
         v-if="field.type === 'text' || field.type === 'email' || field.type === 'phone' || field.type === 'date' || field.type === 'url' || field.type === 'number' || field.type === 'hidden' || field.type === 'color'"
       >
