@@ -1,12 +1,27 @@
 <template>
     <div class="adrm-star-rating">
-        <label name="rating" class="active" value="1">★</label>
-        <label name="rating" class="active" value="2">★</label>
-        <label name="rating" class="active" value="3">★</label>
-        <label name="rating" value="4">★</label>
-        <label name="rating" value="5">★</label>
+        <span v-for="star in 5">
+            <label  name="rating" :class=" star <= rating ? 'active' : ''" value="1">★</label>
+        </span>
     </div>
 </template>
+
+<script>
+export default {
+    name: 'RatingLabel',
+    props: {
+        rating: {
+            type: Number,
+            required: true,
+        },
+    },
+    methods: {
+        getRating() {
+            return this.rating;
+        },
+    },
+};
+</script>
 
 <style lang="scss">
 

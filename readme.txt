@@ -9,3 +9,7 @@ License: GPLv2 or later
 
 == Description ==
 Write your snippets, with zero extra coding
+
+
+WIP:
+Check duplicate form component 

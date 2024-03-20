@@ -1,12 +1,11 @@
 jQuery(document).ready(function ($) {
     // Your code here
-    console.log("asdjhghfdhajsf");
+    // console.log("asdjhghfdhajsf");
     $('.adrm-success-notification').click(function(e){
         e.preventDefault();
         let form = $(this).closest('form');
         let formID = +form.attr('data-adrm-form-id');
         let formSerialized = form.serializeArray();
-
         let formFieldData = {};
         formSerialized.map((field) => {
             formFieldData[field.name] = field.value;

@@ -75,20 +75,20 @@ use ADReviewManager\Views\ReviewsTemplate;
                         $label = Arr::get($formField, 'label','');
                         $placeholder = Arr::get($formField, 'placeholder', '');
                         // dd($formField);
+                        if (Arr::get($formField, 'type') != 'submit') {
                     ?>
-
                     <label for="fname"><?php echo Arr::get($formField, 'label') ?></label>
 
-                    <?php if ($type == 'text' || $type == 'email' || $type == 'phone' || $type == 'number') { ?>
+                    <?php } if ($type == 'text' || $type == 'email' || $type == 'phone' || $type == 'number') { ?>
                         <input data-id="<?php echo $label ?>" type="<?php echo $type ?>" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>">
                     <?php
                         } else if ($type == 'textarea') {
                     ?>
-                        <textarea data-id="<?php echo $label ?>" id="subject" name="subject" placeholder="<?php echo $placeholder ?>"></textarea>
+                        <textarea data-id="<?php echo $label ?>" id="subject" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>"></textarea>
                     <?php
                         } else if ($type == 'select') {
                     ?>
-                    <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="country" name="country">
+                    <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="country" name="<?php echo $name ?>">
                         <option value="australia">Australia</option>
                         <option value="canada">Canada</option>
                         <option value="usa">USA</option>
@@ -98,7 +98,15 @@ use ADReviewManager\Views\ReviewsTemplate;
                     ?>
                     <input class="adrm-success-notification" type="submit" value="Submit">
                     <?php
-                    }}
+                    } else if (Arr::get($formField, 'type') == 'rating') { ?>
+                       <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="<?php echo $name ?>" name="<?php echo $name ?>">
+                            <option value="0" disabled>Rating</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    <?php
+                }}
                     ?>
                 </form>
             </div>

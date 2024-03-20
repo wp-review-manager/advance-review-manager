@@ -10,3 +10,29 @@
         }
     }
 }
+
+
+.rating-section {
+    margin-bottom: 20px;
+}
+
+.rating {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    color: #ccc;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.rating input[type="radio"]:checked ~ label {
+    color: #ffc700;
+}

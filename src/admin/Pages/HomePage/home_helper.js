@@ -202,54 +202,35 @@ const commonFormFields = [
         type: 'email',
         placeholder: 'Enter user email',
         template_required: false,
-    },
-    {
-        label: 'Message',
-        name: 'message',
-        type: 'textarea',
-        placeholder: 'Your message',
-        template_required: true,
-    },
-    {
-        label: 'Rating',
-        name: 'rating',
-        type: 'rating',
-        template_required: true,
-    },
-    {
-        label: 'File',
-        name: 'file',
-        type: 'file',
-        template_required: false,
-        value: [
-            {
-                image_full: '',
-                image_thumb: '',
-                alt_text: '',
-            }
-        ],
-    },
+    }
 ];
 
 const formTemplate = {
-    'blank_form': {
-        id: 0,
-        title: 'Blank Form',
-        thumbnail: 'images/template_1.jpeg',
-        formFields: [],
-
-    },
-    'hotel_review_form':{
+    'single_rating_form_template':{
         id: 1,
-        title: 'Hotel Review Form',
+        title: 'Book Review Form Template',
+        desc: 'This is a book review form template', 
+        rating_type: 'single',
         thumbnail: 'images/template_1.jpeg',
-        formFields: [...commonFormFields, {
-            label: 'Hotel Name',
-            name: 'hotel_name',
-            type: 'text',
-            placeholder: 'Hotel Name',
-            template_required: false,
-        }],
+        formFields: [...commonFormFields,  {
+            label: 'Write a review about the book',
+            name: 'message',
+            type: 'textarea',
+            placeholder: 'Your message',
+            template_required: true,
+        },
+        {
+            label: 'Provide a rating for the book',
+            name: 'rating',
+            type: 'rating',
+            template_required: true,
+        },
+       {
+        label: "Review Submission",
+        name: "review_submission",
+        type: "submit",
+        template_required: true,
+       }],
     },
     'product_review_form': {
         id: 2,

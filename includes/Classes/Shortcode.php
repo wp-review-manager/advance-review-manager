@@ -15,7 +15,7 @@ class Shortcode {
 
     public function ADReviewManagerShortCode() {
         add_shortcode('advance-review-manager', function ($args) {
-            // dd($args);
+    
             $formId = $args['id'];
             Vite::enqueueScript('adrm-form-preview-js', 'public/js/form_preview.js', array('jquery'), ADRM_VERSION, true);
             Vite::enqueueStyle('adrm-global-styling', 'scss/admin/app.scss', array(), ADRM_VERSION);
