@@ -5,6 +5,8 @@ namespace ADReviewManager\Classes;
 use ADReviewManager\Classes\View;
 use ADReviewManager\Models\ReviewForm;
 use ADReviewManager\Models\Review;
+use ADReviewManager\Services\ArrayHelper as Arr;
+
 class Shortcode {
     
     public function registerShortCodes() {
@@ -15,8 +17,10 @@ class Shortcode {
 
     public function ADReviewManagerShortCode() {
         add_shortcode('advance-review-manager', function ($args) {
-    
-            $formId = $args['id'];
+            $formId = Arr::get($args, 'id');
+            $showReviewForm = Arr::get($args, 'show_review_form');
+            $showReviewTemplate = Arr::get($args, 'show_review_template');
+
             Vite::enqueueScript('adrm-form-preview-js', 'public/js/form_preview.js', array('jquery'), ADRM_VERSION, true);
             Vite::enqueueStyle('adrm-global-styling', 'scss/admin/app.scss', array(), ADRM_VERSION);
             $preview_localized =  array(
@@ -28,12 +32,13 @@ class Shortcode {
             wp_localize_script('adrm-form-preview-js', 'ADRMPublic', $preview_localized);
             $form = (new ReviewForm)->getReviewForm($formId);
             $reviews = (new Review)->getReviews($formId);
-            // dd($form);
+
             if (!empty($form)) {
                View::render('preview_review', [
                 'form' => $form,
-                'preview_page' => 'yes',
-                'reviews' => $reviews
+                'reviews' => $reviews,
+                'show_review_form' => $showReviewForm,
+                'show_review_template' => $showReviewTemplate
                ] );
             }
         });

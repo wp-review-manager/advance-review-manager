@@ -188,6 +188,29 @@ const formFields = [
     }
 ]
 
+const ratingOptions = [
+    {
+        label: '1 Star',
+        value: 1,
+    },
+    {
+        label: '2 Star',
+        value: 2,
+    },
+    {
+        label: '3 Star',
+        value: 3,
+    },
+    {
+        label: '4 Star',
+        value: 4,
+    },
+    {
+        label: '5 Star',
+        value: 5,
+    }
+]
+
 const commonFormFields = [
     {
         label: 'Name',
@@ -195,11 +218,13 @@ const commonFormFields = [
         type: 'text',
         placeholder: 'Apple MacBook Pro 17',
         template_required: true,
+        enabled: true,
     },
     {
         label: 'Email',
         name: 'email',
         type: 'email',
+        enabled: true,
         placeholder: 'Enter user email',
         template_required: false,
     }
@@ -218,25 +243,67 @@ const formTemplate = {
             type: 'textarea',
             placeholder: 'Your message',
             template_required: true,
+            enabled: true,
         },
         {
             label: 'Provide a rating for the book',
             name: 'rating',
             type: 'rating',
             template_required: true,
+            enabled: true,
+            options: ratingOptions
+        },
+       {
+        label: "Review Submission",
+        name: "review_submission",
+        type: "submit",
+        enabled: true,
+        template_required: true,
+       }],
+    },
+    'product_review_form': {
+        id: 2,
+        title: 'Food Review Form Template',
+        thumbnail: 'images/template_1.jpeg',
+        formFields: [...commonFormFields,  {
+            label: 'Write a review about the food',
+            name: 'message',
+            type: 'textarea',
+            placeholder: 'Your message',
+            template_required: true,
+            enabled: true,
+        },
+        {
+            label: 'Provide a rating for the food',
+            name: 'rating',
+            type: 'rating',
+            template_required: true,
+            options: ratingOptions,
+            enabled: true,
+        },
+        {
+            label: 'Provide a rating for the waiter',
+            name: 'rating_1',
+            type: 'rating',
+            template_required: false,
+            options: ratingOptions,
+            enabled: true,
+        },
+        {
+            label: 'Provide a rating for the ambiance',
+            name: 'rating_2',
+            type: 'rating',
+            template_required: false,
+            options: ratingOptions,
+            enabled: true,
         },
        {
         label: "Review Submission",
         name: "review_submission",
         type: "submit",
         template_required: true,
+        enabled: true,
        }],
-    },
-    'product_review_form': {
-        id: 2,
-        title: 'Product Review Form',
-        thumbnail: 'images/template_1.jpeg',
-        formFields: commonFormFields,
     }
 }
 

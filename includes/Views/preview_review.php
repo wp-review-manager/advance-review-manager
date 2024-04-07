@@ -62,57 +62,62 @@ use ADReviewManager\Views\ReviewsTemplate;
             $title = $form->post_title;
             $formFields = $form->form_fields;
             $formID = $form->ID;
-        }
-    ?>
-        <div class="adrm-review-manager-wrapper <?php echo $preview_page == 'yes' ? 'adrm-preview-page' : '' ?>">
-            <h3><?php echo $title ?></h3>
-            <div>
-                <form data-adrm-form-id="<?php echo $formID ?>">
-                    <?php
-                        foreach ($formFields as $formField) {
-                        $type = Arr::get($formField, 'type', '');
-                        $name = Arr::get($formField, 'name', '');
-                        $label = Arr::get($formField, 'label','');
-                        $placeholder = Arr::get($formField, 'placeholder', '');
-                        // dd($formField);
-                        if (Arr::get($formField, 'type') != 'submit') {
-                    ?>
-                    <label for="fname"><?php echo Arr::get($formField, 'label') ?></label>
 
-                    <?php } if ($type == 'text' || $type == 'email' || $type == 'phone' || $type == 'number') { ?>
-                        <input data-id="<?php echo $label ?>" type="<?php echo $type ?>" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>">
-                    <?php
-                        } else if ($type == 'textarea') {
-                    ?>
-                        <textarea data-id="<?php echo $label ?>" id="subject" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>"></textarea>
-                    <?php
-                        } else if ($type == 'select') {
-                    ?>
-                    <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="country" name="<?php echo $name ?>">
-                        <option value="australia">Australia</option>
-                        <option value="canada">Canada</option>
-                        <option value="usa">USA</option>
-                    </select>
-                    <?php
-                    } else if (Arr::get($formField, 'type') == 'submit') {
-                    ?>
-                    <input class="adrm-success-notification" type="submit" value="Submit">
-                    <?php
-                    } else if (Arr::get($formField, 'type') == 'rating') { ?>
-                       <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="<?php echo $name ?>" name="<?php echo $name ?>">
-                            <option value="0" disabled>Rating</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    <?php
-                }}
-                    ?>
-                </form>
-            </div>
-        </div>
-        <?php 
-        // (new ReviewsTemplate)->render($reviews);
-        ?>
+            if ($show_review_form == 'yes') {
+                ?>
+                <div class="adrm-review-manager-wrapper">
+                    <h3><?php echo $title ?></h3>
+                    <div>
+                        <form data-adrm-form-id="<?php echo $formID ?>">
+                            <?php
+                                foreach ($formFields as $formField) {
+                                $type = Arr::get($formField, 'type', '');
+                                $name = Arr::get($formField, 'name', '');
+                                $label = Arr::get($formField, 'label','');
+                                $placeholder = Arr::get($formField, 'placeholder', '');
+                                // dd($formField);
+                                if (Arr::get($formField, 'type') != 'submit') {
+                            ?>
+                            <label for="fname"><?php echo Arr::get($formField, 'label') ?></label>
+
+                            <?php } if ($type == 'text' || $type == 'email' || $type == 'phone' || $type == 'number') { ?>
+                                <input data-id="<?php echo $label ?>" type="<?php echo $type ?>" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>">
+                            <?php
+                                } else if ($type == 'textarea') {
+                            ?>
+                                <textarea data-id="<?php echo $label ?>" id="subject" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>"></textarea>
+                            <?php
+                                } else if ($type == 'select') {
+                            ?>
+                            <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="country" name="<?php echo $name ?>">
+                                <option value="australia">Australia</option>
+                                <option value="canada">Canada</option>
+                                <option value="usa">USA</option>
+                            </select>
+                            <?php
+                            } else if (Arr::get($formField, 'type') == 'submit') {
+                            ?>
+                            <input class="adrm-success-notification" type="submit" value="Submit">
+                            <?php
+                            } else if (Arr::get($formField, 'type') == 'rating') { ?>
+                            <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="<?php echo $name ?>" name="<?php echo $name ?>">
+                                    <option value="0" disabled>Rating</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            <?php
+                        }}
+                            ?>
+                        </form>
+                    </div>
+                </div>
+                <?php
+            }
+            if ($show_review_template == 'yes') {
+                (new ReviewsTemplate)->render($reviews, $form);
+            }
+            }
+            ?>
     </body>
 </html>

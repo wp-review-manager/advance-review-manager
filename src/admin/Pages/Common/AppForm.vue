@@ -4,7 +4,6 @@
     style="margin: 10px 0px"
   >
     <el-form-item label-position="top">
-
       <input
         v-if="labelEditAble"
         v-model="field.label"
@@ -19,7 +18,7 @@
         class="form-label mb-1"
         for="inputField"
         @click="labelEditAble = true"
-      >{{ field.label }}
+      > {{ field.template_required == 'true' ? '*' : '' }} {{ field.label }}
         <p class="form-editor-label" style="color: rgb(64, 126, 234);">Click to edit <span class="dashicons dashicons-edit"></span></p>
       </label>
 
@@ -41,13 +40,13 @@
         />
       </template>
 
-      <template v-else-if="field.type === 'rating'">
+      <!-- <template v-else-if="field.type === 'rating'">
         <el-rate
           v-model="field.value"
           :allow-half="true"
           size="large"
         />
-      </template>
+      </template> -->
 
       <template v-else-if="field.type === 'file'">
         <AppFileUpload
@@ -80,7 +79,7 @@
           </el-checkbox>
         </el-checkbox-group>
       </template>
-      <template v-else-if="field.type === 'select'">
+      <template v-else-if="field.type === 'select' || field.type === 'rating'">
         <el-select v-model="field.value">
           <el-option
             v-for="option in field.options"

@@ -1,5 +1,6 @@
 .adrm-form-editor {
     .adrm-form-editor__header {
+        margin: 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -11,30 +12,21 @@
         }
     }
 
-    .adrm-form-editor__action {
-        @include adrm-box-wrapper;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .adrm-form-editor__action_left {
-            margin-right: 20px;
-            .adrm-radio-group-wrapper {
-                padding: 8px;
-                border-radius: 4px;
-                border: 1px solid $border-color;
-            }
-        }
-        &.adrm-form-editor__action__right {
-            margin-left: 20px;
-        }
-    }
-
     .adrm-form-body {
         display: flex;
         gap: 20px;
 
         .adrm-form-body__left {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 70%;
+            margin: 24px auto;
             .adrm-dynamicForm__item {
+                .disabled {
+                    opacity: 0.5;
+                    pointer-events: none;
+                }
                 .form-editor-label {
                     display: none;
                 }
@@ -51,7 +43,9 @@
                         align-items: center;
                     }
                     .form-item-delete-btn {
-                        display: block;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
                         position: absolute;
                         top: 10px;
                         right: 0;
@@ -59,6 +53,15 @@
                         padding: 4px;
                         border-radius: 4px;
                         cursor: pointer;
+                        .adrm-plus-btn {
+                           padding: 2px;
+                           border-radius: 8px;
+                            color: $text-dark-50;
+                            border: 1px solid $border-color;
+                            // &:hover {
+                            //     background: darken($primary-color, 10%);
+                            // }
+                        }
                     }
                 }
             }
@@ -69,6 +72,7 @@
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                width: 100%;
             }
         }
 

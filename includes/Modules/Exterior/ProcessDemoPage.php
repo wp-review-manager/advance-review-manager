@@ -7,7 +7,6 @@ use ADReviewManager\Classes\Vite;
 
 class ProcessDemoPage {
     public function handleExteriorPages() {
-        // dd("hitt");
         if (isset($_GET['adrm_review_preview']) && $_GET['adrm_review_preview']) {
             $hasDemoAccess = AccessControl::hasTopLevelMenuPermission();
             $hasDemoAccess = apply_filters('adrm/can_see_demo_form', $hasDemoAccess);
@@ -31,13 +30,6 @@ class ProcessDemoPage {
 
     public function renderPreview($formId)
     {
-        $form = (new ReviewForm)->getReviewForm($formId);
-        if (!empty($form)) {
-           View::render('preview_review', [
-            'form' => $form,
-            'preview_page' => 'yes'
-           ] );
-           exit();
-        }
+         echo do_shortcode('[advance-review-manager id="' . intval($formId) . '" show_review_template= "yes" show_review_form="yes"]');
     }
 }

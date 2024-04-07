@@ -2,55 +2,22 @@
 namespace ADReviewManager\Views;
 use ADReviewManager\Classes\Helper;
 use ADReviewManager\Services\ArrayHelper as Arr;
+use ADReviewManager\Classes\View;
 /**
  * Class ReviewsTemplate
  * @package ADReviewManager\Views
  */
 
 class ReviewsTemplate {
-    public function render($reviews = []) {
-        ?>
-        <style>
-            div {
-                padding: 0px;
-            }
-        </style>
-        <div class="review-template_settings_wrapper">
-            <div class="review-template" style="background: #4caf500f;">
-                <h3>Reviews</h3>
-                <?php
-                if (empty($reviews)) {
-                    echo '<p>No reviews yet</p>';
-                }
-                ?>
-                <?php foreach ($reviews as $review) { ?>
-                <div class="adrm_review_temp_one"><!-- {{ review }} -->
-                    <div class="adrm_review_temp_one_avatar"><img src="https://cdn1.vectorstock.com/i/1000x1000/51/05/male-profile-avatar-with-brown-hair-vector-12055105.jpg" alt="Avatar"></div>
-                    <div class="adrm_review_temp_one_content">
-                        <div class="adrm_review_temp_one_content_header">
-                            <div class="left">
-                                <p class="date"><?php echo (new Helper)->formatDate(Arr::get($review, 'created_at'));  ?></p>
-                                <h3 class="adrm_review_temp_one_content_header_name">John Doe</h3>
-                            </div>
-                            <div class="adrm_rating">
-                                <div class="adrm-star-rating">
-                                    <label name="rating" class="active" value="1">★</label>
-                                    <label name="rating" class="active" value="2">★</label>
-                                    <label name="rating" class="active" value="3">★</label>
-                                    <label name="rating" value="4">★</label>
-                                    <label name="rating" value="5">★</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="adrm_review_temp_one_content_body">
-                            <p class="review">This is a review of the product. It is a very good product. I would recommend it to
-                                anyone.</p>
-                        </div>
-                    </div>
-                </div>
-                <?php } ?>
-            </div>
-        </div>
-        <?php
+    public function render($reviews = [], $form) {
+        $template = 'Template.';
+        if (str_contains($form->post_name, 'book-review-form-template')) {
+            $template .= 'book_review_template';
+        }
+
+        View::render($template, [
+            'reviews' => $reviews,
+            'form' => $form
+        ]);
     }
 }

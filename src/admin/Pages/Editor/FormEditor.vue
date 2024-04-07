@@ -18,38 +18,26 @@
         </el-button>
       </div>
     </div>
-    <div class="adrm-form-editor__action">
-      <div class="adrm-form-editor__action_left">
-        <div class="adrm-radio-group-wrapper">
-          <el-radio-group v-model="editor_mode">
-            <el-radio-button label="Review Template">Review Template</el-radio-button>
-            <el-radio-button label="Review Form">Review Form</el-radio-button>
-          </el-radio-group>
-        </div>
-      </div>
-      <div class="adrm-form-editor__action_right">
-        <button class="adrm-shortcode" v-clipboard:success="clipboardSuccessHandler" v-clipboard="'swdugsuyg'">
-          {{ shortcode }}
-        </button>
-      </div>
-    </div>
-    {{ editor_mode }}
-    <div v-if="editor_mode == 'Review Form'" class="adrm-form-body">
+
+    <div class="adrm-form-body">
       <div class="adrm-form-body__left">
         <draggable class="dragArea list-group w-full adrm-dynamicForm" :list="templateFormComponents" group="people"
           :move="checkMove" @change="log">
           <!-- <div class="adrm-dynamicForm" label-width="120px"> -->
           <el-row v-for="(field, fieldIndex) in templateFormComponents" :key="field.name"
             class="adrm-dynamicForm__item">
-            <AppForm :field="field" />
-            <el-button @click="deleteFormItem(fieldIndex)" class="form-item-delete-btn" type="" circle>
-              <span class="dashicons dashicons-trash"></span>
-            </el-button>
+            <AppForm :field="field" :class="field.enabled == 'false' ? 'disabled' : ''" />
+            <div class="form-item-delete-btn">
+              <div class="adrm-plus-btn" v-if="field.type == 'rating'">
+                <Icon icon="Plus" @click="addMoreRatingField(fieldIndex)" />
+              </div>
+              <el-switch @change="checkIsValidForDisabled(field)" inactive-value="false" active-value="true" v-model="field.enabled"></el-switch>
+            </div>
           </el-row>
           <!-- </div> -->
         </draggable>
       </div>
-      <div class="adrm-form-body__right">
+      <!-- <div class="adrm-form-body__right">
         <h2>Form components</h2>
         <draggable class="dragArea list-group w-full" :list="allFormComponents"
           :group="{ name: 'people', pull: 'clone', put: false }" :sort="true" :move="checkMove" @change="log">
@@ -58,16 +46,17 @@
             {{ element.name }}
           </div>
         </draggable>
-      </div>
+      </div> -->
     </div>
-    <div v-else class="adrm-form-body">
+    <!-- <div v-else class="adrm-form-body">
       <ReviewTemplate :reviews="reviews" />
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import AppForm from '../Common/AppForm.vue';
+import Icon from '../../Icons/Index.vue';
 import { ElNotification } from 'element-plus'
 import ReviewTemplate from './ReviewTemplate.vue';
 import debounce from 'lodash/debounce';
@@ -78,12 +67,12 @@ export default {
   components: {
     AppForm,
     draggable: VueDraggableNext,
-    ReviewTemplate
+    ReviewTemplate,
+    Icon
   },
   data() {
     return {
       editor_mode: 'Review Template',
-      shortcode: '[adrm_review_form id="1"]',
       formTemplate: formTemplate,
       enabled: true,
       allFormComponents: formFields,
@@ -103,6 +92,39 @@ export default {
     // console.log(this.templateFormComponents);
   },
   methods: {
+    getRatingFieldNumber() {
+      return this.templateFormComponents.filter(field => field.type === 'rating').length;
+    },
+    addMoreRatingField(fieldIndex) {
+      const ratingFieldNumber = this.getRatingFieldNumber();
+      const newField = {
+        name: 'rating_' + ratingFieldNumber,
+        type: 'rating',
+        label: 'Rating ' + ratingFieldNumber,
+        value: 0,
+        enabled: 'true',
+        template_required: 'false',
+        options: [
+          { label: '1 Star', value: 1 },
+          { label: '2 Stars', value: 2 },
+          { label: '3 Stars', value: 3 },
+          { label: '4 Stars', value: 4 },
+          { label: '5 Stars', value: 5 },
+        ],
+      };
+      this.templateFormComponents.splice(fieldIndex + 1, 0, newField);
+    },
+    checkIsValidForDisabled(field) {
+      if (field.template_required == 'true') {
+        field.enabled = 'true';
+        ElNotification({
+          title: 'Error',
+          message: 'Cannot disable a required field.',
+          type: 'error',
+          position: 'bottom-right'
+        });
+      }
+    },
     add() {
       console.log('add');
     },
@@ -125,17 +147,10 @@ export default {
         this.templateFormComponents.splice(index, 1);
       }
     },
-    clipboardSuccessHandler() {
-      ElNotification({
-        title: 'Success',
-        message: 'Copied to clipboard',
-        type: 'success',
-        position: 'bottom-right'
-      });
-    },
+  
     checkMove(event) {
-      const hasDuplicate = this.countOccurrences(event.to, event.draggedContext.element) > 1;
-      console.log('checkMove', hasDuplicate);
+      // const hasDuplicate = this.countOccurrences(event.to, event.draggedContext.element) > 1;
+      // console.log('checkMove', hasDuplicate);
     //   if (hasDuplicate) {
     //       event.cancel = true;
     //       console.log("Cannot drop a duplicate item.");

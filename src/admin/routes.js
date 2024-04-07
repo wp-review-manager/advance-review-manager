@@ -1,5 +1,6 @@
 import Admin from './Pages/HomePage/Admin.vue';
 import Contact from './Pages/Contact.vue';
+import EditorIndex from './Pages/Editor/Index.vue';
 import FormEditor from './Pages/Editor/FormEditor.vue';
 
 export default [{
@@ -27,7 +28,18 @@ export default [{
 },
 {
     path: '/form/edit/:id',
-    name: 'edit-form',
-    component: FormEditor
+    name: 'editor-index',
+    component: EditorIndex,
+    children: [{
+        path: '',
+        name: 'edit-form',
+        component: FormEditor
+    },
+    {
+        path: 'settings',
+        name: 'edit-form-settings',
+        component: FormEditor
+    }
+    ]
 }
 ];
