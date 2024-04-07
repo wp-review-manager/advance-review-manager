@@ -1,0 +1,68 @@
+.adrm_food_review_template {
+    div {
+        padding: 0px;
+    }
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .adrm-reviewer-info {
+        width: 150px;
+        text-align: center;
+        img {
+            border-radius: 50%;
+        }
+        .adrm-reviewer-name {
+            padding: 8px 0px;
+            color: $text-dark;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .adrm-reviewer-email {
+            word-break: break-all;
+            color: $text-dark;
+            font-size: 14px;
+        }
+    }
+
+    .adrm-review-body {
+        .adrm-review-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .review-categories {
+            .adrm-star-rating {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                line-height: 0px;
+                label {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+}
+
+.review-filters {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    .review-filter {
+        padding: 5px 10px;
+        border-radius: 5px;
+        min-width: 400px;
+        // background: $bg-light;
+        // color: $text-dark;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            // background: $bg-dark;
+        }
+    }
+}

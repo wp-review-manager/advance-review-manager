@@ -97,15 +97,15 @@ use ADReviewManager\Views\ReviewsTemplate;
                             <?php
                             } else if (Arr::get($formField, 'type') == 'submit') {
                             ?>
-                            <input class="adrm-success-notification" type="submit" value="Submit">
+                            <input class="adrm-success-notification" type="submit" value="<?php echo $formField['label'] ?>">
                             <?php
                             } else if (Arr::get($formField, 'type') == 'rating') { ?>
                             <select placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="<?php echo $name ?>" name="<?php echo $name ?>">
-                                    <option value="0" disabled>Rating</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select>
+                                <option></option>
+                                <?php foreach($formField['options'] as $option) {?>
+                                    <option value="<?php echo $option['value'] ?>"><?php echo $option['label']  ?></option>
+                                <?php } ?>
+                            </select>
                             <?php
                         }}
                             ?>

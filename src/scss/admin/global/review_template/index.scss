@@ -1,5 +1,9 @@
 @import './rating_label.scss';
 @import './template_one.scss';
+@import './food_review_template.scss';
+p {
+    font-size: 14px;
+}
 .review-template_settings_wrapper {
     display: flex;
     gap: 30px;

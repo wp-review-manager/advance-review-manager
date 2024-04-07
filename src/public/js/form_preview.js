@@ -1,15 +1,24 @@
 jQuery(document).ready(function ($) {
-    // Your code here
-    // console.log("asdjhghfdhajsf");
     $('.adrm-success-notification').click(function(e){
         e.preventDefault();
         let form = $(this).closest('form');
         let formID = +form.attr('data-adrm-form-id');
-        let formSerialized = form.serializeArray();
-        let formFieldData = {};
-        formSerialized.map((field) => {
-            formFieldData[field.name] = field.value;
-        })
+        // let formSerialized = form.serializeArray();
+     
+        let formFieldData = {
+            ratings: []
+        };
+
+        // formSerialized.map((field) => {
+        //     if(field.name.includes('rating')) {
+        //         formFieldData['ratings'].push({
+        //             name: field.label,
+        //             value: field.value
+        //         });
+        //     } else {
+        //         formFieldData[field.name] = field.value;
+        //     }
+        // })
 
         let formComponent = form.serializeArray();
         let inputIndex = 0;
@@ -18,6 +27,18 @@ jQuery(document).ready(function ($) {
             // data[inputIndex]['placeholder'] = $(this).attr('placeholder') || '';
             inputIndex++;
         });
+        formComponent.map((field) => {
+            if(field.name.includes('rating')) {
+                formFieldData['ratings'].push({
+                    name: field.name,
+                    value: field.value,
+                    label: field.label
+                });
+            } else {
+                formFieldData[field.name] = field.value;
+            }
+        })
+        
         let data = {
             formID: formID,
             formComponent: formComponent,
