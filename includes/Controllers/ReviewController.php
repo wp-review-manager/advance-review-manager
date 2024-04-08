@@ -30,6 +30,7 @@ class ReviewController
         $filter = sanitize_text_field($filter);
 
         $reviews = (new Review)->getReviews($formID, $filter, $sort);
+      
         wp_send_json_success($reviews);
     }
 }

@@ -47,7 +47,7 @@ class Review extends Model
             $reviews[$key]['meta'] = maybe_unserialize($review['meta']);
         }
 
-        if (!empty($filter)) {  
+        if (!empty($filter) && $filter != 'all') {  
             $reviews = array_filter($reviews, function($review) use ($filter) {
                 $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
                 $total_rating = 0;
@@ -59,8 +59,9 @@ class Review extends Model
                 return $average_rating == $filter;
             });
 
-            wp_send_json_success($reviews);
         }
+
+        $reviews = array_values($reviews);
 
         return $reviews;
     }
