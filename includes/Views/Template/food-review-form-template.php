@@ -7,7 +7,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
  * get the reviews and form data and render the template
  */
 ?>
-<div class="review-template_settings_wrapper">
+<div data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
     <div class="review-template" style="background: #4caf500f;">
         <?php
         if (empty($reviews)) {
@@ -26,13 +26,26 @@ use ADReviewManager\Services\ArrayHelper as Arr;
             </div>
             <div class="review-filter">
                 <label for="review-filter">Filter by:</label>
-                <div class="filter-buttons">
-                    <button value="all">All</button>
-                    <button value="5">5 stars</button>
-                    <button value="4">4 stars</button>
-                    <button value="3">3 stars</button>
-                    <button value="2">2 stars</button>
-                    <button value="1">1 star</button>
+                <div class="filter-radio-inputs">
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="all" value="all" checked>
+                    <label for="all">All</label>
+
+                    <input class="adrm-filter-by-star"  type="radio" name="review-filter" id="1-star" value="1">
+                    <label  for="1-star"><p>*</p>1</label>
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="2-star" value="2">
+                    <label for="2-star"><p>*</p>2</label>
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="3-star" value="3">
+                    <label for="3-star"><p>*</p>3</label>
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="4-star" value="4">
+                    <label for="4-star"><p>*</p>4</label>
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="5-star" value="5">
+                    <label for="5-star"><p>*</p>5</label>
+
                 </div>
             </div>
         </div>

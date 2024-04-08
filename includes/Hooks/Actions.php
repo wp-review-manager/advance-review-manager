@@ -51,6 +51,7 @@ class Actions{
                 'get_review_form' => 'getReviewForm',
                 'delete_review_form' => 'deleteReviewForm',
                 'create_review' => 'createReview',
+                'get_reviews' => 'getReviews',
             );
 
             if (isset($validRoutes[$route])) {
@@ -92,10 +93,15 @@ class Actions{
                ReviewFormController::getReviewForm();
             }
         }
-// start of review  endpoint
+        // start of review  endpoint
         public function createReview()
         {
             ReviewController::createReview();
+        }
+
+        public function getReviews()
+        {
+            (new ReviewController)->getReviews();
         }
 
 }

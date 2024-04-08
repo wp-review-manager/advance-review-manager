@@ -19,4 +19,14 @@ class ReviewController
             423);
         }
     }
+
+    public function getReviews()
+    {
+        $formID = sanitize_text_field($_REQUEST['formID']);
+        $filter = Arr::get($_REQUEST, 'filter', []);
+        $filter = sanitize_text_field($filter);
+
+        $reviews = (new Review)->getReviews($formID, $filter);
+        wp_send_json_success($reviews);
+    }
 }

@@ -51,18 +51,48 @@
 .review-filters {
     display: flex;
     gap: 10px;
+    padding: 20px 0px;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: space-between;
     .review-filter {
         padding: 5px 10px;
         border-radius: 5px;
-        min-width: 400px;
-        // background: $bg-light;
-        // color: $text-dark;
+        min-width: 300px;
         cursor: pointer;
         transition: all 0.3s;
-        &:hover {
-            // background: $bg-dark;
+        .filter-radio-inputs {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        
+            input[type="radio"] {
+                display: none;
+        
+                + label {
+                    padding: 4px 12px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: all 0.3s;
+                    color: #f90;
+                    display: flex;
+                    align-items: center;
+                    border: 1px solid transparent;
+                    background: #fff;
+                    p {
+                        font-size: 32px;
+                        margin: 4px;
+                        line-height: 10px;
+                        margin-top: 14px;
+                    }
+                }
+        
+                &:checked + label {
+                    border: 1px solid #f90;
+                    background: #ffc1071a;
+                }
+            }
         }
     }
 }

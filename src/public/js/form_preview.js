@@ -1,4 +1,19 @@
 jQuery(document).ready(function ($) {
+    $('.adrm-filter-by-star').change(function(e){
+
+        let form = $(this).closest('.review-template_settings_wrapper');
+        let formID = +form.attr('data-form-id');
+
+        let data = {
+            formID: formID,
+            action: 'ad_review_manager_ajax',
+            filter: $(this).val(),
+            nonce: window.ADRMPublic.adrm_nonce,
+            route: 'get_reviews'
+        }
+        makeAjaxRequestForReviewGet(data);
+    });
+        
     $('.adrm-success-notification').click(function(e){
         e.preventDefault();
         let form = $(this).closest('form');
@@ -8,17 +23,6 @@ jQuery(document).ready(function ($) {
         let formFieldData = {
             ratings: []
         };
-
-        // formSerialized.map((field) => {
-        //     if(field.name.includes('rating')) {
-        //         formFieldData['ratings'].push({
-        //             name: field.label,
-        //             value: field.value
-        //         });
-        //     } else {
-        //         formFieldData[field.name] = field.value;
-        //     }
-        // })
 
         let formComponent = form.serializeArray();
         let inputIndex = 0;
@@ -47,10 +51,10 @@ jQuery(document).ready(function ($) {
             nonce: window.ADRMPublic.adrm_nonce,
             route: 'create_review'
         }
-        makeAjaxRequest(data, formID);
+        makeAjaxRequestForReviewSubmit(data, formID);
     })
 
-    function makeAjaxRequest(data, formID) {
+    function makeAjaxRequestForReviewSubmit(data, formID) {
         const form = $(`[data-adrm-form-id="${formID}"]`);
 
         $.ajax({
@@ -71,6 +75,18 @@ jQuery(document).ready(function ($) {
                     notification.remove();
                 }, 3000);
     
+                console.log(response);
+            }
+        });
+    }
+
+    function makeAjaxRequestForReviewGet (data) {
+        $.ajax({
+            url: window.ADRMPublic.ajax_url,
+            type: 'GET',
+            data: data,
+            success: function(response) {
+                // Handle the response here
                 console.log(response);
             }
         });

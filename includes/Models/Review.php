@@ -36,7 +36,7 @@ class Review extends Model
         }
     }
 
-    public function getReviews($formID) {
+    public function getReviews($formID, $filter = null) {
         global $wpdb;
         $formID = sanitize_text_field($formID);
         $sql = "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID}";
@@ -44,6 +44,21 @@ class Review extends Model
         
         foreach ($reviews as $key => $review) {
             $reviews[$key]['meta'] = maybe_unserialize($review['meta']);
+        }
+
+        if (!empty($filter)) {  
+            $reviews = array_filter($reviews, function($review) use ($filter) {
+                $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
+                $total_rating = 0;
+                foreach ($ratings as $rating) {
+                    $total_rating += Arr::get($rating, 'value');
+                }
+                $average_rating = round($total_rating / count($ratings));
+
+                return $average_rating == $filter;
+            });
+
+            wp_send_json_success($reviews);
         }
 
         return $reviews;
