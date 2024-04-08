@@ -18,7 +18,7 @@ class Actions{
         public function registerHooks()
         {
             // register necessary hooks here
-            add_action( 'init', function () {
+            add_action( 'wp', function () {
                 $demoPage = new \ADReviewManager\Modules\Exterior\ProcessDemoPage();
                 $demoPage->handleExteriorPages();
             }); 
