@@ -101,21 +101,29 @@ jQuery(document).ready(function ($) {
             }
         });
     }
-{/* <label name="rating" class="<?php echo $i <= $average_rating ? 'active' : ''; ?>" value="<?php echo $i; ?>">★</label> */}
+
+    // For food review template filter and sort functionality
     function domUpdateAfterReviewGet (response) {
         console.log(typeof response, response, response?.length);
 
         const reviewContainer = $('.adrm_food_review_template_wrapper');
         reviewContainer.empty();
         let created_at = '';
+        let avatar = '';
+        let average_rating = 0;
         if (response?.length) {
             response.map((review, key) => {
-                created_at = new Date(review?.created_at);
+                created_at = review?.created_at;
+                avatar = review?.avatar;
+                average_rating = review?.average_rating;
+            
+                review = review?.meta?.formFieldData
+                // console.log({review}, {avatar}, {average_rating})
                 const reviewHTML = `
                 <div class="adrm_food_review_template">
                     <div class="adrm-reviewer-info">
                         <div class="adrm-reviewer-avatar">
-                            ${review?.avatar ? `<img src="${review?.avatar}" alt="Reviewer Avatar">` : '<span class="adrm-reviewer-avatar-placeholder">A</span>'}
+                            ${avatar}
                         </div>
                         <div class="adrm-reviewer-name">
                             <span>${review?.name}</span>
@@ -127,12 +135,25 @@ jQuery(document).ready(function ($) {
                     <div class="adrm-review-body">
                         <div class="adrm-review-rating">
                             <div class="adrm-star-rating">
-                                ${review?.rating ? Array.from({length: review?.rating}, (_, i) => `<label name="rating" class="active" value="${i + 1}">★</label>`).join('') : ''}
+                            ${Array.from({ length: 5 }, (_, index) => {
+                                return `<label name="rating" class="${index < average_rating ? 'active' : ''}" value="${index + 1}">★</label>`;
+                            }).join('')}
                             </div>
-                            <span class="adrm-review-date"> Reviewed }${created_at}/span>
+                            <span class="adrm-review-date"> Reviewed ${created_at}</span>
                         </div>
                         <div class="adrm-review-content">
                             <p>${review?.message}</p>
+                        </div>
+                        <div class="review-categories">
+                                ${review?.ratings.map((rating) => {
+                                    return `<div class="adrm-star-rating">
+                                        ${Array.from({ length: 5 }, (_, index) => {
+                                            return `<label name="rating" class="${index < rating?.value ? 'active' : ''}" value="${index + 1}">★</label>`;
+                                        }).join('')}
+
+                                        <p>${rating?.label}</p>
+                                    </div>`;
+                                }).join('')}
                         </div>
                     </div>
                 </div>
@@ -140,7 +161,7 @@ jQuery(document).ready(function ($) {
                 reviewContainer.append(reviewHTML);
             })
         } else {
-            reviewContainer.append('<div class="adrm_food_review_template"><p>No reviews found</p></div>');
+            reviewContainer.append('<div class="adrm_food_review_template"><p class="adrm-empty-review">No reviews found yet !</p></div>');
         }
         // Update the DOM with the response
     }

@@ -46,6 +46,13 @@
             }
         }
     }
+    .adrm-empty-review {
+        text-align: center;
+        width: 100%;
+        font-size: 20px;
+        font-weight: 500;
+        color: $text-dark;
+    }
 }
 
 .review-filters {

@@ -70,7 +70,12 @@ use ADReviewManager\Views\ReviewsTemplate;
                     <div>
                         <form data-adrm-form-id="<?php echo $formID ?>">
                             <?php
+                            // dd($formFields);
                                 foreach ($formFields as $formField) {
+                
+                                if (Arr::get($formField, 'enabled', false) == "false") {
+                                    continue;
+                                }
                                 $type = Arr::get($formField, 'type', '');
                                 $name = Arr::get($formField, 'name', '');
                                 $label = Arr::get($formField, 'label','');
