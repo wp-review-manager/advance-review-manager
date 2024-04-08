@@ -1,17 +1,25 @@
 jQuery(document).ready(function ($) {
-    $('.adrm-filter-by-star').change(function(e){
 
+    let getReviewParamsData = {
+        action: 'ad_review_manager_ajax',
+        nonce: window.ADRMPublic.adrm_nonce,
+        route: 'get_reviews'
+    }
+
+    $('.adrm-filter-by-star').change(function(e){
         let form = $(this).closest('.review-template_settings_wrapper');
         let formID = +form.attr('data-form-id');
+        getReviewParamsData['formID'] = formID;
+        getReviewParamsData['filter'] = $(this).val();
+        makeAjaxRequestForReviewGet();
+    });
 
-        let data = {
-            formID: formID,
-            action: 'ad_review_manager_ajax',
-            filter: $(this).val(),
-            nonce: window.ADRMPublic.adrm_nonce,
-            route: 'get_reviews'
-        }
-        makeAjaxRequestForReviewGet(data);
+    $('.adrm-sort-input').change(function(e){
+        let form = $(this).closest('.review-template_settings_wrapper');
+        let formID = +form.attr('data-form-id');
+        getReviewParamsData['formID'] = formID;
+        getReviewParamsData['sort'] = $(this).val();
+        makeAjaxRequestForReviewGet();
     });
         
     $('.adrm-success-notification').click(function(e){
@@ -80,11 +88,11 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    function makeAjaxRequestForReviewGet (data) {
+    function makeAjaxRequestForReviewGet () {
         $.ajax({
             url: window.ADRMPublic.ajax_url,
             type: 'GET',
-            data: data,
+            data: getReviewParamsData,
             success: function(response) {
                 // Handle the response here
                 console.log(response);

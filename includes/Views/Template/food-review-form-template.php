@@ -19,7 +19,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
         <div class="review-filters">
             <div class="review-filter">
                 <label for="review-sort">Sort by:</label>
-                <select name="review-sort" id="review-sort">
+                <select class="adrm-sort-input" name="review-sort" id="review-sort">
                     <option value="newest">Newest</option>
                     <option value="oldest">Oldest</option>
                 </select>

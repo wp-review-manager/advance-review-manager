@@ -36,10 +36,11 @@ class Review extends Model
         }
     }
 
-    public function getReviews($formID, $filter = null) {
+    public function getReviews($formID, $filter = null, $sort = 'newest') {
         global $wpdb;
         $formID = sanitize_text_field($formID);
-        $sql = "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID}";
+        $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
+        $sql = "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID} ORDER BY created_at $sortOrder";
         $reviews = $wpdb->get_results($sql, ARRAY_A);
         
         foreach ($reviews as $key => $review) {

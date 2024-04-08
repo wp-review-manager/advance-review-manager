@@ -22,11 +22,14 @@ class ReviewController
 
     public function getReviews()
     {
-        $formID = sanitize_text_field($_REQUEST['formID']);
         $filter = Arr::get($_REQUEST, 'filter', []);
+        $sort = Arr::get($_REQUEST, 'sort', 'newest');
+
+        $formID = sanitize_text_field($_REQUEST['formID']);
+        $sort = sanitize_text_field($sort);
         $filter = sanitize_text_field($filter);
 
-        $reviews = (new Review)->getReviews($formID, $filter);
+        $reviews = (new Review)->getReviews($formID, $filter, $sort);
         wp_send_json_success($reviews);
     }
 }
