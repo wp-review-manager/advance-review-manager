@@ -12,8 +12,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
         <?php
         if (empty($reviews)) {
             echo '<p>No reviews yet</p>';
-            die();
-        }
+        } else { // Add the else condition here
         ?>
         <h3>Reviews (<?php echo count($reviews)  ?>)</h3>
         <div class="review-filters">
@@ -99,6 +98,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
             </div>
             <?php } ?>
         </div>
+        <?php } ?>
     </div>
 </div>
 
