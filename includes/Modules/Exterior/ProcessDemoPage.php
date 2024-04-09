@@ -44,6 +44,7 @@ class ProcessDemoPage {
         $reviews = (new Review)->getReviews($formId);
         
         if (!empty($form)) {
+            wp_head();
             View::render('preview_review', [
             'form' => $form,
             'reviews' => $reviews,
