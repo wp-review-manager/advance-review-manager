@@ -45,7 +45,7 @@ class Review extends Model
         
         foreach ($reviews as $key => $review) {
             $reviews[$key]['meta'] = maybe_unserialize($review['meta']);
-            $reviews[$key]['avatar'] = get_avatar( Arr::get($reviews[$key], 'meta.formFieldData.email'), 32 );
+            $reviews[$key]['avatar'] = get_avatar( Arr::get($reviews[$key], 'meta.formFieldData.email') );
 
             // calculate average rating
             $average_rating = 0;

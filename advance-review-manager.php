@@ -22,8 +22,8 @@ define('ADRM_FILE', __FILE__);
 define('ADRM_VERSION', '1.0.0');
 define('ADRM_DB_VERSION', 1);
 
-// define('ADVANCE_REVIEW_MANAGER_PRODUCTION', 'yes');
-define('ADVANCE_REVIEW_MANAGER_PRODUCTION', 'yes');
+// define('ADVANCE_REVIEW_MANAGER_DEVELOPMENT', 'yes');
+define('ADVANCE_REVIEW_MANAGER_DEVELOPMENT', 'yes');
 
 class AdvanceReviewManager {
     public function boot()

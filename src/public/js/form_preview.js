@@ -139,7 +139,7 @@ jQuery(document).ready(function ($) {
                                 return `<label name="rating" class="${index < average_rating ? 'active' : ''}" value="${index + 1}">★</label>`;
                             }).join('')}
                             </div>
-                            <span class="adrm-review-date"> Reviewed ${created_at}</span>
+                            <span class="adrm-review-date"> Reviewed ${extractDate(created_at)}</span>
                         </div>
                         <div class="adrm-review-content">
                             <p>${review?.message}</p>
@@ -164,5 +164,20 @@ jQuery(document).ready(function ($) {
             reviewContainer.append('<div class="adrm_food_review_template"><p class="adrm-empty-review">No reviews found yet !</p></div>');
         }
         // Update the DOM with the response
+    }
+
+    function extractDate(dateString) {
+        // Create a new Date object from the given string
+        const date = new Date(dateString);
+        
+        // Extract the year, month, and day
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        
+        // Format the date as YYYY-MM-DD
+        const formattedDate = `${year}-${month}-${day}`;
+        
+        return formattedDate;
     }
 })
