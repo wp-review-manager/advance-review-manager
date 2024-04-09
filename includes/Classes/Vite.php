@@ -44,7 +44,7 @@ class Vite
 
         if (in_array($handle, (static::$instance)->moduleScripts)) {
             if (static::isDevMode()) {
-                throw new \Exception('This handel Has been used');
+                return;
             }
             return;
         }
@@ -65,7 +65,6 @@ class Vite
             $srcPath = static::getDevPath() . $src;
         }
 
-        // dd($srcPath, $handle, $src, $dependency, $version, $inFooter);
         wp_enqueue_script(
             $handle,
             $srcPath,
