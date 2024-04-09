@@ -1,0 +1,56 @@
+.adrm-editor-settings-wrapper {
+    background-color: $gray-50;
+    padding: 30px;
+    h3 {
+        color: $text-dark;
+        font-family: Inter;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 30px;
+        padding-bottom: 30px;
+    }
+    .adrm-editor-settings-body{
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        .adrm-editor-settings-sidebar {
+            width: 185px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                li {
+                    margin-bottom: 10px;
+                    a {
+                        color: $text-dark;
+                        font-family: Inter;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 500;
+                        line-height: 22px;
+                        text-decoration: none;
+                        padding: 8px 16px;
+                        display: block;
+                        width: 100%;
+                    
+                        &:hover {
+                            color: $text-dark-50;
+                        }
+                        &.router-link-exact-active {
+                            background: $accent-color;
+                            border-radius: 8px;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .adrm-editor-settings-content {
+            width: calc(100% - 200px);
+        }
+    }
+}

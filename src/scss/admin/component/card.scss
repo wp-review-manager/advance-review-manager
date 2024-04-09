@@ -9,3 +9,62 @@
         max-width: 31.533%;
     }
 }
+
+.adrm-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    .adrm-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background: $gray-100;
+        border-radius: 8px 8px 0 0;
+        h3 {
+            color: $text-dark;
+            font-family: Inter;
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px;
+            margin: 0;
+            padding: 0;
+        }
+        .adrm-card-header-actions {
+            display: flex;
+            gap: 10px;
+            button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                &:hover {
+                    color: $text-dark-50;
+                }
+            }
+        }
+    }
+    .adrm-card-body {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        .adrm-card-body-item {
+            width: 100%;
+            padding: 20px;
+            .header {
+                border-bottom: 1px solid $border-color;
+                padding: 0 0 10px 0;
+                h4 {
+                    color: $text-dark;
+                    font-family: Inter;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 32px;
+                }
+            }
+        }
+    }
+}

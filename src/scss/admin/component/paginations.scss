@@ -1,0 +1,52 @@
+.adrm-pagination {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    .adrm-page-numbers {
+        display: flex;
+        gap: 10px;
+        padding: 0 20px;
+        align-items: center;
+        justify-content: center;
+        .adrm-page-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $white;
+            color: $text-dark;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            &:hover {
+                background-color: $accent-color;
+                color: $white;
+            }
+            &.active {
+                background-color: $accent-color;
+                color: $white;
+            }
+        }
+    }
+    .adrm-next-page , .adrm-prev-page {
+        width: 60px;
+        height: 30px;
+        border-radius: 8px;
+        background-color: $white;
+        color: $text-dark;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+            background-color: $accent-color;
+            color: $white;
+        }
+    }
+ 
+}

@@ -98,6 +98,15 @@ use ADReviewManager\Services\ArrayHelper as Arr;
             </div>
             <?php } ?>
         </div>
+        <div class="adrm-pagination">
+            <button class="adrm-prev-page">Prev</button>
+            <ul class="adrm-page-numbers">
+                <li class="adrm-page-number active">1</li>
+                <li class="adrm-page-number">2</li>
+                <li class="adrm-page-number">3</li>
+            </ul>
+            <button class="adrm-next-page">Next</button>
+        </div>
         <?php } ?>
     </div>
 </div>
