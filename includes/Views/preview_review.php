@@ -77,6 +77,7 @@
 </head>
     <body>
     <?php
+    wp_footer();
     use ADReviewManager\Services\ArrayHelper as Arr;
     use ADReviewManager\Classes\Vite;
     use ADReviewManager\Views\ReviewsTemplate;
@@ -157,7 +158,6 @@
                 </div>
             </div>
             <?php
-            wp_footer();
         }
         ?>
     </body>

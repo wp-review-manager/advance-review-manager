@@ -11,9 +11,8 @@ class ProcessDemoPage {
         if (isset($_GET['adrm_review_preview']) && $_GET['adrm_review_preview']) {
             $hasDemoAccess = AccessControl::hasTopLevelMenuPermission();
             $hasDemoAccess = apply_filters('adrm/can_see_demo_form', $hasDemoAccess);
-
             if (!current_user_can($hasDemoAccess)) {
-                $accessStatus = AccessControl::giveCustomAccess();
+                $accessStatus = AccessControl::hasGrandAccess();
                 $hasDemoAccess = $accessStatus['has_access'];
             }
             if ($hasDemoAccess) {
