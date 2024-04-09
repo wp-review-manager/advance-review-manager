@@ -79,4 +79,34 @@ class ReviewFormController
             423);
         }
     }
+
+
+    // Start template settings
+    public function saveTemplateSettings()
+    {
+        try{
+            return (new ReviewForm)->saveTemplateSettings();
+        } catch(\Exception $e) {
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
+        }
+    }
+
+    public function getTemplateSettings()
+    {
+        try{
+            $form_id = sanitize_text_field( $_REQUEST['form_id'] );
+            
+            return (new ReviewForm)->getTemplateSettings($form_id);
+        } catch(\Exception $e) {
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
+        }
+    }
 }

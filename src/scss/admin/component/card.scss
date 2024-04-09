@@ -56,6 +56,11 @@
             .header {
                 border-bottom: 1px solid $border-color;
                 padding: 0 0 10px 0;
+                display: flex;
+                justify-content: space-between;
+                &.disabled {
+                    opacity: 0.5;
+                }
                 h4 {
                     color: $text-dark;
                     font-family: Inter;
@@ -65,6 +70,27 @@
                     line-height: 32px;
                 }
             }
+            .adrm-card-content {
+                padding: 20px 0;
+            }
+        }
+    }
+    .adrm-card-footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        border-top: 1px solid $border-color;
+        button {
+            background: $accent-color;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            font-family: Inter;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            height: 38px;
         }
     }
 }

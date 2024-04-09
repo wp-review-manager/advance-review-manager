@@ -15,7 +15,7 @@
                     </router-link>
                 </li>
                 <li>
-                    <router-link :to="`/form/edit/${template_id}/settings`">
+                    <router-link :to="`/form/edit/${template_id}/settings/general`">
                         <Icon icon="Settings" />
                         Settings
                     </router-link>

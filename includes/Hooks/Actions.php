@@ -52,6 +52,8 @@ class Actions{
                 'delete_review_form' => 'deleteReviewForm',
                 'create_review' => 'createReview',
                 'get_reviews' => 'getReviews',
+                'save_template_settings' => 'saveTemplateSettings',
+                'get_template_settings' => 'getTemplateSettings',
             );
 
             if (isset($validRoutes[$route])) {
@@ -102,6 +104,21 @@ class Actions{
         public function getReviews()
         {
             (new ReviewController)->getReviews();
+        }
+
+        // settings controller 
+        public function saveTemplateSettings()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new ReviewFormController)->saveTemplateSettings();
+            }
+        }
+        
+        public function getTemplateSettings()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new ReviewFormController)->getTemplateSettings();
+            }
         }
 
 }

@@ -161,4 +161,31 @@ class ReviewForm extends Model
         return 'deleteReviewForm';
     }
 
+    // Start template settings 
+    public function saveTemplateSettings()
+    {
+        $form_id = sanitize_text_field( $_REQUEST['form_id'] );
+        $template_settings = $_REQUEST['settings'];
+        $template_settings = sanitize_text_field(maybe_serialize($template_settings));
+
+        update_post_meta($form_id, 'adrm_template_settings', $template_settings);
+
+        wp_send_json_success( array(
+            'form_id' => $form_id,
+            'message' => 'Template settings saved!'
+        ),200 );
+    }
+
+    public function getTemplateSettings($form_id)
+    {
+        $form_id = sanitize_text_field( $form_id );
+        $template_settings = get_post_meta($form_id, 'adrm_template_settings', true);
+
+        wp_send_json_success( array(
+            'form_id' => $form_id,
+            'settings' => maybe_unserialize($template_settings),
+            'message' => 'Template settings retried!'
+        ),200 );
+    }
+
 }
