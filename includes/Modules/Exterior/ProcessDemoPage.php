@@ -41,13 +41,15 @@ class ProcessDemoPage {
         $showReviewForm = 'yes';
         $showReviewTemplate = 'yes';
         $form = (new ReviewForm)->getReviewForm($formId);
-        $reviews = (new Review)->getReviews($formId);
-        
+        $response = (new Review)->getReviews($formId);
+    
         if (!empty($form)) {
             wp_head();
             View::render('preview_review', [
             'form' => $form,
-            'reviews' => $reviews,
+            'reviews' => $response['reviews'],
+            'total_reviews' => $response['total_reviews'],
+            'pagination' => $response['pagination'],
             'show_review_form' => $showReviewForm,
             'show_review_template' => $showReviewTemplate
             ] );

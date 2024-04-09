@@ -29,8 +29,8 @@ class ReviewController
         $sort = sanitize_text_field($sort);
         $filter = sanitize_text_field($filter);
 
-        $reviews = (new Review)->getReviews($formID, $filter, $sort);
+        $response = (new Review)->getReviews($formID, $filter, $sort);
       
-        wp_send_json_success($reviews);
+        wp_send_json_success($response);
     }
 }

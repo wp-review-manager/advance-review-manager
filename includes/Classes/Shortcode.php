@@ -32,12 +32,14 @@ class Shortcode {
             wp_localize_script('adrm-form-preview-js', 'ADRMPublic', $preview_localized);
             
             $form = (new ReviewForm)->getReviewForm($formId);
-            $reviews = (new Review)->getReviews($formId);
+            $response = (new Review)->getReviews($formId);
 
             if (!empty($form)) {
                return View::make('preview_review', [
                 'form' => $form,
-                'reviews' => $reviews,
+                'reviews' => $response['reviews'],
+                'total_reviews' => $response['total_reviews'],
+                'pagination' => $response['pagination'],
                 'show_review_form' => $showReviewForm,
                 'show_review_template' => $showReviewTemplate
                ] );

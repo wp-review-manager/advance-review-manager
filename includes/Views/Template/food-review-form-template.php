@@ -6,6 +6,11 @@ use ADReviewManager\Services\ArrayHelper as Arr;
  * Return a html review template for the food review form
  * get the reviews and form data and render the template
  */
+$per_page = Arr::get($pagination, 'per_page');
+$enablePagination = Arr::get($pagination, 'enable');
+if ($enablePagination == 'true') {
+    $total_page = ceil($total_reviews / $per_page);
+}
 ?>
 <div data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
     <div class="review-template" style="background: #4caf500f;">
@@ -14,7 +19,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
             echo '<p>No reviews yet</p>';
         } else { // Add the else condition here
         ?>
-        <h3>Reviews (<?php echo count($reviews)  ?>)</h3>
+        <h3>Reviews (<?php echo $total_reviews  ?>)</h3>
         <div class="review-filters">
             <div class="review-filter">
                 <label for="review-sort">Sort by:</label>
@@ -98,15 +103,18 @@ use ADReviewManager\Services\ArrayHelper as Arr;
             </div>
             <?php } ?>
         </div>
+        <?php if($enablePagination == 'true') {?>
         <div class="adrm-pagination">
             <button class="adrm-prev-page">Prev</button>
             <ul class="adrm-page-numbers">
-                <li class="adrm-page-number active">1</li>
-                <li class="adrm-page-number">2</li>
-                <li class="adrm-page-number">3</li>
+                <?php for($i = 1; $i <= $total_page; $i++) { ?>
+                    <li class="adrm-page-number <?php echo $i == 1 ? 'active' : '' ?>"><?php echo $i ?></li>
+                <?php } ?>
             </ul>
             <button class="adrm-next-page">Next</button>
         </div>
+        <?php } ?>
+
         <?php } ?>
     </div>
 </div>

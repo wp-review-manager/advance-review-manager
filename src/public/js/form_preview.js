@@ -21,6 +21,32 @@ jQuery(document).ready(function ($) {
         getReviewParamsData['sort'] = $(this).val();
         makeAjaxRequestForReviewGet();
     });
+
+    $('.adrm-page-number').click(function(e){
+        $(this).addClass('active').siblings().removeClass('active');
+        let form = $(this).closest('.review-template_settings_wrapper');
+        let formID = +form.attr('data-form-id');
+        let page = $(this).text();
+        getReviewParamsData['formID'] = formID;
+        getReviewParamsData['page'] = page;
+        makeAjaxRequestForReviewGet();
+    });
+
+    $('.adrm-next-page, .adrm-prev-page').click(function(e){
+        let form = $(this).closest('.review-template_settings_wrapper');
+        let formID = +form.attr('data-form-id');
+        let page = +$('.adrm-page-number.active').text();
+        getReviewParamsData['formID'] = formID;
+        let nextPage = $(this).hasClass('adrm-next-page') ? page + 1 : page - 1;
+        getReviewParamsData['page'] = nextPage;
+        
+        // Remove the active class from the current page and add it to the next page
+        $('.adrm-page-number.active').removeClass('active');
+        $('.adrm-page-number').eq(nextPage - 1).addClass('active');
+
+        makeAjaxRequestForReviewGet();
+    });
+
         
     $('.adrm-success-notification').click(function(e){
         e.preventDefault();
@@ -111,8 +137,9 @@ jQuery(document).ready(function ($) {
         let created_at = '';
         let avatar = '';
         let average_rating = 0;
-        if (response?.length) {
-            response.map((review, key) => {
+        let reviews = response?.reviews || [];
+        if (reviews?.length) {
+            reviews.map((review, key) => {
                 created_at = review?.created_at;
                 avatar = review?.avatar;
                 average_rating = review?.average_rating;

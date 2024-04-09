@@ -38,44 +38,68 @@ class Review extends Model
 
     public function getReviews($formID, $filter = null, $sort = 'newest') {
         global $wpdb;
+    
+        // Sanitize input
         $formID = sanitize_text_field($formID);
         $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
-        $sql = "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID} ORDER BY created_at $sortOrder";
-        $reviews = $wpdb->get_results($sql, ARRAY_A);
-        
-        foreach ($reviews as $key => $review) {
-            $reviews[$key]['meta'] = maybe_unserialize($review['meta']);
-            $reviews[$key]['avatar'] = get_avatar( Arr::get($reviews[$key], 'meta.formFieldData.email') );
-
-            // calculate average rating
-            $average_rating = 0;
-            foreach ($reviews[$key]['meta']['formFieldData']['ratings'] as $rating) {
-                $average_rating += $rating['value'];
-            }
-            $average_rating = round($average_rating / count($reviews[$key]['meta']['formFieldData']['ratings']));
-            $reviews[$key]['average_rating'] = $average_rating;
-            // end calculate average rating
-
+    
+        // Fetch pagination settings
+        $template_settings = maybe_unserialize(get_post_meta($formID, 'adrm_template_settings', true));
+        $pagination = Arr::get($template_settings, 'pagination', []);
+        $limit = Arr::get($pagination, 'per_page', 10);
+        $page = max(1, Arr::get($_REQUEST, 'page', 1)); // Ensure page is at least 1
+        $offset = ($page - 1) * $limit;
+       
+        if (Arr::get($pagination, 'enable') == 'false') {
+            $limit = 100000000000;
+            $offset = 0;
         }
 
+        // Fetch reviews
+        $sql = $wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d ORDER BY created_at $sortOrder LIMIT %d OFFSET %d",
+            $formID,
+            $limit,
+            $offset
+        );
+        $reviews = $wpdb->get_results($sql, ARRAY_A);
+    
+        // Fetch total reviews count
+        $total_reviews_sql = $wpdb->prepare(
+            "SELECT COUNT(*) as total_reviews FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
+            $formID
+        );
+        $total_reviews_result = $wpdb->get_row($total_reviews_sql, ARRAY_A);
+        $total_reviews = isset($total_reviews_result['total_reviews']) ? (int)$total_reviews_result['total_reviews'] : 0;
+    
+        // Process reviews
+        foreach ($reviews as &$review) {
+            $review['meta'] = maybe_unserialize($review['meta']);
+            $review['avatar'] = get_avatar(Arr::get($review, 'meta.formFieldData.email'));
+    
+            // Calculate average rating
+            $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
+            $total_rating = array_reduce($ratings, function($acc, $rating) {
+                return $acc + Arr::get($rating, 'value', 0);
+            }, 0);
+            $average_rating = count($ratings) > 0 ? round($total_rating / count($ratings)) : 0;
+            $review['average_rating'] = $average_rating;
+        }
+    
+        // Apply filter if provided
         if (!empty($filter) && $filter != 'all') {  
             $reviews = array_filter($reviews, function($review) use ($filter) {
-                $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
-                $total_rating = 0;
-                foreach ($ratings as $rating) {
-                    $total_rating += Arr::get($rating, 'value');
-                }
-                $average_rating = round($total_rating / count($ratings));
-
-                return $average_rating == $filter;
+                return Arr::get($review, 'average_rating', 0) == $filter;
             });
-
         }
-
-        $reviews = array_values($reviews);
-
-        return $reviews;
+    
+        return [
+            'reviews' => array_values($reviews),
+            'total_reviews' => $total_reviews,
+            'pagination' => $pagination
+        ];
     }
+    
 
     public static function sanitizeData($data) {
         $data['formID'] = sanitize_text_field( $data['formID'] );
