@@ -44,6 +44,7 @@ class ProcessDemoPage {
         $reviews = (new Review)->getReviews($formId);
         
         if (!empty($form)) {
+            wp_head();
             View::render('preview_review', [
             'form' => $form,
             'reviews' => $reviews,
@@ -54,7 +55,7 @@ class ProcessDemoPage {
                 <div class="adrm_preview_footer">
                     <p>You are seeing preview version of Advance review manager. This form is only accessible for Admin users. Other users
                         may not access this page. To use this for in a page please use the following shortcode: [wppayform
-                        id='<?php echo intval($formID); ?>']</p>
+                        id='<?php echo intval($formId); ?>']</p>
                 </div>
             <?php
             wp_footer();
