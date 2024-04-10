@@ -60,10 +60,6 @@ export default {
 </script>
 
 <style lang="scss">
-.main-menu {
-    display: none !important;
-}
-
 .nav-wrapper {
     display: flex;
     justify-content: space-between;
@@ -73,6 +69,9 @@ export default {
     border-bottom: 1px solid #E5E5E5;
     list-style-type: none;
     font-size: 16px;
+    margin-top: -63px;
+    position: relative;
+    z-index: 9999999;
 
     li {
         a {
