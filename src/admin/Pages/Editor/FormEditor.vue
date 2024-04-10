@@ -28,7 +28,7 @@
             class="adrm-dynamicForm__item">
             <AppForm :field="field" :class="field.enabled == 'false' ? 'disabled' : ''" />
             <div class="form-item-delete-btn">
-              <div class="adrm-plus-btn" v-if="field.type == 'rating'">
+              <div class="adrm-plus-btn" v-if="field.type == 'rating' && !single_review_template">
                 <Icon icon="Plus" @click="addMoreRatingField(fieldIndex)" />
               </div>
               <el-switch @change="checkIsValidForDisabled(field)" inactive-value="false" active-value="true" v-model="field.enabled"></el-switch>
@@ -84,6 +84,7 @@ export default {
       title: 'Form Editor',
       title_editable: false,
       preview_url: '',
+      single_review_template: false
     };
   },
   mounted() {
@@ -202,10 +203,15 @@ export default {
           _that.loading = false;
           _that.preview_url = response.data.form.preview_url;
           _that.shortcode = response.data.form.shortcode;
+          _that.isItSingleReviewTemp(response.data.form.post_name)
         }).catch(function (error) {
           _that.loading = false;
           console.log(error);
         });
+    },
+    isItSingleReviewTemp(post_name) {
+      if (post_name == "book-review-form-template") 
+      this.single_review_template = true
     },
     updateDuplicateNames(data) {
       const nameCount = {};

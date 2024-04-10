@@ -153,10 +153,10 @@ jQuery(document).ready(function ($) {
                             ${avatar}
                         </div>
                         <div class="adrm-reviewer-name">
-                            <span>${review?.name}</span>
+                            <span>${review?.name || ''}</span>
                         </div>
                         <div class="adrm-reviewer-email">
-                            <span>${review?.email}</span>
+                            <span>${review?.email || ''}</span>
                         </div>
                     </div>
                     <div class="adrm-review-body">

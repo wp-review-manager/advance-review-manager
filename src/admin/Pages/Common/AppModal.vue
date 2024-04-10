@@ -14,6 +14,7 @@
         <el-button
           type="primary"
           @click="handleSuccess"
+          v-if="hasConfirmAction"
         >
           {{ confirmBtnLabel }}
         </el-button>
@@ -36,6 +37,10 @@ export default {
     confirmBtnLabel: {
       type: String,
       default: 'Confirm'
+    },
+    hasConfirmAction: {
+      type: Boolean,
+      default: true
     },
     title: {
       type: String,

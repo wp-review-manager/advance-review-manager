@@ -264,6 +264,7 @@ const formTemplate = {
     'product_review_form': {
         id: 2,
         title: 'Food Review Form Template',
+        rating_type: 'multiple',
         thumbnail: 'images/template_1.jpeg',
         formFields: [...commonFormFields,  {
             label: 'Write a review about the food',

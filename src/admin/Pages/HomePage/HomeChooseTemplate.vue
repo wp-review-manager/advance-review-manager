@@ -1,6 +1,6 @@
 <template>
   <div class="adrm-template-modal">
-    <div class="adrm-search-container">
+    <!-- <div class="adrm-search-container">
       <div class="filter-btn">
         <el-radio-group
           v-model="radio1"
@@ -19,7 +19,7 @@
           prefix-icon="el-icon-search"
         />
       </div>
-    </div>
+    </div> -->
 
     <div class="adrm-card-wrapper">
       <ChooseTemplateCard :form-templates="formTemplates" />

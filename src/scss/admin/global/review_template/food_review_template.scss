@@ -9,8 +9,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
     .adrm-reviewer-info {
-        width: 150px;
+        min-width: 150px;
         text-align: center;
         img {
             border-radius: 50%;
@@ -29,6 +30,7 @@
     }
 
     .adrm-review-body {
+        min-width: 400px;
         .adrm-review-rating {
             display: flex;
             align-items: center;

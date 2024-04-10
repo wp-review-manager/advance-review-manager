@@ -55,14 +55,10 @@ if ($enablePagination == 'true') {
         </div>
         <div class="adrm_food_review_template_wrapper">
             <?php foreach ($reviews as $review) {
+                $average_rating = Arr::get($review, 'average_rating');
                 $created_at = Arr::get($review, 'created_at');
                 $review = Arr::get($review, 'meta.formFieldData', []);
                 $ratings = Arr::get($review, 'ratings', []);
-                $total_rating = 0;
-                foreach ($ratings as $rating) {
-                    $total_rating += Arr::get($rating, 'value');
-                }
-                $average_rating = $total_rating / count($ratings);
             ?>
             <div class="adrm_food_review_template">
                 <div class="adrm-reviewer-info">

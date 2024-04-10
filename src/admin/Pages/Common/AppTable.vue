@@ -30,27 +30,15 @@
           >
             <span v-if="column.field !== 'actions'">{{ item[column.field] }}</span>
             <!-- Actions column is a special case -->
-            <div v-else>
-              <button
-                v-if="item[column.field]?.edit"
-                type="button"
-                class="text-white mx-1 bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center me-2"
-                @click="editItem(item)"
-              >
-                <span class="dashicons dashicons-edit" />
+            <div v-else style="display: flex; gap: 20px;">
+              <button v-if="item[column.field]?.edit" type="button" @click="editItem(item)">
+                <Icons icon="Edit" />
               </button>
-              <button
-                v-if="item[column.field]?.delete"
-                type="button"
-                class="text-white mx-1 bg-red-700 hover:bg-red-800 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center me-2"
-                @click="deleteItem(item)"
-              >
-                <span class="dashicons dashicons-trash" />
+              <button v-if="item[column.field]?.delete" @click="deleteItem(item)">
+                <Icons icon="Delete" />
               </button>
-              <button
-                class="text-white mx-1 bg-gray-700 hover:bg-gray-800 font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center me-2"
-              >
-                <Icons icon="Duplicate" />
+              <button class="">
+                <Icons @click="redirectPreviewUrl(item.preview_url)" icon="Eye" />
               </button>
             </div>
           </td>
@@ -89,6 +77,9 @@ export default {
     },
     deleteItem(item) {
       this.$emit('delete-item', item);
+    },
+    redirectPreviewUrl(url) {
+      window.open(url, '_blank');
     }
   }
 };

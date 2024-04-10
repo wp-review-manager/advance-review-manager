@@ -55,8 +55,8 @@
     <AppModal
       width="70%"
       :dialog-visible-prop="dialogVisibleProp"
-      :confirm-btn-label="'Create a blank form'"
       @update:handle-dialog-close="handleDialogClose"
+      :hasConfirmAction="false"
     >
       <div class="adrm-choose-template-form">
         <HomeChooseTemplate :form-templates="formTemplate" />
@@ -188,3 +188,8 @@ export default {
   }
 };
 </script>
+<style  lang="scss">
+.adrm-admin-page .main-menu {
+  display: flex !important;
+}
+</style>
