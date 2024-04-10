@@ -52,6 +52,7 @@ class Actions{
                 'delete_review_form' => 'deleteReviewForm',
                 'create_review' => 'createReview',
                 'get_reviews' => 'getReviews',
+                'delete_review' => 'deleteReview',
                 'get_formatted_reviews' => 'getFormattedReviews',
                 'save_template_settings' => 'saveTemplateSettings',
                 'get_template_settings' => 'getTemplateSettings',
@@ -105,6 +106,13 @@ class Actions{
         public function getReviews()
         {
             (new ReviewController)->getReviews();
+        }
+
+        public function deleteReview()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new ReviewController)->deleteReview();
+            }
         }
 
         public function getFormattedReviews()

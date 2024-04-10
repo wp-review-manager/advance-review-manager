@@ -100,6 +100,23 @@ class Review extends Model
             'pagination' => $pagination
         ];
     }
+
+    public function deleteReview($reviewID) {
+        global $wpdb;
+        try {
+            $wpdb->delete(
+                $wpdb->prefix . 'adrm_reviews',
+                array('id' => $reviewID)
+            );
+            wp_send_json_success([
+                'message' => 'Review deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            wp_send_json_error([
+                'message' => $e->getMessage()
+            ], 423);
+        }
+    }
     
 
     public static function sanitizeData($data) {
