@@ -18,3 +18,48 @@
     width: 100%;
     margin-bottom: 10px;
 }
+
+
+.adrm_pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+
+    .pager-wrap {
+
+        input.el-input__inner {
+            border: none !important;
+        }
+
+        & .el-select input {
+            background: #F5F6F7 !important;
+            width: 125px;
+        }
+    }
+
+    .pagination_page_list {
+
+        .el-icon-arrow-right,
+        .el-icon-arrow-left {
+            color: #2d78e8 !important;
+        }
+
+        .el-pager li {
+            margin: 0 5px;
+            background: #f4f4f5;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: #2d78e8 !important;
+                color: #fff !important;
+            }
+            
+            &.active {
+                background-color: #2d78e8!important;
+                color: #fff !important;
+            }
+        }
+
+    }
+}
