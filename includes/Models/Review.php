@@ -24,6 +24,7 @@ class Review extends Model
                     'form_id' => $formID,
                     'meta' => $formData,
                     'created_at' => current_time('mysql'),
+                    'updated_at' => current_time('mysql')
                 )
             );
             wp_send_json_success([
@@ -98,6 +99,23 @@ class Review extends Model
             'total_reviews' => $total_reviews,
             'pagination' => $pagination
         ];
+    }
+
+    public function deleteReview($reviewID) {
+        global $wpdb;
+        try {
+            $wpdb->delete(
+                $wpdb->prefix . 'adrm_reviews',
+                array('id' => $reviewID)
+            );
+            wp_send_json_success([
+                'message' => 'Review deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            wp_send_json_error([
+                'message' => $e->getMessage()
+            ], 423);
+        }
     }
     
 

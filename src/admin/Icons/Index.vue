@@ -8,9 +8,13 @@
         <Settings v-else-if="icon == 'Settings'" />
         <LeftBack v-else-if="icon == 'LeftBack'" />
         <Plus v-else-if="icon == 'Plus'" />
+
         <Eye v-else-if="icon == 'Eye'" />
         <Edit v-else-if="icon == 'Edit'" />
         <Delete v-else-if="icon == 'Delete'" />
+
+        <List v-else-if="icon == 'List'" />
+
   </div>
 </template>
 
@@ -22,6 +26,8 @@ import Plus from './Plus.vue';
 import Eye from './Eye.vue';
 import Edit from './Edit.vue';
 import Delete from './Delete.vue';
+import List from './List.vue';
+
 import { shallowRef } from 'vue';
 import { defineAsyncComponent } from 'vue';
 // eslint-disable-next-line no-use-before-define
@@ -37,7 +43,8 @@ export default {
         Plus,
         Eye,
         Edit,
-        Delete
+        Delete,
+        List
     },
     props: {
         icon: {
