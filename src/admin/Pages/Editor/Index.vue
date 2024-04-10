@@ -21,6 +21,12 @@
                     </router-link>
                 </li>
                 <li>
+                    <router-link :to="`/form/edit/${template_id}/reviews`">
+                        <Icon icon="List" />
+                        Reviews
+                    </router-link>
+                </li>
+                <li>
                     <div class="adrm-form-editor__action_right">
                         <button class="adrm-shortcode" v-clipboard:success="clipboardSuccessHandler"
                             v-clipboard="shortcode">

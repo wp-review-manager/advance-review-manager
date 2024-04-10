@@ -8,6 +8,7 @@
         <Settings v-else-if="icon == 'Settings'" />
         <LeftBack v-else-if="icon == 'LeftBack'" />
         <Plus v-else-if="icon == 'Plus'" />
+        <List v-else-if="icon == 'List'" />
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import Editor from './Editor.vue';
 import  Settings  from './Settings.vue'
 import LeftBack from './LeftBack.vue';
 import Plus from './Plus.vue';
+import List from './List.vue';
 import { shallowRef } from 'vue';
 import { defineAsyncComponent } from 'vue';
 // eslint-disable-next-line no-use-before-define
@@ -28,7 +30,8 @@ export default {
         Editor,
         Settings,
         LeftBack,
-        Plus
+        Plus,
+        List,
     },
     props: {
         icon: {

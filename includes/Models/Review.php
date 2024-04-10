@@ -24,6 +24,7 @@ class Review extends Model
                     'form_id' => $formID,
                     'meta' => $formData,
                     'created_at' => current_time('mysql'),
+                    'updated_at' => current_time('mysql')
                 )
             );
             wp_send_json_success([
