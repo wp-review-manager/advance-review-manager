@@ -1,6 +1,7 @@
 @import './rating_label.scss';
 @import './template_one.scss';
 @import './food_review_template.scss';
+@import './hotel_review_template.scss';
 p {
     font-size: 14px;
 }
@@ -13,10 +14,11 @@ p {
         margin: 0 auto;
         width: 100%;
         max-width: 1000px;
+        border: 1px solid $border-color;
         @include adrm-box-wrapper;
+        padding: 0px;
         @media screen and (max-width: 768px){
             width: 100%;
-            padding: 8px;
         }
     }
     .review-template-settings {

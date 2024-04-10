@@ -1,0 +1,115 @@
+.adrm_review_summary {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid $border-color;
+    padding: 20px;
+
+    .adrm_review_summary_rating {
+        width: 180px;
+
+        h6 {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .avg_rating {
+
+            h4,
+            h6 {
+                padding: 0;
+                margin: 0;
+                color: $accent-color;
+            }
+
+            display: flex;
+            gap: 2px;
+
+            h4 {
+                font-size: 44px;
+                font-weight: 600;
+            }
+
+            h6 {
+                margin-top: 25px;
+                font-size: 18px;
+                font-weight: 500;
+            }
+        }
+
+        .review-label {
+            font-size: 18px;
+            font-weight: 600;
+            color: $text-dark;
+        }
+
+        .total-review-number {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            margin-top: 8px;
+
+            .icon {
+                border-radius: 50%;
+                background: $accent-color;
+                padding: 4px;
+                width: 4px;
+                height: 4px;
+            }
+        }
+    }
+
+    .adrm_review_categories_stats {
+        width: calc(100% - 431px);
+        min-width: 400px;
+        border-right: 1px solid $border-color;
+        border-radius: 0px;
+        .adrm-progress-bar{
+            margin: 10px auto;
+            .progress {
+                padding: 0;
+                width: 90%;
+                height: 12px;
+                overflow: hidden;
+                background: #e5e5e5;
+                border-radius: 6px;
+            }
+    
+            .bar {
+                position: relative;
+                float: left;
+                min-width: 1%;
+                height: 100%;
+                background: cornflowerblue;
+            }
+    
+            .percent {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                margin: 0;
+                font-family: tahoma, arial, helvetica;
+                font-size: 10px;
+                color: white;
+            }
+        }
+        
+    }
+
+    .adrm_review_categories_summary {
+        width: 210px;
+        .rating-summary-item {
+            span {
+                color: $text-dark;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+    }
+
+}

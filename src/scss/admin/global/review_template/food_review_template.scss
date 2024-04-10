@@ -2,7 +2,7 @@
     div {
         padding: 0px;
     }
-    background: #fff;
+    background: #8080800d;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -10,8 +10,11 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
+    border-bottom: 1px solid $border-color;
+    margin: 20px;
+    border-radius: 8px;
     .adrm-reviewer-info {
-        min-width: 150px;
+        width: 160px;
         text-align: center;
         img {
             border-radius: 50%;
@@ -31,6 +34,7 @@
 
     .adrm-review-body {
         min-width: 400px;
+        width: calc(100% - 170px);
         .adrm-review-rating {
             display: flex;
             align-items: center;
@@ -60,7 +64,7 @@
 .review-filters {
     display: flex;
     gap: 10px;
-    padding: 20px 0px;
+    padding: 20px;
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -87,7 +91,7 @@
                     color: #f90;
                     display: flex;
                     align-items: center;
-                    border: 1px solid transparent;
+                    border: 1px solid $border-color;
                     background: #fff;
                     p {
                         font-size: 32px;

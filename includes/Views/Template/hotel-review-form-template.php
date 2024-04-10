@@ -11,16 +11,110 @@ $enablePagination = Arr::get($pagination, 'enable');
 if ($enablePagination == 'true') {
     $total_page = ceil($total_reviews / $per_page);
 }
+function getAverageRatingByCategories ($reviews) {
+    $categoriesReview = [];
+    $total_average_rating = 0;
+    $summary_by_rating = [];
+    foreach ($reviews as $review) {
+        $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
+        $total_average_rating += Arr::get($review, 'average_rating', 0);
+        foreach ($ratings as $rating) {
+            $label = Arr::get($rating, 'label');
+            $value = Arr::get($rating, 'value');
+            if (!isset($categoriesReview[$label])) {
+                $categoriesReview[$label] = [];
+            }
+            
+            $categoriesReview[$label]['total_rating'] = Arr::get($categoriesReview[$label], 'total_rating', 0) + $value;
+            $categoriesReview[$label]['count_ratings'] = Arr::get($categoriesReview[$label], 'count_ratings', 0) + 1;
+            $summary_by_rating[$value] = Arr::get($summary_by_rating, $value, 0) + 1;
 
+        }
+    }
+
+    return array(
+        'categoriesReview' => $categoriesReview,
+        'total_average_rating' => number_format($total_average_rating / count($reviews), 2),
+        'summary_by_rating' => $summary_by_rating
+    );
+}
+
+function getReviewLabel ($rating) {
+    if ($rating >= 4.5) {
+        return 'Excellent';
+    } else if ($rating >= 4) {
+        return 'Very Good';
+    } else if ($rating >= 3.5) {
+        return 'Good';
+    } else if ($rating >= 3) {
+        return 'Fair';
+    } else if ($rating >= 2.5) {
+        return 'Average';
+    } else if ($rating >= 2) {
+        return 'Below Average';
+    } else {
+        return 'Poor';
+    }
+}
 ?>
 <div data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
-    <div class="review-template" style="background: #4caf500f;">
+    <div class="review-template">
         <?php
         if (empty($reviews)) {
             echo '<p>No reviews yet</p>';
         } else { // Add the else condition here
+            $reviewStats = getAverageRatingByCategories($reviews);
+            $categoriesReviews = Arr::get($reviewStats, 'categoriesReview', []);
+            $summary_by_rating = Arr::get($reviewStats, 'summary_by_rating', []);
+            $total_average_rating = Arr::get($reviewStats, 'total_average_rating', 0);
+            $review_label = getReviewLabel($total_average_rating); 
         ?>
-        <h3>Reviews (<?php echo $total_reviews  ?>)</h3>
+        <div class="adrm_review_summary">
+            <div class="adrm_review_summary_rating">
+                <h6>Average rating</h6>
+                <div class="avg_rating">
+                    <h4><?php echo $total_average_rating ?></h4>
+                    <h6>/ 5</h4>
+                </div>
+                <span class="review-label"><?php echo $review_label ?></span>
+                <div class="total-review-number">
+                    <span class="icon"></span>
+                    From <?php echo $total_reviews  ?> Reviews
+                </div>
+            </div>
+            <div class="adrm_review_categories_stats">
+
+                <?php foreach($categoriesReviews as $key => $categoriesReview) {
+                    $average_rating = number_format(Arr::get($categoriesReview, 'total_rating', 0) / Arr::get($categoriesReview, 'count_ratings', 1), 2);
+                    $review_percentage = ($average_rating / 5) * 100;
+                ?>
+                <div class="adrm-progress-bar">
+                    <div class="progress">
+                        <div class="bar" style="width: <?php echo $review_percentage . "%" ?>">
+                            <p class="percent"><?php echo $average_rating ?></p>
+                        </div>
+                    </div>
+                    <p style="margin: 3px 0;"><?php echo $key ?></p>
+                </div>
+                <?php } ?>
+  
+            </div>
+            <div class="adrm_review_categories_summary">
+                <span>Rating</span>
+                <div class="rating-summary-with-total">
+                    <?php
+                        foreach($summary_by_rating as $key => $summary) {
+                            $average_rating = Arr::get($categoriesReview, 'total_rating', 0) / Arr::get($categoriesReview, 'count_ratings', 1);
+                            $review_label = getReviewLabel($key);
+                            echo '<div class="rating-summary-item">';
+                            echo '<input type="checkbox" disabled />';
+                            echo '<span>' . $review_label . '/' . $key . ' ('. $summary .')' .'</span>';
+                            echo '</div>';
+                        }
+                    ?>
+                </div>
+            </div>
+        </div>
         <div class="review-filters">
             <div class="review-filter">
                 <label for="review-sort">Sort by:</label>
@@ -115,4 +209,3 @@ if ($enablePagination == 'true') {
         <?php } ?>
     </div>
 </div>
-
