@@ -53,40 +53,73 @@ jQuery(document).ready(function ($) {
         let form = $(this).closest('form');
         let formID = +form.attr('data-adrm-form-id');
         // let formSerialized = form.serializeArray();
-     
-        let formFieldData = {
-            ratings: []
-        };
+        const validForm = formValidation(form, formID);
 
+        if (validForm) {
+            let formFieldData = {
+                ratings: []
+            };
+
+            let formComponent = form.serializeArray();
+            let inputIndex = 0;
+            form.find('[data-id]').each(function() {
+                formComponent[inputIndex]['label'] = $(this).attr('data-id');
+                // data[inputIndex]['placeholder'] = $(this).attr('placeholder') || '';
+                inputIndex++;
+            });
+            formComponent.map((field) => {
+                if(field.name.includes('rating')) {
+                    formFieldData['ratings'].push({
+                        name: field.name,
+                        value: field.value,
+                        label: field.label
+                    });
+                } else {
+                    formFieldData[field.name] = field.value;
+                }
+            })
+            
+            let data = {
+                formID: formID,
+                formComponent: formComponent,
+                formFieldData: formFieldData,
+                action: 'ad_review_manager_ajax',
+                nonce: window.ADRMPublic.adrm_nonce,
+                route: 'create_review'
+            }
+            makeAjaxRequestForReviewSubmit(data, formID);
+        } else {
+            var errorMessage = $('<div class="adrm-error-notification">Please fill required field !</div>');
+            $(form).append(errorMessage);
+            // Remove the notification after 3 seconds
+            setTimeout(function() {
+                errorMessage.remove();
+            }, 3000);
+        }
+    })
+
+    function formValidation(form, formID) {
+        let validForm = true;
         let formComponent = form.serializeArray();
-        let inputIndex = 0;
-        form.find('[data-id]').each(function() {
-            formComponent[inputIndex]['label'] = $(this).attr('data-id');
-            // data[inputIndex]['placeholder'] = $(this).attr('placeholder') || '';
-            inputIndex++;
-        });
         formComponent.map((field) => {
             if(field.name.includes('rating')) {
-                formFieldData['ratings'].push({
-                    name: field.name,
-                    value: field.value,
-                    label: field.label
-                });
+                if (!field.value) {
+                    validForm = false;
+                    $(`[name="${field.name}"]`).addClass('error');
+                } else {
+                    $(`[name="${field.name}"]`).removeClass('error');
+                }
             } else {
-                formFieldData[field.name] = field.value;
+                if (!field.value) {
+                    validForm = false;
+                    $(`[name="${field.name}"]`).addClass('error');
+                } else {
+                    $(`[name="${field.name}"]`).removeClass('error');
+                }
             }
         })
-        
-        let data = {
-            formID: formID,
-            formComponent: formComponent,
-            formFieldData: formFieldData,
-            action: 'ad_review_manager_ajax',
-            nonce: window.ADRMPublic.adrm_nonce,
-            route: 'create_review'
-        }
-        makeAjaxRequestForReviewSubmit(data, formID);
-    })
+        return validForm;
+    }
 
     function makeAjaxRequestForReviewSubmit(data, formID) {
         const form = $(`[data-adrm-form-id="${formID}"]`);
