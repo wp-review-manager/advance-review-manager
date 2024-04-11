@@ -189,23 +189,22 @@ export default {
     },
     getForm() {
       this.loading = true;
-      const _that = this;
       this.$get('',
         {
           action: 'ad_review_manager_ajax',
           route: 'get_review_form',
           nonce: window.ADRMAdmin.adrm_nonce,
           form_id: this.$route.params.id,
-        }).then(function (response) {
-          _that.templateFormComponents = response.data.form.form_fields;
-          _that.reviews = response.data.reviews;
-          _that.title = response.data.form.post_title;
-          _that.loading = false;
-          _that.preview_url = response.data.form.preview_url;
-          _that.shortcode = response.data.form.shortcode;
-          _that.isItSingleReviewTemp(response.data.form.post_name)
-        }).catch(function (error) {
-          _that.loading = false;
+        }).then( (response) => {
+          this.templateFormComponents = response.data.form.form_fields;
+          this.reviews = response.data.reviews;
+          this.title = response.data.form.post_title;
+          this.loading = false;
+          this.preview_url = response.data.form.preview_url;
+          this.shortcode = response.data.form.shortcode;
+          this.isItSingleReviewTemp(response.data.form.post_name)
+        }).catch((error) => {
+          this.loading = false;
           console.log(error);
         });
     },
