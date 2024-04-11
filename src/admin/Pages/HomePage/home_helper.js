@@ -231,7 +231,7 @@ const commonFormFields = [
 ];
 
 const formTemplate = {
-    'single_rating_form_template':{
+    'book_review_form':{
         id: 1,
         title: 'Book Review Form Template',
         desc: 'This is a book review form template', 
@@ -261,7 +261,46 @@ const formTemplate = {
         template_required: true,
        }],
     },
-    'product_review_form': {
+    'product_review_form':{
+        id: 1,
+        title: 'Product Review Form Template',
+        desc: 'This is a product review form template', 
+        rating_type: 'single',
+        thumbnail: 'images/template_1.jpeg',
+        formFields: [...commonFormFields,
+            {
+                label: 'Review Title',
+                name: 'title',
+                type: 'text',
+                placeholder: 'Review title',
+                template_required: true,
+                enabled: true,
+            }, 
+            {
+            label: 'Write a review about the product',
+            name: 'message',
+            type: 'textarea',
+            placeholder: 'Your message',
+            template_required: true,
+            enabled: true,
+        },
+        {
+            label: 'Rating',
+            name: 'rating',
+            type: 'rating',
+            template_required: true,
+            enabled: true,
+            options: ratingOptions
+        },
+       {
+        label: "Review Submission",
+        name: "review_submission",
+        type: "submit",
+        enabled: true,
+        template_required: true,
+       }],
+    },
+    'food_review_form': {
         id: 2,
         title: 'Food Review Form Template',
         rating_type: 'multiple',
