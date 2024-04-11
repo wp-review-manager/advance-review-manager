@@ -5,6 +5,7 @@ import FormEditor from './Pages/Editor/FormEditor.vue';
 import Settings from './Pages/Editor/Settings/Settings.vue';
 import General from './Pages/Editor/Settings/General.vue';
 import ReviewsTable from './Pages/Reviews/ReviewsTable.vue';
+import Review from './Pages/Reviews/Review.vue';
 
 export default [{
     path: '/',
@@ -60,6 +61,11 @@ export default [{
             path: 'reviews',
             name: 'form-reviews',
             component: ReviewsTable
+        },
+        {
+            path: 'reviews/:reviewId',
+            name: 'review',
+            component: Review
         }
     ]
 }

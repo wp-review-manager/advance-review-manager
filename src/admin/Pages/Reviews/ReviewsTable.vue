@@ -1,8 +1,8 @@
 <template>
     <div class="adrm-reviews-wrapper"> 
-        <h3>Reviews</h3>
-        <div class="adrm-reviews" v-loading="loading"> 
-            <el-table :data="reviews" style="width: 100%" :default-sort="{ prop: 'created_at', order: 'descending' }">
+        <h3>{{ formTitle }} - Reviews</h3>
+        <div class="adrm-reviews"> 
+            <el-table :loading="loading" :data="reviews" style="width: 100%" :default-sort="{ prop: 'created_at', order: 'descending' }">
                 <el-table-column prop="created_at" fixed label="Date" width="200" sortable>
                     <template #default="scope">
                         <p>{{ formatDate(scope.row.created_at) }}</p>
@@ -32,10 +32,10 @@
                 </el-table-column>
                 <el-table-column fixed="right" label="Actions" >
                     <template #default="scope">
-                        <div style="display: flex; gap: 10px;"> 
-                            <button  @click="handleClick"> 
+                        <div style="display: flex; gap: 10px; align-items: center"> 
+                            <router-link  :to="`/form/edit/${formID}/reviews/${scope.row.id}`"> 
                                 <Icon icon="Eye" />
-                            </button>
+                            </router-link>
                             <p>|</p>
                             <button  @click="deleteHandler(scope.row.id)"> 
                                 <Icon icon="Delete" />
@@ -55,9 +55,9 @@
             </div>
 
             <div class="pagination_page_list">
-                <el-pagination @size-change="pageSizeChange" @current-change="changePage"
-                    :current-page.sync="current_page" :page-sizes="page_sizes"
-                    :page-size="pagination.per_page" layout="prev, pager, next" :total="total">
+                <el-pagination @current-change="changePage"
+                    :current-page.sync="currentPage" :page-sizes="page_sizes"
+                    :page-size="pageSize" layout="prev, pager, next" :total="total">
                 </el-pagination>
             </div>
         </div>
@@ -80,6 +80,7 @@ import Icon from '../../Icons/Index.vue';
 import { ElNotification } from 'element-plus'
 import AppModal from '../Common/AppModal.vue';
 import moment from 'moment';
+
 export default {
     name: 'Reviews',
     components: {
@@ -95,9 +96,12 @@ export default {
             currentPage: 1,
             total: 0,
             page_sizes: [5, 10, 20, 50],
+            pageSize: 10,
             max_message_length: 20,
             dialogVisibleDeleteProp: false,
             deleteReviewId: null,
+            formID: this.$route.params.id,
+            formTitle: '',
         }
     },
 
@@ -114,11 +118,12 @@ export default {
             }).then((response) => {
                 this.reviews = response.data.reviews;
                 this.pagination = response.data.pagination;
+                this.pageSize = parseInt(response.data.pagination.per_page);
                 this.total = response.data.total_reviews;
                 this.loading = false;
                 ElNotification({
-                title: 'Successfully Deleted',
-                message: 'Clicked',
+                title: 'Success!',
+                message: 'Successfully fetched reviews!',
                 type: 'success',
                 position: 'bottom-right'
             });
@@ -126,6 +131,22 @@ export default {
                 this.loading = false;
                 console.log(error);
             });
+        },
+        getForm() {
+            this.loading = true;
+            this.$get('',
+                {
+                action: 'ad_review_manager_ajax',
+                route: 'get_review_form',
+                nonce: window.ADRMAdmin.adrm_nonce,
+                form_id: this.$route.params.id,
+                }).then( (response) => {
+                this.formTitle = response.data.form.post_title;
+                this.loading = false;
+                }).catch((error) => {
+                this.loading = false;
+                console.log(error);
+                });
         },
         handleClick() {
             ElNotification({
@@ -191,6 +212,7 @@ export default {
 
     mounted() {
         this.dialogVisibleDeleteProp = false;
+        this.getForm();
         this.getReviews();
     },
 }

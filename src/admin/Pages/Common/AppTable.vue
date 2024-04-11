@@ -28,7 +28,16 @@
             scope="row"
             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
           >
-            <span v-if="column.field !== 'actions'">{{ item[column.field] }}</span>
+          <span v-if="column.field == 'reviews'" style="text-decoration: underline;">
+              <router-link :to="`/form/edit/${item.ID}/reviews`">
+                {{ item[column.field] }}
+              </router-link>
+            </span>
+            <!-- Normal columns -->
+            <span v-else-if="column.field !== 'actions'">
+
+              {{ item[column.field] }}
+            </span>
             <!-- Actions column is a special case -->
             <div v-else style="display: flex; gap: 20px;">
               <button v-if="item[column.field]?.edit" type="button" @click="editItem(item)">
