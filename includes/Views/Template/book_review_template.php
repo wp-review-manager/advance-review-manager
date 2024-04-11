@@ -12,7 +12,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
         <h3>Reviews (<?php echo $total_reviews ?>)</h3>
         <?php
         if (empty($reviews)) {
-            echo '<p>No reviews yet</p>';
+            echo '<p style="padding: 20px">No reviews yet</p>';
         }
         ?>
         <?php foreach ($reviews as $review) {

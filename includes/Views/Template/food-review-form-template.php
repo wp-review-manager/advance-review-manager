@@ -17,7 +17,7 @@ if ($enablePagination == 'true') {
     <div class="review-template" style="background: #4caf500f;">
         <?php
         if (empty($reviews)) {
-            echo '<p>No reviews yet</p>';
+            echo '<p style="padding: 20px">No reviews yet</p>';
         } else { // Add the else condition here
         ?>
         <h3>Reviews (<?php echo $total_reviews  ?>)</h3>

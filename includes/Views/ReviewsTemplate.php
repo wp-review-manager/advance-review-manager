@@ -9,7 +9,7 @@ use ADReviewManager\Classes\View;
  */
 
 class ReviewsTemplate {
-    public function render($reviews = [], $form, $total_reviews, $pagination) {
+    public function render($reviews = [], $form, $total_reviews, $pagination, $all_reviews) {
         $template = 'Template.';
      
         if (str_contains($form->post_name, 'book-review-form-template')) {
@@ -24,6 +24,7 @@ class ReviewsTemplate {
             'reviews' => $reviews,
             'pagination' => $pagination,
             'total_reviews' => $total_reviews,
+            'all_reviews' => $all_reviews,
             'form' => $form
         ]);
     }

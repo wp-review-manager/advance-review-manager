@@ -11,59 +11,64 @@ $enablePagination = Arr::get($pagination, 'enable');
 if ($enablePagination == 'true') {
     $total_page = ceil($total_reviews / $per_page);
 }
-function getAverageRatingByCategories ($reviews) {
-    $categoriesReview = [];
-    $total_average_rating = 0;
-    $summary_by_rating = [];
-    foreach ($reviews as $review) {
-        $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
-        $total_average_rating += Arr::get($review, 'average_rating', 0);
-        foreach ($ratings as $rating) {
-            $label = Arr::get($rating, 'label');
-            $value = Arr::get($rating, 'value');
-            if (!isset($categoriesReview[$label])) {
-                $categoriesReview[$label] = [];
+
+if(!function_exists('getAverageRatingByCategories')) {
+    function getAverageRatingByCategories ($reviews) {
+        $categoriesReview = [];
+        $total_average_rating = 0;
+        $summary_by_rating = [];
+        foreach ($reviews as $review) {
+            $ratings = Arr::get($review, 'meta.formFieldData.ratings', []);
+            $total_average_rating += Arr::get($review, 'average_rating', 0);
+            foreach ($ratings as $rating) {
+                $label = Arr::get($rating, 'label');
+                $value = Arr::get($rating, 'value');
+                if (!isset($categoriesReview[$label])) {
+                    $categoriesReview[$label] = [];
+                }
+                
+                $categoriesReview[$label]['total_rating'] = Arr::get($categoriesReview[$label], 'total_rating', 0) + $value;
+                $categoriesReview[$label]['count_ratings'] = Arr::get($categoriesReview[$label], 'count_ratings', 0) + 1;
+                $summary_by_rating[$value] = Arr::get($summary_by_rating, $value, 0) + 1;
+
             }
-            
-            $categoriesReview[$label]['total_rating'] = Arr::get($categoriesReview[$label], 'total_rating', 0) + $value;
-            $categoriesReview[$label]['count_ratings'] = Arr::get($categoriesReview[$label], 'count_ratings', 0) + 1;
-            $summary_by_rating[$value] = Arr::get($summary_by_rating, $value, 0) + 1;
-
         }
-    }
 
-    return array(
-        'categoriesReview' => $categoriesReview,
-        'total_average_rating' => number_format($total_average_rating / count($reviews), 2),
-        'summary_by_rating' => $summary_by_rating
-    );
+        return array(
+            'categoriesReview' => $categoriesReview,
+            'total_average_rating' => number_format($total_average_rating / count($reviews), 2),
+            'summary_by_rating' => $summary_by_rating
+        );
+    }
 }
 
-function getReviewLabel ($rating) {
-    if ($rating >= 4.5) {
-        return 'Excellent';
-    } else if ($rating >= 4) {
-        return 'Very Good';
-    } else if ($rating >= 3.5) {
-        return 'Good';
-    } else if ($rating >= 3) {
-        return 'Fair';
-    } else if ($rating >= 2.5) {
-        return 'Average';
-    } else if ($rating >= 2) {
-        return 'Below Average';
-    } else {
-        return 'Poor';
+if(!function_exists("getReviewLabel")) {
+    function getReviewLabel ($rating) {
+        if ($rating >= 4.5) {
+            return 'Excellent';
+        } else if ($rating >= 4) {
+            return 'Very Good';
+        } else if ($rating >= 3.5) {
+            return 'Good';
+        } else if ($rating >= 3) {
+            return 'Fair';
+        } else if ($rating >= 2.5) {
+            return 'Average';
+        } else if ($rating >= 2) {
+            return 'Below Average';
+        } else {
+            return 'Poor';
+        }
     }
 }
 ?>
 <div data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
     <div class="review-template">
         <?php
-        if (empty($reviews)) {
-            echo '<p>No reviews yet</p>';
+        if (empty($all_reviews)) {
+            echo '<p style="padding: 20px">No reviews yet</p>';
         } else { // Add the else condition here
-            $reviewStats = getAverageRatingByCategories($reviews);
+            $reviewStats = getAverageRatingByCategories($all_reviews);
             $categoriesReviews = Arr::get($reviewStats, 'categoriesReview', []);
             $summary_by_rating = Arr::get($reviewStats, 'summary_by_rating', []);
             $total_average_rating = Arr::get($reviewStats, 'total_average_rating', 0);

@@ -63,17 +63,38 @@ class Review extends Model
             $limit,
             $offset
         );
+
         $reviews = $wpdb->get_results($sql, ARRAY_A);
     
         // Fetch total reviews count
         $total_reviews_sql = $wpdb->prepare(
-            "SELECT COUNT(*) as total_reviews FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
+            "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
             $formID
         );
-        $total_reviews_result = $wpdb->get_row($total_reviews_sql, ARRAY_A);
-        $total_reviews = isset($total_reviews_result['total_reviews']) ? (int)$total_reviews_result['total_reviews'] : 0;
+
+        $all_reviews= $wpdb->get_results($total_reviews_sql, ARRAY_A);
+        $total_reviews = count($all_reviews);
     
         // Process reviews
+        $reviews = static::processReviewData($reviews);
+        $all_reviews = static::processReviewData($all_reviews);
+    
+        // Apply filter if provided
+        if (!empty($filter) && $filter != 'all') {  
+            $reviews = array_filter($reviews, function($review) use ($filter) {
+                return Arr::get($review, 'average_rating', 0) == $filter;
+            });
+        }
+
+        return [
+            'reviews' => array_values($reviews),
+            'total_reviews' => $total_reviews,
+            'pagination' => $pagination,
+            'all_reviews' => $all_reviews
+        ];
+    }
+
+    public static function processReviewData($reviews) {
         foreach ($reviews as &$review) {
             $review['meta'] = maybe_unserialize($review['meta']);
             $review['avatar'] = get_avatar(Arr::get($review, 'meta.formFieldData.email'));
@@ -86,19 +107,8 @@ class Review extends Model
             $average_rating = count($ratings) > 0 ? round($total_rating / count($ratings)) : 0;
             $review['average_rating'] = $average_rating;
         }
-    
-        // Apply filter if provided
-        if (!empty($filter) && $filter != 'all') {  
-            $reviews = array_filter($reviews, function($review) use ($filter) {
-                return Arr::get($review, 'average_rating', 0) == $filter;
-            });
-        }
-    
-        return [
-            'reviews' => array_values($reviews),
-            'total_reviews' => $total_reviews,
-            'pagination' => $pagination
-        ];
+
+        return $reviews;
     }
 
     public function deleteReview($reviewID) {
