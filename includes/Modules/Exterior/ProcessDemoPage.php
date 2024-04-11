@@ -54,7 +54,7 @@ class ProcessDemoPage {
             'show_review_template' => $showReviewTemplate
             ] );
             ?>
-                <div class="adrm_preview_footer">
+                <div class="adrm_preview_footer" style="max-width: 1000px; margin: 0 auto">
                     <p>You are seeing preview version of Advance review manager. This form is only accessible for Admin users. Other users
                         may not access this page. To use this for in a page please use the following shortcode: [wppayform
                         id='<?php echo intval($formId); ?>']</p>

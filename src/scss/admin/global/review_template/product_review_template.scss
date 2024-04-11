@@ -1,0 +1,46 @@
+.adrm-product-review-stats-wrapper{
+    border-bottom:1px solid $border-color ;
+    margin-bottom: 15px !important;
+    .adrm-product-review-stats {
+        max-width: 740px;
+        margin: 0 auto !important;
+        padding: 20px !important;
+        .adrm-product-reviews-stats-heading {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            h2 {
+                font-size: 60px;
+                line-height: 1;
+                margin-bottom: 0;
+                letter-spacing: -.05em;
+                color: $text-dark;
+                font-family: Heebo, sans-serif;
+                font-weight: 700;
+            }
+            p {
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 0;
+                color: $text-dark;
+            }
+            .ratings {
+                display: flex;
+                gap: 4px;
+                align-items: center;
+            }
+        }
+        .adrm-product-rating-stats {
+            margin: 10px 0px;
+            .adrm-progress-bar {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: 740px;
+                .adrm_rating {
+                    width: 140px;
+                }
+            }
+        }
+    }
+}
