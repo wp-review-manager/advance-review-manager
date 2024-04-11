@@ -1,15 +1,12 @@
 .adrm_review_summary {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding-bottom: 20px;
     flex-wrap: wrap;
     border-bottom: 1px solid $border-color;
-    padding: 20px;
 
     .adrm_review_summary_rating {
         width: 180px;
-
+        padding: 20px;
         h6 {
             margin: 0;
             padding: 0;
@@ -22,7 +19,7 @@
             h6 {
                 padding: 0;
                 margin: 0;
-                color: $accent-color;
+                color: $text-dark;
             }
 
             display: flex;
@@ -55,7 +52,7 @@
 
             .icon {
                 border-radius: 50%;
-                background: $accent-color;
+                background: $text-dark;
                 padding: 4px;
                 width: 4px;
                 height: 4px;
@@ -64,10 +61,11 @@
     }
 
     .adrm_review_categories_stats {
-        width: calc(100% - 431px);
+        width: calc(100% - 471px);
         min-width: 400px;
         border-right: 1px solid $border-color;
         border-radius: 0px;
+        padding: 20px 0px;
         .adrm-progress-bar{
             margin: 10px auto;
             .progress {
@@ -84,7 +82,7 @@
                 float: left;
                 min-width: 1%;
                 height: 100%;
-                background: cornflowerblue;
+                background: $text-dark;
             }
     
             .percent {
@@ -103,6 +101,7 @@
 
     .adrm_review_categories_summary {
         width: 210px;
+        padding: 20px;
         .rating-summary-item {
             span {
                 color: $text-dark;
@@ -111,5 +110,7 @@
             }
         }
     }
+    border-radius: 0px;
+    
 
 }

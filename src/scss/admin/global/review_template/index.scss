@@ -6,6 +6,11 @@ p {
     font-size: 14px;
 }
 .review-template_settings_wrapper {
+    p, h1, h2, h3, h4, h5, h6, div, span, p {
+        margin: 0;
+        padding: 0;
+        border-radius: 0px;
+    }
     display: flex;
     gap: 30px;
     width: 100%;
@@ -19,6 +24,13 @@ p {
         padding: 0px;
         @media screen and (max-width: 768px){
             width: 100%;
+        }
+        .adrm-heading {
+            font-size: 18px;
+        }
+        &.padding-20 {
+            padding: 20px;
+            border-radius: 0px;
         }
     }
     .review-template-settings {
@@ -78,9 +90,6 @@ p {
         background-color: #45a049;
     }
 
-    div {
-        border-radius: 5px;
-    }
     .adrm-review-manager-preview .adrm_preview_footer {
         display: block;
         overflow: hidden;

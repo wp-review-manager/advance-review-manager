@@ -8,8 +8,8 @@ use ADReviewManager\Services\ArrayHelper as Arr;
  */
 ?>
 <div class="review-template_settings_wrapper">
-    <div class="review-template" style="background: #4caf500f;">
-        <h3>Reviews (<?php echo $total_reviews ?>)</h3>
+    <div class="review-template padding-20">
+        <h3 class="adrm-heading">CUSTOMER REVIEWS (<?php echo $total_reviews ?>)</h3>
         <?php
         if (empty($reviews)) {
             echo '<p style="padding: 20px">No reviews yet</p>';
@@ -28,8 +28,8 @@ use ADReviewManager\Services\ArrayHelper as Arr;
             <div class="adrm_review_temp_one_content">
                 <div class="adrm_review_temp_one_content_header">
                     <div class="left">
-                        <p class="date"><?php echo (new Helper)->formatDate($created_at);  ?></p>
-                        <h3 class="adrm_review_temp_one_content_header_name">
+                        <p class="date adrm-heading"><?php echo (new Helper)->formatDate($created_at);  ?></p>
+                        <h3 class="adrm_review_temp_one_content_header_name adrm-heading">
                             <?php echo Arr::get($review, 'name'); ?>
                         </h3>
                     </div>

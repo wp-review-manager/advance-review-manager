@@ -14,13 +14,12 @@ if ($enablePagination == 'true') {
 
 ?>
 <div data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
-    <div class="review-template" style="background: #4caf500f;">
+    <div class="review-template">
         <?php
         if (empty($reviews)) {
             echo '<p style="padding: 20px">No reviews yet</p>';
         } else { // Add the else condition here
         ?>
-        <h3>Reviews (<?php echo $total_reviews  ?>)</h3>
         <div class="review-filters">
             <div class="review-filter">
                 <label for="review-sort">Sort by:</label>
@@ -55,6 +54,8 @@ if ($enablePagination == 'true') {
             </div>
         </div>
         <div class="adrm_food_review_template_wrapper">
+        <h3 class="adrm-heading">CUSTOMER REVIEWS (<?php echo $total_reviews ?>)</h3>
+
             <?php foreach ($reviews as $review) {
                 $average_rating = Arr::get($review, 'average_rating');
                 $created_at = Arr::get($review, 'created_at');

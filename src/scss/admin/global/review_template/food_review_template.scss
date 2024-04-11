@@ -1,63 +1,61 @@
-.adrm_food_review_template {
-    div {
-        padding: 0px;
-    }
-    background: #8080800d;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    border-bottom: 1px solid $border-color;
-    margin: 20px;
-    border-radius: 8px;
-    .adrm-reviewer-info {
-        width: 160px;
-        text-align: center;
-        img {
-            border-radius: 50%;
+.adrm_food_review_template_wrapper {
+    padding: 20px !important;
+    .adrm_food_review_template { 
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        border-bottom: 1px solid $border-color;
+        padding: 10px 0px;
+        .adrm-reviewer-info {
+            width: 180px;
+            text-align: center;
+            img {
+                border-radius: 50%;
+            }
+            .adrm-reviewer-name {
+                padding-top: 14px;
+                color: $text-dark;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+            .adrm-reviewer-email {
+                word-break: break-all;
+                color: $text-dark;
+                font-size: 14px;
+            }
         }
-        .adrm-reviewer-name {
-            padding: 8px 0px;
-            color: $text-dark;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        .adrm-reviewer-email {
-            word-break: break-all;
-            color: $text-dark;
-            font-size: 14px;
-        }
-    }
-
-    .adrm-review-body {
-        min-width: 400px;
-        width: calc(100% - 170px);
-        .adrm-review-rating {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .review-categories {
-            .adrm-star-rating {
+    
+        .adrm-review-body {
+            min-width: 400px;
+            width: calc(100% - 190px);
+            .adrm-review-rating {
                 display: flex;
                 align-items: center;
-                gap: 5px;
-                line-height: 0px;
-                label {
-                    font-size: 1rem;
+                gap: 10px;
+            }
+            .review-categories {
+                padding: 10px 0px;
+                .adrm-star-rating {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    line-height: 0px;
+                    padding: 10px 0px;
+                    label {
+                        font-size: 1rem;
+                    }
                 }
             }
         }
-    }
-    .adrm-empty-review {
-        text-align: center;
-        width: 100%;
-        font-size: 20px;
-        font-weight: 500;
-        color: $text-dark;
+        .adrm-empty-review {
+            text-align: center;
+            width: 100%;
+            font-size: 20px;
+            font-weight: 500;
+            color: $text-dark;
+        }
     }
 }
 
@@ -69,7 +67,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     .review-filter {
-        padding: 5px 10px;
+        padding: 10px 20px;
         border-radius: 5px;
         min-width: 300px;
         cursor: pointer;

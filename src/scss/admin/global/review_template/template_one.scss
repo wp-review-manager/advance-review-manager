@@ -5,13 +5,14 @@
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid $border-color;
+    padding: 20px 0px !important;
     @media screen and (max-width: 768px){
       padding: 4px;
       gap: 10px;
     }
     .adrm_review_temp_one_avatar {
-        width: 100px;
-        height: 100px;
+        width: 82px;
+        height: 82px;
         border-radius: 50%;
         overflow: hidden;
         img {
@@ -29,12 +30,12 @@
         .date {
           font-size: 14px;
           font-weight: 600;
-          color: $text-dark-50;
         }
 
         .adrm_review_temp_one_content_header_name {
-          font-size: 20px;
+          font-size: 14px;
           font-weight: 600;
+          margin-top: 10px;
           color: $text-dark;
         }
         .adrm_review_temp_one_content_header_rating {
@@ -57,7 +58,7 @@
       .adrm_review_temp_one_content_body {
         .review {
             @include adrm-paragraph;
-            color: $text-dark-50;
+            color: $text-dark;
             margin-bottom: 10px;
         }
         @media screen and (max-width: 768px){
