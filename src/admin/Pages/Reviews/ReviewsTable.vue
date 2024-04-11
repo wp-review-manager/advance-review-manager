@@ -165,7 +165,7 @@ export default {
             }
         },
         formatDate(rawDate){
-            return moment(rawDate).format('YYYY-MM-DD');
+            return moment(rawDate).format('dddd D MMMM YYYY');
         },
         deleteHandler(id) {
             console.log('delete..id', id);
@@ -209,11 +209,10 @@ export default {
             this.dialogVisibleDeleteProp = false;
         },
     },
-
-    mounted() {
+    created() {
         this.dialogVisibleDeleteProp = false;
         this.getForm();
         this.getReviews();
-    },
+    }
 }
 </script>

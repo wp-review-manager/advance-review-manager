@@ -4,10 +4,65 @@
     h3 {
         color: $text-dark;
         font-family: Inter;
-        font-size: 22px;
+        font-size: 18px;
         font-style: normal;
         font-weight: 600;
         line-height: 30px;
         padding-bottom: 30px;
     }
+    
 }
+
+.adrm-review-wrapper{
+    background-color: $gray-50;
+    padding: 30px;
+    .adrm-review-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 30px;
+        a{
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 14px;
+        }
+        h3 {
+            color: $text-dark;
+            font-family: Inter;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 30px;
+        }
+    }
+   
+}
+
+.adrm-review_main{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+    .adrm-review_main-header{
+        display: flex; 
+        justify-content: space-between;
+    }
+    .adrm-review_main-middle{
+        display: flex; 
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.adrm-review_meta{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 4px;
+}
+

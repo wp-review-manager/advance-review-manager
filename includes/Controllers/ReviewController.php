@@ -33,6 +33,20 @@ class ReviewController
         wp_send_json_success($response);
     }
 
+    public function getReview()
+    {
+        $reviewID = sanitize_text_field($_REQUEST['reviewID']);
+        if (empty($reviewID)) {
+            wp_send_json_error(
+                [
+                    'message' => "Review Id not found."
+                ],
+            423);
+        }
+        $response = (new Review)->getReview($reviewID);
+        wp_send_json_success($response);
+    }
+
     public function deleteReview()
     {
         $reviewID = sanitize_text_field($_REQUEST['reviewID']);
