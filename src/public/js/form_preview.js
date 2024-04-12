@@ -5,6 +5,7 @@ jQuery(document).ready(function ($) {
         nonce: window.ADRMPublic.adrm_nonce,
         route: 'get_reviews'
     }
+    const template_type = $('.review-template_settings_wrapper').attr('data-template-type');
 
     $('.adrm-filter-by-star').change(function(e){
         let form = $(this).closest('.review-template_settings_wrapper');
@@ -25,6 +26,7 @@ jQuery(document).ready(function ($) {
     $('.adrm-page-number').click(function(e){
         $(this).addClass('active').siblings().removeClass('active');
         let form = $(this).closest('.review-template_settings_wrapper');
+
         let formID = +form.attr('data-form-id');
         let page = $(this).text();
         getReviewParamsData['formID'] = formID;
@@ -43,7 +45,7 @@ jQuery(document).ready(function ($) {
         // Remove the active class from the current page and add it to the next page
         $('.adrm-page-number.active').removeClass('active');
         $('.adrm-page-number').eq(nextPage - 1).addClass('active');
-
+    
         makeAjaxRequestForReviewGet();
     });
 
@@ -155,17 +157,15 @@ jQuery(document).ready(function ($) {
             success: function(response) {
                 // Handle the response here
                 if (response.success) {
-                    domUpdateAfterReviewGet(response.data);
+                    const reviewContainer = $('.adrm_food_review_template_wrapper, .adrm_product_review_temp');
+                    domUpdateAfterReviewGet(response.data, reviewContainer);  
                 }
             }
         });
     }
 
     // For food review template filter and sort functionality
-    function domUpdateAfterReviewGet (response) {
-        console.log(typeof response, response, response?.length);
-
-        const reviewContainer = $('.adrm_food_review_template_wrapper');
+    function domUpdateAfterReviewGet (response, reviewContainer) {
         reviewContainer.empty();
         let created_at = '';
         let avatar = '';
@@ -179,51 +179,90 @@ jQuery(document).ready(function ($) {
             
                 review = review?.meta?.formFieldData
                 // console.log({review}, {avatar}, {average_rating})
-                const reviewHTML = `
-                <div class="adrm_food_review_template">
-                    <div class="adrm-reviewer-info">
-                        <div class="adrm-reviewer-avatar">
-                            ${avatar}
-                        </div>
-                        <div class="adrm-reviewer-name">
-                            <span>${review?.name || ''}</span>
-                        </div>
-                        <div class="adrm-reviewer-email">
-                            <span>${review?.email || ''}</span>
-                        </div>
-                    </div>
-                    <div class="adrm-review-body">
-                        <div class="adrm-review-rating">
-                            <div class="adrm-star-rating">
-                            ${Array.from({ length: 5 }, (_, index) => {
-                                return `<label name="rating" class="${index < average_rating ? 'active' : ''}" value="${index + 1}">★</label>`;
-                            }).join('')}
-                            </div>
-                            <span class="adrm-review-date"> Reviewed ${extractDate(created_at)}</span>
-                        </div>
-                        <div class="adrm-review-content">
-                            <p>${review?.message}</p>
-                        </div>
-                        <div class="review-categories">
-                                ${review?.ratings.map((rating) => {
-                                    return `<div class="adrm-star-rating">
-                                        ${Array.from({ length: 5 }, (_, index) => {
-                                            return `<label name="rating" class="${index < rating?.value ? 'active' : ''}" value="${index + 1}">★</label>`;
-                                        }).join('')}
-
-                                        <p>${rating?.label}</p>
-                                    </div>`;
-                                }).join('')}
-                        </div>
-                    </div>
-                </div>
-                `;
-                reviewContainer.append(reviewHTML);
+                if(template_type?.includes('hotel-review-form-template') || template_type?.includes('food-review-form-template')) {
+                    renderDomForFoodAndHotel(reviewContainer, avatar, review, created_at, average_rating);
+                } else if (template_type?.includes('product-review-form-template')) {
+                    renderDomForProductTemp(reviewContainer, avatar, review, created_at, average_rating);
+                }
             })
         } else {
             reviewContainer.append('<div class="adrm_food_review_template"><p class="adrm-empty-review">No reviews found yet !</p></div>');
         }
         // Update the DOM with the response
+    }
+
+    function renderDomForFoodAndHotel (reviewContainer, avatar, review, created_at, average_rating) {
+        const reviewHTML = `
+        <div class="adrm_food_review_template">
+            <div class="adrm-reviewer-info">
+                <div class="adrm-reviewer-avatar">
+                    ${avatar}
+                </div>
+                <div class="adrm-reviewer-name">
+                    <span>${review?.name || ''}</span>
+                </div>
+                <div class="adrm-reviewer-email">
+                    <span>${review?.email || ''}</span>
+                </div>
+            </div>
+            <div class="adrm-review-body">
+                <div class="adrm-review-rating">
+                    <div class="adrm-star-rating">
+                    ${Array.from({ length: 5 }, (_, index) => {
+                        return `<label name="rating" class="${index < average_rating ? 'active' : ''}" value="${index + 1}">★</label>`;
+                    }).join('')}
+                    </div>
+                    <span class="adrm-review-date"> Reviewed ${extractDate(created_at)}</span>
+                </div>
+                <div class="adrm-review-content">
+                    <p>${review?.message}</p>
+                </div>
+                <div class="review-categories">
+                        ${review?.ratings.map((rating) => {
+                            return `<div class="adrm-star-rating">
+                                ${Array.from({ length: 5 }, (_, index) => {
+                                    return `<label name="rating" class="${index < rating?.value ? 'active' : ''}" value="${index + 1}">★</label>`;
+                                }).join('')}
+
+                                <p>${rating?.label}</p>
+                            </div>`;
+                        }).join('')}
+                </div>
+            </div>
+        </div>
+        `;
+        reviewContainer.append(reviewHTML);
+    }
+
+    function renderDomForProductTemp (reviewContainer, avatar, review, created_at, average_rating) {
+        const reviewHTML = `
+            <div class="adrm_review_temp_one adrm_product_review_temp">
+                <div class="adrm_review_temp_one_avatar">
+                    ${avatar}
+                </div>
+                <div class="adrm_review_temp_one_content">
+                    <div class="adrm_review_temp_one_content_header">
+                        <div class="left">
+                            <p class="date adrm-heading">${review?.name || ''}</p>
+                            <h3 class="adrm_review_temp_one_content_header_name adrm-heading">
+                                ${review?.title || ''}
+                            </h3>
+                        </div>
+                        <div class="adrm-review-rating">
+                            <p> ${extractDate(created_at)}</p>
+                            <div class="adrm-star-rating">
+                            ${Array.from({ length: 5 }, (_, index) => {
+                                return `<label name="rating" class="${index < average_rating ? 'active' : ''}" value="${index + 1}">★</label>`;
+                            }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="adrm_review_temp_one_content_body">
+                        <p class="review">${review?.message}</p>
+                    </div>
+                </div>
+            </div>`;
+        reviewContainer.append(reviewHTML);
     }
 
     function extractDate(dateString) {

@@ -1,11 +1,10 @@
 .adrm_review_temp_one {
     display: flex;
     gap: 30px;
-    width: 100%;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid $border-color;
-    padding: 20px 0px !important;
+    padding: 20px !important;
     @media screen and (max-width: 768px){
       padding: 4px;
       gap: 10px;

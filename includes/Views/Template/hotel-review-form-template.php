@@ -13,7 +13,7 @@ if ($enablePagination == 'true') {
 }
 
 ?>
-<div data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
+<div data-form-id="<?php echo $form->ID ?>" data-template-type="<?php echo $form->post_name ?>" class="review-template_settings_wrapper">
     <div class="review-template">
         <?php
         if (empty($all_reviews)) {

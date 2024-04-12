@@ -6,9 +6,14 @@ use ADReviewManager\Services\ArrayHelper as Arr;
  * Class ReviewsTemplate
  * @package ADReviewManager\Views
  */
+$per_page = Arr::get($pagination, 'per_page');
+$enablePagination = Arr::get($pagination, 'enable');
+if ($enablePagination == 'true') {
+    $total_page = ceil($total_reviews / $per_page);
+}
 ?>
-<div class="review-template_settings_wrapper">
-    <div class="review-template padding-20">
+<div data-form-id="<?php echo $form->ID ?>" data-template-type="<?php echo $form->post_name ?>" class="review-template_settings_wrapper">
+    <div class="review-template">
         <?php
         if (empty($all_reviews)) {
             echo '<p style="padding: 20px">No reviews yet</p>';
@@ -60,13 +65,14 @@ use ADReviewManager\Services\ArrayHelper as Arr;
                 </div>
             </div>
         </div>
+        <div class="adrm_product_review_temp">
         <?php foreach ($reviews as $review) {
              $average_rating = Arr::get($review, 'average_rating');
              $created_at = Arr::get($review, 'created_at');
              $review = Arr::get($review, 'meta.formFieldData', []);
              $ratings = Arr::get($review, 'ratings', []);
         ?>
-        <div class="adrm_review_temp_one"><!-- {{ review }} -->
+        <div class="adrm_review_temp_one">
             <div class="adrm_review_temp_one_avatar">
                 <?php echo get_avatar(Arr::get($review, 'email'), 96) ?>
             </div>
@@ -93,6 +99,20 @@ use ADReviewManager\Services\ArrayHelper as Arr;
                 </div>
             </div>
         </div>
-        <?php } }?>
+        <?php }?>
+        </div>
+        <?php
+       if($enablePagination == 'true') {?>
+        <div class="adrm-pagination">
+            <button class="adrm-prev-page">Prev</button>
+            <ul class="adrm-page-numbers">
+                <?php for($i = 1; $i <= $total_page; $i++) { ?>
+                    <li class="adrm-page-number <?php echo $i == 1 ? 'active' : '' ?>"><?php echo $i ?></li>
+                <?php } ?>
+            </ul>
+            <button class="adrm-next-page">Next</button>
+        </div>
+        <?php }
+    }?>
     </div>
 </div>
