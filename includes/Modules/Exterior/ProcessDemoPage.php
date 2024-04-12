@@ -42,8 +42,20 @@ class ProcessDemoPage {
         $showReviewTemplate = 'yes';
         $form = (new ReviewForm)->getReviewForm($formId);
         $response = (new Review)->getReviews($formId);
+        $edit_url = site_url() . "/wp-admin/admin.php?page=advance-review-manager.php#/form/edit/". $form->ID;
         if (!empty($form)) {
             wp_head();
+            ?>
+            <div style="display: flex;justify-content: space-between;padding: 20px;background: #9e9e9e4f;">
+                <div style="display: flex; align-items: center; gap: 20px">
+                    <h4 style="margin: 0"><?php echo$form->post_title ?></h4>
+                    <a style="font-size: 20px" href="<?php echo $edit_url ?>">Edit form</a>
+                </div>
+                <div style="padding: 4px 8px;background: #fff;border-radius: 4px;">
+                    <?php echo $form->shortcode ?>
+                </div>
+            </div>
+            <?php
             View::render('preview_review', [
             'form' => $form,
             'reviews' => $response['reviews'],
