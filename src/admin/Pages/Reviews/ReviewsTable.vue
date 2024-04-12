@@ -2,7 +2,7 @@
     <div class="adrm-reviews-wrapper"> 
         <h3>{{ formTitle }} - Reviews</h3>
         <div class="adrm-reviews"> 
-            <el-table :loading="loading" :data="reviews" style="width: 100%" :default-sort="{ prop: 'created_at', order: 'descending' }">
+            <el-table :loading="loading" :data="reviews" style="width: 100%">
                 <el-table-column prop="created_at" fixed label="Date" width="200" sortable>
                     <template #default="scope">
                         <p>{{ formatDate(scope.row.created_at) }}</p>
@@ -16,7 +16,7 @@
                 </el-table-column>
                 <el-table-column prop="rating" label="Rating" width="200" sortable>
                     <template #default="scope">
-                        <el-rate v-model="scope.row.rating" disabled show-score text-color="#ff9900"></el-rate>
+                        <el-rate v-model="scope.row.rating" disabled text-color="#ff9900"></el-rate>
                     </template>
                 </el-table-column>
                 <el-table-column label="Profile" width="180" >

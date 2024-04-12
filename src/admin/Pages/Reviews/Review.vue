@@ -3,7 +3,7 @@
        <div class="adrm-review-header"> 
             <router-link :to="`/form/edit/${formID}/reviews`">
                 <Icon icon="LeftBack" />
-                Back to Review Forms
+                Back to Reviews
             </router-link>
             <h3>{{ formTitle }} - Review ID - {{ $route.params.reviewId }}</h3>
        </div>
@@ -33,7 +33,7 @@
                     <el-table :data="reviewData.ratings" style="width: 100%">
                         <el-table-column prop="label" label="Label" ></el-table-column>
                         <el-table-column #default="scope" label="Value" > 
-                            <el-rate v-model="scope.row.value" disabled show-score text-color="#ff9900"></el-rate>
+                            <el-rate v-model="scope.row.value" disabled  text-color="#ff9900"></el-rate>
                         </el-table-column>
                     </el-table>
                 </div>
@@ -69,7 +69,7 @@ export default {
         rating() {
             let sum = this.reviewData.ratings.reduce((accumulator, rating) => accumulator 
             + parseInt(rating.value) , 0)
-            return sum / this.reviewData.ratings.length ;
+            return parseFloat(sum / this.reviewData.ratings.length).toFixed(1) ;
 
         },
         date() {
