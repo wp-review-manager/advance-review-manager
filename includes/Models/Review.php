@@ -94,6 +94,20 @@ class Review extends Model
         ];
     }
 
+    public function getReview($reviewID)
+    {
+        global $wpdb;
+        $reviewID = sanitize_text_field($reviewID);
+        $sql = $wpdb->prepare(
+            "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = %d",
+            $reviewID
+        );
+        $review = $wpdb->get_row($sql, ARRAY_A);
+        $review['meta'] = maybe_unserialize($review['meta']);
+        $review['avatar'] = get_avatar(Arr::get($review, 'meta.formFieldData.email'));
+        return $review;
+    }
+
     public static function processReviewData($reviews) {
         foreach ($reviews as &$review) {
             $review['meta'] = maybe_unserialize($review['meta']);
