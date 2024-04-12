@@ -15,9 +15,9 @@
                  </div>
                  <div class="adrm-review_main-middle"> 
                     <div class="adrm-review_main-middle_left" style="display: flex; flex-direction: column;"> 
-                        <p class="adrm-review_name" style="font-weight: bold; margin-bottom: 4px;">{{ reviewData.name }}</p>
-                        <p class="adrm-review_email" style="font-weight: bold; margin-bottom: 4px;">{{ reviewData.email }}</p>
-                        <p class="adrm-review_message" style="display: block; font-size: 14px; color: #555; pad: 4px;">{{ reviewData.message }}</p>
+                        <p class="adrm-review_message" style="display: block; font-size: 14px; color: #000; font-weight: 600; margin-bottom: 8px;">&quot; {{ reviewData.message }}  &quot;</p>
+                        <p class="adrm-review_name" style="font-weight: bold; font-size: 12px; margin-bottom: 2px;">{{ reviewData.name }}</p>
+                        <p class="adrm-review_email" style="font-weight: bold; font-size: 12px;">{{ reviewData.email }}</p>
                     </div>
                     <div class="adrm-review_main-middle_right" style="display: flex; align-items: center">
                         <el-image :src="getThumbNail()" style="width: 80px">
@@ -29,7 +29,7 @@
                  </div>
             </div>
             <div class="adrm-review_meta" v-if="this.reviewData.ratings.length > 1"> 
-                <span style="font-size: 16px; border-bottom: 1px dotted #555; text-align: center; color: #ff9900;">Other ratings</span>
+                <span style="font-size: 16px; border-bottom: 1px dotted #555; text-align: center; color: #ff9900; padding-bottom: 6px;">Other ratings</span>
                 <div class="adrm-review_meta-list" style="display: flex; gap: 20px; margin-top: 20px;"> 
                     <el-table :data="reviewData.ratings" style="width: 100%">
                         <el-table-column prop="label" label="Label" ></el-table-column>
