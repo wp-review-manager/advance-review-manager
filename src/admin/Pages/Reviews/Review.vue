@@ -16,8 +16,9 @@
                  <div class="adrm-review_main-middle"> 
                     <div class="adrm-review_main-middle_left" style="display: flex; flex-direction: column;"> 
                         <p class="adrm-review_message" style="display: block; font-size: 14px; color: #000; font-weight: 600; margin-bottom: 8px;">&quot; {{ reviewData.message }}  &quot;</p>
-                        <p class="adrm-review_name" style="font-weight: bold; font-size: 12px; margin-bottom: 2px;">{{ reviewData.name }}</p>
-                        <p class="adrm-review_email" style="font-weight: bold; font-size: 12px;">{{ reviewData.email }}</p>
+                        <p class="adrm-review_name" style="font-weight: 600; font-size: 12px; margin-bottom: 4px;">{{ reviewData.name }}</p>
+                        <p class="adrm-review_email" style="font-weight: 600; font-size: 12px;">{{ reviewData.email }}</p>
+                        <p v-if="reviewData.position" style="font-weight: bold; font-size: 12px; margin-top: 4px;">{{ reviewData.position }}</p>
                     </div>
                     <div class="adrm-review_main-middle_right" style="display: flex; align-items: center">
                         <el-image :src="getThumbNail()" style="width: 80px">

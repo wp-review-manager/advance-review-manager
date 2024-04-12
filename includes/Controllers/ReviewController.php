@@ -84,11 +84,13 @@ class ReviewController
             $email = Arr::get($meta, 'formFieldData.email', '');
             $message = Arr::get($meta, 'formFieldData.message', '');
             $name = Arr::get($meta, 'formFieldData.name', '');
+            $position = Arr::get($meta, 'formFieldData.position', '');
             $formattedReviews[] = [
                 'id' => $review['id'],
                 'rating' => $review['average_rating'],
                 'avatar' => get_avatar_url($email) ? get_avatar_url($email) : Arr::get($review, 'avatar', ''),
                 'email' => $email,
+                'position' => $position,
                 'message' => $message,
                 'name' => $name,
                 'created_at' => $review['created_at'],
