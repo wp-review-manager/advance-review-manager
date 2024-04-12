@@ -413,6 +413,44 @@ const formTemplate = {
         template_required: true,
         enabled: true,
        }],
+    },
+    'simple_slide_testimonial_template': {
+        id: 2,
+        title: 'Simple Slide Testimonial Template',
+        rating_type: 'single',
+        thumbnail: 'images/template_1.jpeg',
+        formFields: [...commonFormFields,
+        {
+            label: 'Position',
+            name: 'position',
+            type: 'text',
+            placeholder: 'Your message',
+            template_required: true,
+            enabled: true,
+        },
+        {
+            label: 'Write a review about me',
+            name: 'message',
+            type: 'textarea',
+            placeholder: 'Your message',
+            template_required: false,
+            enabled: true,
+        },
+        {
+            label: 'Rating',
+            name: 'rating',
+            type: 'rating',
+            template_required: true,
+            options: ratingOptions,
+            enabled: true,
+        },
+       {
+        label: "Review Submission",
+        name: "review_submission",
+        type: "submit",
+        template_required: true,
+        enabled: true,
+       }],
     }
 }
 

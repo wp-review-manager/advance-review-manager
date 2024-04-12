@@ -280,3 +280,39 @@ jQuery(document).ready(function ($) {
         return formattedDate;
     }
 })
+
+// Testimonial slider
+jQuery(document).ready(function ($) {
+    $('.btn').click(function() {
+        var current = $('.adrm-testimonial-container.active');
+        var next = current.next('.adrm-testimonial-container');
+        var prev = current.prev('.adrm-testimonial-container');
+        var progress_dot = $('.progress-dot.active');
+        if ($(this).attr('id') == 'btn-next') {
+            if (next.length) {
+                current.removeClass('active');
+                progress_dot.removeClass('active');
+                progress_dot.next().addClass('active');
+                next.addClass('active');
+
+            } else {
+                current.removeClass('active');
+                progress_dot.removeClass('active');
+                $('.progress-dot').first().addClass('active');
+                current.siblings().first().addClass('active');
+            }
+        } else {
+            if (prev.length) {
+                current.removeClass('active');
+                progress_dot.removeClass('active');
+                progress_dot.prev().addClass('active');
+                prev.addClass('active');
+            } else {
+                current.removeClass('active');
+                progress_dot.removeClass('active');
+                $('.progress-dot').last().addClass('active');
+                current.siblings().last().addClass('active');
+            }
+        }
+    });
+})

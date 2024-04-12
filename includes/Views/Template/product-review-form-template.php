@@ -91,7 +91,6 @@ if ($enablePagination == 'true') {
                                 <label name="rating" class="<?php echo $i <= $average_rating ? 'active' : ''; ?>" value="<?php echo $i; ?>">★</label>
                             <?php } ?>
                         </div>
-
                     </div>
                 </div>
                 <div class="adrm_review_temp_one_content_body">

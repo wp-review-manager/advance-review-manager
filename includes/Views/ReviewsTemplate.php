@@ -11,7 +11,6 @@ use ADReviewManager\Classes\View;
 class ReviewsTemplate {
     public function render($reviews = [], $form, $total_reviews, $pagination, $all_reviews) {
         $template = 'Template.';
-
         if (str_contains($form->post_name, 'book-review-form-template')) {
             $template .= 'book_review_template';
         } else if (str_contains($form->post_name, 'food-review-form-template')) {
@@ -20,6 +19,8 @@ class ReviewsTemplate {
             $template .= 'hotel-review-form-template';
         } else if(str_contains($form->post_name, 'product-review-form-template')) {
             $template .= 'product-review-form-template';
+        }else if(str_contains($form->post_name, 'simple-slide-testimonial-template')) {
+            $template .= 'simple-slide-testimonial-template';
         }
 
         View::render($template, [
