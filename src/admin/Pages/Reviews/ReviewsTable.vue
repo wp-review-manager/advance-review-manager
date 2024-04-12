@@ -8,6 +8,7 @@
                         <p>{{ formatDate(scope.row.created_at) }}</p>
                     </template>
                 </el-table-column>
+                <el-table-column prop="name" label="Name" width="180"/>
                 <el-table-column prop="email" label="Email" width="180"/>
                 <el-table-column prop="message" label="Review" width="250">
                     <template #default="scope">

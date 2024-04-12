@@ -15,6 +15,7 @@
                  </div>
                  <div class="adrm-review_main-middle"> 
                     <div class="adrm-review_main-middle_left" style="display: flex; flex-direction: column;"> 
+                        <p class="adrm-review_name" style="font-weight: bold; margin-bottom: 4px;">{{ reviewData.name }}</p>
                         <p class="adrm-review_email" style="font-weight: bold; margin-bottom: 4px;">{{ reviewData.email }}</p>
                         <p class="adrm-review_message" style="display: block; font-size: 14px; color: #555; pad: 4px;">{{ reviewData.message }}</p>
                     </div>
