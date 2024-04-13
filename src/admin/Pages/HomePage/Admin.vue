@@ -26,7 +26,7 @@
             v-model="forms_search_string"
             type="search"
             class="block adrm-search-input w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-yellow-700 focus:border-yellow-700  dark:text-white"
-            placeholder="Search Mockups, Logos..."
+            placeholder="Search templates by name"
             required
             @keyup="getFormsDebounce()"
           >
@@ -46,7 +46,7 @@
           type="success"
           @click="dialogVisibleProp = true"
         >
-          Create Your Form
+          Create Your Template
         </el-button>
       </div>
     </div>
