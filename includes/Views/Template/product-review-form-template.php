@@ -44,7 +44,7 @@ if ($enablePagination == 'true') {
                 </div>
                 <div class="adrm-product-rating-stats">
                     <?php foreach($summary_by_rating as $key => $summary) {
-                    $average_rating =(($key * $summary) / ($summary * 5)) * 100;
+                    $average_rating = number_format(($summary / count($all_reviews)) * 100, 2);
                     ?>
                     <div class="adrm-progress-bar">
                         <div class="adrm_rating">
