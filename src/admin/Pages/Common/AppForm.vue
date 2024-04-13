@@ -19,7 +19,10 @@
         for="inputField"
         @click="labelEditAble = true"
       > {{ field.template_required == 'true' ? '*' : '' }} {{ field.label }}
-        <p class="form-editor-label" style="color: rgb(64, 126, 234);">Click to edit <span class="dashicons dashicons-edit"></span></p>
+        <p
+          class="form-editor-label"
+          style="color: rgb(64, 126, 234);"
+        >Click to edit <span class="dashicons dashicons-edit" /></p>
       </label>
 
       <template

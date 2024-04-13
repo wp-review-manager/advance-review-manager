@@ -1,19 +1,45 @@
 <template>
-  <div v-loading="loading" class="adrm-form-editor adrm-box-editor">
+  <div
+    v-loading="loading"
+    class="adrm-form-editor adrm-box-editor"
+  >
     <div class="adrm-form-editor__header">
       <div class="adrm-form-editor__header__title">
-        <span style="width: 1em; height: 1em; margin-right: 8px" class="dashicons dashicons-arrow-left-alt" />
-        <el-input v-if="title_editable" v-model="title" style="min-width: 764px;" @blur="title_editable = false" />
-        <h2 v-else style="cursor: pointer" @click="title_editable = true">
+        <router-link style="margin-bottom: -19px;" to="/">
+        <span
+          style="width: 1em; height: 1em; margin-right: 8px"
+          class="dashicons dashicons-arrow-left-alt"
+        />
+        </router-link>
+        <el-input
+          v-if="title_editable"
+          v-model="title"
+          style="min-width: 764px;"
+          @blur="title_editable = false"
+        />
+        <h2
+          v-else
+          style="cursor: pointer"
+          @click="title_editable = true"
+        >
           {{ title }} <span class="dashicons dashicons-edit" />
         </h2>
       </div>
       <div class="adrm-form-editor__header__action">
-        <el-button @click="redirectToPreview()" type="default">
-          <span style="margin-right: 8px" class="dashicons dashicons-visibility" />
+        <el-button
+          type="default"
+          @click="redirectToPreview()"
+        >
+          <span
+            style="margin-right: 8px"
+            class="dashicons dashicons-visibility"
+          />
           Preview
         </el-button>
-        <el-button type="success" @click="saveForm()">
+        <el-button
+          type="success"
+          @click="saveForm()"
+        >
           Save Settings
         </el-button>
       </div>
@@ -21,17 +47,39 @@
 
     <div class="adrm-form-body">
       <div class="adrm-form-body__left">
-        <draggable class="dragArea list-group w-full adrm-dynamicForm" :list="templateFormComponents" group="people"
-          :move="checkMove" @change="log">
+        <draggable
+          class="dragArea list-group w-full adrm-dynamicForm"
+          :list="templateFormComponents"
+          group="people"
+          :move="checkMove"
+          @change="log"
+        >
           <!-- <div class="adrm-dynamicForm" label-width="120px"> -->
-          <el-row v-for="(field, fieldIndex) in templateFormComponents" :key="field.name"
-            class="adrm-dynamicForm__item">
-            <AppForm :field="field" :class="field.enabled == 'false' ? 'disabled' : ''" />
+          <el-row
+            v-for="(field, fieldIndex) in templateFormComponents"
+            :key="field.name"
+            class="adrm-dynamicForm__item"
+          >
+            <AppForm
+              :field="field"
+              :class="field.enabled == 'false' ? 'disabled' : ''"
+            />
             <div class="form-item-delete-btn">
-              <div class="adrm-plus-btn" v-if="field.type == 'rating' && !single_review_template">
-                <Icon icon="Plus" @click="addMoreRatingField(fieldIndex)" />
+              <div
+                v-if="field.type == 'rating' && !single_review_template"
+                class="adrm-plus-btn"
+              >
+                <Icon
+                  icon="Plus"
+                  @click="addMoreRatingField(fieldIndex)"
+                />
               </div>
-              <el-switch @change="checkIsValidForDisabled(field)" inactive-value="false" active-value="true" v-model="field.enabled"></el-switch>
+              <el-switch
+                v-model="field.enabled"
+                inactive-value="false"
+                active-value="true"
+                @change="checkIsValidForDisabled(field)"
+              />
             </div>
           </el-row>
           <!-- </div> -->
@@ -57,7 +105,7 @@
 <script>
 import AppForm from '../Common/AppForm.vue';
 import Icon from '../../Icons/Index.vue';
-import { ElNotification } from 'element-plus'
+import { ElNotification } from 'element-plus';
 import ReviewTemplate from './ReviewTemplate.vue';
 import debounce from 'lodash/debounce';
 import { VueDraggableNext } from 'vue-draggable-next';
@@ -202,7 +250,7 @@ export default {
           this.loading = false;
           this.preview_url = response.data.form.preview_url;
           this.shortcode = response.data.form.shortcode;
-          this.isItSingleReviewTemp(response.data.form.post_name)
+          this.isItSingleReviewTemp(response.data.form.post_name);
         }).catch((error) => {
           this.loading = false;
           console.log(error);
@@ -210,7 +258,7 @@ export default {
     },
     isItSingleReviewTemp(post_name) {
       if (post_name == "book-review-form-template") 
-      this.single_review_template = true
+      this.single_review_template = true;
     },
     updateDuplicateNames(data) {
       const nameCount = {};
@@ -229,7 +277,7 @@ export default {
       return data;
     },
     saveForm() {
-      let formData = this.updateDuplicateNames(this.templateFormComponents);
+      const formData = this.updateDuplicateNames(this.templateFormComponents);
       const _that = this;
       jQuery.ajax({
         method: 'POST',

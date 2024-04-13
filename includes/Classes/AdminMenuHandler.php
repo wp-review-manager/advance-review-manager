@@ -86,11 +86,11 @@ class AdminMenuHandler{
                 </div>
                 <div class="adrm-menu-item">
                     <router-link to="/">
-                        Review Forms
+                        Review Templates
                     </router-link> 
-                    <router-link to="/settings" >
+                    <!-- <router-link to="/settings" >
                         Settings 
-                    </router-link>
+                    </router-link> -->
                     <router-link to="/user-guide" >
                         User Guide 
                     </router-link>

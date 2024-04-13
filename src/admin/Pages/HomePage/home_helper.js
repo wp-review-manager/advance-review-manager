@@ -236,7 +236,7 @@ const formTemplate = {
         title: 'Book Review Form Template',
         desc: 'This is a book review form template', 
         rating_type: 'single',
-        thumbnail: 'images/template_1.jpeg',
+        thumbnail: 'images/book_temp.jpeg',
         formFields: [...commonFormFields,  {
             label: 'Write a review about the book',
             name: 'message',
@@ -266,7 +266,7 @@ const formTemplate = {
         title: 'Product Review Form Template',
         desc: 'This is a product review form template', 
         rating_type: 'single',
-        thumbnail: 'images/template_1.jpeg',
+        thumbnail: 'images/product_temp.jpeg',
         formFields: [...commonFormFields,
             {
                 label: 'Review Title',
@@ -304,7 +304,7 @@ const formTemplate = {
         id: 2,
         title: 'Food Review Form Template',
         rating_type: 'multiple',
-        thumbnail: 'images/template_1.jpeg',
+        thumbnail: 'images/food_temp.jpeg',
         formFields: [...commonFormFields,  {
             label: 'Write a review about the food',
             name: 'message',
@@ -357,7 +357,7 @@ const formTemplate = {
         id: 2,
         title: 'Hotel Review Form Template',
         rating_type: 'multiple',
-        thumbnail: 'images/template_1.jpeg',
+        thumbnail: 'images/hotel_temp.jpeg',
         formFields: [...commonFormFields,  {
             label: 'Write a review about the hotel',
             name: 'message',
@@ -418,7 +418,7 @@ const formTemplate = {
         id: 2,
         title: 'Simple Slide Testimonial Template',
         rating_type: 'single',
-        thumbnail: 'images/template_1.jpeg',
+        thumbnail: 'images/testimonial_temp.jpeg',
         formFields: [...commonFormFields,
         {
             label: 'Position',

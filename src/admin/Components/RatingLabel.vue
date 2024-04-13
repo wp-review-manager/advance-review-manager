@@ -1,9 +1,13 @@
 <template>
-    <div class="adrm-star-rating">
-        <span v-for="star in 5">
-            <label  name="rating" :class=" star <= rating ? 'active' : ''" value="1">★</label>
-        </span>
-    </div>
+  <div class="adrm-star-rating">
+    <span v-for="star in 5">
+      <label
+        name="rating"
+        :class=" star <= rating ? 'active' : ''"
+        value="1"
+      >★</label>
+    </span>
+  </div>
 </template>
 
 <script>

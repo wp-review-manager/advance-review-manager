@@ -1,21 +1,28 @@
 <template>
-    <div class="adrm-editor-settings-wrapper">
-        <div class="adrm-editor-settings-body">
-            <div class="adrm-editor-settings-sidebar">
-                <ul>
-                    <li>
-                        <router-link :to="{ name: 'edit-form-settings-general' }">General</router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'edit-form-settings-design' }">Design</router-link>
-                    </li>
-                </ul>
-            </div>
-            <div class="adrm-editor-settings-content">
-                <router-view @updateSettings="updateSettings" :settings="settings"></router-view>
-            </div>
-        </div>
+  <div class="adrm-editor-settings-wrapper">
+    <div class="adrm-editor-settings-body">
+      <div class="adrm-editor-settings-sidebar">
+        <ul>
+          <li>
+            <router-link :to="{ name: 'edit-form-settings-general' }">
+              General
+            </router-link>
+          </li>
+          <!-- <li>
+            <router-link :to="{ name: 'edit-form-settings-design' }">
+              Design
+            </router-link>
+          </li> -->
+        </ul>
+      </div>
+      <div class="adrm-editor-settings-content">
+        <router-view
+          :settings="settings"
+          @update-settings="updateSettings"
+        />
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -29,7 +36,10 @@ export default {
                     per_page: 10
                 }
             }
-        }
+        };
+    },
+    mounted() {
+        this.getSettings();
     },
     methods: {
         updateSettings(settings) {
@@ -71,7 +81,7 @@ export default {
                     form_id: this.$route.params.id,
                 },
                 success(res) {
-                    console.log(res.data.settings)
+                    console.log(res.data.settings);
                     if (res.data?.settings) {
                         _that.settings = res.data.settings;
                     }
@@ -81,9 +91,6 @@ export default {
                 }
             });
         }
-    },
-    mounted() {
-        this.getSettings();
     }
-}
+};
 </script>

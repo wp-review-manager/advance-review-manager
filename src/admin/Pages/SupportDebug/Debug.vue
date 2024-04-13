@@ -1,122 +1,177 @@
 <template>
-	<div style="min-height: 400px">
-		<el-container
-			class="adrm-debug-container"
-		>
-            <el-col class="debug-left-side"
-                v-if="!wpLoading && !serverLoading && !othersLoading" :lg="18" :sm="24">
-                <code class="copy">
-                    <el-icon :size="16" color="#000">
-                 <Document />
-            </el-icon> Copy
-                </code>
-                <div class="notice-container">
-                    <el-icon :size="16" color="#000">
-                        <InfoFilled />
-                    </el-icon>
-                    <p>Check if there is any item with red color or labeled 'issue'</p>
-                </div>
-                <div class="adrm-debug-server">
-                    <div class="adrm-debug-item">
-                        <h4>#WordPress Info</h4>
-                        <DebugTemplate :renderContent="wordpress" />
+  <div style="min-height: 400px">
+    <el-container
+      class="adrm-debug-container"
+    >
+      <el-col
+        v-if="!wpLoading && !serverLoading && !othersLoading"
+        class="debug-left-side"
+        :lg="18"
+        :sm="24"
+      >
+        <code class="copy">
+          <el-icon
+            :size="16"
+            color="#000"
+          >
+            <Document />
+          </el-icon> Copy
+        </code>
+        <div class="notice-container">
+          <el-icon
+            :size="16"
+            color="#000"
+          >
+            <InfoFilled />
+          </el-icon>
+          <p>Check if there is any item with red color or labeled 'issue'</p>
+        </div>
+        <div class="adrm-debug-server">
+          <div class="adrm-debug-item">
+            <h4>#WordPress Info</h4>
+            <DebugTemplate :render-content="wordpress" />
 
-                        <h4>#Plugin Status</h4>
-                        <DebugTemplate :renderContent="adrmInfo" />
+            <h4>#Plugin Status</h4>
+            <DebugTemplate :render-content="adrmInfo" />
 
 
-                        <h4>#Theme Info</h4>
-                        <DebugTemplate :renderContent="themeInfo" />
+            <h4>#Theme Info</h4>
+            <DebugTemplate :render-content="themeInfo" />
 
-                        <h4>#Active Plugins: ({{plugins.total}})</h4>
-                        <div
-                            class="adrm-debug-item-line"
-                            v-for="(plugin, i) in plugins.all"
-                            :key="i"
-                        >
-                            <p>{{i+1}}.</p>
-                            <p class="result" :class="plugin.status === 'ok' ? 'status-ok' : ''">{{ plugin}}</p>
-                        </div>
+            <h4>#Active Plugins: ({{ plugins.total }})</h4>
+            <div
+              v-for="(plugin, i) in plugins.all"
+              :key="i"
+              class="adrm-debug-item-line"
+            >
+              <p>{{ i+1 }}.</p>
+              <p
+                class="result"
+                :class="plugin.status === 'ok' ? 'status-ok' : ''"
+              >
+                {{ plugin }}
+              </p>
+            </div>
 
-                        <h4>#Server Info</h4>
-                        <DebugTemplate :renderContent="serverInfos" />
-                    </div>
-                </div>
-            </el-col>
-            <el-col class="debug-right-side" :lg="6" :sm="24">
-                <h4>#Debug Log</h4>
-                <div class="status-container">
-                    <div v-if="wpLoading">
-                        <el-icon :size="16" color="#096A2E">
-                            <Loading />
-                        </el-icon>
-                        <p>WP Compatibility..</p>
-                    </div>
-                    <div v-else>
-                        <el-icon :size="16" color="#096A2E">
-                            <CircleCheck />
-                        </el-icon>
-                        <p>WordPress test completed</p>
-                    </div>
-                </div>
-                 <div class="status-container">
-                    <div v-if="adrmLoading">
-                        <el-icon :size="16" color="#096A2E">
-                                <Loading />
-                        </el-icon>
-                        <p>Plugin test Compatibility..</p>
-                    </div>
-                    <div v-else>
-                        <el-icon :size="16" color="#096A2E">
-                            <CircleCheck />
-                        </el-icon>
-                        <p>Plugin test completed</p>
-                    </div>
-                </div>
-                 <div class="status-container">
-                    <div v-if="serverLoading">
-                        <el-icon :size="16" color="#096A2E">
-                                <Loading />
-                        </el-icon>
-                        <p>Server Compatibility..</p>
-                    </div>
-                    <div v-else>
-                        <el-icon :size="16" color="#096A2E">
-                                <CircleCheck />
-                        </el-icon>
-                        <p>Server config test completed</p>
-                    </div>
-                </div>
-                 <div class="status-container">
-                    <div v-if="othersLoading">
-                        <el-icon :size="16" color="#096A2E">
-                                <Loading />
-                        </el-icon>
-                        <p>Testing theme & plugins..</p>
-                    </div>
-                    <div v-else>
-                        <el-icon :size="16" color="#096A2E">
-                                <CircleCheck />
-                        </el-icon>
-                        <p>Others test completed</p>
-                    </div>
-                </div>
-                <div v-if="downlodable" style="margin-top: 45px;">
-                    <el-button type="primary" icon="el-icon-download" size="mini" plain @click="download">Download Report</el-button>
-                </div>
-            </el-col>
-
-		</el-container>
-	</div>
+            <h4>#Server Info</h4>
+            <DebugTemplate :render-content="serverInfos" />
+          </div>
+        </div>
+      </el-col>
+      <el-col
+        class="debug-right-side"
+        :lg="6"
+        :sm="24"
+      >
+        <h4>#Debug Log</h4>
+        <div class="status-container">
+          <div v-if="wpLoading">
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <Loading />
+            </el-icon>
+            <p>WP Compatibility..</p>
+          </div>
+          <div v-else>
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <CircleCheck />
+            </el-icon>
+            <p>WordPress test completed</p>
+          </div>
+        </div>
+        <div class="status-container">
+          <div v-if="adrmLoading">
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <Loading />
+            </el-icon>
+            <p>Plugin test Compatibility..</p>
+          </div>
+          <div v-else>
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <CircleCheck />
+            </el-icon>
+            <p>Plugin test completed</p>
+          </div>
+        </div>
+        <div class="status-container">
+          <div v-if="serverLoading">
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <Loading />
+            </el-icon>
+            <p>Server Compatibility..</p>
+          </div>
+          <div v-else>
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <CircleCheck />
+            </el-icon>
+            <p>Server config test completed</p>
+          </div>
+        </div>
+        <div class="status-container">
+          <div v-if="othersLoading">
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <Loading />
+            </el-icon>
+            <p>Testing theme & plugins..</p>
+          </div>
+          <div v-else>
+            <el-icon
+              :size="16"
+              color="#096A2E"
+            >
+              <CircleCheck />
+            </el-icon>
+            <p>Others test completed</p>
+          </div>
+        </div>
+        <div
+          v-if="downlodable"
+          style="margin-top: 45px;"
+        >
+          <el-button
+            type="primary"
+            icon="el-icon-download"
+            size="mini"
+            plain
+            @click="download"
+          >
+            Download Report
+          </el-button>
+        </div>
+      </el-col>
+    </el-container>
+  </div>
 </template>
 
 <script>
     import DebugTemplate from './DebugTemplate.vue';
-    import Clipboard from 'clipboard';
     import ClipboardJS from 'clipboard';
 
 	export default {
-		name: 'debug',
+		name: 'Debug',
+        components: {
+            DebugTemplate
+        },
 		data() {
 			return {
                 wpLoading: false,
@@ -131,9 +186,6 @@
                 adrmInfo: {}
 			};
 		},
-        components: {
-            DebugTemplate
-        },
         computed: {
             downlodable() {
                 return !this.wpLoading &&
@@ -142,6 +194,28 @@
                 !this.adrmLoading;
             }
         },
+		created() {
+			this.getWPData();
+            this.getADRMData();
+            this.getOthersData();
+            this.getServerData();
+
+            if(!window.wpf_clip_inited) {
+                 var clipboard = new ClipboardJS('.copy', {
+                    text: () => {
+                        return this.getString();
+                    }
+                });
+                clipboard.on('success', () => {
+                    this.$message({
+                        offset: 39,
+                        message: 'Copied to Clipboard!',
+                        type: 'success'
+                    });
+                });
+                window.wpf_clip_inited = true;
+            }
+		},
 		methods: {
             copyData() {
                 this.getString();
@@ -157,7 +231,7 @@
                 document.querySelector('body').removeChild(link);
             },
             getConcatString(obj) {
-                let str = ''
+                let str = '';
                 for (var item in obj) {
                     str += `${obj[item].label} : ${obj[item].result}\n`;
                 }
@@ -173,7 +247,7 @@
                 str += "\n#Server Infos\n";
                 str += this.getConcatString(this.serverInfos);
                 str += `\n#All Active Plugins (${this.plugins.total})\n`;
-                for (let plugin in this.plugins.all) {
+                for (const plugin in this.plugins.all) {
                     str += ` ${this.plugins.all[plugin]} \n`;
                 }
                 return str;
@@ -188,7 +262,7 @@
                 }).then((response) => {
 						this.wordpress = response.data;
                         this.wpLoading = false;
-                        console.log('wp data', response, 'loading', this.wpLoading)
+                        console.log('wp data', response, 'loading', this.wpLoading);
 					})
 					.always(() => {
                         this.wpLoading = false;
@@ -220,7 +294,7 @@
 						this.themeInfo = response.data.themes;
                         this.plugins = response.data.plugins;
                         this.othersLoading = false;
-                        console.log('others data', response, 'loading', this.othersLoading)
+                        console.log('others data', response, 'loading', this.othersLoading);
 					})
 					.always(() => {
                         this.othersLoading = false;
@@ -236,35 +310,13 @@
                 }).then((response) => {
 						this.serverInfos = response.data;
                         this.serverLoading = false;
-                        console.log('server data', response, 'loading', this.serverLoading)
+                        console.log('server data', response, 'loading', this.serverLoading);
                     })
 					.always(() => {
                         this.serverLoading = false;
 					});
             },
 
-		},
-		created() {
-			this.getWPData();
-            this.getADRMData();
-            this.getOthersData()
-            this.getServerData();
-
-            if(!window.wpf_clip_inited) {
-                 var clipboard = new ClipboardJS('.copy', {
-                    text: () => {
-                        return this.getString();
-                    }
-                });
-                clipboard.on('success', (e) => {
-                    this.$message({
-                        offset: 39,
-                        message: 'Copied to Clipboard!',
-                        type: 'success'
-                    });
-                });
-                window.wpf_clip_inited = true;
-            }
 		}
 	};
 </script>

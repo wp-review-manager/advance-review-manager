@@ -4,22 +4,21 @@
       :is="dynamicComponent"
       v-if="dynamicComponent"
     /> -->
-        <Editor v-if="icon == 'Editor'" />
-        <Settings v-else-if="icon == 'Settings'" />
-        <LeftBack v-else-if="icon == 'LeftBack'" />
-        <Plus v-else-if="icon == 'Plus'" />
+    <Editor v-if="icon == 'Editor'" />
+    <Settings v-else-if="icon == 'Settings'" />
+    <LeftBack v-else-if="icon == 'LeftBack'" />
+    <Plus v-else-if="icon == 'Plus'" />
 
-        <Eye v-else-if="icon == 'Eye'" />
-        <Edit v-else-if="icon == 'Edit'" />
-        <Delete v-else-if="icon == 'Delete'" />
-        <List v-else-if="icon == 'List'" />
-
+    <Eye v-else-if="icon == 'Eye'" />
+    <Edit v-else-if="icon == 'Edit'" />
+    <Delete v-else-if="icon == 'Delete'" />
+    <List v-else-if="icon == 'List'" />
   </div>
 </template>
 
 <script>
 import Editor from './Editor.vue';
-import  Settings  from './Settings.vue'
+import  Settings  from './Settings.vue';
 import LeftBack from './LeftBack.vue';
 import Plus from './Plus.vue';
 import Eye from './Eye.vue';

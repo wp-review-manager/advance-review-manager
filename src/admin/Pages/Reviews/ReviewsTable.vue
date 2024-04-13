@@ -1,84 +1,129 @@
 <template>
-    <div class="adrm-reviews-wrapper"> 
-        <h3>{{ formTitle }} - Reviews</h3>
-        <div class="adrm-reviews"> 
-            <el-table :loading="loading" :data="reviews" style="width: 100%">
-                <el-table-column prop="created_at" fixed label="Date" width="200" sortable>
-                    <template #default="scope">
-                        <p>{{ formatDate(scope.row.created_at) }}</p>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="name" label="Name" width="180"/>
-                <el-table-column prop="email" label="Email" width="180"/>
-                <el-table-column prop="message" label="Review" width="250">
-                    <template #default="scope">
-                        <p>{{ shortenMessage(scope.row.message) }}</p>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="rating" label="Rating" width="200" sortable>
-                    <template #default="scope">
-                        <el-rate v-model="scope.row.rating" disabled text-color="#ff9900"></el-rate>
-                    </template>
-                </el-table-column>
-                <el-table-column label="Profile" width="180" >
-                    <template #default="scope">
-                        <div style="display: flex; align-items: center">
-                            <el-image :src="scope.row.avatar" style="width: 80px">
-                                <template #placeholder>
-                                    <div class="image-slot">Loading<span class="dot">...</span></div>
-                                </template>
-                            </el-image>
-                        </div>
-                    </template>
-                </el-table-column>
-                <el-table-column fixed="right" label="Actions" >
-                    <template #default="scope">
-                        <div style="display: flex; gap: 10px; align-items: center"> 
-                            <router-link  :to="`/form/edit/${formID}/reviews/${scope.row.id}`"> 
-                                <Icon icon="Eye" />
-                            </router-link>
-                            <p>|</p>
-                            <button  @click="deleteHandler(scope.row.id)"> 
-                                <Icon icon="Delete" />
-                            </button>
-                        </div>
-                    </template>
-                
-                </el-table-column>
-            </el-table>
-        </div>
-        <div class="adrm_pagination">
-            <div class="pager-wrap">
-                <span class="text">Page 1 to {{ pagination.per_page }} of {{ total }}</span>
-                <!-- <el-select v-model="pagination.per_page" placeholder="Select">
+  <div class="adrm-reviews-wrapper"> 
+    <h3>{{ formTitle }} - Reviews</h3>
+    <div class="adrm-reviews"> 
+      <el-table
+        :loading="loading"
+        :data="reviews"
+        style="width: 100%"
+      >
+        <el-table-column
+          prop="created_at"
+          fixed
+          label="Date"
+          width="200"
+          sortable
+        >
+          <template #default="scope">
+            <p>{{ formatDate(scope.row.created_at) }}</p>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="name"
+          label="Name"
+          width="180"
+        />
+        <el-table-column
+          prop="email"
+          label="Email"
+          width="180"
+        />
+        <el-table-column
+          prop="message"
+          label="Review"
+          width="250"
+        >
+          <template #default="scope">
+            <p>{{ shortenMessage(scope.row.message) }}</p>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="rating"
+          label="Rating"
+          width="200"
+          sortable
+        >
+          <template #default="scope">
+            <el-rate
+              v-model="scope.row.rating"
+              disabled
+              text-color="#ff9900"
+            />
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="Profile"
+          width="180"
+        >
+          <template #default="scope">
+            <div style="display: flex; align-items: center">
+              <el-image
+                :src="scope.row.avatar"
+                style="width: 80px"
+              >
+                <template #placeholder>
+                  <div class="image-slot">
+                    Loading<span class="dot">...</span>
+                  </div>
+                </template>
+              </el-image>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column
+          fixed="right"
+          label="Actions"
+        >
+          <template #default="scope">
+            <div style="display: flex; gap: 10px; align-items: center"> 
+              <router-link :to="`/form/edit/${formID}/reviews/${scope.row.id}`"> 
+                <Icon icon="Eye" />
+              </router-link>
+              <p>|</p>
+              <button @click="deleteHandler(scope.row.id)"> 
+                <Icon icon="Delete" />
+              </button>
+            </div>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+    <div class="adrm_pagination">
+      <div class="pager-wrap">
+        <span class="text">Page 1 to {{ pagination.per_page }} of {{ total }}</span>
+        <!-- <el-select v-model="pagination.per_page" placeholder="Select">
                     <el-option v-for="item in page_sizes" :key="item" :label="item + ' Per page'" :value="item" />
                 </el-select> -->
-            </div>
+      </div>
 
-            <div class="pagination_page_list">
-                <el-pagination @current-change="changePage"
-                    :current-page.sync="currentPage" :page-sizes="page_sizes"
-                    :page-size="pageSize" layout="prev, pager, next" :total="total">
-                </el-pagination>
-            </div>
-        </div>
-        <AppModal
-            width="40%"
-            :dialog-visible-prop="dialogVisibleDeleteProp"
-            :confirm-btn-label="'Delete'"
-            :title="'Confirmation Delete review!'"
-            @update:handle-dialog-close="handleDelDialogClose"
-        >
-            <div class="adrm-delete-confirmation">
-                <p>Are you sure you want to delete this review?</p>
-            </div>
-        </AppModal>
+      <div class="pagination_page_list">
+        <el-pagination
+          v-model:current-page="currentPage"
+          :page-sizes="page_sizes"
+          :page-size="pageSize"
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="changePage"
+        />
+      </div>
     </div>
+    <AppModal
+      width="40%"
+      :dialog-visible-prop="dialogVisibleDeleteProp"
+      :confirm-btn-label="'Delete'"
+      :title="'Confirmation Delete review!'"
+      @update:handle-dialog-close="handleDelDialogClose"
+    >
+      <div class="adrm-delete-confirmation">
+        <p>Are you sure you want to delete this review?</p>
+      </div>
+    </AppModal>
+  </div>
 </template>
 
 <script>
 import Icon from '../../Icons/Index.vue';
-import { ElNotification } from 'element-plus'
+import { ElNotification } from 'element-plus';
 import AppModal from '../Common/AppModal.vue';
 import moment from 'moment';
 
@@ -103,7 +148,12 @@ export default {
             deleteReviewId: null,
             formID: this.$route.params.id,
             formTitle: '',
-        }
+        };
+    },
+    created() {
+        this.dialogVisibleDeleteProp = false;
+        this.getForm();
+        this.getReviews();
     },
 
     methods: {
@@ -175,13 +225,13 @@ export default {
         },
         changePage(page) {
             this.currentPage = page;
-            this.getReviews()
+            this.getReviews();
         },
         handleClose() {
             this.dialogVisibleDeleteProp = false;
             
         },
-        handleSuccess(successOrCancel) {
+        handleSuccess() {
             this.dialogVisible = false;
         },
         handleDelDialogClose(successOrCancel) {
@@ -198,22 +248,17 @@ export default {
                     nonce: window.ADRMAdmin.adrm_nonce,
                     reviewID: this.deleteReviewId
                 },
-                success(res) {
+                success() {
                     _that.loading = false;
                     _that.getReviews();
                 },
-                error(err) {
+                error() {
                     _that.loading = false;
                 }
                 });
             }
             this.dialogVisibleDeleteProp = false;
         },
-    },
-    created() {
-        this.dialogVisibleDeleteProp = false;
-        this.getForm();
-        this.getReviews();
     }
-}
+};
 </script>

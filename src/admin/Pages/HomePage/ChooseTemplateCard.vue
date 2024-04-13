@@ -8,12 +8,12 @@
       <el-card :body-style="{ padding: '0px' }">
         <img
           :src="getTemplateImage(template.thumbnail)"
-          style="width: 100%; height: 200px"
+          style="width: 100%; height: 200px; padding: 10px; padding-bottom: 0px;"
           alt="image"
           class="image"
         >
         <div style="padding: 14px">
-          <span>{{ template.title }}</span>
+          <p style="font-weight: 600; text-align: center; padding: 10px 0px;">{{ template.title }}</p>
           <div class="bottom">
             <el-button
               style="width: 100%;"

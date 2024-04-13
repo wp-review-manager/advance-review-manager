@@ -55,8 +55,8 @@
     <AppModal
       width="70%"
       :dialog-visible-prop="dialogVisibleProp"
+      :has-confirm-action="false"
       @update:handle-dialog-close="handleDialogClose"
-      :hasConfirmAction="false"
     >
       <div class="adrm-choose-template-form">
         <HomeChooseTemplate :form-templates="formTemplate" />

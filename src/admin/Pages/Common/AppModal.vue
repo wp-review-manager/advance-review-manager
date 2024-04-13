@@ -12,9 +12,9 @@
       <span class="dialog-footer">
         <el-button @click="handleClose">{{ cancelBtnLabel }}</el-button>
         <el-button
+          v-if="hasConfirmAction"
           type="primary"
           @click="handleSuccess"
-          v-if="hasConfirmAction"
         >
           {{ confirmBtnLabel }}
         </el-button>
