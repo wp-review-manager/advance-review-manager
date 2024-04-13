@@ -4,11 +4,11 @@
 			class="adrm-debug-container"
 		>
             <el-col class="debug-left-side"
-                v-if="!wpLoading && !serverLoading && !othersLoading" :lg="18" :sm="24">
+                 v-loading="true" :lg="18" :sm="24">
                 <code class="copy">
                     <el-icon :size="16" color="#000">
-                 <Document />
-            </el-icon> Copy
+                        <Document />
+                    </el-icon> Copy
                 </code>
                 <div class="notice-container">
                     <el-icon :size="16" color="#000">
@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div v-if="downlodable" style="margin-top: 45px;">
-                    <el-button type="primary" icon="el-icon-download" size="mini" plain @click="download">Download Report</el-button>
+                    <el-button type="primary" size="small" plain @click="download"><el-icon :size="16"><Download /></el-icon>Download Report</el-button>
                 </div>
             </el-col>
 
@@ -114,6 +114,10 @@
     import DebugTemplate from './DebugTemplate.vue';
     import Clipboard from 'clipboard';
     import ClipboardJS from 'clipboard';
+    import { ref } from 'vue'
+    const loading = ref(true)
+
+import { ElNotification } from 'element-plus';
 
 	export default {
 		name: 'debug',
@@ -188,7 +192,6 @@
                 }).then((response) => {
 						this.wordpress = response.data;
                         this.wpLoading = false;
-                        console.log('wp data', response, 'loading', this.wpLoading)
 					})
 					.always(() => {
                         this.wpLoading = false;
@@ -220,7 +223,6 @@
 						this.themeInfo = response.data.themes;
                         this.plugins = response.data.plugins;
                         this.othersLoading = false;
-                        console.log('others data', response, 'loading', this.othersLoading)
 					})
 					.always(() => {
                         this.othersLoading = false;
@@ -236,7 +238,6 @@
                 }).then((response) => {
 						this.serverInfos = response.data;
                         this.serverLoading = false;
-                        console.log('server data', response, 'loading', this.serverLoading)
                     })
 					.always(() => {
                         this.serverLoading = false;
@@ -257,7 +258,7 @@
                     }
                 });
                 clipboard.on('success', (e) => {
-                    this.$message({
+                    ElNotification({
                         offset: 39,
                         message: 'Copied to Clipboard!',
                         type: 'success'
