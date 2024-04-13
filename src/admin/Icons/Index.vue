@@ -12,7 +12,6 @@
         <Eye v-else-if="icon == 'Eye'" />
         <Edit v-else-if="icon == 'Edit'" />
         <Delete v-else-if="icon == 'Delete'" />
-
         <List v-else-if="icon == 'List'" />
 
   </div>
@@ -44,7 +43,7 @@ export default {
         Eye,
         Edit,
         Delete,
-        List
+        List,
     },
     props: {
         icon: {

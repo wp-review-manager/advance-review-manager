@@ -1,7 +1,7 @@
 import routes from './routes';
 import 'element-plus/dist/index.css'
 import Clipboard from 'v-clipboard'
-// import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import { createWebHashHistory, createRouter } from 'vue-router'
 import Framework from './Bits/Framework';
 
@@ -15,9 +15,9 @@ const framework = new Framework();
 
 framework.app.config.globalProperties.appVars = window.ADRMAdmin;
 
-// Object.keys(ElementPlusIconsVue).forEach(key => {
-//     framework.app.component(key, ElementPlusIconsVue[key])
-// });
+Object.keys(ElementPlusIconsVue).forEach(key => {
+    framework.app.component(key, ElementPlusIconsVue[key])
+});
 framework.app.use(router);
 framework.app.use(Clipboard);
 // framework.app.use(ElementPlus);

@@ -57,6 +57,11 @@ class Actions{
                 'get_formatted_reviews' => 'getFormattedReviews',
                 'save_template_settings' => 'saveTemplateSettings',
                 'get_template_settings' => 'getTemplateSettings',
+                // debug info routes
+                'debug_info_wp' => 'getDebugInfoWP',
+                'debug_info_others' => 'getDebugInfoOthers',
+                'debug_info_server' => 'getDebugInfoServer',
+                'debug_info_adrm' => 'getDebugInfoADRM',
             );
 
             if (isset($validRoutes[$route])) {
@@ -142,6 +147,34 @@ class Actions{
         {
             if (AccessControl::hasTopLevelMenuPermission()) {
                 (new ReviewFormController)->getTemplateSettings();
+            }
+        }
+
+        public function getDebugInfoWP()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new \ADReviewManager\Controllers\GlobalSettingsController)->generateDebug('wp');
+            }
+        }
+
+        public function getDebugInfoOthers()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new \ADReviewManager\Controllers\GlobalSettingsController)->generateDebug('others');
+            }
+        }
+
+        public function getDebugInfoServer()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new \ADReviewManager\Controllers\GlobalSettingsController)->generateDebug('server');
+            }
+        }
+
+        public function getDebugInfoADRM()
+        {
+            if (AccessControl::hasTopLevelMenuPermission()) {
+                (new \ADReviewManager\Controllers\GlobalSettingsController)->generateDebug('adrm');
             }
         }
 

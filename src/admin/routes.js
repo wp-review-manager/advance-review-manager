@@ -6,6 +6,7 @@ import Settings from './Pages/Editor/Settings/Settings.vue';
 import General from './Pages/Editor/Settings/General.vue';
 import ReviewsTable from './Pages/Reviews/ReviewsTable.vue';
 import Review from './Pages/Reviews/Review.vue';
+import SupportDebug from './Pages/SupportDebug/index.vue';
 
 export default [{
     path: '/',
@@ -28,7 +29,7 @@ export default [{
 {
     path: '/support-&-debug',
     name: 'support-&-debug',
-    component: Contact
+    component: SupportDebug
 },
 {
     path: '/form/edit/:id',

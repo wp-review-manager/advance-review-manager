@@ -12,6 +12,7 @@
 
 use ADReviewManager\Classes\ActivationHandler;
 use ADReviewManager\Classes\DeactivationHandler;
+use ADReviewManager\Hooks\Actions;
 
 if (!defined('ABSPATH')) {
     exit;
