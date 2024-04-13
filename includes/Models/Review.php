@@ -39,7 +39,6 @@ class Review extends Model
 
     public function getReviews($formID, $filter = null, $sort = 'newest') {
         global $wpdb;
-    
         // Sanitize input
         $formID = sanitize_text_field($formID);
         $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';

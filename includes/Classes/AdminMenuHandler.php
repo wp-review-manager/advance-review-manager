@@ -101,7 +101,7 @@ class AdminMenuHandler{
             </div>
             <hr/>
             <router-view></router-view>
-        </div>;
+        </div>
         <?php
         $form_body = ob_get_clean();
         echo $form_body;

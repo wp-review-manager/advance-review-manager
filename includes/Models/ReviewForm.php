@@ -35,7 +35,9 @@ class ReviewForm extends Model
                 'edit' => true,
                 'delete' => true,
             );
-            $form->reviews = '100';
+            $reviewModel = new Review();
+            $reviews = $reviewModel->getReviews($form->ID);
+            $form->reviews = Arr::get($reviews, 'total_reviews', 0);
             $form->form_fields = maybe_unserialize(get_post_meta($form->ID, 'adrm_form_fields', true));
             $form->preview_url = site_url('?adrm_review_preview=' . $form->ID);
             $forms[] = $form;
