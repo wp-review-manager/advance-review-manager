@@ -144,10 +144,27 @@ class Review extends Model
 
     public static function sanitizeData($data) {
         $data['formID'] = sanitize_text_field( $data['formID'] );
-        foreach ($data['formData'] as $key => $value) {
-            $data['formData'][$key]['name'] = sanitize_text_field( $value['name'] );
-            $data['formData'][$key]['value'] = sanitize_text_field( $value['value'] );
-            $data['formData'][$key]['label'] = sanitize_text_field( $value['label'] );
+    
+        foreach ($data['formComponent'] as $key => $value) {
+            $data['formComponent'][$key]['name'] = sanitize_text_field( $value['name'] );
+            $data['formComponent'][$key]['value'] = sanitize_text_field( $value['value'] );
+            $data['formComponent'][$key]['label'] = sanitize_text_field( $value['label'] );
+        }
+        foreach ($data['formFieldData'] as $key => $value) {
+            if (is_array($value)) {
+                // Mainly for ratings
+                foreach ($value as $k => $v) {
+                   if (is_array($v)) {
+                        foreach ($v as $k1 => $v1) {
+                            $data['formFieldData'][$key][$k][$k1] = sanitize_text_field($v1);
+                        }
+                    } else {
+                        $data['formFieldData'][$key][$k] = sanitize_text_field($v);
+                    }
+                }
+            } else {
+                $data['formFieldData'][$key] = sanitize_text_field($value);
+            }
         }
 
         return $data; 
