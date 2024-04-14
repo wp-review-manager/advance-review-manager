@@ -1,0 +1,24 @@
+{
+  "src/admin/start.js": {
+    "file": "start.js",
+    "src": "src/admin/start.js",
+    "isEntry": true,
+    "css": [
+      "assets/start.62de3321.css"
+    ]
+  },
+  "src/public/js/form_preview.js": {
+    "file": "form_preview.js",
+    "src": "src/public/js/form_preview.js",
+    "isEntry": true
+  },
+  "src/scss/admin/app.scss": {
+    "file": "assets/app.d7aeaba0.css",
+    "src": "src/scss/admin/app.scss",
+    "isEntry": true
+  },
+  "src/admin/start.css": {
+    "file": "assets/start.62de3321.css",
+    "src": "src/admin/start.css"
+  }
+}
