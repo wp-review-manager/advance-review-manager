@@ -32,11 +32,11 @@ class AdminMenuHandler{
             //     'manage_options',
             //     'admin.php?page=advance-review-manager.php#/settings',
             // );
-            $submenu['advance-review-manager.php']['user-guide'] = array(
-                'User Guide',
-                'manage_options',
-                'admin.php?page=advance-review-manager.php#/user-guide',
-            );
+            // $submenu['advance-review-manager.php']['user-guide'] = array(
+            //     'User Guide',
+            //     'manage_options',
+            //     'admin.php?page=advance-review-manager.php#/support-&-debug',
+            // );
             $submenu['advance-review-manager.php']['support-&-debug'] = array(
                 'Support & Debug',
                 'manage_options',
@@ -82,7 +82,7 @@ class AdminMenuHandler{
         <div class="adrm-admin-page" id="ADRM_app">
             <div class="main-menu text-white-200 bg-wheat-600">
                 <div class="adrm-logo">
-                    <?php echo Helper::LogoSvg() ?>
+                   <a href="admin.php?page=advance-review-manager.php#/"> <?php echo Helper::LogoSvg() ?> </a>
                 </div>
                 <div class="adrm-menu-item">
                     <router-link to="/">
@@ -91,9 +91,9 @@ class AdminMenuHandler{
                     <!-- <router-link to="/settings" >
                         Settings 
                     </router-link> -->
-                    <router-link to="/user-guide" >
+                    <!-- <router-link to="/user-guide" >
                         User Guide 
-                    </router-link>
+                    </router-link> -->
                     <router-link to="/support-&-debug" >
                         Support And Debug
                     </router-link>

@@ -23,7 +23,7 @@
 			</el-col>
 		</el-row>
 		<el-row :gutter="20">
-			<el-col :xs="24" :md="12">
+			<el-col :xs="24" :md="16">
 				<div class="adrm-support_block">
 					<div class="support_block_header">
 						<h3>Documentation and User Guide</h3>
@@ -32,7 +32,13 @@
 						<ul class="support_block_lists">
 							<li v-for="(list,i) in docs" :key="i">
 								<h4>{{ list.title }}</h4>
-								<ul>
+								<el-carousel indicator-position="outside" height="auto" arrow="always" v-if="i == 'screenshots'">
+									<el-carousel-item v-for="(doc, it) in list.docs" :key="it" style="overflow-y: auto">
+										<p>{{ doc.title }}</p>
+										<img :src="doc.src" alt="" style="width: 100%" />
+									</el-carousel-item>
+								</el-carousel>
+								<ul v-else>
 									<li v-for="(doc, it) in list.docs" :key="it">
 										<a
 											target="_blank"
@@ -48,7 +54,7 @@
 					</div>
 				</div>
 			</el-col>
-			<el-col :xs="24" :md="12">
+			<el-col :xs="24" :md="8">
 				<div class="adrm-support_block">
 					<div class="support_block_header">
 						<h3><i class="el-icon-star-off"/> Top new features in V-1.0.0 * *</h3>
@@ -123,7 +129,7 @@
 			</el-col>
 		</el-row>
 		<el-row v-if="!has_pro" :gutter="20">
-			<el-col :xs="24" :md="12">
+			<el-col :xs="24" :md="16">
 				<div class="adrm-support_block">
 					<div class="support_block_header">
 						<h4>Feedback and Support us</h4>
@@ -182,6 +188,39 @@
 							}
 						]
 					},
+					screenshots: {
+                        title: 'Plugin overview with screenshots',
+                        docs: [
+                            {
+                                title: 'Choose Templates',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-templates.jpg'
+                            },
+                            {
+                                title: 'Editor',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-form-editor.jpg'
+                            },
+                            {
+                                title: 'Preview',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-form-preview.jpg'
+                            },
+                            {
+                                title: 'Review Forms',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-forms-dashboard.jpg'
+                            },
+                            {
+                                title: 'Reviews',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-reviews-frontend.jpg'
+                            },
+                            {
+                                title: 'Reviews For Admin view',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-reviews-backend.jpg'
+                            },
+                            {
+                                title: 'Review Details For Admin view',
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-backend.jpg'
+                            }
+                        ]
+                    },
 					form_configaration: {
 						title: 'Review Form Configuration',
 						docs: [
@@ -384,5 +423,23 @@ ul.adrm-no_style.top-features a {
         color: #2271b1 !important;
         text-decoration: none;
     }
+}
+
+.el-carousel__item{
+	height: 450px;
+	background-color: #d3dce6;
+}
+.el-carousel__arrow{
+	color: #096A2E !important
+}
+.el-carousel__item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: flex;
+	color: #475669;
+	opacity: 0.75;
+	line-height: 300px;
+	margin: 0;
 }
 </style>

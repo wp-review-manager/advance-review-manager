@@ -4,7 +4,7 @@
     "src": "src/admin/start.js",
     "isEntry": true,
     "css": [
-      "assets/start.62de3321.css"
+      "assets/start.3d1573df.css"
     ]
   },
   "src/public/js/form_preview.js": {
@@ -18,7 +18,7 @@
     "isEntry": true
   },
   "src/admin/start.css": {
-    "file": "assets/start.62de3321.css",
+    "file": "assets/start.3d1573df.css",
     "src": "src/admin/start.css"
   }
 }
