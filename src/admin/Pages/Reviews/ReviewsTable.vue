@@ -59,7 +59,7 @@
             <div style="display: flex; align-items: center">
               <el-image
                 :src="scope.row.avatar"
-                style="width: 80px"
+                style="width: 40px; border-radius: 50%;"
               >
                 <template #placeholder>
                   <div class="image-slot">
