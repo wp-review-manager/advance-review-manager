@@ -27,11 +27,11 @@ class AdminMenuHandler{
                 'manage_options',
                 'admin.php?page=advance-review-manager.php#/',
             );
-            $submenu['advance-review-manager.php']['settings'] = array(
-                'Settings',
-                'manage_options',
-                'admin.php?page=advance-review-manager.php#/settings',
-            );
+            // $submenu['advance-review-manager.php']['settings'] = array(
+            //     'Settings',
+            //     'manage_options',
+            //     'admin.php?page=advance-review-manager.php#/settings',
+            // );
             $submenu['advance-review-manager.php']['user-guide'] = array(
                 'User Guide',
                 'manage_options',
