@@ -1,13 +1,13 @@
 === Advance Review Manager ===
 
-* Contributors: dasnitesh780, akmelias
-* Tags: reviews, feedback, forms, review manager
-* Requires at least: 4.5
-* Tested up to: 6.5
-* Stable tag: 1.0.0
-* Requires PHP: 7.1
-* License: GPLv2 or later
-* License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Contributors: dasnitesh780, akmelias
+Tags: Feedback, Reviews, Testimonials, Forms, User Experience, Customer Satisfaction, WordPress Plugin
+Requires at least: 4.5
+Tested up to: 6.5
+Stable tag: 1.0.0
+Requires PHP: 7.1
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
