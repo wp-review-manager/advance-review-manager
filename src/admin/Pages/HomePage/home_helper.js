@@ -440,7 +440,7 @@ const formTemplate = {
             label: 'Rating',
             name: 'rating',
             type: 'rating',
-            template_required: true,
+            template_required: false,
             options: ratingOptions,
             enabled: true,
         },
