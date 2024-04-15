@@ -57,7 +57,7 @@
 			<el-col :xs="24" :md="8">
 				<div class="adrm-support_block">
 					<div class="support_block_header">
-						<h3><i class="el-icon-star-off"/> Top new features in V-1.0.0 * *</h3>
+						<h3><i class="el-icon-star-off"/> Top features in V-1.0.0 * *</h3>
 					</div>
 					<div class="support_block_body">
 						<p>
@@ -193,31 +193,31 @@
                         docs: [
                             {
                                 title: 'Choose Templates',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-templates.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-templates.jpg'
                             },
                             {
                                 title: 'Editor',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-form-editor.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-form-editor.jpg'
                             },
                             {
                                 title: 'Preview',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-form-preview.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-preview.jpg'
                             },
                             {
                                 title: 'Review Forms',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-forms-dashboard.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-review-forms-dashboard.jpg'
                             },
                             {
                                 title: 'Reviews',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-reviews-frontend.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-reviews-frontend.jpg'
                             },
                             {
                                 title: 'Reviews For Admin view',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-reviews-backend.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-reviews-backend.jpg'
                             },
                             {
                                 title: 'Review Details For Admin view',
-                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-backend.jpg'
+                                src: window.ADRMAdmin.screenshots_url + 'adrm-review-backend.jpg'
                             }
                         ]
                     },
@@ -254,7 +254,7 @@
 						title: 'Need And Expert Support?',
 						des:
 							'Our EXPERTS would like to assist you for your query and any customization.',
-						url: 'https://www.akmelias.com/',
+						url: 'https://www.akmelias.com/#contact',
 						img: 'images/supports/support.png',
 						btn: 'Contact Support'
 					},
@@ -270,7 +270,7 @@
 						title: 'Found a Bug?',
 						des:
 							'Please report us and we promise we will fix that as soon as humanly possible',
-						url: 'https://www.akmelias.com/',
+						url: 'https://www.akmelias.com/#contact',
 						img: 'images/supports/bug.png',
 						btn: 'Let us know'
 					}
@@ -426,7 +426,7 @@ ul.adrm-no_style.top-features a {
 }
 
 .el-carousel__item{
-	height: 450px;
+	height: 600px;
 	background-color: #d3dce6;
 }
 .el-carousel__arrow{
