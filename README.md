@@ -35,24 +35,26 @@ Advance Review Manager is a powerful yet easy-to-use WordPress plugin that empow
 
 4. **Configure Settings:** Configure the plugin settings according to your requirements.
 
-5. **Shortcode Usage:** Use the shortcode `[advance-review-manager]` in your posts or pages to display the review form.
+5. **Shortcode Usage:** Use the shortcode `[advance-review-manager]` in your posts or pages to display the review form and reviews.
 
 6. **Customize Shortcode:** Customize the shortcode to fit your needs. For example:
-   - To display only the review form without reviews, ex: `[advance-review-manager id="117" show_review_template="no"]`
-   - To display only reviews without the review form, ex: `[advance-review-manager id="117" show_review_form="no"]`
+   - To display only the review form without reviews,
+     - ex: `[advance-review-manager id="117" show_review_template="no"]`
+   - To display only reviews without the review form, 
+      - ex: `[advance-review-manager id="117" show_review_form="no"]`
    - Explore additional customization options for the shortcode to tailor it to your specific requirements.
 
 7. **Customize Appearance and Functionality:** Customize the appearance and functionality of the review form using the available options.
 
 == Screenshots ==
 
-1. ![Review Form Templates](assets/images/screenshots/adrm-templates.jpg)
-2. ![Review From Editor](assets/images/screenshots/adrm-form-editor.jpg)
-3. ![Review From Preview](assets/images/screenshots/adrm-preview.png)
-4. ![Review Forms Dashboard](assets/images/screenshots/adrm-review-forms-dashboard.jpg)
-5. ![Review Collections For Users view ](assets/images/screenshots/adrm-reviews-frontend.jpg)
-6. ![Review Collections For Admin view](assets/images/screenshots/adrm-reviews-backend.jpg)
-3. ![Review Details For Admin view](assets/images/screenshots/adrm-review-backend.jpg)
+1. ![Review Form Templates](screenshots/adrm-templates.jpg)
+2. ![Review From Editor](screenshots/adrm-form-editor.jpg)
+3. ![Review From Preview](screenshots/adrm-preview.jpg)
+4. ![Review Forms Dashboard](screenshots/adrm-review-forms-dashboard.jpg)
+5. ![Review Collections For Users view ](screenshots/adrm-reviews-frontend.jpg)
+6. ![Review Collections For Admin view](screenshots/adrm-reviews-backend.jpg)
+3. ![Review Details For Admin view](screenshots/adrm-review-backend.jpg)
 
 == Frequently Asked Questions ==
 
