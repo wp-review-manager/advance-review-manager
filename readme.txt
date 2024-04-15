@@ -38,8 +38,10 @@ Advance Review Manager is a powerful yet easy-to-use WordPress plugin that empow
 5. **Shortcode Usage:** Use the shortcode `[advance-review-manager]` in your posts or pages to display the review form.
 
 6. **Customize Shortcode:** Customize the shortcode to fit your needs. For example:
-   - To display only the review form without reviews, ex: `[advance-review-manager id="117" show_review_template="no"]`
-   - To display only reviews without the review form, ex: `[advance-review-manager id="117" show_review_form="no"]`
+   - To display only the review form without reviews,
+     - ex: `[advance-review-manager id="117" show_review_template="no"]`
+   - To display only reviews without the review form, 
+      - ex: `[advance-review-manager id="117" show_review_form="no"]`
    - Explore additional customization options for the shortcode to tailor it to your specific requirements.
 
 7. **Customize Appearance and Functionality:** Customize the appearance and functionality of the review form using the available options.
