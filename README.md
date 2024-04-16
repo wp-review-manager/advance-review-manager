@@ -1,13 +1,15 @@
-=== Advance Review Manager ===
+# Advance Review Manager
 
-Contributors: dasnitesh780, akmelias
-Tags: Feedback, Reviews, Testimonials, Forms, User Experience, Customer Satisfaction, WordPress Plugin
-Requires at least: 4.5
-Tested up to: 6.5
-Stable tag: 1.0.0
-Requires PHP: 7.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Welcome to **Advance Review Manager** – your go-to solution for handling feedback, reviews, and testimonials on your WordPress site with ease and style!
+
+**Contributors**: dasnitesh780, akmelias  
+**Tags**: Feedback, Reviews, Testimonials, Forms, User Experience, Customer Satisfaction  
+**Minimum WordPress Version Required**: 4.5  
+**Tested Up To**: 6.5  
+**Stable Version**: 1.0.0  
+**PHP Requirement**: 7.1  
+**License**: GPLv2 or later  
+**License URI**: [GPLv2](http://www.gnu.org/licenses/gpl-2.0.html)
 
 ## Description 
 
