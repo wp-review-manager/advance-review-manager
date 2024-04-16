@@ -22,58 +22,98 @@ class ReviewController
 
     public function getReviews()
     {
-        $filter = Arr::get($_REQUEST, 'filter', []);
-        $sort = Arr::get($_REQUEST, 'sort', 'newest');
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
 
-        $formID = sanitize_text_field($_REQUEST['formID']);
-        $sort = sanitize_text_field($sort);
-        $filter = sanitize_text_field($filter);
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+            wp_send_json_error(
+                [
+                    'message' => "Nonce verification failed."
+                ],
+            423);
+        } else {
+            $filter = Arr::get($_REQUEST, 'filter', []);
+            $sort = Arr::get($_REQUEST, 'sort', 'newest');
 
-        $response = (new Review)->getReviews($formID, $filter, $sort);
-        wp_send_json_success($response);
+            $formID = sanitize_text_field($_REQUEST['formID']);
+            $sort = sanitize_text_field($sort);
+            $filter = sanitize_text_field($filter);
+
+            $response = (new Review)->getReviews($formID, $filter, $sort);
+            wp_send_json_success($response);
+        }
     }
 
     public function getReview()
     {
-        $reviewID = sanitize_text_field($_REQUEST['reviewID']);
-        if (empty($reviewID)) {
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
-                    'message' => "Review Id not found."
+                    'message' => "Nonce verification failed."
                 ],
             423);
+        } else {
+            $reviewID = sanitize_text_field($_REQUEST['reviewID']);
+            if (empty($reviewID)) {
+                wp_send_json_error(
+                    [
+                        'message' => "Review Id not found."
+                    ],
+                423);
+            }
+            $response = (new Review)->getReview($reviewID);
+            wp_send_json_success($response);
         }
-        $response = (new Review)->getReview($reviewID);
-        wp_send_json_success($response);
     }
 
     public function deleteReview()
     {
-        $reviewID = sanitize_text_field($_REQUEST['reviewID']);
-        if (empty($reviewID)) {
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
-                    'message' => "Review Id not found."
+                    'message' => "Nonce verification failed."
                 ],
             423);
+        } else {
+            $reviewID = sanitize_text_field($_REQUEST['reviewID']);
+            if (empty($reviewID)) {
+                wp_send_json_error(
+                    [
+                        'message' => "Review Id not found."
+                    ],
+                423);
+            }
+            return (new Review)->deleteReview($reviewID);
         }
-        return (new Review)->deleteReview($reviewID);
     }
 
     public function getFormattedReviews()
     {
-        $filter = Arr::get($_REQUEST, 'filter', []);
-        $sort = Arr::get($_REQUEST, 'sort', 'newest');
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
 
-        $formID = sanitize_text_field($_REQUEST['formID']);
-        $sort = sanitize_text_field($sort);
-        $filter = sanitize_text_field($filter);
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+            wp_send_json_error(
+                [
+                    'message' => "Nonce verification failed."
+                ],
+            423);
+        } else {
+            $filter = Arr::get($_REQUEST, 'filter', []);
+            $sort = Arr::get($_REQUEST, 'sort', 'newest');
 
-        $response = (new Review)->getReviews($formID, $filter, $sort);
-        $formattedReviews = $this->formatReviews($response['reviews']);
-        $response['reviews'] = $formattedReviews;
-        unset($response['meta']);
-        wp_send_json_success($response);
+            $formID = sanitize_text_field($_REQUEST['formID']);
+            $sort = sanitize_text_field($sort);
+            $filter = sanitize_text_field($filter);
+
+            $response = (new Review)->getReviews($formID, $filter, $sort);
+            $formattedReviews = $this->formatReviews($response['reviews']);
+            $response['reviews'] = $formattedReviews;
+            unset($response['meta']);
+            wp_send_json_success($response);
+        }
     }
 
     public function formatReviews($reviews)

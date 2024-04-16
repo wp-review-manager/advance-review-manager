@@ -15,43 +15,64 @@ class ReviewFormController
 
     public function deleteReviewForm()
     {
-        $form_id = Arr::get($_REQUEST, 'form_id', "");
-        $form_id = sanitize_text_field($form_id);
-        if (empty($form_id)) {
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
-                    'message' => "Form Id not found."
+                    'message' => "Nonce verification failed."
                 ],
             423);
+        } else {
+            $form_id = Arr::get($_REQUEST, 'form_id', "");
+            $form_id = sanitize_text_field($form_id);
+            if (empty($form_id)) {
+                wp_send_json_error(
+                    [
+                        'message' => "Form Id not found."
+                    ],
+                423);
+            }
+            return (new ReviewForm)->deleteReviewForm($form_id);
         }
-        return (new ReviewForm)->deleteReviewForm($form_id);
     }
 
     public static function getReviewForm()
     {
-        try{
-            $form_id = $_REQUEST['form_id'];
-            $form = (new ReviewForm)->getReviewForm($form_id);
-            $reviews = (new Review)->getReviews($form_id);
-            if(empty($form)) {
-                wp_send_json_error(
-                    [
-                        'message' => "Form not found."
-                    ],423);
-            } else {
-                wp_send_json_success( array(
-                    'form' => $form,
-                    'reviews' => $reviews,
-                    'message' => 'Form retried!'
-                ),200 );
-            }
-        } catch(\Exception $e) {
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
-                    'message' => $e->getMessage()
+                    'message' => "Nonce verification failed."
                 ],
             423);
+        } else {
+            try{
+                $form_id = $_REQUEST['form_id'];
+                $form = (new ReviewForm)->getReviewForm($form_id);
+                $reviews = (new Review)->getReviews($form_id);
+                if(empty($form)) {
+                    wp_send_json_error(
+                        [
+                            'message' => "Form not found."
+                        ],423);
+                } else {
+                    wp_send_json_success( array(
+                        'form' => $form,
+                        'reviews' => $reviews,
+                        'message' => 'Form retrieved!'
+                    ),200 );
+                }
+            } catch(\Exception $e) {
+                wp_send_json_error(
+                    [
+                        'message' => $e->getMessage()
+                    ],
+                423);
+            }
         }
+       
     }
 
     public static function createReviewForm()
@@ -97,16 +118,26 @@ class ReviewFormController
 
     public function getTemplateSettings()
     {
-        try{
-            $form_id = sanitize_text_field( $_REQUEST['form_id'] );
-            
-            return (new ReviewForm)->getTemplateSettings($form_id);
-        } catch(\Exception $e) {
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
-                    'message' => $e->getMessage()
+                    'message' => "Nonce verification failed."
                 ],
             423);
+        } else {
+            try{
+                $form_id = sanitize_text_field( $_REQUEST['form_id'] );
+                
+                return (new ReviewForm)->getTemplateSettings($form_id);
+            } catch(\Exception $e) {
+                wp_send_json_error(
+                    [
+                        'message' => $e->getMessage()
+                    ],
+                423);
+            }
         }
     }
 }
