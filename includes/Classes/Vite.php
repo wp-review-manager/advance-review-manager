@@ -103,15 +103,23 @@ class Vite
         if (!file_exists($manifestPath)) {
             throw new \Exception('Vite Manifest Not Found. Run : npm run dev or npm run prod');
         }
-        $manifestFile = fopen($manifestPath, "r");
-        $manifestData = fread($manifestFile, filesize($manifestPath));
+        
+        if ( ! function_exists( 'WP_Filesystem' ) ) {
+            require_once ABSPATH . '/wp-admin/includes/file.php';
+        }
+        // Initialize the WP_Filesystem
+        global $wp_filesystem;
+        $manifestData = $wp_filesystem->get_contents( $manifestPath );
+
+        // $manifestFile = fopen($manifestPath, "r");
+        // $manifestData = fread($manifestFile, filesize($manifestPath));
         (static::$instance)->manifestData = json_decode($manifestData, true);
     }
 
     private function getFileFromManifest($src)
     {
         if (!isset((static::$instance)->manifestData[(static::$instance)->resourceDirectory . $src]) && static::isDevMode()) {
-            throw new \Exception("$src file not found in vite manifest, Make sure it is in rollupOptions input and build again");
+            throw new \Exception(esc_html("$src file not found in vite manifest, Make sure it is in rollupOptions input and build again"));
         }
 
         return (static::$instance)->manifestData[(static::$instance)->resourceDirectory . $src];

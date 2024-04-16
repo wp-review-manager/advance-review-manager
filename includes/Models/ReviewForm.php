@@ -39,7 +39,7 @@ class ReviewForm extends Model
             $reviews = $reviewModel->getReviews($form->ID);
             $form->reviews = Arr::get($reviews, 'total_reviews', 0);
             $form->form_fields = maybe_unserialize(get_post_meta($form->ID, 'adrm_form_fields', true));
-            $form->preview_url = site_url('?adrm_review_preview=' . $form->ID);
+            $form->preview_url = site_url('?adrm_review_preview=' . $form->ID . '&nonce=' . wp_create_nonce('advance-review-manager-nonce'));
             $forms[] = $form;
         }
 

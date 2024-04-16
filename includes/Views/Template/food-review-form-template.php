@@ -13,7 +13,7 @@ if ($enablePagination == 'true') {
 }
 
 ?>
-<div data-template-type="<?php echo $form->post_name ?>" data-form-id="<?php echo $form->ID ?>" class="review-template_settings_wrapper">
+<div data-template-type="<?php echo esc_html($form->post_name) ?>" data-form-id="<?php echo esc_html($form->ID) ?>" class="review-template_settings_wrapper">
     <div class="review-template">
         <?php
         if (empty($reviews)) {
@@ -54,7 +54,7 @@ if ($enablePagination == 'true') {
             </div>
         </div>
         <div class="adrm_food_review_template_wrapper">
-        <h3 class="adrm-heading">CUSTOMER REVIEWS (<?php echo $total_reviews ?>)</h3>
+        <h3 class="adrm-heading">CUSTOMER REVIEWS (<?php echo esc_html($total_reviews) ?>)</h3>
 
             <?php foreach ($reviews as $review) {
                 $average_rating = Arr::get($review, 'average_rating');
@@ -68,10 +68,10 @@ if ($enablePagination == 'true') {
                     <?php echo get_avatar(Arr::get($review, 'email'), 96) ?>
                     </div>
                     <div class="adrm-reviewer-name">
-                        <span><?php echo Arr::get($review, 'name'); ?></span>
+                        <span><?php echo esc_html(Arr::get($review, 'name')); ?></span>
                     </div>
                     <div class="adrm-reviewer-email">
-                        <span><?php echo Arr::get($review, 'email'); ?></span>
+                        <span><?php echo esc_html(Arr::get($review, 'email')); ?></span>
                     </div>
 
                 </div>
@@ -79,21 +79,21 @@ if ($enablePagination == 'true') {
                     <div class="adrm-review-rating">
                         <div class="adrm-star-rating">
                             <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                <label name="rating" class="<?php echo $i <= $average_rating ? 'active' : ''; ?>" value="<?php echo $i; ?>">★</label>
+                                <label name="rating" class="<?php echo esc_attr($i <= $average_rating ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
                             <?php } ?>
                         </div>
-                        <span class="adrm-review-date"> Reviewed <?php echo (new Helper)->formatDate($created_at); ?></span>
+                        <span class="adrm-review-date"> Reviewed <?php echo esc_html((new Helper)->formatDate($created_at)); ?></span>
                     </div>
                     <div class="adrm-review-content">
-                        <p><?php echo Arr::get($review, 'message'); ?></p>
+                        <p><?php echo esc_html(Arr::get($review, 'message')); ?></p>
                     </div>
                     <div class="review-categories">
                         <?php foreach ($ratings as $rating) { ?>
                             <div class="adrm-star-rating">
                                 <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                    <label name="rating" class="<?php echo $i <= Arr::get($rating, 'value') ? 'active' : ''; ?>" value="<?php echo $i; ?>">★</label>
+                                    <label name="rating" class="<?php echo esc_attr($i <= Arr::get($rating, 'value') ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
                                 <?php } ?>
-                                <p><?php echo Arr::get($rating, 'label'); ?></p>
+                                <p><?php echo esc_html(Arr::get($rating, 'label')); ?></p>
                             </div>
                         <?php } ?>
                     </div>
@@ -106,7 +106,7 @@ if ($enablePagination == 'true') {
             <button class="adrm-prev-page">Prev</button>
             <ul class="adrm-page-numbers">
                 <?php for($i = 1; $i <= $total_page; $i++) { ?>
-                    <li class="adrm-page-number <?php echo $i == 1 ? 'active' : '' ?>"><?php echo $i ?></li>
+                    <li class="adrm-page-number <?php echo esc_attr($i == 1 ? 'active' : '') ?>"><?php echo esc_attr($i) ?></li>
                 <?php } ?>
             </ul>
             <button class="adrm-next-page">Next</button>

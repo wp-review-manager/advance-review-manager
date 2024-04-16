@@ -13,7 +13,7 @@ if ($enablePagination == 'true') {
 }
 
 ?>
-<div data-form-id="<?php echo $form->ID ?>" data-template-type="<?php echo $form->post_name ?>" class="review-template_settings_wrapper">
+<div data-form-id="<?php echo esc_attr($form->ID) ?>" data-template-type="<?php echo esc_attr($form->post_name) ?>" class="review-template_settings_wrapper">
     <div class="review-template">
         <?php
         if (empty($all_reviews)) {
@@ -29,13 +29,13 @@ if ($enablePagination == 'true') {
             <div class="adrm_review_summary_rating">
                 <h6>Average rating</h6>
                 <div class="avg_rating">
-                    <h4><?php echo $total_average_rating ?></h4>
+                    <h4><?php echo esc_html($total_average_rating) ?></h4>
                     <h6>/ 5</h4>
                 </div>
-                <span class="review-label"><?php echo $review_label ?></span>
+                <span class="review-label"><?php echo esc_html($review_label) ?></span>
                 <div class="total-review-number">
                     <span class="icon"></span>
-                    From <?php echo $total_reviews  ?> Reviews
+                    From <?php echo esc_html($total_reviews)  ?> Reviews
                 </div>
             </div>
             <div class="adrm_review_categories_stats">
@@ -46,11 +46,11 @@ if ($enablePagination == 'true') {
                 ?>
                 <div class="adrm-progress-bar">
                     <div class="progress">
-                        <div class="bar" style="width: <?php echo $review_percentage . "%" ?>">
-                            <p class="percent"><?php echo $average_rating ?></p>
+                        <div class="bar" style="width: <?php echo esc_attr($review_percentage . "%") ?>">
+                            <p class="percent"><?php echo esc_html($average_rating) ?></p>
                         </div>
                     </div>
-                    <p style="margin: 3px 0;"><?php echo $key ?></p>
+                    <p style="margin: 3px 0;"><?php echo esc_html($key) ?></p>
                 </div>
                 <?php } ?>
   
@@ -64,7 +64,7 @@ if ($enablePagination == 'true') {
                             $review_label = TemplateHelper::getReviewLabel($key);
                             echo '<div class="rating-summary-item">';
                             echo '<input type="checkbox" disabled />';
-                            echo '<span>' . $review_label . '/' . $key . ' ('. $summary .')' .'</span>';
+                            echo '<span>' . esc_html($review_label) . '/' . esc_html($key) . ' ('. esc_html($summary) .')' .'</span>';
                             echo '</div>';
                         }
                     ?>
@@ -117,10 +117,10 @@ if ($enablePagination == 'true') {
                     <?php echo get_avatar(Arr::get($review, 'email'), 96) ?>
                     </div>
                     <div class="adrm-reviewer-name">
-                        <span><?php echo Arr::get($review, 'name'); ?></span>
+                        <span><?php echo esc_html(Arr::get($review, 'name')); ?></span>
                     </div>
                     <div class="adrm-reviewer-email">
-                        <span><?php echo Arr::get($review, 'email'); ?></span>
+                        <span><?php echo esc_html(Arr::get($review, 'email')); ?></span>
                     </div>
 
                 </div>
@@ -128,21 +128,21 @@ if ($enablePagination == 'true') {
                     <div class="adrm-review-rating">
                         <div class="adrm-star-rating">
                             <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                <label name="rating" class="<?php echo $i <= $average_rating ? 'active' : ''; ?>" value="<?php echo $i; ?>">★</label>
+                                <label name="rating" class="<?php echo esc_attr($i <= $average_rating ? 'active' : ''); ?>" value="<?php echo esc_html($i); ?>">★</label>
                             <?php } ?>
                         </div>
-                        <span class="adrm-review-date"> Reviewed <?php echo (new Helper)->formatDate($created_at); ?></span>
+                        <span class="adrm-review-date"> Reviewed <?php echo esc_html((new Helper)->formatDate($created_at)); ?></span>
                     </div>
                     <div class="adrm-review-content">
-                        <p><?php echo Arr::get($review, 'message'); ?></p>
+                        <p><?php echo esc_html(Arr::get($review, 'message')); ?></p>
                     </div>
                     <div class="review-categories">
                         <?php foreach ($ratings as $rating) { ?>
                             <div class="adrm-star-rating">
                                 <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                    <label name="rating" class="<?php echo $i <= Arr::get($rating, 'value') ? 'active' : ''; ?>" value="<?php echo $i; ?>">★</label>
+                                    <label name="rating" class="<?php echo esc_attr($i <= Arr::get($rating, 'value') ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
                                 <?php } ?>
-                                <p><?php echo Arr::get($rating, 'label'); ?></p>
+                                <p><?php echo esc_html(Arr::get($rating, 'label')); ?></p>
                             </div>
                         <?php } ?>
                     </div>
@@ -155,7 +155,7 @@ if ($enablePagination == 'true') {
             <button class="adrm-prev-page">Prev</button>
             <ul class="adrm-page-numbers">
                 <?php for($i = 1; $i <= $total_page; $i++) { ?>
-                    <li class="adrm-page-number <?php echo $i == 1 ? 'active' : '' ?>"><?php echo $i ?></li>
+                    <li class="adrm-page-number <?php echo esc_attr($i == 1 ? 'active' : '') ?>"><?php echo esc_html($i) ?></li>
                 <?php } ?>
             </ul>
             <button class="adrm-next-page">Next</button>

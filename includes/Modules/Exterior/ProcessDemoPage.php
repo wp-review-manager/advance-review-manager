@@ -8,7 +8,8 @@ use ADReviewManager\Classes\Vite;
 
 class ProcessDemoPage {
     public function handleExteriorPages() {
-        if (isset($_GET['adrm_review_preview']) && $_GET['adrm_review_preview']) {
+        $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
+        if (wp_verify_nonce($nonce, 'advance-review-manager-nonce') && isset($_GET['adrm_review_preview']) &&  $_GET['adrm_review_preview']) {
             $hasDemoAccess = AccessControl::hasTopLevelMenuPermission();
             $hasDemoAccess = apply_filters('adrm/can_see_demo_form', $hasDemoAccess);
             if (!current_user_can($hasDemoAccess)) {
@@ -48,11 +49,11 @@ class ProcessDemoPage {
             ?>
             <div style="display: flex;justify-content: space-between;padding: 20px;background: #9e9e9e4f;">
                 <div style="display: flex; align-items: center; gap: 20px">
-                    <h4 style="margin: 0"><?php echo$form->post_title ?></h4>
-                    <a style="font-size: 20px" href="<?php echo $edit_url ?>">Edit form</a>
+                    <h4 style="margin: 0"><?php echo esc_html($form->post_title) ?></h4>
+                    <a style="font-size: 20px" href="<?php echo esc_url($edit_url) ?>">Edit form</a>
                 </div>
                 <div style="padding: 4px 8px;background: #fff;border-radius: 4px;">
-                    <?php echo $form->shortcode ?>
+                    <?php echo esc_html($form->shortcode) ?>
                 </div>
             </div>
             <?php
@@ -69,7 +70,7 @@ class ProcessDemoPage {
                 <div class="adrm_preview_footer" style="max-width: 1000px; margin: 0 auto">
                     <p>You are seeing preview version of Advance review manager. This form is only accessible for Admin users. Other users
                         may not access this page. To use this for in a page please use the following shortcode: [wppayform
-                        id='<?php echo intval($formId); ?>']</p>
+                        id='<?php echo esc_html(intval($formId)); ?>']</p>
                 </div>
             <?php
             wp_footer();

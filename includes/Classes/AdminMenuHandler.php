@@ -79,6 +79,7 @@ class AdminMenuHandler{
 
         wp_localize_script('ADRM-script-boot', 'ADRMAdmin', $ADRM);
         ob_start();
+        $svgurl = ADRM_URL . 'assets/logo.svg';
         ?>
         <div class="adrm-admin-page" id="ADRM_app">
             <div class="main-menu text-white-200 bg-wheat-600">

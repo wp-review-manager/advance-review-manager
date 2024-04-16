@@ -16,9 +16,9 @@
                 if ($show_review_form == 'yes') {
                     ?>
                     <div class="adrm-review-manager-wrapper">
-                        <h3><?php echo $title ?></h3>
+                        <h3><?php echo esc_html($title) ?></h3>
                         <div>
-                            <form data-adrm-form-id="<?php echo $formID ?>">
+                            <form data-adrm-form-id="<?php echo esc_attr($formID) ?>">
                                 <?php
                                 // dd($formFields);
                                     foreach ($formFields as $formField) {
@@ -34,18 +34,18 @@
                                     $required = Arr::get($formField, 'template_required', false) == true;
                                     if (Arr::get($formField, 'type') != 'submit') {
                                 ?>
-                                <label for="fname"><?php echo Arr::get($formField, 'label') ?></label>
+                                <label for="fname"><?php echo esc_html(Arr::get($formField, 'label')) ?></label>
 
                                 <?php } if ($type == 'text' || $type == 'email' || $type == 'phone' || $type == 'number') { ?>
-                                    <input required="<?php echo $required ?>" data-id="<?php echo $label ?>" type="<?php echo $type ?>" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>">
+                                    <input required="<?php echo esc_html($required) ?>" data-id="<?php echo esc_html($label) ?>" type="<?php echo esc_html($type) ?>" name="<?php echo esc_attr($name) ?>" placeholder="<?php echo esc_attr($placeholder) ?>">
                                 <?php
                                     } else if ($type == 'textarea') {
                                 ?>
-                                    <textarea required="<?php echo $required ?>" data-id="<?php echo $label ?>" id="subject" name="<?php echo $name ?>" placeholder="<?php echo $placeholder ?>"></textarea>
+                                    <textarea required="<?php echo esc_attr($required) ?>" data-id="<?php echo esc_attr($label) ?>" id="subject" name="<?php echo esc_attr($name) ?>" placeholder="<?php echo esc_attr($placeholder) ?>"></textarea>
                                 <?php
                                     } else if ($type == 'select') {
                                 ?>
-                                <select required="<?php echo $required ?>" placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="country" name="<?php echo $name ?>">
+                                <select required="<?php echo esc_attr($required) ?>" placeholder="<?php echo esc_attr($placeholder) ?>" data-id="<?php echo esc_attr($label) ?>" type="select" id="country" name="<?php echo esc_attr($name) ?>">
                                     <option value="australia">Australia</option>
                                     <option value="canada">Canada</option>
                                     <option value="usa">USA</option>
@@ -53,13 +53,13 @@
                                 <?php
                                 } else if (Arr::get($formField, 'type') == 'submit') {
                                 ?>
-                                <input class="adrm-success-notification" type="submit" value="<?php echo $formField['label'] ?>">
+                                <input class="adrm-success-notification" type="submit" value="<?php echo esc_attr($formField['label']) ?>">
                                 <?php
                                 } else if (Arr::get($formField, 'type') == 'rating') { ?>
-                                <select required="<?php echo $required ?>" placeholder="<?php echo $placeholder ?>" data-id="<?php echo $label ?>" type="select" id="<?php echo $name ?>" name="<?php echo $name ?>">
+                                <select required="<?php echo esc_attr($required) ?>" placeholder="<?php echo esc_attr($placeholder) ?>" data-id="<?php echo esc_attr($label) ?>" type="select" id="<?php echo esc_attr($name) ?>" name="<?php echo esc_attr($name) ?>">
                                     <option></option>
                                     <?php foreach($formField['options'] as $option) {?>
-                                        <option value="<?php echo $option['value'] ?>"><?php echo $option['label']  ?></option>
+                                        <option value="<?php echo esc_attr($option['value']) ?>"><?php echo esc_html($option['label']);  ?></option>
                                     <?php } ?>
                                 </select>
                                 <?php
