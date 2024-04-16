@@ -7,6 +7,8 @@ class Debug
 {
     public static function getDebugInfos($type)
     {
+        global $wpdb;
+
         if ($type === 'wp') {
             return self::getWPInfos();
         } elseif ($type === 'server') {
@@ -197,11 +199,8 @@ class Debug
         $host = self::getHost();
         $mysql = '';
 
-        if ($wpdb->use_mysqli) {
-            $mysql = @mysqli_get_server_info($wpdb->dbh);
-        } else {
-            $mysql = __('Cannot connect to MySQL database.', 'advance-review-manager');
-        }
+        global $wpdb;
+        $mysql = $wpdb->db_version();
 
         $mysqlStatus = version_compare($mysql, '5.4', '>');
 

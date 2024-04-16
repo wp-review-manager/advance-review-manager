@@ -155,7 +155,9 @@ class Vite
             foreach ($file['css'] as $key => $path) {
                 wp_enqueue_style(
                     $file['file'] . '_' . $key . '_css',
-                    $assetPath . $path
+                    $assetPath . $path,
+                    [],
+                    ADRM_VERSION
                 );
             }
         }

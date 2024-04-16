@@ -13,7 +13,7 @@ class MigrateHelper
     public static function runSQL($sql, $tableName)
     {
         global $wpdb;
-        if ($wpdb->get_var("SHOW TABLES LIKE '$tableName'") != $tableName) {
+        if ($wpdb->prepare("SHOW TABLES LIKE %s", $tableName) != $tableName) {
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
             return true;
