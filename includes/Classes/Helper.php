@@ -413,7 +413,7 @@ class Helper {
             ],
         ];
 
-        foreach (['input', 'label', 'img', 'router-link', 'a', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'div', 'span', 'p', 'select', 'option', 'textarea', 'button', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr'] as $tag) {
+        foreach (['input', 'label', 'img', 'router-view', 'router-link', 'a', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'div', 'span', 'p', 'select', 'option', 'textarea', 'button', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr'] as $tag) {
             $allowedTags[$tag] = [
                 'type' => [],
                 'name' => [],

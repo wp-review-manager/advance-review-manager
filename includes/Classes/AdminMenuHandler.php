@@ -49,8 +49,8 @@ class AdminMenuHandler{
             $disablePages = [
                 'advance-review-manager.php',
             ];
-        
-            if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
+            
+            if (wp_verify_nonce('', 'advance-review-manager-nonce') &&isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
                 remove_all_actions('admin_notices');
         
                 // wp_enqueue_style(
@@ -90,12 +90,6 @@ class AdminMenuHandler{
                     <router-link to="/">
                         Review Templates
                     </router-link> 
-                    <!-- <router-link to="/settings" >
-                        Settings 
-                    </router-link> -->
-                    <!-- <router-link to="/user-guide" >
-                        User Guide 
-                    </router-link> -->
                     <router-link to="/support-&-debug" >
                         Support And Debug
                     </router-link>
@@ -106,8 +100,7 @@ class AdminMenuHandler{
         </div>
         <?php
         $form_body = ob_get_clean();
-     
-        echo $form_body;
+        echo wp_kses($form_body, Helper::allowedHTMLTags());
     }
 
    

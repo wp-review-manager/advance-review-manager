@@ -16,9 +16,19 @@ class GlobalSettingsController
 
     public function updateGlobalSettings()
     {
-        $settings = Arr::get($_REQUEST, 'settings', []);
-        update_option('adrm_global_settings', $settings);
-        wp_send_json_success();
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+
+        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+            wp_send_json_error(
+                [
+                    'message' => "Nonce verification failed."
+                ],
+            423);
+        } else {
+            $settings = Arr::get($_REQUEST, 'settings', []);
+            update_option('adrm_global_settings', $settings);
+            wp_send_json_success();
+        }
     }
 
     public function generateDebug($type)
