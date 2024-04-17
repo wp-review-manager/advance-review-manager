@@ -25,6 +25,7 @@ class ReviewsTemplate {
 
         View::render($template, [
             'reviews' => $reviews,
+            'allowed_html_tags' => Helper::allowedHTMLTags(),
             'pagination' => $pagination,
             'total_reviews' => $total_reviews,
             'all_reviews' => $all_reviews,

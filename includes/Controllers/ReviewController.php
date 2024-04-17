@@ -38,7 +38,7 @@ class ReviewController
             $sort = sanitize_text_field($sort);
             $filter = sanitize_text_field($filter);
 
-            $response = (new Review)->getReviews($formID, $filter, $sort);
+            $response = (new Review)->getReviews($formID, $nonce, $filter, $sort);
             wp_send_json_success($response);
         }
     }
@@ -108,7 +108,7 @@ class ReviewController
             $sort = sanitize_text_field($sort);
             $filter = sanitize_text_field($filter);
 
-            $response = (new Review)->getReviews($formID, $filter, $sort);
+            $response = (new Review)->getReviews($formID, $nonce, $filter, $sort);
             $formattedReviews = $this->formatReviews($response['reviews']);
             $response['reviews'] = $formattedReviews;
             unset($response['meta']);

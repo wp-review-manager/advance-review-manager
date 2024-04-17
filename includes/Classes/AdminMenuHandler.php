@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ADReviewManager\Classes;
 use ADReviewManager\Classes\Helper;
 use ADReviewManager\Hooks\Actions;
+use PHPUnit\TextUI\Help;
 
 class AdminMenuHandler{
 
@@ -79,12 +80,11 @@ class AdminMenuHandler{
 
         wp_localize_script('ADRM-script-boot', 'ADRMAdmin', $ADRM);
         ob_start();
-        $svgurl = ADRM_URL . 'assets/logo.svg';
         ?>
         <div class="adrm-admin-page" id="ADRM_app">
             <div class="main-menu text-white-200 bg-wheat-600">
                 <div class="adrm-logo">
-                   <a href="admin.php?page=advance-review-manager.php#/"> <?php echo Helper::LogoSvg() ?> </a>
+                   <a href="admin.php?page=advance-review-manager.php#/"> <?php echo wp_kses(Helper::LogoSvg(), Helper::allowedHTMLTags()) ?> </a>
                 </div>
                 <div class="adrm-menu-item">
                     <router-link to="/">
@@ -106,8 +106,11 @@ class AdminMenuHandler{
         </div>
         <?php
         $form_body = ob_get_clean();
+     
         echo $form_body;
     }
+
+   
 
     public function renderGlobalSettings()
     {

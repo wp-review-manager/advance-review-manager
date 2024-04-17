@@ -35,7 +35,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
                 </p>
                 <div class="user">
                     <div style="border-radius: 50%; overflow: hidden">
-                        <?php echo get_avatar(Arr::get($review, 'email'), 96) ?>
+                        <?php echo wp_kses(get_avatar(Arr::get($review, 'email'), 96), $allowed_html_tags); ?>
                     </div>
                     <div class="user-details">
                         <h4 class="username"><?php echo esc_html(Arr::get($review, 'name')); ?></h4>

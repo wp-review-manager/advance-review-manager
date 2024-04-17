@@ -17,7 +17,7 @@ if ($enablePagination == 'true') {
     <div class="review-template">
         <?php
         if (empty($all_reviews)) {
-            echo '<p style="padding: 20px">No reviews yet</p>';
+            echo wp_kses('<p style="padding: 20px">No reviews yet</p>', $allowed_html_tags);
         } else { // Add the else condition here
             $reviewStats = TemplateHelper::getAverageRatingByCategories($all_reviews);
             $categoriesReviews = Arr::get($reviewStats, 'categoriesReview', []);
@@ -114,7 +114,7 @@ if ($enablePagination == 'true') {
             <div class="adrm_food_review_template">
                 <div class="adrm-reviewer-info">
                     <div class="adrm-reviewer-avatar">
-                    <?php echo get_avatar(Arr::get($review, 'email'), 96) ?>
+                    <?php echo wp_kses(get_avatar(Arr::get($review, 'email'), 96), $allowed_html_tags) ?>
                     </div>
                     <div class="adrm-reviewer-name">
                         <span><?php echo esc_html(Arr::get($review, 'name')); ?></span>

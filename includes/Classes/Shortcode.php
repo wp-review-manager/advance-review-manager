@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace ADReviewManager\Classes;
 use ADReviewManager\Classes\View;
+use ADReviewManager\Classes\Helper;
 use ADReviewManager\Models\ReviewForm;
 use ADReviewManager\Models\Review;
 use ADReviewManager\Services\ArrayHelper as Arr;
@@ -32,12 +33,15 @@ class Shortcode {
             wp_localize_script('adrm-form-preview-js', 'ADRMPublic', $preview_localized);
             
             $form = (new ReviewForm)->getReviewForm($formId);
-            $response = (new Review)->getReviews($formId);
+            $nonce = wp_create_nonce('advance-review-manager-nonce');
+            
+            $response = (new Review)->getReviews($formId, $nonce);
 
             if (!empty($form)) {
                return View::make('preview_review', [
                 'form' => $form,
                 'reviews' => $response['reviews'],
+                'allowed_html_tags' => Helper::allowedHTMLTags(),
                 'total_reviews' => $response['total_reviews'],
                 'pagination' => $response['pagination'],
                 'all_reviews' => $response['all_reviews'],

@@ -4,6 +4,7 @@ use ADReviewManager\Services\AccessControl;
 use ADReviewManager\Models\ReviewForm;
 use ADReviewManager\Models\Review;
 use ADReviewManager\Classes\View;
+use ADReviewManager\Classes\Helper;
 use ADReviewManager\Classes\Vite;
 
 class ProcessDemoPage {
@@ -60,6 +61,7 @@ class ProcessDemoPage {
             View::render('preview_review', [
             'form' => $form,
             'reviews' => $response['reviews'],
+            'allowed_html_tags' => Helper::allowedHTMLTags(),
             'total_reviews' => $response['total_reviews'],
             'pagination' => $response['pagination'],
             'all_reviews' => $response['all_reviews'],

@@ -47,8 +47,9 @@ class Review extends Model
         }
     }
 
-    public function getReviews($formID, $filter = null, $sort = 'newest') {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
+    public function getReviews($formID, $nonce = '', $filter = null, $sort = 'newest') {
+
+        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? $nonce;
 
         if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
             wp_send_json_error(

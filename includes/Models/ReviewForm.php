@@ -63,7 +63,7 @@ class ReviewForm extends Model
         $data = maybe_unserialize(get_post_meta($reviewFormId, 'adrm_form_fields', true));
 
         $reviewForm->form_fields = $data ? $data : [];
-        $reviewForm->preview_url = site_url('?adrm_review_preview=' . $reviewForm->ID);
+        $reviewForm->preview_url = site_url('?adrm_review_preview=' . $reviewForm->ID . '&nonce=' . wp_create_nonce('advance-review-manager-nonce'));
         $reviewForm->shortcode = '[advance-review-manager id="' . $reviewFormId . '"]';
 
         return $reviewForm;

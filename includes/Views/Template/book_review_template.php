@@ -12,7 +12,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
         <h3 class="adrm-heading">CUSTOMER REVIEWS (<?php echo esc_html($total_reviews) ?>)</h3>
         <?php
         if (empty($reviews)) {
-            echo '<p style="padding: 20px">No reviews yet</p>';
+            echo wp_kses('<p style="padding: 20px">No reviews yet</p>', $allowed_html_tags);
         }
         ?>
         <?php foreach ($reviews as $review) {
@@ -23,7 +23,7 @@ use ADReviewManager\Services\ArrayHelper as Arr;
         ?>
         <div class="adrm_review_temp_one"><!-- {{ review }} -->
             <div class="adrm_review_temp_one_avatar">
-                <?php echo get_avatar(Arr::get($review, 'email'), 96) ?>
+                <?php echo wp_kses(get_avatar(Arr::get($review, 'email'), 96), $allowed_html_tags) ?>
             </div>
             <div class="adrm_review_temp_one_content">
                 <div class="adrm_review_temp_one_content_header">

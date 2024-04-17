@@ -1,6 +1,8 @@
 <?php
 namespace ADReviewManager\Classes;
 
+use ParagonIE\Sodium\Core\Curve25519\H;
+
 class View
 {
     public static function make($path, $data = [])
@@ -15,6 +17,6 @@ class View
 
     public static function render($path, $data = [])
     {
-        echo static::make($path, $data);
+        echo wp_kses(static::make($path, wp_kses_allowed_html($data)), Helper::allowedHTMLTags());
     }
 }
