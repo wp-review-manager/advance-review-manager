@@ -73,20 +73,11 @@ class Review extends Model
                 $limit = 100000000000;
                 $offset = 0;
             }
-    
-            $allowedSortOrders = ['ASC', 'DESC'];
-            if (!in_array($sortOrder, $allowedSortOrders)) {
-                // Handle error or default to a safe value
-                $sortOrder = 'ASC'; // default sort order
-            }
+
             // Fetch reviews
-            $sql =  "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d ORDER BY created_at %s LIMIT %d OFFSET %d";
-          
-    
-            $wpdb->prepare(
-                $sql,
+            $sql = $wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d ORDER BY created_at $sortOrder LIMIT %d OFFSET %d",
                 $formID,
-                $sortOrder,
                 $limit,
                 $offset
             );
