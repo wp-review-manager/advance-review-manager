@@ -59,44 +59,53 @@ class Review extends Model
             423);
         } else {
             global $wpdb;
+
             // Sanitize input
             $formID = sanitize_text_field($formID);
             $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
-        
+
             // Fetch pagination settings
             $template_settings = maybe_unserialize(get_post_meta($formID, 'adrm_template_settings', true));
             $pagination = Arr::get($template_settings, 'pagination', []);
             $limit = Arr::get($pagination, 'per_page', 10);
             $page = max(1, Arr::get($_REQUEST, 'page', 1)); // Ensure page is at least 1
             $offset = ($page - 1) * $limit;
-           
+
             if (Arr::get($pagination, 'enable') == 'false') {
-                $limit = 100000000000;
+                $limit = 1000000000; // Arbitrary large number to effectively disable pagination
                 $offset = 0;
             }
 
-            // Fetch reviews
-            $sql = $wpdb->prepare(
-                "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d ORDER BY created_at $sortOrder LIMIT %d OFFSET %d",
-                $formID,
-                $limit,
-                $offset
-            );
-    
-            $reviews = $wpdb->get_results($sql, ARRAY_A);
-        
+            // Properly include ORDER BY in prepared SQL
+            $table_name = "{$wpdb->prefix}adrm_reviews"; // Safe table name via WPDB prefix
+            $query = "SELECT * FROM $table_name WHERE form_id = %d";
+
+            // Add ORDER BY clause safely
+            $query .= sprintf(" ORDER BY created_at %s", in_array($sortOrder, ['ASC', 'DESC']) ? $sortOrder : 'ASC');
+
+            // Add LIMIT and OFFSET
+            $query .= " LIMIT %d OFFSET %d";
+
+            if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
+                $sortOrder = 'ASC';  // Default to 'ASC' if invalid
+            }
+            
+            // Prepare SQL with safe placeholders for variables
+            // $final_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE form_id = %d ORDER BY created_at {$sortOrder} LIMIT %d OFFSET %d", $formID, $limit, $offset);
+       
+            $reviews = $wpdb->get_results("SELECT * FROM $table_name WHERE form_id = {$formID} ORDER BY created_at {$sortOrder} LIMIT {$limit} OFFSET {$offset}", ARRAY_A);
+
             // Fetch total reviews count
-            $total_reviews_sql = $wpdb->prepare(
-                "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
-                $formID
-            );
-    
-            $all_reviews= $wpdb->get_results($total_reviews_sql, ARRAY_A);
-            $total_reviews = count($all_reviews);
-        
+            // $total_reviews_sql = $wpdb->prepare(
+            //     "SELECT COUNT(*) FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
+            //     $formID
+            // );
+
+            $total_reviews = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID}");
+
             // Process reviews
             $reviews = static::processReviewData($reviews);
-            $all_reviews = static::processReviewData($all_reviews);
+            $all_reviews = static::processReviewData($reviews);
         
             // Apply filter if provided
             if (!empty($filter) && $filter != 'all') {  
@@ -119,11 +128,11 @@ class Review extends Model
     {
         global $wpdb;
         $reviewID = sanitize_text_field($reviewID);
-        $sql = $wpdb->prepare(
-            "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = %d",
-            $reviewID
-        );
-        $review = $wpdb->get_row($sql, ARRAY_A);
+        // $sql = $wpdb->prepare(
+        //     "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = %d",
+        //     $reviewID
+        // );
+        $review = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = {$reviewID}", ARRAY_A);
         $review['meta'] = maybe_unserialize($review['meta']);
         $review['avatar'] = get_avatar(Arr::get($review, 'meta.formFieldData.email'));
         return $review;
