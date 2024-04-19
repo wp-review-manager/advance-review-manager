@@ -104,15 +104,11 @@ class Vite
             throw new \Exception('Vite Manifest Not Found. Run : npm run dev or npm run prod');
         }
         
-        if ( ! function_exists( 'WP_Filesystem' ) ) {
-            require_once ABSPATH . '/wp-admin/includes/file.php';
-        }
-        // Initialize the WP_Filesystem
         global $wp_filesystem;
+        require_once ( ABSPATH . '/wp-admin/includes/file.php' );
+        WP_Filesystem();
         $manifestData = $wp_filesystem->get_contents( $manifestPath );
 
-        // $manifestFile = fopen($manifestPath, "r");
-        // $manifestData = fread($manifestFile, filesize($manifestPath));
         (static::$instance)->manifestData = json_decode($manifestData, true);
     }
 

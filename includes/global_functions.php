@@ -11,7 +11,7 @@ function ADRM_getAvatar($email, $size)
      * @return HTML $gravatar img attributes of the gravatar image
      */
     return apply_filters('adrm_get_avatar',
-        "https://www.gravatar.com/avatar/${hash}?s=${size}&d=mm&r=g",
+        "https://www.gravatar.com/avatar/{$hash}?s={$size}&d=mm&r=g",
         $email
     );
 }

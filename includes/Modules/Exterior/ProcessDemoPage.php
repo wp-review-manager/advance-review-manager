@@ -7,6 +7,10 @@ use ADReviewManager\Classes\View;
 use ADReviewManager\Classes\Helper;
 use ADReviewManager\Classes\Vite;
 
+if (!class_exists('ADReviewManager\Services\AccessControl', true)) {
+    require ADRM_DIR . 'includes/services/AccessControl.php';
+}
+
 class ProcessDemoPage {
     public function handleExteriorPages() {
         $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
@@ -19,7 +23,6 @@ class ProcessDemoPage {
             }
             if ($hasDemoAccess) {
                 $formId = intval($_GET['adrm_review_preview']);
-                Vite::enqueueStyle('dashicons');
                 Vite::enqueueScript('adrm-form-preview-js', 'public/js/form_preview.js', array('jquery'), ADRM_VERSION, true);
                 Vite::enqueueStyle('adrm-global-styling', 'scss/admin/app.scss', array(), ADRM_VERSION);
 

@@ -6,6 +6,10 @@ use ADReviewManager\Services\ArrayHelper as Arr;
 use ADReviewManager\Models\ReviewForm;
 use ADReviewManager\Models\Review;
 
+if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
+    require ADRM_DIR . 'includes/services/ArrayHelper.php';
+}
+
 class ReviewFormController
 {
     public function getReviewForms()

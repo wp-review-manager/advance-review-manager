@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace ADReviewManager\Models;
 use ADReviewManager\Services\ArrayHelper as Arr;
+if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
+    require ADRM_DIR . 'includes/services/ArrayHelper.php';
+}
 
 class Review extends Model
 {
@@ -78,13 +81,13 @@ class Review extends Model
 
             // Properly include ORDER BY in prepared SQL
             $table_name = "{$wpdb->prefix}adrm_reviews"; // Safe table name via WPDB prefix
-            $query = "SELECT * FROM $table_name WHERE form_id = %d";
+            // $query = "SELECT * FROM $table_name WHERE form_id = %d";
 
-            // Add ORDER BY clause safely
-            $query .= sprintf(" ORDER BY created_at %s", in_array($sortOrder, ['ASC', 'DESC']) ? $sortOrder : 'ASC');
+            // // Add ORDER BY clause safely
+            // $query .= sprintf(" ORDER BY created_at %s", in_array($sortOrder, ['ASC', 'DESC']) ? $sortOrder : 'ASC');
 
-            // Add LIMIT and OFFSET
-            $query .= " LIMIT %d OFFSET %d";
+            // // Add LIMIT and OFFSET
+            // $query .= " LIMIT %d OFFSET %d";
 
             if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
                 $sortOrder = 'ASC';  // Default to 'ASC' if invalid

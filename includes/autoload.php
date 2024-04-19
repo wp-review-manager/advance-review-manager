@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 include 'global_functions.php';
-if (!function_exists('WPReviewManagerAutoload')) {
+if (!function_exists('ADReviewManagerAutoload')) {
     /**
      * Plugin autoloader.
      *

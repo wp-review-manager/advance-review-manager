@@ -7,6 +7,10 @@ use ADReviewManager\Controllers\ReviewFormController;
 use ADReviewManager\Controllers\ReviewController;
 use ADReviewManager\Services\AccessControl;
 
+if (!class_exists('ADReviewManager\Services\AccessControl', true)) {
+    require ADRM_DIR . 'includes/services/AccessControl.php';
+}
+
 class Actions{
     
         public function __construct()

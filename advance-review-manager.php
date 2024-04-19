@@ -34,6 +34,7 @@ class AdvanceReviewManager {
         $this->loadTextDomain();
         // register hooks
         new ADReviewManager\Hooks\Actions();
+        // require ADRM_DIR . 'includes/Hooks/Actions.php';
         (new ADReviewManager\Classes\Shortcode)->registerShortCodes();
     }
 

@@ -3,7 +3,6 @@
 namespace ADReviewManager\Database;
 
 require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-require_once(ADRM_DIR.'includes/Database/Migrations/ReviewTable.php');
 
 
 class DBMigrator

@@ -6,6 +6,9 @@ namespace ADReviewManager\Controllers;
 use ADReviewManager\Modules\Debug\Debug;
 use ADReviewManager\Services\ArrayHelper as Arr;
 
+if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
+    require ADRM_DIR . 'includes/services/ArrayHelper.php';
+}
 class GlobalSettingsController
 {
     public function getGlobalSettings()

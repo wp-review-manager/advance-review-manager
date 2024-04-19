@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
 
 /**
  * Managing Access Control
- * This is not complete on version 1.0.0 but we will definately add this feature.
+ * This is not complete on version 1.0.0 but we will definitely add this feature.
  * @since 1.0.0
  */
 class AccessControl

@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace ADReviewManager\Models;
 use ADReviewManager\Services\ArrayHelper as Arr;
-
+if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
+    require ADRM_DIR . 'includes/services/ArrayHelper.php';
+}
 class ReviewForm extends Model
 {
     public function getReviewForms()
@@ -31,10 +33,10 @@ class ReviewForm extends Model
            $all_forms = get_posts($post_query_array);
     
             if (empty($all_forms)) {
-                wp_send_json_error(
+                wp_send_json_success(
                     [
                         'message' => "No forms found."
-                    ],423);
+                    ],200);
             }
     
             $forms = [];
