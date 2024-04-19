@@ -17,6 +17,6 @@ class View
 
     public static function render($path, $data = [])
     {
-        echo wp_kses(static::make($path, wp_kses_allowed_html($data)), Helper::allowedHTMLTags());
+        echo wp_kses(static::make($path, $data), Helper::allowedHTMLTags());
     }
 }
