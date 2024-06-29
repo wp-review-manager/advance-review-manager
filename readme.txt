@@ -1,6 +1,6 @@
 === Advance Review Manager ===
 
-Contributors: dasnitesh780, akmelias
+Contributors: wpulse, dasnitesh780, akmelias
 Tags: Feedback, Reviews, Testimonials, User Experience, Customer Satisfaction
 Requires at least: 4.5
 Tested up to: 6.5
@@ -18,23 +18,23 @@ Advance Review Manager is a powerful yet easy-to-use WordPress plugin that empow
 
 **Advance Review Manager** is the powerhouse WordPress plugin designed to make the collection and management of reviews a breeze. With its intuitive design and a suite of customizable options, you can effortlessly gather critical customer insights while maintaining a seamless user experience.
 
-### Features at a Glance
+== Features at a Glance ==
 
-- **Simplified Form Creation**: Our custom templates allow you to craft the perfect review forms with minimal fuss.
-- **Real-time Previews**: A quick peek is just a click away to ensure your forms look just right.
-- **Adaptable Shortcodes**: Insert review forms anywhere with shortcodes that bend to your will.
-- **Display Controls**: Tweak and tune how reviews are shown with our flexible shortcode parameters.
-- **Centralized Management**: All your reviews, easily accessible and organized for detailed analysis.
-- **Engaging Review Tables**: Dive into each piece of feedback with our interactive review display.
-- **Efficient Pagination**: Manage a flood of feedback with smart pagination.
-- **Captivating Review Summary** Show your Ratings, Reviews and Feedbacks summary with nice and filterable template.
-- **Dedicated Support**: Our Support & Debug toolkit is there to iron out any wrinkles.
-- **Support & Debug:** Utilize the built-in Support & Debug section for assistance and troubleshooting.
--  **Future Updates:** Stay tuned for upcoming releases with even more exciting features and enhancements.
-- **Continuous Innovation**: Keep an eye out for updates packed with new features and refinements.
+- Simplified Form Creation**: Our custom templates allow you to craft the perfect review forms with minimal fuss.
+- Real-time Previews: A quick peek is just a click away to ensure your forms look just right.
+- Adaptable Shortcodes: Insert review forms anywhere with shortcodes that bend to your will.
+- Display Controls: Tweak and tune how reviews are shown with our flexible shortcode parameters.
+- Centralized Management: All your reviews, easily accessible and organized for detailed analysis.
+- Engaging Review Tables: Dive into each piece of feedback with our interactive review display.
+- Efficient Pagination**: Manage a flood of feedback with smart pagination.
+- Captivating Review Summary** Show your Ratings, Reviews and Feedbacks summary with nice and filterable template.
+- Dedicated Support: Our Support & Debug toolkit is there to iron out any wrinkles.
+- Support & Debug: Utilize the built-in Support & Debug section for assistance and troubleshooting.
+- Future Updates: Stay tuned for upcoming releases with even more exciting features and enhancements.
+- Continuous Innovation**: Keep an eye out for updates packed with new features and refinements.
 
 
-## Simple Setup, Powerful Results
+== Simple Setup, Powerful Results ==
 
 Getting started with **Advance Review Manager** is as straightforward as it gets:
 
@@ -50,31 +50,35 @@ Getting started with **Advance Review Manager** is as straightforward as it gets
       - ex: `[advance-review-manager id="117" show_review_form="no"]`
    - Explore additional customization options for the shortcode to tailor it to your specific requirements. 
 
-## Screenshots
+== Screenshots ==
+1. Choose from built-in review templates
+2. Review Form Builder
+3. Review Form Preview with review submissions
+4. All reviews table
+5. Reviews display for site visitor
+6. Specific product reviews
+7. Single review details
+8. Data Reporting
 
-1. ![Review Form Templates](screenshots/adrm-templates.jpg)
-2. ![Review From Editor](screenshots/adrm-form-editor.jpg)
-3. ![Review From Preview](screenshots/adrm-preview.jpg)
-4. ![Review Forms Dashboard](screenshots/adrm-review-forms-dashboard.jpg)
-5. ![Review Collections For Users view ](screenshots/adrm-reviews-frontend.jpg)
-6. ![Review Collections For Admin view](screenshots/adrm-reviews-backend.jpg)
-3. ![Review Details For Admin view](screenshots/adrm-review-backend.jpg)
+== Frequently Asked Questions ==
 
-## Frequently Asked Questions 
+= Can I tailor the review form’s style? =  
 
-**Q: Can I tailor the review form’s style?**  
-A: Absolutely! Customize to your heart's content to match your site's look and feel.
+Absolutely! Customize to your heart's content to match your site's look and feel.
 
-**Q: Is my feedback safe with you?**  
-A: Your data's security is our top priority, with stringent measures in place.
+= Is my feedback safe with you? =
 
-**Q: Plugin integrations – yay or nay?**  
-A: We're in the lab working on expanding our plugin’s handshake capabilities.
+Your data's security is our top priority, with stringent measures in place.
 
-**Q: How fresh will my plugin stay?**  
-A: Freshness guaranteed with regular updates based on your input and the latest trends.
+= Plugin integrations – yay or nay? =
 
-## Join the Advance Review Manager Family
+We're in the lab working on expanding our plugin’s handshake capabilities.
+
+= How fresh will my plugin stay? =
+
+Freshness guaranteed with regular updates based on your input and the latest trends.
+
+== Join the Advance Review Manager Family ==
 
   We welcome contributions to Advance Review Manager! Here's how you can get involved:
 

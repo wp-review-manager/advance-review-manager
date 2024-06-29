@@ -193,31 +193,31 @@
                         docs: [
                             {
                                 title: 'Choose Templates',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-templates.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-templates.jpg'
                             },
                             {
                                 title: 'Editor',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-form-editor.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-form-editor.jpg'
                             },
                             {
                                 title: 'Preview',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-preview.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-preview.jpg'
                             },
                             {
                                 title: 'Review Forms',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-review-forms-dashboard.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-forms-dashboard.jpg'
                             },
                             {
                                 title: 'Reviews',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-reviews-frontend.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-reviews-frontend.jpg'
                             },
                             {
                                 title: 'Reviews For Admin view',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-reviews-backend.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-reviews-backend.jpg'
                             },
                             {
                                 title: 'Review Details For Admin view',
-                                src: window.ADRMAdmin.screenshots_url + 'adrm-review-backend.jpg'
+                                src: window.ADRMAdmin.assets_url + 'images/screenshots/adrm-review-backend.jpg'
                             }
                         ]
                     },

@@ -71,7 +71,6 @@ class AdminMenuHandler{
         $ADRM = apply_filters('ADRM/admin_app_vars', array(
             //'image_upload_url' => admin_url('admin-ajax.php?action=wpf_global_settings_handler&route=wpf_upload_image'),
             'assets_url' => ADRM_URL . 'assets/',
-            'screenshots_url' => ADRM_URL . 'screenshots/',
             'ajax_url' => admin_url('admin-ajax.php'),
             'adrm_nonce' => wp_create_nonce('advance-review-manager-nonce'),
         ));

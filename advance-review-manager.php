@@ -1,22 +1,16 @@
-<?php
+<?php defined('ABSPATH') or die;
 
 /**
- * Plugin Name:  Advance Review Manager
- * Plugin URI: http://advance-review-manager.com/
- * text-domain: advance-review-manager
- * Description: Advance Review Manager is a plugin for wordpress that allows you to manage reviews for your website.
- * Author: Nitesh Dash, AKM Elias
- * Author URI: #
+ * Plugin Name: Advance Review Manager
+ * Description: Advance Review Manager by WPulse is an advance review management plugin.
+ * Author: WPulse
+ * Author URI: https://www.akmelias.com/
+ * Plugin URI: #
+ * License: GPLv2 or later
+ * Text Domain: advance-review-manager
  * Version: 1.0.0
  */
 
-use ADReviewManager\Classes\ActivationHandler;
-use ADReviewManager\Classes\DeactivationHandler;
-use ADReviewManager\Hooks\Actions;
-
-if (!defined('ABSPATH')) {
-    exit;
-}
 define('ADRM_URL', plugin_dir_url(__FILE__));
 define('ADRM_DIR', plugin_dir_path(__FILE__));
 define('ADRM_FILE', __FILE__);
@@ -25,6 +19,10 @@ define('ADRM_DB_VERSION', 1);
 
 // define('ADVANCE_REVIEW_MANAGER_PRODUCTION', 'yes');
 define('ADVANCE_REVIEW_MANAGER_PRODUCTION', 'yes');
+
+
+use ADReviewManager\Classes\ActivationHandler;
+use ADReviewManager\Classes\DeactivationHandler;
 
 class AdvanceReviewManager {
     public function boot()
@@ -53,7 +51,6 @@ class AdvanceReviewManager {
 register_activation_hook(__FILE__, function () {
  
      ActivationHandler::handle();
-    // (new ADReviewManager\Classes\ActivationHandler)->handle();
 });
 
 register_deactivation_hook(__FILE__, function () {
