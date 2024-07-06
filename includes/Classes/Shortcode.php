@@ -8,6 +8,10 @@ use ADReviewManager\Models\ReviewForm;
 use ADReviewManager\Models\Review;
 use ADReviewManager\Services\ArrayHelper as Arr;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class Shortcode {
     
     public function registerShortCodes() {

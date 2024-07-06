@@ -2,24 +2,30 @@
 declare(strict_types=1);
 
 namespace ADReviewManager\Models;
+
+use ADReviewManager\Services\SanitizationService;
 use ADReviewManager\Services\ArrayHelper as Arr;
+
 if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
     require ADRM_DIR . 'includes/services/ArrayHelper.php';
+}
+
+if (!class_exists('ADReviewManager\Services\SanitizationService', true)) {
+    require ADRM_DIR . 'includes/services/SanitizationService.php';
 }
 class ReviewForm extends Model
 {
     public function getReviewForms()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $search_string = Arr::get($_REQUEST, 'search_string', "");
+            $request = $_REQUEST;
+            $search_string = sanitize_text_field(Arr::get($request, 'search_string', ""));
             $post_query_array = [
                 'post_type' => 'wp_review_form',
                 'post_status' => 'publish',
@@ -83,30 +89,23 @@ class ReviewForm extends Model
 
     public function saveReviewForm()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         }  else {
-            $reviewFormId = $_REQUEST['form_id'];
-            $formFields = maybe_serialize($_REQUEST['formFields']);
+            $request = $_REQUEST;
+            $reviewFormId = sanitize_text_field($request['form_id']);
+
+            $sanitizedFormFields = SanitizationService::sanitize_array_values($request['formFields']);
+            $formFields = maybe_serialize($sanitizedFormFields);
     
             wp_update_post([
                 'ID' => $reviewFormId,
-                'post_title' => sanitize_text_field( $_REQUEST['post_title'] )
+                'post_title' => sanitize_text_field( $request['post_title'] )
             ]);
-    
-            if (is_wp_error($reviewFormId)) {
-                wp_send_json_error(
-                    [
-                        'message' => $reviewFormId->get_error_message()
-                    ],
-                423);
-            }
     
             update_post_meta($reviewFormId, 'adrm_form_fields', $formFields);
     
@@ -118,25 +117,25 @@ class ReviewForm extends Model
     }
 
     public function create()
-    {   
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+    {  
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $postTitle = $_REQUEST['post_title'];
-            $template = $_REQUEST['template'];
+            $request = $_REQUEST;
+            $postTitle = sanitize_text_field($request['post_title']);
+  
+            $template = SanitizationService::sanitize_array_values($request['template']);
     
             if (!$postTitle) {
                 $postTitle = 'Blank Form';
             }
     
             $data = array(
-                'post_title' => sanitize_text_field($postTitle),
+                'post_title' => $postTitle,
                 'post_status' => 'publish'
             );
     
@@ -162,8 +161,9 @@ class ReviewForm extends Model
 
     public static function insertTemplate($reviewFormId, $template)
     {
-        
+
         $template_data = Arr::get($template, 'formFields', null);
+ 
         if ($template_data == null) {
             wp_send_json_success( array(
                 'form_id' => $reviewFormId,
@@ -198,17 +198,23 @@ class ReviewForm extends Model
     // Start template settings 
     public function saveTemplateSettings()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $form_id = sanitize_text_field( $_REQUEST['form_id'] );
-            $template_settings = $_REQUEST['settings'];
+            $request = $_REQUEST;
+            $form_id = sanitize_text_field( $request['form_id'] );
+            if (is_array($request['settings'])) {
+                $request['settings'] = SanitizationService::sanitize_array_values($request['settings']);
+
+            } else {
+                $request['settings'] = sanitize_text_field($request['settings']);
+            }
+
+            $template_settings = $request['settings'];
             $template_settings = sanitize_text_field(maybe_serialize($template_settings));
     
             update_post_meta($form_id, 'adrm_template_settings', $template_settings);

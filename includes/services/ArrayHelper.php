@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace ADReviewManager\Services;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class ArrayHelper
 {
     /**

@@ -7,6 +7,10 @@ use ADReviewManager\Classes\View;
 use ADReviewManager\Classes\Helper;
 use ADReviewManager\Classes\Vite;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 if (!class_exists('ADReviewManager\Services\AccessControl', true)) {
     require ADRM_DIR . 'includes/services/AccessControl.php';
 }
@@ -74,8 +78,7 @@ class ProcessDemoPage {
             ?>
                 <div class="adrm_preview_footer" style="max-width: 1000px; margin: 0 auto">
                     <p>You are seeing preview version of Advance review manager. This form is only accessible for Admin users. Other users
-                        may not access this page. To use this for in a page please use the following shortcode: [wppayform
-                        id='<?php echo esc_html(intval($formId)); ?>']</p>
+                        may not access this page. To use this for in a page please use the following shortcode: [advance-review-manager id='<?php echo esc_html(intval($formId)); ?>']</p>
                 </div>
             <?php
             wp_footer();

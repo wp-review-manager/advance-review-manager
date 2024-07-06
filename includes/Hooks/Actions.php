@@ -7,6 +7,10 @@ use ADReviewManager\Controllers\ReviewFormController;
 use ADReviewManager\Controllers\ReviewController;
 use ADReviewManager\Services\AccessControl;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 if (!class_exists('ADReviewManager\Services\AccessControl', true)) {
     require ADRM_DIR . 'includes/services/AccessControl.php';
 }
@@ -35,18 +39,28 @@ class Actions{
         }
         public function handleEndPoint()
         {
-            $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
-            if(!wp_verify_nonce($nonce, 'advance-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
+            if(!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
                 wp_send_json([
                     "status" => 403,
-                    "nonce" => $_POST['nonce'],
+                    "nonce" => sanitize_text_field($_REQUEST['nonce']),
                     "success"=> false,
                     "message" => "Something went wrong! Request not valid.",
                 ]);
                 wp_die();
             }
+
+            $postData = $_POST;
+            $getData = $_GET;
+            $request = $_REQUEST;
+            $nonce = '';
+
+            if (isset($_POST['nonce'])) {
+                $nonce = sanitize_text_field($postData['nonce']);
+            } elseif (isset($_GET['nonce'])) {
+                $nonce = sanitize_text_field($getData['nonce']);
+            }
     
-            $route = sanitize_text_field($_REQUEST['route']);
+            $route = sanitize_text_field($request['route']);
     
             $validRoutes = array(
                 'create_review_form' => 'createReviewForm',

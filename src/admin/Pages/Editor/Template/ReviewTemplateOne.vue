@@ -7,7 +7,7 @@
     >
       <div class="adrm_review_temp_one_avatar">
         <img
-          src="https://via.placeholder.com/150"
+          src=""
           alt="Avatar"
         >
       </div>

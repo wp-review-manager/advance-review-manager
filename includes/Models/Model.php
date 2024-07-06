@@ -190,21 +190,21 @@ class Model
             );
         }
 
-        $statement = "SELECT {$this->getSelects()} FROM {$this->model} {$this->getWhereStatement()}";
+        $statement = $this->db->prepare("SELECT %1s FROM %1s %1s", $this->getSelects(), $this->model, $this->getWhereStatement());
         $this->reset();
         return $this->db->get_row($statement);
     }
 
     public function first()
     {
-        $query = "SELECT {$this->getSelects()} FROM {$this->model} {$this->getWhereStatement()} {$this->getOtherStatements()}";
+        $query = $this->db->prepare("SELECT %1s FROM %1s $1s %1s", $this->getSelects(), $this->model, $this->getWhereStatement(), $this->getOtherStatements());
         $this->reset();
         return $this->db->get_row($query);
     }
 
     public function get()
     {
-        $query = "SELECT {$this->getSelects()} FROM {$this->model} {$this->getWhereStatement()} {$this->getOtherStatements()}";
+        $query = $this->db->prepare("SELECT %1s FROM %1s $1s %1s", $this->getSelects(), $this->model, $this->getWhereStatement(), $this->getOtherStatements());
         $this->reset();
         return $this->db->get_results($query);
     }
@@ -260,12 +260,13 @@ class Model
 
     public function getCount()
     {
-        return $this->db->get_var("SELECT COUNT(*) FROM $this->model {$this->getWhereStatement()}");
+        $query = $this->db->prepare("SELECT COUNT(*) FROM %1s %1s", $this->model, $this->getWhereStatement());
+        return $this->db->get_var($query);
     }
 
     public function getDISTINCT($row)
     {
-        $query = "SELECT DISTINCT $row FROM $this->model";
+        $query = $this->db->prepare("SELECT DISTINCT %1s FROM %1s", $row, $this->model);
         return $this->db->get_results($query);
     }
 

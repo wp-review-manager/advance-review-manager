@@ -240,7 +240,7 @@
             getString() {
                 var str = '\n#WordPress\n';
                 str += this.getConcatString(this.wordpress);
-                str += "\n#PayForm Infos\n";
+                str += "\n#ADRM Infos\n";
                 str += this.getConcatString(this.adrmInfo);
                 str += "\n#Theme Infos\n";
                 str += this.getConcatString(this.themeInfo);

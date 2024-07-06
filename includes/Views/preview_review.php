@@ -1,8 +1,10 @@
+<?php
 
-    <?php
     use ADReviewManager\Services\ArrayHelper as Arr;
     use ADReviewManager\Classes\Vite;
     use ADReviewManager\Views\ReviewsTemplate;
+
+    if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
 
     ?>
     <?php

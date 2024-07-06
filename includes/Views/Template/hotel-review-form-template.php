@@ -2,6 +2,9 @@
 namespace ADReviewManager\Views\Template;
 use ADReviewManager\Classes\Helper;
 use ADReviewManager\Services\ArrayHelper as Arr;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+
 /**
  * Return a html review template for the food review form
  * get the reviews and form data and render the template

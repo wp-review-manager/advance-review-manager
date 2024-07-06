@@ -6,6 +6,10 @@ use ADReviewManager\Classes\Helper;
 use ADReviewManager\Hooks\Actions;
 use PHPUnit\TextUI\Help;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class AdminMenuHandler{
 
     public function renderMenu() {

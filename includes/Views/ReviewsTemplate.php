@@ -3,6 +3,8 @@ namespace ADReviewManager\Views;
 use ADReviewManager\Classes\Helper;
 use ADReviewManager\Services\ArrayHelper as Arr;
 use ADReviewManager\Classes\View;
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
 /**
  * Class ReviewsTemplate
  * @package ADReviewManager\Views

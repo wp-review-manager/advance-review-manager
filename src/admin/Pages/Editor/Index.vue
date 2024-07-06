@@ -1,46 +1,48 @@
 <template>
-  <div class="nav-wrapper">
-    <li>
-      <router-link to="/">
-        <Icon icon="LeftBack" />
-        Back to Review Forms
-      </router-link>
-    </li>
-    <nav>
-      <ul class="nav-menu">
-        <li>
-          <router-link :to="`/form/edit/${template_id}`">
-            <Icon icon="Editor" />
-            Editor
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="`/form/edit/${template_id}/settings/general`">
-            <Icon icon="Settings" />
-            Settings
-          </router-link>
-        </li>
-        <li>
-          <router-link :to="`/form/edit/${template_id}/reviews`">
-            <Icon icon="List" />
-            Reviews
-          </router-link>
-        </li>
-        <li>
-          <div class="adrm-form-editor__action_right">
-            <button
-              v-clipboard:success="clipboardSuccessHandler"
-              v-clipboard="shortcode"
-              class="adrm-shortcode"
-            >
-              {{ shortcode }}
-            </button>
-          </div>
-        </li>
-      </ul>
-    </nav>
+  <div>
+    <div class="nav-wrapper">
+      <li>
+        <router-link to="/">
+          <Icon icon="LeftBack" />
+          Back to Review Forms
+        </router-link>
+      </li>
+      <nav>
+        <ul class="nav-menu">
+          <li>
+            <router-link :to="`/form/edit/${template_id}`">
+              <Icon icon="Editor" />
+              Editor
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="`/form/edit/${template_id}/settings/general`">
+              <Icon icon="Settings" />
+              Settings
+            </router-link>
+          </li>
+          <li>
+            <router-link :to="`/form/edit/${template_id}/reviews`">
+              <Icon icon="List" />
+              Reviews
+            </router-link>
+          </li>
+          <li>
+            <div class="adrm-form-editor__action_right">
+              <button
+                v-clipboard:success="clipboardSuccessHandler"
+                v-clipboard="shortcode"
+                class="adrm-shortcode"
+              >
+                {{ shortcode }}
+              </button>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <router-view />
   </div>
-  <router-view />
 </template>
 <script>
 import { ElNotification } from 'element-plus';
@@ -80,7 +82,7 @@ export default {
     font-size: 16px;
     margin-top: -63px;
     position: relative;
-    z-index: 9999999;
+    // z-index: 9999999;
 
     li {
         a {

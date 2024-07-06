@@ -5,6 +5,10 @@ namespace ADReviewManager\Controllers;
 use ADReviewManager\Services\ArrayHelper as Arr;
 use ADReviewManager\Models\Review;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
     require ADRM_DIR . 'includes/services/ArrayHelper.php';
 }
@@ -26,19 +30,18 @@ class ReviewController
 
     public function getReviews()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $filter = Arr::get($_REQUEST, 'filter', []);
-            $sort = Arr::get($_REQUEST, 'sort', 'newest');
+            $request = $_REQUEST;
+            $filter = Arr::get($request, 'filter', []);
+            $sort = Arr::get($request, 'sort', 'newest');
 
-            $formID = sanitize_text_field($_REQUEST['formID']);
+            $formID = sanitize_text_field($request['formID']);
             $sort = sanitize_text_field($sort);
             $filter = sanitize_text_field($filter);
 
@@ -49,16 +52,16 @@ class ReviewController
 
     public function getReview()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
 
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $reviewID = sanitize_text_field($_REQUEST['reviewID']);
+            $request = $_REQUEST;
+            $reviewID = sanitize_text_field($request['reviewID']);
             if (empty($reviewID)) {
                 wp_send_json_error(
                     [
@@ -73,16 +76,15 @@ class ReviewController
 
     public function deleteReview()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $reviewID = sanitize_text_field($_REQUEST['reviewID']);
+            $request = $_REQUEST;
+            $reviewID = sanitize_text_field($request['reviewID']);
             if (empty($reviewID)) {
                 wp_send_json_error(
                     [
@@ -96,21 +98,18 @@ class ReviewController
 
     public function getFormattedReviews()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $filter = Arr::get($_REQUEST, 'filter', []);
-            $sort = Arr::get($_REQUEST, 'sort', 'newest');
+            $request = $_REQUEST;
+            $filter =  sanitize_text_field(Arr::get($request, 'filter', []));
+            $sort = sanitize_text_field(Arr::get($request, 'sort', 'newest'));
 
-            $formID = sanitize_text_field($_REQUEST['formID']);
-            $sort = sanitize_text_field($sort);
-            $filter = sanitize_text_field($filter);
+            $formID = sanitize_text_field($request['formID']);
 
             $response = (new Review)->getReviews($formID, $nonce, $filter, $sort);
             $formattedReviews = $this->formatReviews($response['reviews']);

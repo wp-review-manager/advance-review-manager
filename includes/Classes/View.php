@@ -3,6 +3,9 @@ namespace ADReviewManager\Classes;
 
 use ParagonIE\Sodium\Core\Curve25519\H;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
 class View
 {
     public static function make($path, $data = [])

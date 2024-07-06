@@ -1,6 +1,10 @@
 <?php
 namespace ADReviewManager\Classes;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 class Helper {
     public static function LogoSvg() {
         $svg = '<svg style="height: 68px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="68px" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 1124 402" enable-background="new 0 0 1124 402" xml:space="preserve">

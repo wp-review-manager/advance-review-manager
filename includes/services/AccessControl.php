@@ -56,7 +56,7 @@ class AccessControl
         }
 
         wp_send_json_error(array(
-            'message' => ($message) ? $message : __('Sorry, You do not have permission to do this action: ', 'wp-payment-form') . $endpoint,
+            'message' => ($message) ? $message : __('Sorry, You do not have permission to do this action: ', 'advance-review-manager') . $endpoint,
             'action' => $endpoint
         ), 423);
     }
@@ -79,7 +79,7 @@ class AccessControl
             $relatedPermission = $permissions[$endpoint];
             foreach ($relatedPermission as $permission) {
                 if (current_user_can($permission)) {
-                    return apply_filters('wppayform/has_endpoint_access', $permission, $endpoint, $group);
+                    return apply_filters('adrm/has_endpoint_access', $permission, $endpoint, $group);
                 }
             }
         }

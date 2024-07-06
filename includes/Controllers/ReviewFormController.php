@@ -6,6 +6,10 @@ use ADReviewManager\Services\ArrayHelper as Arr;
 use ADReviewManager\Models\ReviewForm;
 use ADReviewManager\Models\Review;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
     require ADRM_DIR . 'includes/services/ArrayHelper.php';
 }
@@ -19,17 +23,15 @@ class ReviewFormController
 
     public function deleteReviewForm()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
-            $form_id = Arr::get($_REQUEST, 'form_id', "");
-            $form_id = sanitize_text_field($form_id);
+            $request = $_REQUEST;
+            $form_id = sanitize_text_field(Arr::get($request, 'form_id', ""));
             if (empty($form_id)) {
                 wp_send_json_error(
                     [
@@ -43,17 +45,17 @@ class ReviewFormController
 
     public static function getReviewForm()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
 
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
+            $request = $_REQUEST;
             try{
-                $form_id = $_REQUEST['form_id'];
+                $form_id = sanitize_text_field($request['form_id']);
                 $form = (new ReviewForm)->getReviewForm($form_id);
                 $reviews = (new Review)->getReviews($form_id);
                 if(empty($form)) {
@@ -122,17 +124,16 @@ class ReviewFormController
 
     public function getTemplateSettings()
     {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
                 ],
             423);
         } else {
+            $request = $_REQUEST;
             try{
-                $form_id = sanitize_text_field( $_REQUEST['form_id'] );
+                $form_id = sanitize_text_field( $request['form_id'] );
                 
                 return (new ReviewForm)->getTemplateSettings($form_id);
             } catch(\Exception $e) {

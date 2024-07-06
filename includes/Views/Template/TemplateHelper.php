@@ -2,6 +2,8 @@
 namespace ADReviewManager\Views\Template;
 use ADReviewManager\Services\ArrayHelper as Arr;
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+
 class TemplateHelper {
     
     public static function getAverageRatingByCategories($reviews) {

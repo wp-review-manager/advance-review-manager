@@ -173,12 +173,12 @@ export default {
                 this.total = response.data.total_reviews;
                 this.loading = false;
                 ElNotification({
-                title: 'Success!',
-                message: 'Successfully fetched reviews!',
-                type: 'success',
-                position: 'bottom-right'
-            });
-                }).catch(function (error) {
+                    title: 'Success!',
+                    message: 'Successfully fetched reviews!',
+                    type: 'success',
+                    position: 'bottom-right'
+                });
+            }).catch(function (error) {
                 this.loading = false;
                 console.log(error);
             });

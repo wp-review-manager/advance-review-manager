@@ -10,9 +10,7 @@ if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
 class Review extends Model
 {
     public function create() {
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? '';
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
@@ -20,7 +18,8 @@ class Review extends Model
             423);
         } else {
             global $wpdb;
-            $data = self::sanitizeData($_POST);
+            $data = $_POST;
+            $data = self::sanitizeData($data);
             $formID = $data['formID'];
             $formData = array(
                 'formComponent' => $data['formComponent'],
@@ -52,9 +51,7 @@ class Review extends Model
 
     public function getReviews($formID, $nonce = '', $filter = null, $sort = 'newest') {
 
-        $nonce = $_REQUEST['nonce'] ?? $_REQUEST['nonce'] ?? $nonce;
-
-        if (!wp_verify_nonce($nonce, 'advance-review-manager-nonce')) {
+        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
@@ -62,7 +59,7 @@ class Review extends Model
             423);
         } else {
             global $wpdb;
-
+            $request = $_REQUEST;
             // Sanitize input
             $formID = sanitize_text_field($formID);
             $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
@@ -71,7 +68,7 @@ class Review extends Model
             $template_settings = maybe_unserialize(get_post_meta($formID, 'adrm_template_settings', true));
             $pagination = Arr::get($template_settings, 'pagination', []);
             $limit = Arr::get($pagination, 'per_page', 10);
-            $page = max(1, Arr::get($_REQUEST, 'page', 1)); // Ensure page is at least 1
+            $page = max(1, sanitize_text_field(Arr::get($request, 'page', 1))); // Ensure page is at least 1
             $offset = ($page - 1) * $limit;
 
             if (Arr::get($pagination, 'enable') == 'false') {
@@ -96,7 +93,8 @@ class Review extends Model
             // Prepare SQL with safe placeholders for variables
             // $final_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE form_id = %d ORDER BY created_at {$sortOrder} LIMIT %d OFFSET %d", $formID, $limit, $offset);
        
-            $reviews = $wpdb->get_results("SELECT * FROM $table_name WHERE form_id = {$formID} ORDER BY created_at {$sortOrder} LIMIT {$limit} OFFSET {$offset}", ARRAY_A);
+            $sql = $wpdb->prepare("SELECT * FROM %1s WHERE form_id = %d ORDER BY created_at %1s LIMIT %d OFFSET %d", $table_name, $formID, $sortOrder, $limit, $offset);
+            $reviews = $wpdb->get_results($sql, ARRAY_A);
 
             // Fetch total reviews count
             // $total_reviews_sql = $wpdb->prepare(
@@ -104,7 +102,8 @@ class Review extends Model
             //     $formID
             // );
 
-            $total_reviews = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->prefix}adrm_reviews WHERE form_id = {$formID}");
+            $query = $wpdb->prepare("SELECT COUNT(*) FROM %1s WHERE form_id = %d", $table_name, $formID);
+            $total_reviews = $wpdb->get_var($query);
 
             // Process reviews
             $reviews = static::processReviewData($reviews);
@@ -130,12 +129,18 @@ class Review extends Model
     public function getReview($reviewID)
     {
         global $wpdb;
+        $table_name = $wpdb->prefix . 'adrm_reviews';
         $reviewID = sanitize_text_field($reviewID);
         // $sql = $wpdb->prepare(
         //     "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = %d",
         //     $reviewID
         // );
-        $review = $wpdb->get_row( "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = {$reviewID}", ARRAY_A);
+
+        $query = $wpdb->prepare("SELECT * FROM %1s WHERE id = %d", $table_name, $reviewID);
+        $review = $wpdb->get_row($query, ARRAY_A);
+        if (!$review) {
+            return [];
+        }
         $review['meta'] = maybe_unserialize($review['meta']);
         $review['avatar'] = get_avatar(Arr::get($review, 'meta.formFieldData.email'));
         return $review;

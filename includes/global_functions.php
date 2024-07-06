@@ -1,6 +1,8 @@
 <?php
-// global functions here
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+
+// global functions here
 function ADRM_getAvatar($email, $size)
 {
     $hash = md5(strtolower(trim($email)));

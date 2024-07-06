@@ -1,7 +1,10 @@
 <?php
 namespace ADReviewManager\Modules\Debug;
-
 use ADReviewManager\Services\ArrayHelper as Arr;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 class Debug
 {
@@ -99,7 +102,7 @@ class Debug
             );
         }
 
-        $recapchaSettings = get_option('wppayform_recaptcha_settings', array());
+        $recapchaSettings = get_option('adrm_recaptcha_settings', array());
         $recapchaVersion = Arr::get($recapchaSettings, 'recaptcha_version', false);
 
         $myPlugin = array(
@@ -116,7 +119,7 @@ class Debug
             ),
             // "integration" => array(
             //     "label" => "Integration Module",
-            //     "result" => get_option('wppayform_integration_status', false) ? 'Enabled' : 'Disable'
+            //     "result" => get_option('adrm_integration_status', false) ? 'Enabled' : 'Disable'
             // ),
             // "global_recapcha" => array(
             //     "label" => "Recapcha",
@@ -127,7 +130,7 @@ class Debug
         $hasPro = defined('ADRMHASPRO');
         $proInfo = array();
         if ($hasPro) {
-            $licenceStatus = get_option('_wppayform_pro_license_status', false);
+            $licenceStatus = get_option('_adrm_pro_license_status', false);
             $proInfo = array (
                 "has_pro" => array(
                     "label" => "Pro version",
@@ -188,7 +191,6 @@ class Debug
     public static function getServerInfos()
     {
         global $wpdb;
-        $remotePost = self::postRequestTest();
         $remoteGet = self::getRequestTest();
         $executionLimit = ini_get('max_execution_time');
         $memoryLimit = ini_get('memory_limit');
@@ -261,7 +263,6 @@ class Debug
                 'result' => $inputsLimit ? $inputsLimit : '-',
             ),
             'wp_remote_get' =>$remoteGet,
-            'wp_remote_post' => $remotePost,
             'curl_init' => array(
                 'label' => __('cURL Enabled', 'advance-review-manager'),
                 'result' => function_exists('curl_init') ? __('Yes', 'advance-review-manager') : __('Not Enabled (issue)', 'advance-review-manager'),
@@ -374,37 +375,6 @@ class Debug
                 'label' => __('WP Remote GET', 'advance-review-manager'),
                 'result' => is_wp_error($response) ? $remoteGet . '(issue)' : $remoteGet,
                 'status' => is_wp_error($response) ? 'warn' : 'ok'
-        );
-    }
-
-    private static function postRequestTest()
-    {
-        $response = wp_safe_remote_post(
-            'https://www.paypal.com/cgi-bin/webscr',
-            array(
-                'timeout' => 60,
-                'body'    => array(
-                    'cmd' => '_notify-validate',
-                ),
-            )
-        );
-        $remotePost = '';
-        if (!is_wp_error($response) && $response['response']['code'] >= 200 && $response['response']['code'] < 300) {
-            $remotePost = 'Yes';
-        } else {
-            $remotePost = 'No';
-            if (is_wp_error($response)) {
-                $error  = ' (' . $response->get_error_message() . ')';
-                $remotePost .= $error;
-            } else {
-                $error = ' (' . $response['response']['code'] . ')';
-                $remotePost .= $error;
-            }
-        }
-        return array(
-            'label' => __('WP Remote POST', 'advance-review-manager'),
-            'result' => is_wp_error($response) ? $remotePost . ' (issue)' : $remotePost,
-            'status' => is_wp_error($response) ? 'warn' : 'ok'
         );
     }
 
