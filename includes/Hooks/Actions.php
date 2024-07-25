@@ -26,7 +26,7 @@ class Actions{
         public function registerHooks()
         {
             // register necessary hooks here
-            add_action( 'wp', function () {
+            add_action('wp', function () {
                 $demoPage = new \ADReviewManager\Modules\Exterior\ProcessDemoPage();
                 $demoPage->handleExteriorPages();
             }); 
@@ -39,10 +39,9 @@ class Actions{
         }
         public function handleEndPoint()
         {
-            if(!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce') && AccessControl::hasTopLevelMenuPermission()){
+            if(! isset( $_REQUEST['nonce'] ) || !wp_verify_nonce(sanitize_text_field( wp_unslash($_REQUEST['nonce'])), 'advance-review-manager-nonce')  || ! AccessControl::hasTopLevelMenuPermission()){
                 wp_send_json([
                     "status" => 403,
-                    "nonce" => sanitize_text_field($_REQUEST['nonce']),
                     "success"=> false,
                     "message" => "Something went wrong! Request not valid.",
                 ]);
@@ -55,9 +54,9 @@ class Actions{
             $nonce = '';
 
             if (isset($_POST['nonce'])) {
-                $nonce = sanitize_text_field($postData['nonce']);
+                $nonce = sanitize_text_field(wp_unslash($postData['nonce']));
             } elseif (isset($_GET['nonce'])) {
-                $nonce = sanitize_text_field($getData['nonce']);
+                $nonce = sanitize_text_field(wp_unslash($getData['nonce']));
             }
     
             $route = sanitize_text_field($request['route']);

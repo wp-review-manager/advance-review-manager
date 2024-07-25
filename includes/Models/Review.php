@@ -10,7 +10,7 @@ if (!class_exists('ADReviewManager\Services\ArrayHelper', true)) {
 class Review extends Model
 {
     public function create() {
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
+        if (! isset($_REQUEST['nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['nonce'])), 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
@@ -49,80 +49,72 @@ class Review extends Model
         }
     }
 
-    public function getReviews($formID, $nonce = '', $filter = null, $sort = 'newest') {
+    public function getReviews($formID, $filter = null, $sort = 'newest') 
+    {
+        global $wpdb;
+        $request = $_REQUEST;
+        // Sanitize input
+        $formID = sanitize_text_field($formID);
+        $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
 
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
-            wp_send_json_error(
-                [
-                    'message' => "Nonce verification failed."
-                ],
-            423);
-        } else {
-            global $wpdb;
-            $request = $_REQUEST;
-            // Sanitize input
-            $formID = sanitize_text_field($formID);
-            $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
+        // Fetch pagination settings
+        $template_settings = maybe_unserialize(get_post_meta($formID, 'adrm_template_settings', true));
+        $pagination = Arr::get($template_settings, 'pagination', []);
+        $limit = Arr::get($pagination, 'per_page', 10);
+        $page = max(1, sanitize_text_field(Arr::get($request, 'page', 1))); // Ensure page is at least 1
+        $offset = ($page - 1) * $limit;
 
-            // Fetch pagination settings
-            $template_settings = maybe_unserialize(get_post_meta($formID, 'adrm_template_settings', true));
-            $pagination = Arr::get($template_settings, 'pagination', []);
-            $limit = Arr::get($pagination, 'per_page', 10);
-            $page = max(1, sanitize_text_field(Arr::get($request, 'page', 1))); // Ensure page is at least 1
-            $offset = ($page - 1) * $limit;
-
-            if (Arr::get($pagination, 'enable') == 'false') {
-                $limit = 1000000000; // Arbitrary large number to effectively disable pagination
-                $offset = 0;
-            }
-
-            // Properly include ORDER BY in prepared SQL
-            $table_name = "{$wpdb->prefix}adrm_reviews"; // Safe table name via WPDB prefix
-            // $query = "SELECT * FROM $table_name WHERE form_id = %d";
-
-            // // Add ORDER BY clause safely
-            // $query .= sprintf(" ORDER BY created_at %s", in_array($sortOrder, ['ASC', 'DESC']) ? $sortOrder : 'ASC');
-
-            // // Add LIMIT and OFFSET
-            // $query .= " LIMIT %d OFFSET %d";
-
-            if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
-                $sortOrder = 'ASC';  // Default to 'ASC' if invalid
-            }
-            
-            // Prepare SQL with safe placeholders for variables
-            // $final_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE form_id = %d ORDER BY created_at {$sortOrder} LIMIT %d OFFSET %d", $formID, $limit, $offset);
-       
-            $sql = $wpdb->prepare("SELECT * FROM %1s WHERE form_id = %d ORDER BY created_at %1s LIMIT %d OFFSET %d", $table_name, $formID, $sortOrder, $limit, $offset);
-            $reviews = $wpdb->get_results($sql, ARRAY_A);
-
-            // Fetch total reviews count
-            // $total_reviews_sql = $wpdb->prepare(
-            //     "SELECT COUNT(*) FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
-            //     $formID
-            // );
-
-            $query = $wpdb->prepare("SELECT COUNT(*) FROM %1s WHERE form_id = %d", $table_name, $formID);
-            $total_reviews = $wpdb->get_var($query);
-
-            // Process reviews
-            $reviews = static::processReviewData($reviews);
-            $all_reviews = static::processReviewData($reviews);
-        
-            // Apply filter if provided
-            if (!empty($filter) && $filter != 'all') {  
-                $reviews = array_filter($reviews, function($review) use ($filter) {
-                    return Arr::get($review, 'average_rating', 0) == $filter;
-                });
-            }
-    
-            return [
-                'reviews' => array_values($reviews),
-                'total_reviews' => $total_reviews,
-                'pagination' => $pagination,
-                'all_reviews' => $all_reviews
-            ];
+        if (Arr::get($pagination, 'enable') == 'false') {
+            $limit = 1000000000; // Arbitrary large number to effectively disable pagination
+            $offset = 0;
         }
+
+        // Properly include ORDER BY in prepared SQL
+        $table_name = "{$wpdb->prefix}adrm_reviews"; // Safe table name via WPDB prefix
+        // $query = "SELECT * FROM $table_name WHERE form_id = %d";
+
+        // // Add ORDER BY clause safely
+        // $query .= sprintf(" ORDER BY created_at %s", in_array($sortOrder, ['ASC', 'DESC']) ? $sortOrder : 'ASC');
+
+        // // Add LIMIT and OFFSET
+        // $query .= " LIMIT %d OFFSET %d";
+
+        if (!in_array(strtoupper($sortOrder), ['ASC', 'DESC'])) {
+            $sortOrder = 'ASC';  // Default to 'ASC' if invalid
+        }
+        
+        // Prepare SQL with safe placeholders for variables
+        // $final_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE form_id = %d ORDER BY created_at {$sortOrder} LIMIT %d OFFSET %d", $formID, $limit, $offset);
+    
+        $sql = $wpdb->prepare("SELECT * FROM %1s WHERE form_id = %d ORDER BY created_at %1s LIMIT %d OFFSET %d", $table_name, $formID, $sortOrder, $limit, $offset);
+        $reviews = $wpdb->get_results($sql, ARRAY_A);
+
+        // Fetch total reviews count
+        // $total_reviews_sql = $wpdb->prepare(
+        //     "SELECT COUNT(*) FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
+        //     $formID
+        // );
+
+        $query = $wpdb->prepare("SELECT COUNT(*) FROM %1s WHERE form_id = %d", $table_name, $formID);
+        $total_reviews = $wpdb->get_var($query);
+
+        // Process reviews
+        $reviews = static::processReviewData($reviews);
+        $all_reviews = static::processReviewData($reviews);
+    
+        // Apply filter if provided
+        if (!empty($filter) && $filter != 'all') {  
+            $reviews = array_filter($reviews, function($review) use ($filter) {
+                return Arr::get($review, 'average_rating', 0) == $filter;
+            });
+        }
+
+        return [
+            'reviews' => array_values($reviews),
+            'total_reviews' => $total_reviews,
+            'pagination' => $pagination,
+            'all_reviews' => $all_reviews
+        ];
        
     }
 

@@ -54,7 +54,7 @@ class AdminMenuHandler{
                 'advance-review-manager.php',
             ];
             
-            if (wp_verify_nonce('', 'advance-review-manager-nonce') &&isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
+            if (isset($_GET['page']) && in_array($_GET['page'], $disablePages)) {
                 remove_all_actions('admin_notices');
         
                 // wp_enqueue_style(

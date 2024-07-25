@@ -18,7 +18,7 @@ if (!class_exists('ADReviewManager\Services\AccessControl', true)) {
 class ProcessDemoPage {
     public function handleExteriorPages() {
         $nonce = $_POST['nonce'] ?? $_GET['nonce'] ?? '';
-        if (wp_verify_nonce($nonce, 'advance-review-manager-nonce') && isset($_GET['adrm_review_preview']) &&  $_GET['adrm_review_preview']) {
+        if ($nonce && wp_verify_nonce( sanitize_text_field( wp_unslash($nonce)), 'advance-review-manager-nonce') && isset($_GET['adrm_review_preview']) &&  $_GET['adrm_review_preview']) {
             $hasDemoAccess = AccessControl::hasTopLevelMenuPermission();
             $hasDemoAccess = apply_filters('adrm/can_see_demo_form', $hasDemoAccess);
             if (!current_user_can($hasDemoAccess)) {

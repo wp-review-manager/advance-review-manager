@@ -17,7 +17,7 @@ class ReviewForm extends Model
 {
     public function getReviewForms()
     {
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
+        if (! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce(sanitize_text_field( wp_unslash($_REQUEST['nonce'])), 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
@@ -89,7 +89,7 @@ class ReviewForm extends Model
 
     public function saveReviewForm()
     {
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
+        if (! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce(sanitize_text_field( wp_unslash($_REQUEST['nonce'])), 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
@@ -118,7 +118,7 @@ class ReviewForm extends Model
 
     public function create()
     {  
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
+        if (! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce(sanitize_text_field( wp_unslash($_REQUEST['nonce'])), 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
@@ -198,7 +198,7 @@ class ReviewForm extends Model
     // Start template settings 
     public function saveTemplateSettings()
     {
-        if (!wp_verify_nonce($_REQUEST['nonce'], 'advance-review-manager-nonce')) {
+        if (! isset( $_REQUEST['nonce'] ) || ! wp_verify_nonce(sanitize_text_field( wp_unslash($_REQUEST['nonce'])), 'advance-review-manager-nonce')) {
             wp_send_json_error(
                 [
                     'message' => "Nonce verification failed."
