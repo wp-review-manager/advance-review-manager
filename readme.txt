@@ -3,12 +3,13 @@
 Contributors: wpulse, dasnitesh780, akmelias
 Tags: Feedback, Reviews, Testimonials, User Experience, Customer Satisfaction
 Requires at least: 4.5
-Tested up to: 6.5
+Tested up to: 6.6
 Stable tag: 1.0.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Advance Review Manager is a powerful yet easy-to-use WordPress plugin that empowers you to effortlessly create and manage all kind of reviews.
+
+Advance Review Manager is a powerful yet easy-to-use plugin to effortlessly create and manage all kind of reviews.
 
 ## Description 
 
@@ -90,11 +91,6 @@ Freshness guaranteed with regular updates based on your input and the latest tre
 **Support**: Expert help is a click away. [Get Support](#).
 
 **Stay Informed**: Check back for our no-fuss **Upgrade Notices** and **Changelog** for the latest updates.
-
-
-== Tags ==
-
-Feedback, Reviews, Testimonials, Forms, User Experience, Customer Satisfaction, WordPress Plugin
 
 == Upgrade Notice ==
 

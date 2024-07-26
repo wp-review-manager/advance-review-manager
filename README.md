@@ -3,7 +3,7 @@
 Contributors: wpulse, dasnitesh780, akmelias
 Tags: Feedback, Reviews, Testimonials, User Experience, Customer Satisfaction
 Requires at least: 4.5
-Tested up to: 6.5
+Tested up to: 6.6
 Stable tag: 1.0.0
 Requires PHP: 7.1
 License: GPLv2 or later
@@ -18,7 +18,7 @@ Advance Review Manager is a powerful yet easy-to-use WordPress plugin that empow
 
 **Advance Review Manager** is the powerhouse WordPress plugin designed to make the collection and management of reviews a breeze. With its intuitive design and a suite of customizable options, you can effortlessly gather critical customer insights while maintaining a seamless user experience.
 
-== Amazing Features ==
+== Features at a Glance ==
 
 - Simplified Form Creation**: Our custom templates allow you to craft the perfect review forms with minimal fuss.
 - Real-time Previews: A quick peek is just a click away to ensure your forms look just right.
@@ -90,11 +90,6 @@ Freshness guaranteed with regular updates based on your input and the latest tre
 **Support**: Expert help is a click away. [Get Support](#).
 
 **Stay Informed**: Check back for our no-fuss **Upgrade Notices** and **Changelog** for the latest updates.
-
-
-== Tags ==
-
-Feedback, Reviews, Testimonials, Forms, User Experience, Customer Satisfaction, WordPress Plugin
 
 == Upgrade Notice ==
 
