@@ -39,7 +39,7 @@ class Shortcode {
             $form = (new ReviewForm)->getReviewForm($formId);
             $nonce = wp_create_nonce('advance-review-manager-nonce');
             
-            $response = (new Review)->getReviews($formId, $nonce);
+            $response = (new Review)->getReviews($formId);
 
             if (!empty($form)) {
                return View::make('preview_review', [
