@@ -74,6 +74,17 @@
                   @click="addMoreRatingField(fieldIndex)"
                 />
               </div>
+    
+              <div
+                v-if="field.type == 'rating' && !single_review_template"
+                class="adrm-plus-btn"
+              >
+                <Icon
+                  icon="Delete"
+                  @click="deleteOption(fieldIndex)"
+                />
+              </div>
+
               <el-switch
                 v-model="field.enabled"
                 inactive-value="false"
@@ -304,6 +315,9 @@ export default {
           console.log(err);
         }
       });
+    },
+    deleteOption(fieldIndex) {
+            this.templateFormComponents.splice(fieldIndex, 1);
     },
   }
 };
