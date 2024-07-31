@@ -38,20 +38,20 @@ if ($enablePagination == 'true') {
                     <input class="adrm-filter-by-star" type="radio" name="review-filter" id="all" value="all" checked>
                     <label for="all">All</label>
 
-                    <input class="adrm-filter-by-star"  type="radio" name="review-filter" id="1-star" value="1">
-                    <label  for="1-star"><p>*</p>1</label>
-
-                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="2-star" value="2">
-                    <label for="2-star"><p>*</p>2</label>
-
-                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="3-star" value="3">
-                    <label for="3-star"><p>*</p>3</label>
+                    <input class="adrm-filter-by-star"  type="radio" name="review-filter" id="5-star" value="5">
+                    <label  for="5-star"><p>*</p>5</label>
 
                     <input class="adrm-filter-by-star" type="radio" name="review-filter" id="4-star" value="4">
                     <label for="4-star"><p>*</p>4</label>
 
-                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="5-star" value="5">
-                    <label for="5-star"><p>*</p>5</label>
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="3-star" value="3">
+                    <label for="3-star"><p>*</p>3</label>
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="2-star" value="2">
+                    <label for="2-star"><p>*</p>2</label>
+
+                    <input class="adrm-filter-by-star" type="radio" name="review-filter" id="1-star" value="1">
+                    <label for="1-star"><p>*</p>1</label>
 
                 </div>
             </div>

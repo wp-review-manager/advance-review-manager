@@ -134,7 +134,7 @@ jQuery(document).ready(function ($) {
                 // Handle the response here
 
                 $(form).find('input:not([type=submit])').val('');
-                var notification = $('<div class="adrm-success-notification">Form submitted successfully</div>');
+                var notification = $('<div class="adrm-success-notification">Review submitted successfully</div>');
 
                 // Append the notification to the body
                 $(form).append(notification);
@@ -143,8 +143,7 @@ jQuery(document).ready(function ($) {
                 setTimeout(function() {
                     notification.remove();
                 }, 3000);
-    
-                console.log(response);
+                location.reload();
             }
         });
     }
