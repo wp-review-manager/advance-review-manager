@@ -4,7 +4,7 @@ Contributors: wpulse, dasnitesh780, akmelias
 Tags: Feedback, Reviews, Testimonials, User Experience, Customer Satisfaction
 Requires at least: 4.5
 Tested up to: 6.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -100,6 +100,9 @@ No upgrade notice available.
 
 == Changelog ==
 
+= 1.0.2 July 31, 2024 =
+- Improves User experience on review submission
+
 = 1.0.1 July 29, 2024 =
 - Fixes review template render issue
 
@@ -109,3 +112,4 @@ No upgrade notice available.
 == Upgrade Notice ==
 
 No upgrade notice available.
+
