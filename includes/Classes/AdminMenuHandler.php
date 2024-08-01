@@ -27,6 +27,12 @@ class AdminMenuHandler{
                 $this->getMenuIcon(),
                 4
             );
+            $submenu['advance-review-manager.php']['dashboard'] = array(
+                'Dashboard',
+                'manage_options',
+                'admin.php?page=advance-review-manager.php#/Dashboard',
+            );
+           
             $submenu['advance-review-manager.php']['review-forms'] = array(
                 'Review Forms',
                 'manage_options',
@@ -47,6 +53,7 @@ class AdminMenuHandler{
                 'manage_options',
                 'admin.php?page=advance-review-manager.php#/support-&-debug',
             );
+
         });
         add_action('admin_init', function () {
 

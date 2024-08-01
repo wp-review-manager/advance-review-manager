@@ -1,4 +1,5 @@
 import Admin from './Pages/HomePage/Admin.vue';
+import Dashboard from './Pages/Dashboard/dashboard.vue';
 import Contact from './Pages/Contact.vue';
 import EditorIndex from './Pages/Editor/Index.vue';
 import FormEditor from './Pages/Editor/FormEditor.vue';
@@ -15,6 +16,11 @@ export default [{
     meta: {
         active: 'dashboard'
     },
+},
+{
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard
 },
 {
     path: '/settings',
