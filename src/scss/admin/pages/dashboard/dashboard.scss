@@ -6,10 +6,10 @@
    
     .dash-details{
        display: grid;
-       grid-template-columns: repeat(4, 1fr);
+       grid-template-columns: repeat(3, 1fr);
        .dash-item{
            display: flex;
-           margin: 10px 12px 0px 0px;
+           margin: 10px 20px 0px 0px;
            border: 1px solid  #D6DAE1;
            border-radius: 6px;
            padding: 10px;

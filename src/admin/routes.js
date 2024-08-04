@@ -9,9 +9,10 @@ import ReviewsTable from './Pages/Reviews/ReviewsTable.vue';
 import Review from './Pages/Reviews/Review.vue';
 import SupportDebug from './Pages/SupportDebug/index.vue';
 
-export default [{
+export default [
+    {
     path: '/',
-    name: 'dashboard',
+    name: 'Admin',
     component: Admin,
     meta: {
         active: 'dashboard'

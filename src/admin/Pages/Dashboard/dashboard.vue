@@ -3,37 +3,16 @@
         <h1 class="dash-title">Click Tracking Overview</h1>
         <div class="horizontal"></div>
 
+
         <div class="dash-details">
             <div class="dash-item">
                 <div class="left-item">
-                    <h1>49</h1>
-                    <p>total Click</p>
+                    <h1>{{ data.length }}</h1>
+                    <p> Total Review </p>
                 </div>
                 <div class="right-item">
                     <div class="icon">
-                        <Icon icon="tm-eye" />
-                    </div>
-                </div>
-            </div>
-            <div class="dash-item">
-                <div class="left-item">
-                    <h1>49</h1>
-                    <p>total Click</p>
-                </div>
-                <div class="right-item">
-                    <div class="icon">
-                        <Icon icon="tm-eye" />
-                    </div>
-                </div>
-            </div>
-            <div class="dash-item">
-                <div class="left-item">
-                    <h1>49</h1>
-                    <p>total Click</p>
-                </div>
-                <div class="right-item">
-                    <div class="icon">
-                        <Icon icon="tm-eye" />
+                        <Icon icon="List" />
                     </div>
                 </div>
             </div>
@@ -45,10 +24,21 @@
                 <div class="right-item">
                     <div class="icon">
                         <Icon icon="List" />
-                    </div>.
-
+                    </div>
                 </div>
             </div>
+            <div class="dash-item" style="margin-right: 0px;">
+                <div class="left-item">
+                    <h1>49</h1>
+                    <p>total Click</p>
+                </div>
+                <div class="right-item">
+                    <div class="icon">
+                        <Icon icon="List" />
+                    </div>
+                </div>
+            </div>
+
 
         </div>
 
@@ -83,6 +73,38 @@ export default {
     components: {
         Icon
     },
+    data() {
+    return {
+      data: '',
+    };
+  },
+    methods: {
+        getForms() {
+          this.loading = true;
+          const _that = this;
+          jQuery.ajax({
+              method: 'GET',
+              url: window.ADRMAdmin.ajax_url,
+              dataType: "json",
+              data: {
+                  action: "ad_review_manager_ajax",
+                  route: "get_review_forms",
+                  nonce: window.ADRMAdmin.adrm_nonce,
+              },
+           
+              success(res) {
+                  _that.loading = false;
+                  _that.data = res?.data?.forms;
+              },
+             
+              error(err) {
+                  _that.loading = false;
+                _that.data = [];
+              }
+          });
+      },
+
+    },
     mounted() {
         const ctx = document.getElementById('myChart');
         new Chart(ctx, {
@@ -106,6 +128,8 @@ export default {
                 }
             }
         });
+
+        this.getForms();
     }
 };
 </script>
