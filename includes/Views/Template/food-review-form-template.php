@@ -78,7 +78,7 @@ if ($enablePagination == 'true') {
                     </div>
 
                 </div>
-                <div class="adrm-review-body">
+                <div class="adrm-review-body" style="display:none; opacity: 0.5">
                     <div class="adrm-review-rating">
                         <div class="adrm-star-rating">
                             <?php for ($i = 1; $i <= 5; $i++) { ?>
@@ -100,10 +100,20 @@ if ($enablePagination == 'true') {
                             </div>
                         <?php } ?>
                     </div>
+                    <?php if(is_user_logged_in()) {?>
+                        <button class="adrm-reply-btn">Reply</button>
+                    <?php } ?>
+                </div>
+                <div class="adrm-reply">
+                    <form class="adrm-reply-form">
+                        <textarea name="reply" id="reply" cols="60" rows="6"></textarea>
+                        <button class="adrm-reply-button">Submit</button>
+                    </form>
                 </div>
             </div>
             <?php } ?>
         </div>
+
         <?php if($enablePagination == 'true') {?>
         <div class="adrm-pagination">
             <button class="adrm-prev-page">Prev</button>
@@ -119,4 +129,5 @@ if ($enablePagination == 'true') {
         <?php } ?>
     </div>
 </div>
+
 

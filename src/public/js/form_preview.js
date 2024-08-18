@@ -100,6 +100,17 @@ jQuery(document).ready(function ($) {
         }
     })
 
+    $('adrm-reply-btn').click(function(e){
+        console.log('clicked');
+        const replyForm = this.closest('.adrm-reply').querySelector('.adrm-reply-form');
+        if (replyForm.style.display === 'none' || replyForm.style.display === '') {
+            replyForm.style.display = 'none';
+        } else {
+            replyForm.style.display = 'block';
+        }
+    })
+
+
     function formValidation(form, formID) {
         let validForm = true;
         let formComponent = form.serializeArray();

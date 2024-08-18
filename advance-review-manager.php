@@ -34,6 +34,15 @@ class AdvanceReviewManager {
         new ADReviewManager\Hooks\Actions();
         // require ADRM_DIR . 'includes/Hooks/Actions.php';
         (new ADReviewManager\Classes\Shortcode)->registerShortCodes();
+
+        /**
+         * Migrate the comment database
+         * @since 1.0.3
+         */
+        if (!get_option('adrm_comments_module_enabled')){
+            \ADReviewManager\Database\Migrations\ReviewComment::migrate(true);
+            update_option('adrm_comments_module_enabled', 'yes');
+        }
     }
 
     public function loadClasses()

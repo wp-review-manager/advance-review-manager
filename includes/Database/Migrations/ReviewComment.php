@@ -11,8 +11,9 @@ class ReviewComment {
 
         $sql = "CREATE TABLE $table_name (
             id int(20) NOT NULL AUTO_INCREMENT,
-            review_id int(20) NOT NULL,
             comment text,
+            review_id int(20) NOT NULL,
+            user_id int(20) NULL,
             created_at timestamp NULL,
             updated_at timestamp NULL,
             PRIMARY  KEY  (id)
