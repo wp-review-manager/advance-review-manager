@@ -333,7 +333,7 @@ jQuery(document).ready(function ($) {
 
     jQuery(document).ready(function($) {
         $('.adrm-reply-btn').on('click', function() {
-            $(this).closest('.adrm_product_review_temp').find('.adrm-reply').toggle();
+            $(this).closest('.adrm_review_product_temp').find('.adrm-reply').toggle();
         });
     }); 
 
@@ -345,7 +345,8 @@ jQuery(document).ready(function ($) {
 
     jQuery(document).ready(function($) {
         $('.adrm-reply-btn').on('click', function() {
-            $(this).closest('.adrm_review_temp_one').find('.adrm-reply').toggle();
+            console.log('clicked');
+            $(this).closest('.adrm_review_temp_book').find('.adrm-reply').toggle();
         });
     }); 
 })
