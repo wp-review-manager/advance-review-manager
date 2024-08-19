@@ -325,4 +325,27 @@ jQuery(document).ready(function ($) {
             }
         }
     });
+    jQuery(document).ready(function($) {
+        $('.adrm-reply-btn').on('click', function() {
+            $(this).closest('.adrm_food_review_template').find('.adrm-reply').toggle();
+        });
+    }); 
+
+    jQuery(document).ready(function($) {
+        $('.adrm-reply-btn').on('click', function() {
+            $(this).closest('.adrm_product_review_temp').find('.adrm-reply').toggle();
+        });
+    }); 
+
+    jQuery(document).ready(function($) {
+        $('.adrm-reply-btn').on('click', function() {
+            $(this).closest('.adrm_hotel_review_template').find('.adrm-reply').toggle();
+        });
+    }); 
+
+    jQuery(document).ready(function($) {
+        $('.adrm-reply-btn').on('click', function() {
+            $(this).closest('.adrm_review_temp_one').find('.adrm-reply').toggle();
+        });
+    }); 
 })

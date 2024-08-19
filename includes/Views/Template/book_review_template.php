@@ -47,7 +47,16 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                 <div class="adrm_review_temp_one_content_body">
                     <p class="review"><?php echo esc_html(Arr::get($review, 'message')); ?></p>
                 </div>
-            </div>
+                   <?php if(is_user_logged_in()) {?>
+                        <button class="adrm-reply-btn">Reply</button>
+                    <?php } ?>
+                </div>
+                <div class="adrm-reply" style="padding: 10px">
+                    <form class="adrm-reply-form">
+                        <textarea name="reply" id="reply" cols="10" rows="6"></textarea>
+                        <button class="adrm-reply-button">Submit</button>
+                    </form>
+                </div>
         </div>
         <?php } ?>
     </div>

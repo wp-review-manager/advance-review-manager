@@ -106,7 +106,7 @@ if ($enablePagination == 'true') {
                 </div>
                 <div class="adrm-reply">
                     <form class="adrm-reply-form">
-                        <textarea name="reply" id="reply" cols="60" rows="6"></textarea>
+                        <textarea name="reply" id="reply" cols="10" rows="6"></textarea>
                         <button class="adrm-reply-button">Submit</button>
                     </form>
                 </div>

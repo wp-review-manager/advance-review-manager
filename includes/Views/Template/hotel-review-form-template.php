@@ -114,7 +114,7 @@ if ($enablePagination == 'true') {
                 $review = Arr::get($review, 'meta.formFieldData', []);
                 $ratings = Arr::get($review, 'ratings', []);
             ?>
-            <div class="adrm_food_review_template">
+            <div class="adrm_hotel_review_template">
                 <div class="adrm-reviewer-info">
                     <div class="adrm-reviewer-avatar">
                     <?php echo wp_kses(get_avatar(Arr::get($review, 'email'), 96), $allowed_html_tags) ?>
@@ -149,6 +149,15 @@ if ($enablePagination == 'true') {
                             </div>
                         <?php } ?>
                     </div>
+                    <?php if(is_user_logged_in()) {?>
+                        <button class="adrm-reply-btn">Reply</button>
+                    <?php } ?>
+                </div>
+                <div class="adrm-reply" style="padding: 10px">
+                    <form class="adrm-reply-form">
+                        <textarea name="reply" id="reply" cols="10" rows="6"></textarea>
+                        <button class="adrm-reply-button">Submit</button>
+                    </form>
                 </div>
             </div>
             <?php } ?>
