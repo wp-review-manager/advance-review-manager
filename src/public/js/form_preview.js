@@ -100,16 +100,6 @@ jQuery(document).ready(function ($) {
         }
     })
 
-    $('adrm-reply-btn').click(function(e){
-        console.log('clicked');
-        const replyForm = this.closest('.adrm-reply').querySelector('.adrm-reply-form');
-        if (replyForm.style.display === 'none' || replyForm.style.display === '') {
-            replyForm.style.display = 'none';
-        } else {
-            replyForm.style.display = 'block';
-        }
-    })
-
 
     function formValidation(form, formID) {
         let validForm = true;
@@ -349,4 +339,22 @@ jQuery(document).ready(function ($) {
             $(this).closest('.adrm_review_temp_book').find('.adrm-reply').toggle();
         });
     }); 
+
+    jQuery(document).ready(function($) {
+        $('.adrm-reply-form').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+    
+            var formData = $(this).serialize(); // Serialize form data
+    
+            $.ajax({
+                url: window.ADRMPublic.ajax_url,
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Handle the response here
+                    console.log(response);
+                }
+            });
+        });
+    });
 })

@@ -111,6 +111,7 @@ if ($enablePagination == 'true') {
             <?php foreach ($reviews as $review) {
                 $average_rating = Arr::get($review, 'average_rating');
                 $created_at = Arr::get($review, 'created_at');
+                $reviewId = Arr::get($review, 'id');
                 $review = Arr::get($review, 'meta.formFieldData', []);
                 $ratings = Arr::get($review, 'ratings', []);
             ?>
@@ -150,13 +151,16 @@ if ($enablePagination == 'true') {
                         <?php } ?>
                     </div>
                     <?php if(is_user_logged_in()) {?>
-                        <button class="adrm-reply-btn">Reply</button>
+                        <button class="adrm-reply-btn"><?php echo __('Reply', 'advance-review-manager') ?></button>
                     <?php } ?>
                 </div>
-                <div class="adrm-reply" style="padding: 10px">
-                    <form class="adrm-reply-form">
-                        <textarea name="reply" id="reply" cols="10" rows="6"></textarea>
-                        <button class="adrm-reply-button">Submit</button>
+                <div class="adrm-reply">
+                    <form class="adrm-reply-form" method="post" action="<?php echo admin_url('admin-ajax.php'); ?>">
+                        <input type="hidden" name="action" value="adrm_review_reply_action">
+                        <input type="hidden" name="review_id" value="<?php echo esc_html($reviewId) ?>"/>
+                        <?php wp_nonce_field('adrm_reply_nonce', 'adrm_reply_nonce_field'); ?>
+                        <textarea name="reply" id="reply" cols="10" rows="6" ></textarea>
+                        <button class="adrm-reply-button"><?php echo __('Submit', 'advance-review-manager') ?></button>
                     </form>
                 </div>
             </div>
