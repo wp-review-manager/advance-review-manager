@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace ADReviewManager\Controllers;
 use ADReviewManager\Services\ArrayHelper as Arr;
 use ADReviewManager\Models\Review;
+use ADReviewManager\Models\Comment;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -141,5 +142,20 @@ class ReviewController
         }
   
         return $formattedReviews;
+    }
+
+    public function createReviewReply($reply)
+    {
+        try{
+            
+            return (new Comment)->create($reply);
+
+        } catch(\Exception $e) {
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
+        }
     }
 }

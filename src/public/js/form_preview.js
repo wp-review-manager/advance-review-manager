@@ -343,7 +343,8 @@ jQuery(document).ready(function ($) {
     jQuery(document).ready(function($) {
         $('.adrm-reply-form').on('submit', function(e) {
             e.preventDefault(); // Prevent default form submission
-    
+            // make the button disabled
+            $(this).find('button').attr('disabled', true);
             var formData = $(this).serialize(); // Serialize form data
     
             $.ajax({
@@ -352,7 +353,7 @@ jQuery(document).ready(function ($) {
                 data: formData,
                 success: function(response) {
                     // Handle the response here
-                    console.log(response);
+                    location.reload();
                 }
             });
         });

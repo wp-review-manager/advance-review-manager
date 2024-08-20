@@ -37,8 +37,8 @@ class Actions{
             add_action('wp_ajax_ad_review_manager_ajax', array($this, 'handleEndPoint'));
             add_action('wp_ajax_nopriv_ad_review_manager_ajax', array($this, 'handleEndPoint'));
 
-            add_action('wp_ajax_adrm_review_reply_action', 'adrm_handle_reply');
-            add_action('wp_ajax_nopriv_adrm_review_reply_action', 'adrm_handle_reply');
+            add_action('wp_ajax_adrm_review_reply_action', array($this, 'adrm_handle_reply'));
+            add_action('wp_ajax_nopriv_adrm_review_reply_action', array($this, 'adrm_handle_reply'));
         }
         public function handleEndPoint()
         {
@@ -173,27 +173,38 @@ class Actions{
         public function adrm_handle_reply()
         {
             // Check if the nonce is valid
-            if (!isset($_POST['adrm_reply_nonce_field']) || !wp_verify_nonce($_POST['adrm_reply_nonce_field'], 'adrm_reply_nonce')) {
+            if (!isset($_POST['adrm_reply_nonce_field']) || !wp_verify_nonce(wp_unslash($_POST['adrm_reply_nonce_field']), 'adrm_reply_nonce')) {
                 wp_send_json_error('Invalid nonce');
                 return;
             }
 
-            // Get the value of the textarea input
-            $reply_content = isset($_POST['reply']) ? sanitize_text_field($_POST['reply']) : '';
+            $data = $_POST;
 
-            dd($reply_content);
-            die();
+            // Get the value of the textarea input
+            $reply_content = isset($data['reply']) ? sanitize_text_field($data['reply']) : '';
+            $reviewId = isset($data['review_id']) ? sanitize_text_field($data['review_id']) : '';
+
 
             if (empty($reply_content)) {
                 wp_send_json_error('Reply content is empty');
                 return;
             }
 
-            // Process the reply content (e.g., save it to the database, associate it with a comment, etc.)
-            // Example: $comment_id = wp_insert_comment([...]);
+            if (empty($reviewId)) {
+                wp_send_json_error('Review ID is empty');
+                return;
+            }
 
+            $reply = array(
+                'comment' => $reply_content,
+                'review_id' => $reviewId,
+                'user_id' => get_current_user_id(),
+            );
+            // insert review reply 
+            $reviewController = new ReviewController();
+            $reviewController->createReviewReply($reply);
             // Respond with a success message or additional data
-            wp_send_json_success('Reply submitted successfully');
+            wp_send_json_success(['message' => 'Reply submitted successfully'], 200);
         }
 
         public function getDebugInfoWP()
