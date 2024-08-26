@@ -136,3 +136,37 @@ p {
         background-color: #fff;
     }
 }
+
+.adrm_review_content{
+    display: flex;
+    width: calc(100% - 40px);
+    align-items: center;
+    gap: 30px;
+    padding: 20px !important;
+    background: #f4f4f4;
+}
+
+.adrm-review-reply-section{
+    width: 100%; 
+    padding: 20px !important; 
+    background: #ececec; 
+    border-radius: 8px !important; 
+    margin-bottom: 20px; 
+    display: flex;
+    flex-direction: column; 
+    gap: 10px
+}
+
+.adrm-review-comment{
+    padding: 10px !important;
+}
+
+.adrm-review-comment:not(:last-child) {
+    border-bottom: 1px solid #dadada; /* Customize the border as needed *//* Optional: add some padding for spacing */
+}
+
+.adrm-review-comment-content{
+    font-size: 16px;
+    color: #333;
+    padding: 10px 0px;
+}

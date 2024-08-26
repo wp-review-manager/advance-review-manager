@@ -64,46 +64,49 @@ if ($enablePagination == 'true') {
                 $created_at = Arr::get($review, 'created_at');
                 $ratings = Arr::get($review, 'ratings', []);
                 $reviewId = Arr::get($review, 'id');
+                $comments = Arr::get($review, 'comments', []);
                 $review = Arr::get($review, 'meta.formFieldData', []);
             ?>
             <div class="adrm_food_review_template">
-                <div class="adrm-reviewer-info">
-                    <div class="adrm-reviewer-avatar">
-                    <?php echo wp_kses(get_avatar(Arr::get($review, 'email'), 96), $allowed_html_tags) ?>
-                    </div>
-                    <div class="adrm-reviewer-name">
-                        <span><?php echo esc_html(Arr::get($review, 'name')); ?></span>
-                    </div>
-                    <div class="adrm-reviewer-email">
-                        <span><?php echo esc_html(Arr::get($review, 'email')); ?></span>
-                    </div>
-
-                </div>
-                <div class="adrm-review-body" style="display:none; opacity: 0.5">
-                    <div class="adrm-review-rating">
-                        <div class="adrm-star-rating">
-                            <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                <label name="rating" class="<?php echo esc_attr($i <= $average_rating ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
-                            <?php } ?>
+                <div class="adrm_review_content"> 
+                    <div class="adrm-reviewer-info">
+                        <div class="adrm-reviewer-avatar">
+                        <?php echo wp_kses(get_avatar(Arr::get($review, 'email'), 96), $allowed_html_tags) ?>
                         </div>
-                        <span class="adrm-review-date"> Reviewed <?php echo esc_html((new Helper)->formatDate($created_at)); ?></span>
+                        <div class="adrm-reviewer-name">
+                            <span><?php echo esc_html(Arr::get($review, 'name')); ?></span>
+                        </div>
+                        <div class="adrm-reviewer-email">
+                            <span><?php echo esc_html(Arr::get($review, 'email')); ?></span>
+                        </div>
+
                     </div>
-                    <div class="adrm-review-content">
-                        <p><?php echo esc_html(Arr::get($review, 'message')); ?></p>
-                    </div>
-                    <div class="review-categories">
-                        <?php foreach ($ratings as $rating) { ?>
+                    <div class="adrm-review-body" style="display:none; opacity: 0.5">
+                        <div class="adrm-review-rating">
                             <div class="adrm-star-rating">
                                 <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                    <label name="rating" class="<?php echo esc_attr($i <= Arr::get($rating, 'value') ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
+                                    <label name="rating" class="<?php echo esc_attr($i <= $average_rating ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
                                 <?php } ?>
-                                <p><?php echo esc_html(Arr::get($rating, 'label')); ?></p>
                             </div>
+                            <span class="adrm-review-date"> Reviewed <?php echo esc_html((new Helper)->formatDate($created_at)); ?></span>
+                        </div>
+                        <div class="adrm-review-content">
+                            <p><?php echo esc_html(Arr::get($review, 'message')); ?></p>
+                        </div>
+                        <div class="review-categories">
+                            <?php foreach ($ratings as $rating) { ?>
+                                <div class="adrm-star-rating">
+                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
+                                        <label name="rating" class="<?php echo esc_attr($i <= Arr::get($rating, 'value') ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
+                                    <?php } ?>
+                                    <p><?php echo esc_html(Arr::get($rating, 'label')); ?></p>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <?php if(is_user_logged_in()) {?>
+                            <button class="adrm-reply-btn"><?php echo __('Reply', 'advance-review-manager') ?></button>
                         <?php } ?>
                     </div>
-                    <?php if(is_user_logged_in()) {?>
-                        <button class="adrm-reply-btn"><?php echo __('Reply', 'advance-review-manager') ?></button>
-                    <?php } ?>
                 </div>
                 <div class="adrm-reply">
                     <form class="adrm-reply-form" method="post" action="<?php echo admin_url('admin-ajax.php'); ?>">
@@ -114,20 +117,35 @@ if ($enablePagination == 'true') {
                         <button class="adrm-reply-button"><?php echo __('Submit', 'advance-review-manager') ?></button>
                     </form>
                 </div>
+                <?php if (count($comments)): ?>
+                    <div class="adrm-review-reply-section" style="padding: 20px; margin-left: 20px; background: #ececec; border-radius: 8px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px"> 
+                        <h4 style="font-size: 16px; color: #333">Replies</h4>
+                        <?php foreach ($comments as $comment) { ?>
+                            <div class="adrm-review-comment" style="padding: 10px; border-bottom: 1px solid #dadada">
+                                <div> 
+                                    <span style="font-size: 14px; color: #333"><?php echo esc_html(ucfirst($comment['name'])) ?></span>
+                                </div>
+                                <div class="adrm-review-comment-content" style="color: #333; font-size: 14px">
+                                    <p><?php echo esc_html(Arr::get($comment, 'comment')); ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php endif; ?>
             </div>
             <?php } ?>
         </div>
 
         <?php if($enablePagination == 'true') {?>
-        <div class="adrm-pagination">
-            <button class="adrm-prev-page">Prev</button>
-            <ul class="adrm-page-numbers">
-                <?php for($i = 1; $i <= $total_page; $i++) { ?>
-                    <li class="adrm-page-number <?php echo esc_attr($i == 1 ? 'active' : '') ?>"><?php echo esc_attr($i) ?></li>
-                <?php } ?>
-            </ul>
-            <button class="adrm-next-page">Next</button>
-        </div>
+            <div class="adrm-pagination">
+                <button class="adrm-prev-page">Prev</button>
+                <ul class="adrm-page-numbers">
+                    <?php for($i = 1; $i <= $total_page; $i++) { ?>
+                        <li class="adrm-page-number <?php echo esc_attr($i == 1 ? 'active' : '') ?>"><?php echo esc_attr($i) ?></li>
+                    <?php } ?>
+                </ul>
+                <button class="adrm-next-page">Next</button>
+            </div>
         <?php } ?>
 
         <?php } ?>

@@ -71,6 +71,19 @@ class Review extends Model
 
         // Properly include ORDER BY in prepared SQL
         $table_name = "{$wpdb->prefix}adrm_reviews"; // Safe table name via WPDB prefix
+        $query = $wpdb->prepare("SELECT COUNT(*) FROM %1s WHERE form_id = %d", $table_name, $formID);
+        $total_reviews = $wpdb->get_var($query);
+
+        if ($total_reviews == 0) {
+            return [
+                'reviews' => [],
+                'total_reviews' => 0,
+                'pagination' => $pagination,
+                'all_reviews' => []
+            ];
+        }
+       
+
         // $query = "SELECT * FROM $table_name WHERE form_id = %d";
 
         // // Add ORDER BY clause safely
@@ -86,21 +99,30 @@ class Review extends Model
         // Prepare SQL with safe placeholders for variables
         // $final_sql = $wpdb->prepare("SELECT * FROM $table_name WHERE form_id = %d ORDER BY created_at {$sortOrder} LIMIT %d OFFSET %d", $formID, $limit, $offset);
     
-        $sql = $wpdb->prepare("SELECT * FROM %1s WHERE form_id = %d ORDER BY created_at %1s LIMIT %d OFFSET %d", $table_name, $formID, $sortOrder, $limit, $offset);
+        // $sql = $wpdb->prepare("SELECT * FROM %1s WHERE form_id = %d ORDER BY created_at %1s LIMIT %d OFFSET %d", $table_name, $formID, $sortOrder, $limit, $offset);
+        // $reviews = $wpdb->get_results($sql, ARRAY_A);
+        // dd($reviews, $wpdb->last_query);
+        // die();
+
+        $commentTable = "{$wpdb->prefix}adrm_review_comments";
+
+        $sql = $wpdb->prepare(
+            "SELECT r.*, c.user_id, c.comment 
+             FROM %1s r 
+             LEFT JOIN %1s c ON r.id = c.review_id 
+             WHERE r.form_id = %d 
+             ORDER BY r.created_at %1s 
+             LIMIT %d OFFSET %d", 
+            $table_name, $commentTable, $formID, $sortOrder, $limit, $offset
+        );
         $reviews = $wpdb->get_results($sql, ARRAY_A);
+       
+        $formattedReviews = $this->formatReviews($reviews);
 
-        // Fetch total reviews count
-        // $total_reviews_sql = $wpdb->prepare(
-        //     "SELECT COUNT(*) FROM {$wpdb->prefix}adrm_reviews WHERE form_id = %d",
-        //     $formID
-        // );
 
-        $query = $wpdb->prepare("SELECT COUNT(*) FROM %1s WHERE form_id = %d", $table_name, $formID);
-        $total_reviews = $wpdb->get_var($query);
-
-        // Process reviews
-        $reviews = static::processReviewData($reviews);
-        $all_reviews = static::processReviewData($reviews);
+        // Process reviews , unserialize meta, calculate average rating
+        $formattedReviews = static::processReviewData($formattedReviews);
+        $all_reviews = static::processReviewData($formattedReviews);
     
         // Apply filter if provided
         if (!empty($filter) && $filter != 'all') {  
@@ -110,12 +132,43 @@ class Review extends Model
         }
 
         return [
-            'reviews' => array_values($reviews),
+            'reviews' => $formattedReviews,
             'total_reviews' => $total_reviews,
             'pagination' => $pagination,
             'all_reviews' => $all_reviews
         ];
        
+    }
+
+    // adds comments to the review
+    public function formatReviews($reviews)
+    {
+        foreach ($reviews as $row) {
+            $review_id = $row['id'];
+            
+            // Initialize the review array if it doesn't exist
+            if (!isset($formattedReviews[$review_id])) {
+                $formattedReviews[$review_id] = $row;
+                unset($formattedReviews[$review_id]['user_id'], $formattedReviews[$review_id]['comment']);
+            }
+            
+            // If there are comments, add them to the 'comments' array
+            if (!empty($row['comment'])) {  // Assuming 'comment_id' is not null when there's a comment
+
+                $user = get_user_by('id', $row['user_id']);
+                $formattedReviews[$review_id]['comments'][] = [
+                    'user_id' => $row['user_id'],  // Adjust this to match your comment ID field name
+                    'comment' => $row['comment'], 
+                    'name' => $user->display_name,
+                    // get user inf   'name' => $user->display_name,
+                    'email' => $user->user_email// Add user info
+                    // Add other comment fields as needed
+                ];
+            }
+        }
+        
+        // Reindex the reviews array by numeric keys
+        return $formattedReviews = array_values($formattedReviews);
     }
 
     public function getReview($reviewID)

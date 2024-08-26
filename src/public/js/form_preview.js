@@ -7,6 +7,8 @@ jQuery(document).ready(function ($) {
     }
     const template_type = $('.review-template_settings_wrapper').attr('data-template-type');
 
+    console.log('.....', {template_type})
+
     $('.adrm-filter-by-star').change(function(e){
         let form = $(this).closest('.review-template_settings_wrapper');
         let formID = +form.attr('data-form-id');
@@ -178,6 +180,7 @@ jQuery(document).ready(function ($) {
                 average_rating = review?.average_rating;
             
                 review = review?.meta?.formFieldData
+
                 // console.log({review}, {avatar}, {average_rating})
                 if(template_type?.includes('hotel-review-form-template') || template_type?.includes('food-review-form-template')) {
                     renderDomForFoodAndHotel(reviewContainer, avatar, review, created_at, average_rating);
@@ -192,6 +195,7 @@ jQuery(document).ready(function ($) {
     }
 
     function renderDomForFoodAndHotel (reviewContainer, avatar, review, created_at, average_rating) {
+        console.log('.....', {reviewContainer}, {avatar}, {review}, {created_at}, {average_rating})
         const reviewHTML = `
         <div class="adrm_food_review_template">
             <div class="adrm-reviewer-info">
@@ -218,7 +222,7 @@ jQuery(document).ready(function ($) {
                     <p>${review?.message}</p>
                 </div>
                 <div class="review-categories">
-                        ${review?.ratings.map((rating) => {
+                        ${review?.ratings?.map((rating) => {
                             return `<div class="adrm-star-rating">
                                 ${Array.from({ length: 5 }, (_, index) => {
                                     return `<label name="rating" class="${index < rating?.value ? 'active' : ''}" value="${index + 1}">★</label>`;
@@ -235,7 +239,7 @@ jQuery(document).ready(function ($) {
     }
 
     function renderDomForProductTemp (reviewContainer, avatar, review, created_at, average_rating) {
-        const reviewHTML = `
+        let reviewHTML = `
             <div class="adrm_review_temp_one adrm_product_review_temp">
                 <div class="adrm_review_temp_one_avatar">
                     ${avatar}
@@ -261,7 +265,49 @@ jQuery(document).ready(function ($) {
                         <p class="review">${review?.message}</p>
                     </div>
                 </div>
+                <?php if (count($comments)): ?>
+                <div class="adrm-review-reply-section"> 
+                    <h4 style="font-size: 16px; color: #333">Replies</h4>
+                    <?php foreach ($comments as $comment) { ?>
+                        <div class="adrm-review-comment">
+                            <div> 
+                                <span style="font-size: 16px; color: #000"><?php echo esc_html(ucfirst($comment['name'])) ?></span>
+                            </div>
+                            <div class="adrm-review-comment-content">
+                                <p><?php echo esc_html(Arr::get($comment, 'comment')); ?></p>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endif; ?>
             </div>`;
+        
+
+        let replyHtml = `
+            <div class="adrm-review-reply-section"> 
+                <h4 style="font-size: 16px; color: #333">Replies</h4>
+        `;
+    
+        comments.forEach(comment => {
+            replyHtml += `
+                <div class="adrm-review-comment">
+                    <div> 
+                        <span style="font-size: 16px; color: #000">${comment.name}</span>
+                    </div>
+                    <div class="adrm-review-comment-content">
+                        <p>${comment.comment}</p>
+                    </div>
+                </div>
+            `;
+        });
+    
+        replyHtml += `</div>`;
+    
+        // Add replyHtml to the DOM
+        const container = document.querySelector('.adrm_review_temp_one.adrm_product_review_temp');
+        container.innerHTML += replyHtml;
+
+   
         reviewContainer.append(reviewHTML);
     }
 
