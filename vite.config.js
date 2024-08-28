@@ -65,10 +65,10 @@ export default defineConfig({
     },
 
     server: {
-        port: 8880,
+        port: 8080,
         strictPort: true,
         hmr: {
-        port: 8880,
+        port: 8080,
         host: 'localhost',
         protocol: 'ws',
         }

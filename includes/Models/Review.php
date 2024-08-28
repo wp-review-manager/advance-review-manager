@@ -161,7 +161,8 @@ class Review extends Model
                     'comment' => $row['comment'], 
                     'name' => $user->display_name,
                     // get user inf   'name' => $user->display_name,
-                    'email' => $user->user_email// Add user info
+                    'email' => $user->user_email,// Add user info
+                    'created_at' => $row['created_at']
                     // Add other comment fields as needed
                 ];
             }
@@ -175,20 +176,48 @@ class Review extends Model
     {
         global $wpdb;
         $table_name = $wpdb->prefix . 'adrm_reviews';
+        $commentTable = "{$wpdb->prefix}adrm_review_comments";
         $reviewID = sanitize_text_field($reviewID);
         // $sql = $wpdb->prepare(
         //     "SELECT * FROM {$wpdb->prefix}adrm_reviews WHERE id = %d",
         //     $reviewID
         // );
 
+       
         $query = $wpdb->prepare("SELECT * FROM %1s WHERE id = %d", $table_name, $reviewID);
         $review = $wpdb->get_row($query, ARRAY_A);
-        if (!$review) {
-            return [];
+
+        // get comments for the review
+        $sql = $wpdb->prepare(
+            "SELECT * FROM %1s WHERE review_id = %d",
+            $commentTable, $reviewID
+        );
+
+        $replies = $wpdb->get_results($sql, ARRAY_A);
+        if ($replies === null) {
+            $review['replies'] = [];
+        } else {
+            $review['replies'] = $this->formatReplies($replies);
         }
+       
         $review['meta'] = maybe_unserialize($review['meta']);
         $review['avatar'] = get_avatar(Arr::get($review, 'meta.formFieldData.email'));
         return $review;
+    }
+
+    public function formatReplies($replies) {
+        $formattedReplies = [];
+        foreach ($replies as $reply) {
+            $user = get_user_by('id', $reply['user_id']);
+            $formattedReplies[] = [
+                'user_id' => $reply['user_id'],
+                'reply' => $reply['comment'],
+                'name' => ucfirst($user->display_name),
+                'email' => $user->user_email,
+                'created_at' => $reply['created_at']
+            ];
+        }
+        return $formattedReplies;
     }
 
     public static function processReviewData($reviews) {

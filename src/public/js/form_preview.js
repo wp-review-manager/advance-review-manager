@@ -305,8 +305,9 @@ jQuery(document).ready(function ($) {
     
         // Add replyHtml to the DOM
         const container = document.querySelector('.adrm_review_temp_one.adrm_product_review_temp');
-        container.innerHTML += replyHtml;
-
+        if (comments.length > 0){
+            container.innerHTML += replyHtml;
+        }
    
         reviewContainer.append(reviewHTML);
     }

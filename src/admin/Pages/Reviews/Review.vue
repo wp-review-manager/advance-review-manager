@@ -102,6 +102,34 @@
           </el-table>
         </div>
       </div>
+      <div class="review-replies">
+        <span style="font-size: 16px; border-bottom: 1px dotted #555; text-align: center; color: #5a5a5a; padding-bottom: 6px;">Replies</span>
+        <el-table
+          :data="review.replies"
+          style="width: 100%"
+        >
+          <el-table-column
+            prop="reply"
+            label="Message"
+          />
+          <el-table-column
+            prop="email"
+            label="Email"
+          />
+          <el-table-column
+            prop="name"
+            label="Name"
+          />
+          <el-table-column
+            prop="created_at"
+            label="Date"
+          >
+            <template #default="{ row }">
+              {{ moment(row.created_at).format('dddd D MMMM YYYY') }}
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
     </div>
   </div>
 </template>

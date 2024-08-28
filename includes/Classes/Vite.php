@@ -8,7 +8,7 @@ class Vite
     private static $instance = null;
     private string $viteHostProtocol = 'http://';
     private string $viteHost = 'localhost';
-    private string $vitePort = '8880';
+    private string $vitePort = '8080';
     private string $resourceDirectory = 'src/';
     private array $moduleScripts = [];
     private bool $isScriptFilterAdded = false;
