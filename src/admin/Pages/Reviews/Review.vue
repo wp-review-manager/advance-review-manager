@@ -72,6 +72,31 @@
           </div>
         </div>
       </div>
+      <!-- add a reply form -->
+      <el-button @click="showReplyForm = !showReplyForm">Add Reply</el-button>
+      <form
+        :class="showReplyForm ? 'show-reply-form' : 'hide-reply-form'"
+      >
+        <h3 style="font-size: 16px; color: #ff9900; border-bottom: 1px dotted #555; padding-bottom: 6px;">Add your Reply to this review</h3>
+        <el-form-item
+          prop="reply"
+        >
+          <el-input
+            required
+            type="textarea"
+            v-model="reviewReply.message"
+            placeholder="Reply"
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="submitReply"
+          >
+            Submit
+          </el-button>
+        </el-form-item>
+      </form>
       <div
         v-if="reviewData.ratings.length > 1"
         class="adrm-review_meta"
@@ -102,27 +127,49 @@
           </el-table>
         </div>
       </div>
-      <div class="review-replies">
+   
+      <div class="review-replies" v-if="review.replies.length > 0">
         <span style="font-size: 16px; border-bottom: 1px dotted #555; text-align: center; color: #5a5a5a; padding-bottom: 6px;">Replies</span>
         <el-table
           :data="review.replies"
           style="width: 100%"
         >
           <el-table-column
-            prop="reply"
-            label="Message"
-          />
-          <el-table-column
-            prop="email"
-            label="Email"
-          />
-          <el-table-column
             prop="name"
             label="Name"
           />
           <el-table-column
+            prop="email"
+            label="Email"
+            width="180"
+          />
+          <el-table-column
+            prop="reply"
+            label="Message"
+            width="300"
+          />
+          <el-table-column 
+            prop="avatar"
+            label="Image"
+          >
+          <template #default="{ row }">
+            <el-image
+              :src="row.avatar"
+              style="width: 48px; border-radius: 50%;"
+            >
+              <template #placeholder>
+                <div class="image-slot">
+                  Loading<span class="dot">...</span>
+                </div>
+              </template>
+            </el-image>
+          </template>
+        </el-table-column>
+          <el-table-column
             prop="created_at"
-            label="Date"
+            label="Replied At"
+            width="180"
+            fixed="right"
           >
             <template #default="{ row }">
               {{ moment(row.created_at).format('dddd D MMMM YYYY') }}
@@ -152,6 +199,11 @@ export default {
             loaded: false,
             formID: this.$route.params.id,
             fetching: false,
+            showReplyForm: false,
+            userId: window.ADRMAdmin.user_id,
+            reviewReply: {
+                message: ''
+            }
         };
     },
     computed: {
@@ -215,6 +267,37 @@ export default {
                     console.log(error);
                 });
         },
+        submitReply($event) {
+          if (this.reviewReply.message.length < 3) {
+            alert('Reply message is too short');
+            return;
+          }
+          console.log('submitting reply...', this.review.reply);
+          $event.preventDefault();
+            this.$post('', {
+                action: 'adrm_review_reply_action',
+                nonce: window.ADRMAdmin.adrm_nonce,
+                review_id: this.$route.params.reviewId,
+                reply: this.reviewReply.message,
+            }).then((response) => {
+                this.reviewReply.message = '';
+                this.showReplyForm = false;
+                this.getReview();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
     },
 };
 </script>
+
+<style scoped >
+.show-reply-form {
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px;
+}
+.hide-reply-form {
+    display: none;
+}
+</style>

@@ -77,6 +77,7 @@ class AdminMenuHandler{
             'assets_url' => ADRM_URL . 'assets/',
             'ajax_url' => admin_url('admin-ajax.php'),
             'adrm_nonce' => wp_create_nonce('advance-review-manager-nonce'),
+            'user_id' => get_current_user_id() ? get_current_user_id() : null,
         ));
 
         $this->renderGlobalSettings();

@@ -214,6 +214,7 @@ class Review extends Model
                 'reply' => $reply['comment'],
                 'name' => ucfirst($user->display_name),
                 'email' => $user->user_email,
+                'avatar' => get_avatar_url($user->user_email),
                 'created_at' => $reply['created_at']
             ];
         }

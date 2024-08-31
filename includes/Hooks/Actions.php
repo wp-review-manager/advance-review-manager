@@ -172,8 +172,12 @@ class Actions{
 
         public function adrm_handle_reply()
         {
-            // Check if the nonce is valid
-            if (!isset($_POST['adrm_reply_nonce_field']) || !wp_verify_nonce(wp_unslash($_POST['adrm_reply_nonce_field']), 'adrm_reply_nonce')) {
+            if (isset($_POST['adrm_public_nonce']) && !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['adrm_public_nonce'])), 'adrm_public_nonce')) {
+                wp_send_json_error('Invalid nonce');
+                return;
+            }
+
+            if (isset($_POST['nonce']) && !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['nonce'])), 'advance-review-manager-nonce')) {
                 wp_send_json_error('Invalid nonce');
                 return;
             }

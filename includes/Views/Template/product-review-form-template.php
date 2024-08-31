@@ -109,7 +109,7 @@ if ($enablePagination == 'true') {
                 <form class="adrm-reply-form" method="post" action="<?php echo admin_url('admin-ajax.php'); ?>">
                     <input type="hidden" name="action" value="adrm_review_reply_action">
                     <input type="hidden" name="review_id" value="<?php echo esc_html($reviewId) ?>"/>
-                    <?php wp_nonce_field('adrm_reply_nonce', 'adrm_reply_nonce_field'); ?>
+                    <?php wp_nonce_field('adrm_public_nonce', 'adrm_public_nonce'); ?>
                     <textarea name="reply" id="reply" cols="10" rows="6" ></textarea>
                     <button class="adrm-reply-button"><?php echo __('Submit', 'advance-review-manager') ?></button>
                 </form>
