@@ -22,6 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
              $average_rating = Arr::get($review, 'average_rating');
              $created_at = Arr::get($review, 'created_at');
              $reviewId = Arr::get($review, 'id');
+             $comments = Arr::get($review, 'comments', []);
              $review = Arr::get($review, 'meta.formFieldData', []);
              $ratings = Arr::get($review, 'ratings', []);
         ?>
@@ -61,6 +62,21 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                     <button class="adrm-reply-button"><?php echo __('Submit', 'advance-review-manager') ?></button>
                 </form>
             </div>
+            <?php if (count($comments)): ?>
+                <div class="adrm-review-reply-section"> 
+                    <h4 style="font-size: 16px; color: #333">Replies</h4>
+                    <?php foreach ($comments as $comment) { ?>
+                        <div class="adrm-review-comment">
+                            <div> 
+                                <span style="font-size: 16px; color: #000"><?php echo esc_html(ucfirst($comment['name'])) ?></span>
+                            </div>
+                            <div class="adrm-review-comment-content">
+                                <p><?php echo esc_html(Arr::get($comment, 'comment')); ?></p>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            <?php endif; ?>
         </div>
         <?php } ?>
     </div>
