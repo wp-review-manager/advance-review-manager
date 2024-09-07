@@ -58,7 +58,7 @@ class Review extends Model
         $sortOrder = $sort == 'newest' ? 'DESC' : 'ASC';
 
         // Fetch pagination settings
-        $template_settings = maybe_unserialize(get_post_meta($formID, 'adrm_template_settings', true));
+        $template_settings = maybe_unserialize(get_post_meta(intval($formID), 'adrm_template_settings', true));
         $pagination = Arr::get($template_settings, 'pagination', []);
         $limit = Arr::get($pagination, 'per_page', 10);
         $page = max(1, sanitize_text_field(Arr::get($request, 'page', 1))); // Ensure page is at least 1
@@ -72,6 +72,7 @@ class Review extends Model
         // Properly include ORDER BY in prepared SQL
         $table_name = "{$wpdb->prefix}adrm_reviews"; // Safe table name via WPDB prefix
         $query = $wpdb->prepare("SELECT COUNT(*) FROM %1s WHERE form_id = %d", $table_name, $formID);
+
         $total_reviews = $wpdb->get_var($query);
 
         if ($total_reviews == 0) {
@@ -115,24 +116,24 @@ class Review extends Model
              LIMIT %d OFFSET %d", 
             $table_name, $commentTable, $formID, $sortOrder, $limit, $offset
         );
+
         $reviews = $wpdb->get_results($sql, ARRAY_A);
-       
-        $formattedReviews = $this->formatReviews($reviews);
 
+        $formattedReviews = static::processReviewData($reviews);
+        $formattedReviews = $this->formatReviews($formattedReviews);
+        $all_reviews = $formattedReviews;
 
-        // Process reviews , unserialize meta, calculate average rating
-        $formattedReviews = static::processReviewData($formattedReviews);
-        $all_reviews = static::processReviewData($formattedReviews);
-    
+        $filteredReviews = $formattedReviews;
+
         // Apply filter if provided
         if (!empty($filter) && $filter != 'all') {  
-            $reviews = array_filter($reviews, function($review) use ($filter) {
+            $filteredReviews = array_values(array_filter($formattedReviews, function($review) use ($filter) {
                 return Arr::get($review, 'average_rating', 0) == $filter;
-            });
+            }));
         }
 
         return [
-            'reviews' => $formattedReviews,
+            'reviews' => $filteredReviews,
             'total_reviews' => $total_reviews,
             'pagination' => $pagination,
             'all_reviews' => $all_reviews
@@ -165,6 +166,8 @@ class Review extends Model
                     'created_at' => $row['created_at']
                     // Add other comment fields as needed
                 ];
+            } else {
+                $formattedReviews[$review_id]['comments'] = [];
             }
         }
         

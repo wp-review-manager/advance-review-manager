@@ -94,14 +94,16 @@ if ($enablePagination == 'true') {
                             <p><?php echo esc_html(Arr::get($review, 'message')); ?></p>
                         </div>
                         <div class="review-categories">
-                            <?php foreach ($ratings as $rating) { ?>
-                                <div class="adrm-star-rating">
-                                    <?php for ($i = 1; $i <= 5; $i++) { ?>
-                                        <label name="rating" class="<?php echo esc_attr($i <= Arr::get($rating, 'value') ? 'active' : ''); ?>" value="<?php echo esc_attr($i); ?>">★</label>
-                                    <?php } ?>
-                                    <p><?php echo esc_html(Arr::get($rating, 'label')); ?></p>
-                                </div>
-                            <?php } ?>
+                            <?php if (!empty($review['ratings'])): ?>
+                                <?php foreach ($review['ratings'] as $rating): ?>
+                                    <div class="adrm-star-rating">
+                                        <?php for ($index = 0; $index < 5; $index++): ?>
+                                            <label name="rating" class="<?php echo $index < $rating['value'] ? 'active' : ''; ?>" value="<?php echo $index + 1; ?>">★</label>
+                                        <?php endfor; ?>
+                                        <p><?php echo htmlspecialchars($rating['label']); ?></p>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                         <?php if(is_user_logged_in()) {?>
                             <button class="adrm-reply-btn"><?php echo __('Reply', 'advance-review-manager') ?></button>

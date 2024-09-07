@@ -6,8 +6,7 @@ jQuery(document).ready(function ($) {
         route: 'get_reviews'
     }
     const template_type = $('.review-template_settings_wrapper').attr('data-template-type');
-
-    console.log('.....', {template_type})
+    let isUserLoggedIn = window.ADRMPublic.user_id;
 
     $('.adrm-filter-by-star').change(function(e){
         let form = $(this).closest('.review-template_settings_wrapper');
@@ -173,17 +172,19 @@ jQuery(document).ready(function ($) {
         let avatar = '';
         let average_rating = 0;
         let reviews = response?.reviews || [];
+        let comments = [];
+        console.log('review', reviews, reviews.length, 'comments', comments);
         if (reviews?.length) {
+           
             reviews.map((review, key) => {
                 created_at = review?.created_at;
                 avatar = review?.avatar;
                 average_rating = review?.average_rating;
-            
-                review = review?.meta?.formFieldData
-
-                // console.log({review}, {avatar}, {average_rating})
+                comments = review?.comments ? review?.comments : [];
+                review = review?.meta?.formFieldData;
+                // console.log('review', review, 'comments', comments);
                 if(template_type?.includes('hotel-review-form-template') || template_type?.includes('food-review-form-template')) {
-                    renderDomForFoodAndHotel(reviewContainer, avatar, review, created_at, average_rating);
+                    renderDomForFoodAndHotel(reviewContainer, avatar, review, comments, created_at, average_rating);
                 } else if (template_type?.includes('product-review-form-template')) {
                     renderDomForProductTemp(reviewContainer, avatar, review, created_at, average_rating);
                 }
@@ -194,8 +195,8 @@ jQuery(document).ready(function ($) {
         // Update the DOM with the response
     }
 
-    function renderDomForFoodAndHotel (reviewContainer, avatar, review, created_at, average_rating) {
-        console.log('.....', {reviewContainer}, {avatar}, {review}, {created_at}, {average_rating})
+    function renderDomForFoodAndHotel (reviewContainer, avatar, review, comments, created_at, average_rating) {
+        console.log('review', review, 'comments', comments);
         const reviewHTML = `
         <div class="adrm_food_review_template">
             <div class="adrm-reviewer-info">
@@ -231,10 +232,42 @@ jQuery(document).ready(function ($) {
                                 <p>${rating?.label}</p>
                             </div>`;
                         }).join('')}
+
+                        ${isUserLoggedIn ? `
+                            <button class="adrm-reply-btn">Reply</button>
+                        ` : ''}
+                </div>
+                <!-- Reply Form Section -->
+                    <div class="adrm-reply">
+                        <form class="adrm-reply-form" method="post" action="/admin-ajax.php">
+                            <input type="hidden" name="action" value="adrm_review_reply_action">
+                            <input type="hidden" name="review_id" value="${review?.id || ''}"/>
+                            <textarea name="reply" id="reply" cols="10" rows="6"></textarea>
+                            <button class="adrm-reply-button">Submit</button>
+                        </form>
+                    </div>
+            
+                    <!-- Replies Section -->
+                    ${comments?.length ? `
+                    <div class="adrm-review-reply-section" style="padding: 20px; margin-left: 20px; background: #ececec; border-radius: 8px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px"> 
+                        <h4 style="font-size: 16px; color: #333">Replies</h4>
+                        ${comments.map(comment => `
+                            <div class="adrm-review-comment" style="padding: 10px; border-bottom: 1px solid #dadada">
+                                <div> 
+                                    <span style="font-size: 14px; color: #333">${capitalizeFirstLetter(comment.name || '')}</span>
+                                </div>
+                                <div class="adrm-review-comment-content" style="color: #333; font-size: 14px">
+                                    <p>${comment.comment || ''}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
                 </div>
             </div>
         </div>
         `;
+
         reviewContainer.append(reviewHTML);
     }
 
@@ -288,7 +321,7 @@ jQuery(document).ready(function ($) {
                 <h4 style="font-size: 16px; color: #333">Replies</h4>
         `;
     
-        comments.forEach(comment => {
+        review?.comments.forEach(comment => {
             replyHtml += `
                 <div class="adrm-review-comment">
                     <div> 
@@ -305,11 +338,16 @@ jQuery(document).ready(function ($) {
     
         // Add replyHtml to the DOM
         const container = document.querySelector('.adrm_review_temp_one.adrm_product_review_temp');
-        if (comments.length > 0){
+        if (review?.comments.length > 0){
             container.innerHTML += replyHtml;
         }
    
         reviewContainer.append(reviewHTML);
+    }
+
+    function capitalizeFirstLetter(string) {
+        if (!string) return ''; // Check for empty or undefined strings
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     function extractDate(dateString) {
@@ -406,3 +444,17 @@ jQuery(document).ready(function ($) {
         });
     });
 })
+
+// JavaScript to Toggle the Reply Form
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('loaded');
+    const replyButton = document.querySelector('.adrm-reply-btn');
+    const replyForm = document.querySelector('.adrm-reply');
+
+    if (replyButton && replyForm) {
+        replyButton.addEventListener('click', () => {
+            // Toggle the reply form visibility
+            replyForm.style.display = replyForm.style.display === 'none' ? 'block' : 'none';
+        });
+    }
+});
