@@ -120,10 +120,10 @@ if ($enablePagination == 'true') {
                     </form>
                 </div>
                 <?php if (count($comments)): ?>
-                    <div class="adrm-review-reply-section" style="padding: 20px; margin-left: 20px; background: #ececec; border-radius: 8px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px"> 
+                    <div class="adrm-review-reply-section" style="padding: 20px; margin-left: 20px !important; background: #ececec; border-radius: 8px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px"> 
                         <h4 style="font-size: 16px; color: #333">Replies</h4>
                         <?php foreach ($comments as $comment) { ?>
-                            <div class="adrm-review-comment" style="padding: 10px; border-bottom: 1px solid #dadada">
+                            <div class="adrm-review-comment" style="padding: 10px;">
                                 <div> 
                                     <span style="font-size: 14px; color: #333"><?php echo esc_html(ucfirst($comment['name'])) ?></span>
                                 </div>

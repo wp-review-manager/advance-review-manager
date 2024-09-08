@@ -140,19 +140,21 @@ p {
 .adrm_review_content{
     display: flex;
     width: calc(100% - 40px);
+    border-radius: 8px !important;
     align-items: center;
     gap: 30px;
     padding: 20px !important;
-    background: #f4f4f4;
+    // background: #f4f4f4 !important;
 }
 
 .adrm-review-reply-section{
-    width: 100%; 
-    padding: 20px !important; 
-    background: #ececec; 
-    border-radius: 8px !important; 
+    width: calc(100% - 40px); 
+    padding: 20px !important;
+    margin-left: 20px !important; 
+    background: #ececec;
+    border-radius: 8px !important;
     margin-bottom: 20px; 
-    display: flex;
+    display: flex; 
     flex-direction: column; 
     gap: 10px
 }
@@ -162,7 +164,7 @@ p {
 }
 
 .adrm-review-comment:not(:last-child) {
-    border-bottom: 1px solid #dadada; /* Customize the border as needed *//* Optional: add some padding for spacing */
+    border-bottom: 1px solid #dadada !important; /* Customize the border as needed *//* Optional: add some padding for spacing */
 }
 
 .adrm-review-comment-content{

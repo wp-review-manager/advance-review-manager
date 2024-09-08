@@ -112,6 +112,7 @@ if ($enablePagination == 'true') {
                 $average_rating = Arr::get($review, 'average_rating');
                 $created_at = Arr::get($review, 'created_at');
                 $reviewId = Arr::get($review, 'id');
+                $comments = Arr::get($review, 'comments', []);
                 $review = Arr::get($review, 'meta.formFieldData', []);
                 $ratings = Arr::get($review, 'ratings', []);
             ?>
@@ -163,6 +164,21 @@ if ($enablePagination == 'true') {
                         <button class="adrm-reply-button"><?php echo __('Submit', 'advance-review-manager') ?></button>
                     </form>
                 </div>
+                <?php if (count($comments)): ?>
+                    <div class="adrm-review-reply-section" style="padding: 20px; margin-left: 20px !important; background: #ececec; border-radius: 8px; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px"> 
+                        <h4 style="font-size: 16px; color: #333">Replies</h4>
+                        <?php foreach ($comments as $comment) { ?>
+                            <div class="adrm-review-comment" style="padding: 10px;">
+                                <div> 
+                                    <span style="font-size: 14px; color: #333"><?php echo esc_html(ucfirst($comment['name'])) ?></span>
+                                </div>
+                                <div class="adrm-review-comment-content" style="color: #333; font-size: 14px">
+                                    <p><?php echo esc_html(Arr::get($comment, 'comment')); ?></p>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php endif; ?>
             </div>
             <?php } ?>
         </div>
