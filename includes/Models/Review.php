@@ -213,6 +213,7 @@ class Review extends Model
         foreach ($replies as $reply) {
             $user = get_user_by('id', $reply['user_id']);
             $formattedReplies[] = [
+                'id' => $reply['id'],
                 'user_id' => $reply['user_id'],
                 'reply' => $reply['comment'],
                 'name' => ucfirst($user->display_name),

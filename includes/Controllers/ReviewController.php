@@ -158,4 +158,20 @@ class ReviewController
             423);
         }
     }
+
+    public function deleteReviewReply($replyId)
+    {
+        try {
+            // write row sql query to delete the reply
+            global $wpdb;
+            $wpdb->delete( $wpdb->prefix . 'adrm_review_comments', array( 'id' => $replyId ) );
+        }
+        catch (\Exception $e) {
+            wp_send_json_error(
+                [
+                    'message' => $e->getMessage()
+                ],
+            423);
+        }
+    }
 }

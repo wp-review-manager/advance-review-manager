@@ -182,6 +182,15 @@ class Actions{
                 return;
             }
 
+            if (isset($_POST['route'])) {
+                // handle route
+                $route = sanitize_text_field($_POST['route']);
+                if ($route === 'delete_reply') {
+                    $this->adrm_delete_reply();
+                    return;
+                }
+            }
+
             $data = $_POST;
 
             // Get the value of the textarea input
@@ -209,6 +218,29 @@ class Actions{
             $reviewController->createReviewReply($reply);
             // Respond with a success message or additional data
             wp_send_json_success(['message' => 'Reply submitted successfully'], 200);
+        }
+
+        public function adrm_delete_reply()
+        { 
+            $data = $_POST;
+
+            $replyId = isset($data['reply_id']) ? sanitize_text_field($data['reply_id']) : '';
+            
+            if (empty($replyId)) {
+                wp_send_json_error('Reply ID is empty');
+                return;
+            }
+
+            if (!current_user_can('manage_options')) {
+                wp_send_json_error('You do not have permission to delete this reply');
+                return;
+            }
+
+            $reviewController = new ReviewController();
+            $reviewController->DeleteReviewReply($replyId);
+
+            // Respond with a success message or additional data
+            wp_send_json_success(['message' => 'Reply deleted successfully'], 200);
         }
 
         public function getDebugInfoWP()
