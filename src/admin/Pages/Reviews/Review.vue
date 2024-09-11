@@ -71,32 +71,6 @@
             </el-image>
           </div>
         </div>
-      </div>
-      <!-- add a reply form -->
-      <el-button @click="showReplyForm = !showReplyForm">Add Reply</el-button>
-      <form
-        :class="showReplyForm ? 'show-reply-form' : 'hide-reply-form'"
-      >
-        <h3 style="font-size: 16px; color: #ff9900; border-bottom: 1px dotted #555; padding-bottom: 6px;">Add your Reply to this review</h3>
-        <el-form-item
-          prop="reply"
-        >
-          <el-input
-            required
-            type="textarea"
-            v-model="reviewReply.message"
-            placeholder="Reply"
-          />
-        </el-form-item>
-        <el-form-item>
-          <el-button
-            type="primary"
-            @click="submitReply"
-          >
-            Submit
-          </el-button>
-        </el-form-item>
-      </form>
       <div
         v-if="reviewData.ratings.length > 1"
         class="adrm-review_meta"
@@ -127,7 +101,33 @@
           </el-table>
         </div>
       </div>
-   
+        <!-- add a reply form -->
+        <el-button @click="showReplyForm = !showReplyForm">Add Reply</el-button>
+      <form
+        :class="showReplyForm ? 'show-reply-form' : 'hide-reply-form'"
+      >
+        <h3 style="font-size: 16px; color: #ff9900; border-bottom: 1px dotted #555; padding-bottom: 6px;">Add your Reply to this review</h3>
+        <el-form-item
+          prop="reply"
+          style="margin-bottom: 2px"
+        >
+          <el-input
+            required
+            type="textarea"
+            v-model="reviewReply.message"
+            placeholder="Reply"
+          />
+        </el-form-item>
+        <el-form-item>
+          <el-button
+            type="primary"
+            @click="submitReply"
+          >
+            Submit
+          </el-button>
+        </el-form-item>
+      </form>
+      </div>
       <div class="review-replies" v-if="review.replies.length > 0">
         <span style="font-size: 16px; border-bottom: 1px dotted #555; text-align: center; color: #5a5a5a; padding-bottom: 6px;">Replies</span>
         <el-table
@@ -175,6 +175,20 @@
               {{ moment(row.created_at).format('dddd D MMMM YYYY') }}
             </template>
           </el-table-column>
+          <!-- actions for delete and edit -->
+          <el-table-column label="Actions">
+            <template #default="{ row }">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <!-- <el-icon :size="24" color="#FFbc00">
+                  <Edit style="cursor: pointer;"/>
+                </el-icon> -->
+                <!-- Or use it independently without derive attributes from parent -->
+                <el-icon :size="24" color="#FF0000">
+                  <Delete style="cursor: pointer;" @click="deleteReply(row)"/>
+                </el-icon>
+              </div>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
@@ -184,6 +198,7 @@
 <script>
 import moment from 'moment';
 import Icon from '../../Icons/Index.vue';
+
 export default {
     name: 'Review',
     components: {
@@ -272,7 +287,6 @@ export default {
             alert('Reply message is too short');
             return;
           }
-          console.log('submitting reply...', this.review.reply);
           $event.preventDefault();
             this.$post('', {
                 action: 'adrm_review_reply_action',
@@ -282,11 +296,38 @@ export default {
             }).then((response) => {
                 this.reviewReply.message = '';
                 this.showReplyForm = false;
+                ElNotification({
+                  title: 'Success',
+                  message: 'Reply added successfully',
+                  type: 'success',
+                  position: 'bottom-right'
+                });
                 this.getReview();
             }).catch(function (error) {
                 console.log(error);
             });
         },
+        deleteReply(comment){
+            this.$post('', {
+                action: 'adrm_review_reply_action',
+                route: 'delete_reply',
+                nonce: window.ADRMAdmin.adrm_nonce,
+                review_id: this.$route.params.reviewId,
+                reply_id: comment.id,
+                delete: true
+            }).then((response) => {
+                // show success message
+                ElNotification({
+                  title: 'Success',
+                  message: 'Reply deleted successfully',
+                  type: 'success',
+                  position: 'bottom-right'
+                });
+                this.getReview();
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     },
 };
 </script>
