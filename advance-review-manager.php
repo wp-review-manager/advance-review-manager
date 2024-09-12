@@ -8,17 +8,17 @@
  * Plugin URI: #
  * License: GPLv2 or later
  * Text Domain: advance-review-manager
- * Version: 1.0.2
+ * Version: 1.1.0
  */
 
 define('ADRM_URL', plugin_dir_url(__FILE__));
 define('ADRM_DIR', plugin_dir_path(__FILE__));
 define('ADRM_FILE', __FILE__);
-define('ADRM_VERSION', '1.0.2');
+define('ADRM_VERSION', '1.1.0');
 define('ADRM_DB_VERSION', 1);
 
-// define('ADVANCE_REVIEW_MANAGER_DEVELOPMENT', 'yes');
-define('ADVANCE_REVIEW_MANAGER_DEVELOPMENT', 'yes');
+// define('ADVANCE_REVIEW_MANAGER_PRODUCTION', 'yes');
+define('ADVANCE_REVIEW_MANAGER_PRODUCTION', 'yes');
 
 
 use ADReviewManager\Classes\ActivationHandler;

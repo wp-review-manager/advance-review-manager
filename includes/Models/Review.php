@@ -192,7 +192,7 @@ class Review extends Model
 
         // get comments for the review
         $sql = $wpdb->prepare(
-            "SELECT * FROM %1s WHERE review_id = %d",
+            "SELECT * FROM %1s WHERE review_id = %d ORDER BY created_at DESC",
             $commentTable, $reviewID
         );
 

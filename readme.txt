@@ -4,7 +4,7 @@ Contributors: wpulse, dasnitesh780, akmelias
 Tags: Feedback, Reviews, Testimonials, User Experience, Customer Satisfaction
 Requires at least: 4.5
 Tested up to: 6.6
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -29,6 +29,8 @@ Advance Review Manager is a powerful yet easy-to-use WordPress plugin that empow
 - Display Controls: Tweak and tune how reviews are shown with our flexible shortcode parameters.
 - Centralized Management: All your reviews, easily accessible and organized for detailed analysis.
 - Engaging Review Tables: Dive into each piece of feedback with our interactive review display.
+- Admin/Logged in users can reply on review.
+- Admin can manage specific review.
 - Efficient Pagination**: Manage a flood of feedback with smart pagination.
 - Captivating Review Summary** Show your Ratings, Reviews and Feedbacks summary with nice and filterable template.
 - Dedicated Support: Our Support & Debug toolkit is there to iron out any wrinkles.
@@ -62,6 +64,8 @@ Getting started with **Advance Review Manager** is as straightforward as it gets
 6. Specific product reviews
 7. Single review details
 8. Data Reporting
+9. Reply on Review from Admin site
+10. Reply on Review from Client site
 
 == Frequently Asked Questions ==
 
@@ -99,6 +103,9 @@ Freshness guaranteed with regular updates based on your input and the latest tre
 No upgrade notice available.
 
 == Changelog ==
+
+= 1.1.0 September 11, 2024 = 
+- Adds: Reply Feature on Reviews
 
 = 1.0.2 July 31, 2024 =
 - Improves User experience on review submission

@@ -163,8 +163,7 @@ class ReviewController
     {
         try {
             // write row sql query to delete the reply
-            global $wpdb;
-            $wpdb->delete( $wpdb->prefix . 'adrm_review_comments', array( 'id' => $replyId ) );
+            (new Comment())->deleteComment($replyId);
         }
         catch (\Exception $e) {
             wp_send_json_error(
