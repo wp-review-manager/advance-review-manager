@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 
 class ReviewsTemplate {
-    public function render($reviews = [], $form, $total_reviews, $pagination, $all_reviews) {
+    public function render($form, $total_reviews, $pagination, $all_reviews, $reviews = []) {
         $template = 'Template.';
         if (str_contains($form->post_name, 'book-review-form-template')) {
             $template .= 'book_review_template';

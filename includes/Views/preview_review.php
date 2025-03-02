@@ -73,7 +73,7 @@
                     <?php
                 }
                 if ($show_review_template == 'yes') {
-                    (new ReviewsTemplate)->render($reviews, $form, $total_reviews, $pagination, $all_reviews);
+                    (new ReviewsTemplate)->render($form, $total_reviews, $pagination, $all_reviews, $reviews);
                 }
                 ?>
             </div>

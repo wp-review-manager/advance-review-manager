@@ -1,10 +1,10 @@
 === Advance Review Manager ===
 
-Contributors: wpulse, dasnitesh780, akmelias
+Contributors: wpulse, chadni54, akmelias, dasnitesh780
 Tags: Feedback, Reviews, Testimonials, User Experience, Customer Satisfaction
 Requires at least: 4.5
-Tested up to: 6.6
-Stable tag: 1.1.0
+Tested up to: 6.7
+Stable tag: 1.1.1
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,9 @@ Freshness guaranteed with regular updates based on your input and the latest tre
 No upgrade notice available.
 
 == Changelog ==
+
+= 1.1.1 March 02, 2025 =
+- Fix deprecated issue with php 8++
 
 = 1.1.0 September 11, 2024 = 
 - Adds: Reply Feature on Reviews
